@@ -39,3 +39,11 @@ Proyecto de prácticas Seyte 2023. La aplicación que se va a desarrollar consis
 4. Página de reproducción:
     * Título de la película
     * Reproductor
+## Diagrama Entidad-Relación
+   ````mermaid
+      erDiagram
+         USUARIOS ||--o{ COMPRAS
+         COMPRAS }o--|| PELÍCULAS
+         PELÍCULAS ||--o{ RESEÑA
+         RESEÑA }o--|| USUARIOS
+          }
