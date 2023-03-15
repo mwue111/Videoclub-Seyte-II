@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
-            $table->foreignId('movie_id');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('movie_id')->constrained();
             $table->date('expiration_date')->nullable();
             $table->timestamps();
         });

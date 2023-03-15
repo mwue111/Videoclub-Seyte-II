@@ -13,20 +13,20 @@ class PurchasesTableSeeder extends Seeder
      */
     public function run(): void
     {
-        // DB::table('purchases')->insert([
-        //     'user_id' => 1,
-        //     'movie_id' => 1,
-        //     'expiration_date' => null
-        // ]);
-        // DB::table('purchases')->insert([
-        //     'user_id' => 1,
-        //     'movie_id' => 2,
-        //     'expiration_date' => null
-        // ]);
-        // DB::table('purchases')->insert([
-        //     'user_id' => 1,
-        //     'movie_id' => 3,
-        //     'expiration_date' => null
-        // ]);
+        DB::table('purchases')->insert([
+            'user_id' => 1,
+            'movie_id' => 1,
+            'expiration_date' => null
+        ]);
+        DB::table('purchases')->insert([
+            'user_id' => 1,
+            'movie_id' => 2,
+            'expiration_date' => null
+        ]);
+        DB::table('purchases')->insert([
+            'user_id' => 1,
+            'movie_id' => 3,
+            'expiration_date' => null
+        ]);
     }
 }

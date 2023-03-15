@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Movie extends Model
 {
@@ -18,12 +19,8 @@ class Movie extends Model
         'director',
     ];
 
-    // public function purchases() {
-    //     return $this->belongsToMany(User::class);
-    // }
-
-    // public function reviews() {
-    //     return $this->hasMany(Review::class);
-    // }
+    public function users() {
+        return $this->belongsToMany(User::class, 'purchases');
+    }
 
 }
