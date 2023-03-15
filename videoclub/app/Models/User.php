@@ -49,6 +49,7 @@ class User extends Authenticatable
   ];
 
   public function movies() {
-    return $this->belongsToMany(Movie::class, 'purchases');
+    return $this->belongsToMany(Movie::class, 'purchases')
+                ->withPivot('expiration_date');
   }
 }
