@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ReviewSeeder extends Seeder
+class ReviewsTableSeeder extends Seeder
 {
   /**
    * Run the database seeds.
