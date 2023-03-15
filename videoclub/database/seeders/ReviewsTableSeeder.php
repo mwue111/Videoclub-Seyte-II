@@ -16,21 +16,21 @@ class ReviewsTableSeeder extends Seeder
     //
     DB::table('reviews')->insert([
       'user_id' => 1,
-      'pelicula_id' => 1,
-      'titulo' => 'Review 1',
-      'descripcion' => 'Descripcion de la review 1',
+      'movie_id' => 1,
+      'title' => 'Review 1',
+      'description' => 'Descripcion de la review 1',
     ]);
     DB::table('reviews')->insert([
       'user_id' => 1,
-      'pelicula_id' => 2,
-      'titulo' => 'Review 2',
-      'descripcion' => 'Descripcion de la review 2',
+      'movie_id' => 2,
+      'title' => 'Review 2',
+      'description' => 'Descripcion de la review 2',
     ]);
     DB::table('reviews')->insert([
       'user_id' => 1,
-      'pelicula_id' => 3,
-      'titulo' => 'Review 3',
-      'descripcion' => 'Descripcion de la review 3',
+      'movie_id' => 3,
+      'title' => 'Review 3',
+      'description' => 'Descripcion de la review 3',
     ]);
   }
 }

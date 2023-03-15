@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
   {
     $this->call([
       MoviesTableSeeder::class,
-      ReviewSeeder::class,
+      ReviewsTableSeeder::class,
     ]);
     // \App\Models\User::factory(10)->create();
 
