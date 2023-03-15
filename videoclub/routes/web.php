@@ -15,7 +15,9 @@ use App\Http\Controllers\MovieController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
 Route::resource('peliculas', 'MovieController');
+
+Route::resource('resenas', 'App\Http\Controllers\ReviewController');
