@@ -29,6 +29,8 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+        //añadir para guardar imágenes
+
         $request->validate([
             'title' => 'required',
             'year' => 'required',
@@ -58,24 +60,54 @@ class MovieController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $movie = Movie::findOrFail($id);
+
+        return view('movies.edit', [
+            'movie' => $movie
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $movie = Movie::findOrFail($id);
+
+        // if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST"){
+        //     if (isset($_FILES['file-up1']['name'])){
+        //        /* subimos la imagen */
+        //     }else{
+        //       $imagen = "default.jpg";
+        //       //return $imagen;
+        //     }
+        //   }
+        $request->validate([
+            'title' => 'required',
+            'year' => 'required',
+            'runtime' => 'required',
+            'plot' => 'required',
+            'genre' => 'required',
+            'director' => 'required',
+        ]);
+
+        $movie->update($request->all());
+
+        //return redirect()->route('peliculas.index');//->withMessage('success', 'Película editada');
+        return redirect()->route('peliculas.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $movie = Movie::findOrFail($id);
+
+        $movie->delete();
+
+        return redirect()->route('peliculas.index');
     }
 }

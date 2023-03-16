@@ -81,6 +81,7 @@ class CreateTest extends TestCase
     public function validFields($overrides = []): array {
         return array_merge([
             'title' => 'Película de prueba',
+            'poster' => 'url de un póster',
             'year' => 2000,
             'runtime' => 160,
             'plot' => 'sinopsis de una película de prueba',

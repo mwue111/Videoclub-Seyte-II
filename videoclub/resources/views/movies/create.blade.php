@@ -1,9 +1,15 @@
+<h1>Añadir película</h1>
+
 <form action="{{ route('peliculas.store') }}" method="POST">
     @csrf
 
     <label for="title">Título de la película</label>
     <br>
     <input type="text" name="title"/>
+    <br>
+    <label for="poster">Póster de la película</label>
+    <br>
+    <input type="file" name="poster"/>
     <br>
     <label for="year">Año de la película</label>
     <br>

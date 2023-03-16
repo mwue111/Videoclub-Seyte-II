@@ -12,6 +12,7 @@ class Movie extends Model
 
   protected $fillable = [
     'title',
+    'poster',
     'year',
     'runtime',
     'plot',

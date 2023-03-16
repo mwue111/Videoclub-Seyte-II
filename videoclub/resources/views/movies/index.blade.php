@@ -22,8 +22,18 @@
             <td> {{ $movie->genre }}</td>
             <td> {{ $movie->director }}</td>
             <td> <img src="{{ $movie->poster }}" alt="Poster de la película {{ $movie->title }}" style="width:10%"/></td>
-            <td> Editar </td>
-            <td> Eliminar </td>
+            <td>
+                <a href="{{ route('peliculas.edit', $movie) }}" target="_blank">
+                    Editar
+                </a>
+            </td>
+            <td>
+                <form action="{{ route('peliculas.destroy', $movie) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input type="submit" value="Eliminar">
+                </form>
+            </td>
         </tr>
         @empty
 
