@@ -21,9 +21,9 @@ class CreateTest extends TestCase
 
     public function test_it_saves_the_data() {
 
-        $data = $this->validFields();
+        $data = [];
 
-        $this->post(route('peliculas.store'), $data)
+        $this->saveMovie($data)
             ->assertRedirect(route('peliculas.index'));
 
         $this->assertDatabasehas('movies', $data);
