@@ -6,6 +6,7 @@
         <th>Sinopsis</th>
         <th>Género</th>
         <th>Director</th>
+        <th>Póster</th>
         <th colspan="2">Acciones</th>
     </thead>
     <tbody>
@@ -21,7 +22,13 @@
             <td> {{ $movie->plot }}</td>
             <td> {{ $movie->genre }}</td>
             <td> {{ $movie->director }}</td>
-            <td> <img src="{{ $movie->poster }}" alt="Poster de la película {{ $movie->title }}" style="width:10%"/></td>
+
+
+            <td>
+            <img src="{{ $movie->poster_filename }}" alt="Poster de la película {{ $movie->title }}" style="width:10%"/></td>
+
+
+            <!-- <td> <img src="{{ $movie->poster }}" alt="Poster de la película {{ $movie->title }}" style="width:10%"/></td> -->
             <td>
                 <a href="{{ route('peliculas.edit', $movie) }}" target="_blank">
                     Editar

@@ -1,6 +1,6 @@
 <h1>Añadir película</h1>
 
-<form action="{{ route('peliculas.store') }}" method="POST">
+<form action="{{ route('peliculas.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <label for="title">Título de la película</label>
@@ -33,6 +33,13 @@
     <br>
     <input type="submit" value="Añadir">
 
+@if($errors->any())
+    <ul>
+        @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+        @endforeach
+    </ul>
+@endif
 </form>
 
 <a href="{{ route('peliculas.index') }}">Volver</a>

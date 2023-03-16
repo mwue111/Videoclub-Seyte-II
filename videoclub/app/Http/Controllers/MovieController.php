@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
+use Illuminate\Support\Facades\Storage;
 
 class MovieController extends Controller
 {
@@ -13,6 +14,10 @@ class MovieController extends Controller
     public function index()
     {
         $movies = Movie::orderBy('id', 'DESC')->get();
+        foreach($movies as $movie){
+            $movie->poster_filename = Storage::url('images/' . $movie->poster);
+        }
+        dd($movie->poster_filename);
         return view('movies.index', ['movies' => $movies ]);
     }
 
@@ -30,15 +35,20 @@ class MovieController extends Controller
     public function store(Request $request)
     {
 
-        //Imágenes
+        //dd($request->poster);
         $request->validate([
             'title' => 'required',
+            'poster' => 'required',
             'year' => 'required',
             'runtime' => 'required',
             'plot' => 'required',
             'genre' => 'required',
             'director' => 'required',
         ]);
+
+        //Aquí: hacer que se guarde en storage/images
+        $imageName = time() . '.' . $request->poster->extension();
+        $request->poster->move(public_path('images'), $imageName);
 
         Movie::create($request->all());
 
