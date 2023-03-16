@@ -13,7 +13,7 @@ class ReviewController extends Controller
   public function index()
   {
     //
-    $reviews = Review::orderBy('id', 'DESC')->get();
+    $reviews = Review::orderBy('id', 'ASC')->get();
     return view('reviews.index', ['reviews' => $reviews]);
   }
 
@@ -39,6 +39,8 @@ class ReviewController extends Controller
   public function show(string $id)
   {
     //
+    $review = Review::findOrFail($id);
+    return view('reviews.show', ['review' => $review]);
   }
 
   /**
@@ -63,5 +65,8 @@ class ReviewController extends Controller
   public function destroy(string $id)
   {
     //
+    $review = Review::findOrFail($id);
+    $review->delete();
+    return redirect()->route('resenas.index');
   }
 }
