@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Movie;
 
 class MovieController extends Controller
 {
@@ -11,7 +12,8 @@ class MovieController extends Controller
      */
     public function index()
     {
-        //
+        $movies = Movie::orderBy('id', 'DESC')->get();
+        return view('movies.index', ['movies' => $movies ]);
     }
 
     /**
@@ -19,7 +21,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        //
+        return view('movies.create');
     }
 
     /**
@@ -27,15 +29,28 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'year' => 'required',
+            'runtime' => 'required',
+            'plot' => 'required',
+            'genre' => 'required',
+            'director' => 'required',
+        ]);
+
+        Movie::create($request->all());
+
+        return redirect()->route('peliculas.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Movie $movie)
     {
-        //
+        return view('movies.show', [
+            'movie' => $movie
+        ]);
     }
 
     /**
