@@ -1,4 +1,10 @@
 
-@foreach($movies as $movie)
+@forelse($movies as $movie)
     <p>{{ $movie->title }}</p>
-@endforeach
+
+@empty
+    <p>No hay películas aún.</p>
+
+@endforelse
+
+<a href="{{ route('peliculas.create') }}">Añadir película</a>
