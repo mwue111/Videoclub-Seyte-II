@@ -48,8 +48,11 @@ class User extends Authenticatable
     'email_verified_at' => 'datetime',
   ];
 
-  public function movies() {
+  public function movies()
+  {
     return $this->belongsToMany(Movie::class, 'purchases')
-                ->withPivot('expiration_date');
+      ->withPivot('expiration_date');
+    return $this->belongsToMany(Movie::class, 'reviews')
+      ->withPivot('title', 'description');
   }
 }

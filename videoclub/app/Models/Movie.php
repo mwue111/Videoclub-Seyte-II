@@ -8,20 +8,22 @@ use App\Models\User;
 
 class Movie extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-        'title',
-        'year',
-        'runtime',
-        'plot',
-        'genre',
-        'director',
-    ];
+  protected $fillable = [
+    'title',
+    'year',
+    'runtime',
+    'plot',
+    'genre',
+    'director',
+  ];
 
-    public function users() {
-        return $this->belongsToMany(User::class, 'purchases')
-                    ->withPivot('expiration_date');
-    }
-
+  public function users()
+  {
+    return $this->belongsToMany(User::class, 'purchases')
+      ->withPivot('expiration_date');
+    return $this->belongsToMany(User::class, 'reviews')
+      ->withPivot('title', 'description');
+  }
 }
