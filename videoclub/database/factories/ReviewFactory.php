@@ -22,8 +22,8 @@ class ReviewFactory extends Factory
       //
       'title' => fake()->sentence(),
       'description' => fake()->paragraph(),
-      'user_id' => User::all()->random()->id,
-      'movie_id' => Movie::all()->random()->id,
+      'user_id' => User::factory()->create()->id,
+      'movie_id' =>  Movie::factory()->create()->id,
     ];
   }
 }
