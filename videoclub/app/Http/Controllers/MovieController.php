@@ -29,8 +29,8 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //añadir para guardar imágenes
 
+        //Imágenes
         $request->validate([
             'title' => 'required',
             'year' => 'required',
@@ -76,14 +76,6 @@ class MovieController extends Controller
     {
         $movie = Movie::findOrFail($id);
 
-        // if(isset($_POST) and $_SERVER['REQUEST_METHOD'] == "POST"){
-        //     if (isset($_FILES['file-up1']['name'])){
-        //        /* subimos la imagen */
-        //     }else{
-        //       $imagen = "default.jpg";
-        //       //return $imagen;
-        //     }
-        //   }
         $request->validate([
             'title' => 'required',
             'year' => 'required',

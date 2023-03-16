@@ -4,6 +4,8 @@ namespace Tests\Feature\Http\Controllers\MovieController;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class CreateTest extends TestCase
@@ -68,6 +70,16 @@ class CreateTest extends TestCase
 
         $this->saveMovie(['director' => ''])
             ->assertSessionHasErrors('director');
+    }
+
+    public function test_it_requires_a_poster() {
+
+        Storage::fake('/posters');
+
+        $file = UploadedFile::fake()->image('poster.jpg');
+        $response = $this->saveMovie(['poster' => $file]);
+
+        Storage::disk('/posters')->assertExists($file->hashName());
     }
 
     public function saveMovie($data = []) {

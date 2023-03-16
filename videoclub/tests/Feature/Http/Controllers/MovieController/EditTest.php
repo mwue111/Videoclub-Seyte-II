@@ -11,9 +11,7 @@ use App\Models\Movie;
 class EditTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     */
+
     public function test_it_shows_the_edit_form_with_the_old_values(): void
     {
         $movie = Movie::factory()->create();
