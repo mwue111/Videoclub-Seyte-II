@@ -29,7 +29,18 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'year' => 'required',
+            'runtime' => 'required',
+            'plot' => 'required',
+            'genre' => 'required',
+            'director' => 'required',
+        ]);
+
+        Movie::create($request->all());
+
+        return redirect()->route('peliculas.index');
     }
 
     /**

@@ -19,8 +19,9 @@ class IndexTest extends TestCase
         $this->get(route('peliculas.index'))
             ->assertStatus(200)
             ->assertSee($movie->title)
-            ->assertSee(route('peliculas.create'));
+            ->assertSee(route('peliculas.create')); //cuando el usuario sea admin
             //->assertSee(route('peliculas.create/show/edit/destroy')) cuando el usuario sea admin
+            //assertSee($user->name/$genre->name) cuando el usuario sea admin
     }
 
     public function test_it_displays_an_empty_message_if_there_is_no_movies() {
