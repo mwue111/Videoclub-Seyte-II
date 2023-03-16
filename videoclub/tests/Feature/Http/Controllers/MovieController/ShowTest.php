@@ -20,7 +20,13 @@ class ShowTest extends TestCase
 
         $this->get(route('peliculas.show', $movie))
             ->assertStatus(200)
-            ->assertSee($movie->title);
-            //->assertSee(route('peliculas.index'));
+            ->assertSee($movie->title)
+            ->assertSee($movie->plot)
+            ->assertSee($movie->year)
+            ->assertSee($movie->runtime)
+            ->assertSee($movie->genre)
+            ->assertSee($movie->director)
+            ->assertSee($movie->poster)
+            ->assertSee(route('peliculas.index'));
     }
 }

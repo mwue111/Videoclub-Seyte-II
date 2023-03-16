@@ -46,8 +46,10 @@ class MovieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Movie $movie)
+    public function show($id)
     {
+        $movie = Movie::findOrfail($id);
+
         return view('movies.show', [
             'movie' => $movie
         ]);
