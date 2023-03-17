@@ -8,10 +8,11 @@ use App\Models\User;
 
 class Movie extends Model
 {
-  use HasFactory;
+    use HasFactory;
 
   protected $fillable = [
     'title',
+    'poster',
     'year',
     'runtime',
     'plot',
@@ -29,4 +30,5 @@ class Movie extends Model
     return $this->belongsToMany(User::class, 'reviews')
       ->withPivot('title', 'description');
   }
+
 }
