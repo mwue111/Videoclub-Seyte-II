@@ -122,7 +122,7 @@ class EditTest extends TestCase
 
     }
 
-    public function updateMovie($data = [], $newData = null) {
+    public function updateMovie($data = []) {
 
         $this->withExceptionHandling();
 
