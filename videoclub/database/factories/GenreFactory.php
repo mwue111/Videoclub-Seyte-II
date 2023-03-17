@@ -18,7 +18,7 @@ class GenreFactory extends Factory
   {
     return [
       //
-      'name' => $this->fake()->unique()->word(),
+      'name' => $this->faker->unique()->word(),
     ];
   }
 }
