@@ -33,4 +33,30 @@ class StoreTest extends TestCase
     $response->assertStatus(200);
     $response->assertJson($array);
   }
+
+  public function test_store_review_without_title(): void
+  {
+    $user = User::factory()->create();
+    $movie = Movie::factory()->create();
+    $response = $this->post(route('resenas.store'), [
+      'description' => 'Test description',
+      'user_id' => $user->id,
+      'movie_id' => $movie->id,
+    ]);
+    $response->assertStatus(302);
+    $response->assertSessionHasErrors('title');
+  }
+
+  public function test_store_review_without_description(): void
+  {
+    $user = User::factory()->create();
+    $movie = Movie::factory()->create();
+    $response = $this->post(route('resenas.store'), [
+      'title' => 'Test title',
+      'user_id' => $user->id,
+      'movie_id' => $movie->id,
+    ]);
+    $response->assertStatus(302);
+    $response->assertSessionHasErrors('description');
+  }
 }
