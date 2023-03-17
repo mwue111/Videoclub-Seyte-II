@@ -35,7 +35,8 @@ class GenreController extends Controller
     $request->validate([
       'name' => 'required',
     ]);
-    Genre::create(request()->all());
+    $genre = Genre::create($request()->all());
+    $genre->save();
     return redirect()->route('generos.index');
   }
 
