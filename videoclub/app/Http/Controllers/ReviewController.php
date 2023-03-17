@@ -75,12 +75,12 @@ class ReviewController extends Controller
       'user_id' => 'required',
       'movie_id' => 'required',
     ]);
-    $review->title = $request->string('title');
-    $review->description = $request->string('description');
-    $review->user_id = $request->int('user_id');
-    $review->movie_id = $request->int('movie_id');
+    $review->title = $request->input('title');
+    $review->description = $request->input('description');
+    $review->user_id = $request->input('user_id');
+    $review->movie_id = $request->input('movie_id');
     $review->save();
-    return $review->json_encode();
+    return json_encode($review);
   }
 
   /**
