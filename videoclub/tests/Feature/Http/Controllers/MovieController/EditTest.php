@@ -32,22 +32,7 @@ class EditTest extends TestCase
     public function test_it_saves_new_poster() {
         Storage::fake('public');
 
-        //$movie = Movie::factory()->create();
-
-        // $data = [
-        //     'title' => 'Película de prueba',
-        //     'poster' => $file = UploadedFile::fake()->image('poster.jpg'),
-        //     'year' => 2000,
-        //     'runtime' => 160,
-        //     'plot' => 'sinopsis de una película de prueba',
-        //     'genre' => 'drama',
-        //     'director' => 'Alice Guy'
-        // ];
-
         $data = $this->oldFields(['poster' => $file = UploadedFile::fake()->image('poster.jpg')]);
-
-        // $this->put(route('peliculas.update', $movie), $data)
-        //     ->assertRedirect(route('peliculas.index'));
 
         $this->updateMovie($data)
             ->assertRedirect(route('peliculas.index'));
