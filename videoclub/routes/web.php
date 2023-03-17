@@ -20,4 +20,4 @@ Route::get('/', function () {
 
 Route::resource('peliculas', MovieController::class);
 
-Route::resource('resenas', 'App\Http\Controllers\ReviewController');
+Route::resource('resenas', 'ReviewController');
