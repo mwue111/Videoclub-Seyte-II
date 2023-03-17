@@ -126,7 +126,6 @@ class EditTest extends TestCase
 
         $this->withExceptionHandling();
 
-        //return $this->put(route('peliculas.update', $data), $newData);
         return $this->post(route('peliculas.store'), $data);
     }
 
