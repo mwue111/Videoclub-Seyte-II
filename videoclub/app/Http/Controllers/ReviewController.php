@@ -35,13 +35,13 @@ class ReviewController extends Controller
     ]);
     //Creo el objeto a partir de los datos recibidos, lo guardo y lo devuelvo.
     $review = Review::create([
-      'title' => $request->string('title'),
-      'description' => $request->string('description'),
-      'user_id' => $request->int('user_id'),
-      'movie_id' => $request->int('movie_id'),
+      'title' => $request->input('title'),
+      'description' => $request->input('description'),
+      'user_id' => $request->input('user_id'),
+      'movie_id' => $request->input('movie_id'),
     ]);
     $review->save();
-    return $review->json_encode();
+    return json_encode($review);
   }
 
   /**
