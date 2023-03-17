@@ -26,7 +26,7 @@ class IndexTest extends TestCase
     $response = $this->get(route('generos.index'));
     $response->assertStatus(200);
     $response->assertViewIs('genres.index');
-    $response->assertSee('No genres');
+    $response->assertSee('No hay géneros disponibles');
   }
   public function test_display_genres(): void
   {

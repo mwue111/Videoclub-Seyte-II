@@ -2,5 +2,5 @@
 <a href="">{{$genre -> name}}</a>
 }
 @empty
-<p>No genres</p>
+<p>No hay géneros disponibles</p>
 @endforelse
