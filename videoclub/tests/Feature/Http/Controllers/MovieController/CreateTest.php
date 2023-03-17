@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
+use App\Models\Movie;
 
 class CreateTest extends TestCase
 {
@@ -19,16 +20,6 @@ class CreateTest extends TestCase
             ->assertStatus(200)
             ->assertSee(route('peliculas.store'))
             ->assertSee(route('peliculas.index'));
-    }
-
-    public function test_it_saves_the_data() {
-
-        $data = [];
-
-        $this->saveMovie($data)
-            ->assertRedirect(route('peliculas.index'));
-
-        $this->assertDatabasehas('movies', $data);
     }
 
     public function test_it_requires_a_title() {
@@ -72,14 +63,17 @@ class CreateTest extends TestCase
             ->assertSessionHasErrors('director');
     }
 
-    public function test_it_requires_a_poster() {
+    public function test_it_uploads_a_file() {
+        Storage::fake('public');
 
-        Storage::fake('/posters');
+        $this->post(route('peliculas.store'), $this->validFields(['poster' => $file = UploadedFile::fake()->image('poster.jpg')]));
 
-        $file = UploadedFile::fake()->image('poster.jpg');
-        $response = $this->saveMovie(['poster' => $file]);
+        Storage::disk('public')
+                ->assertExists('/images/' . $file->hashName());
 
-        Storage::disk('/posters')->assertExists($file->hashName());
+        Storage::disk('public')
+                ->assertMissing('/images/anotherPoster.jpg');
+        $this->assertDatabaseHas('movies', ['poster' => 'images/' . $file->hashName()]);
     }
 
     public function saveMovie($data = []) {
@@ -93,7 +87,7 @@ class CreateTest extends TestCase
     public function validFields($overrides = []): array {
         return array_merge([
             'title' => 'Película de prueba',
-            'poster' => 'url de un póster',
+            'poster' => 'image.jpg',
             'year' => 2000,
             'runtime' => 160,
             'plot' => 'sinopsis de una película de prueba',

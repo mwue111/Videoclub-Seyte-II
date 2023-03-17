@@ -92,11 +92,12 @@ class MovieController extends Controller
         if(isset($attributes['poster'])){
             $attributes['poster'] = request()->file('poster')->store('images', 'public');
         }
+        //dd($attributes['poster']);
 
         $movie->update($attributes);
 
         //return redirect()->route('peliculas.index');//->withMessage('success', 'Película editada');
-        return redirect()->route('peliculas.index')->withMessage('success', 'Película editada');
+        return redirect()->route('peliculas.index');
     }
 
     /**
