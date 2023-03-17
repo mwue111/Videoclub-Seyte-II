@@ -35,7 +35,7 @@ class GenreController extends Controller
     $request->validate([
       'name' => 'required',
     ]);
-    $genre = Genre::create($request()->all());
+    $genre = Genre::create($request->all());
     $genre->save();
     return redirect()->route('generos.index');
   }
@@ -46,6 +46,8 @@ class GenreController extends Controller
   public function show(string $id)
   {
     //
+    $genre = Genre::findOrFail($id);
+    return view('genres.show', ['genre' => $genre]);
   }
 
   /**
@@ -54,6 +56,8 @@ class GenreController extends Controller
   public function edit(string $id)
   {
     //
+    $genre = Genre::findOrFail($id);
+    return view('genres.edit', ['genre' => $genre]);
   }
 
   /**
