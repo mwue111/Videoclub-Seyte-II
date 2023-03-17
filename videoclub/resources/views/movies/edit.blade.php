@@ -1,6 +1,6 @@
 <h1>Editar película</h1>
 
-<form action="{{ route('peliculas.update', $movie) }}" method="POST">
+<form action="{{ route('peliculas.update', $movie) }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 
@@ -8,9 +8,9 @@
     <br>
     <input type="text" name="title" value="{{ $movie->title }}"/>
     <br>
-    <label for="poster">Antiguo póster de la película</label>
+    <label for="oldPoster">Antiguo póster de la película</label>
     <br>
-    <img src="{{ $movie->poster }}" alt="Póster de la película {{$movie->title}}" style="width: 20%">
+    <img src="{{ asset('storage/' . $movie->poster) }}" alt="Póster de la película {{$movie->title}}" style="width: 15%">
     <br>
     <label for="poster">Nuevo póster de la película</label>
     <br>

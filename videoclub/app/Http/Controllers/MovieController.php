@@ -14,10 +14,7 @@ class MovieController extends Controller
     public function index()
     {
         $movies = Movie::orderBy('id', 'DESC')->get();
-        foreach($movies as $movie){
-            $movie->poster_filename = Storage::url('images/' . $movie->poster);
-        }
-        dd($movie->poster_filename);
+
         return view('movies.index', ['movies' => $movies ]);
     }
 
@@ -34,11 +31,9 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-
-        //dd($request->poster);
-        $request->validate([
+        $attributes = $request->validate([
             'title' => 'required',
-            'poster' => 'required',
+            'poster' => 'required|image',
             'year' => 'required',
             'runtime' => 'required',
             'plot' => 'required',
@@ -46,11 +41,9 @@ class MovieController extends Controller
             'director' => 'required',
         ]);
 
-        //Aquí: hacer que se guarde en storage/images
-        $imageName = time() . '.' . $request->poster->extension();
-        $request->poster->move(public_path('images'), $imageName);
+        $attributes['poster'] = request()->file('poster')->store('images', 'public');
 
-        Movie::create($request->all());
+        Movie::create($attributes);
 
         return redirect()->route('peliculas.index');
     }
@@ -86,8 +79,9 @@ class MovieController extends Controller
     {
         $movie = Movie::findOrFail($id);
 
-        $request->validate([
+        $attributes = $request->validate([
             'title' => 'required',
+            'poster' => 'image',
             'year' => 'required',
             'runtime' => 'required',
             'plot' => 'required',
@@ -95,10 +89,14 @@ class MovieController extends Controller
             'director' => 'required',
         ]);
 
-        $movie->update($request->all());
+        if(isset($attributes['poster'])){
+            $attributes['poster'] = request()->file('poster')->store('images', 'public');
+        }
+
+        $movie->update($attributes);
 
         //return redirect()->route('peliculas.index');//->withMessage('success', 'Película editada');
-        return redirect()->route('peliculas.index');
+        return redirect()->route('peliculas.index')->withMessage('success', 'Película editada');
     }
 
     /**

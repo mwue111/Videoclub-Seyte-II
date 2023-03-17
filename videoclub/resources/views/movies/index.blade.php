@@ -22,13 +22,9 @@
             <td> {{ $movie->plot }}</td>
             <td> {{ $movie->genre }}</td>
             <td> {{ $movie->director }}</td>
-
-
             <td>
-            <img src="{{ $movie->poster_filename }}" alt="Poster de la película {{ $movie->title }}" style="width:10%"/></td>
-
-
-            <!-- <td> <img src="{{ $movie->poster }}" alt="Poster de la película {{ $movie->title }}" style="width:10%"/></td> -->
+                <img src="{{ asset('storage/' . $movie->poster ) }}" alt="Poster de la película {{ $movie->title }}" style="width:10%"/>
+            </td>
             <td>
                 <a href="{{ route('peliculas.edit', $movie) }}" target="_blank">
                     Editar
