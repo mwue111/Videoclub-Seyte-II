@@ -21,3 +21,5 @@ Route::get('/', function () {
 Route::resource('peliculas', 'MovieController');
 
 Route::resource('resenas', 'ReviewController');
+
+Route::resource('generos', 'GenreController');
