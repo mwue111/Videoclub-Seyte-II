@@ -59,4 +59,13 @@ class StoreTest extends TestCase
     $response->assertStatus(302);
     $response->assertSessionHasErrors('description');
   }
+  public function test_store_empty_review(): void
+  {
+    $response = $this->post(route('resenas.store'), []);
+    $response->assertStatus(302);
+    $response->assertSessionHasErrors('title');
+    $response->assertSessionHasErrors('description');
+    $response->assertSessionHasErrors('user_id');
+    $response->assertSessionHasErrors('movie_id');
+  }
 }
