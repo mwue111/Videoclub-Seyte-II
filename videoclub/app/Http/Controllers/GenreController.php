@@ -66,6 +66,13 @@ class GenreController extends Controller
   public function update(Request $request, string $id)
   {
     //
+    $request->validate([
+      'name' => 'required',
+    ]);
+    $genre = Genre::findOrFail($id);
+    $genre->name = $request->input('name');
+    $genre->save();
+    return redirect()->route('generos.index');
   }
 
   /**
@@ -74,5 +81,8 @@ class GenreController extends Controller
   public function destroy(string $id)
   {
     //
+    $genre = Genre::findOrFail($id);
+    $genre->delete();
+    return redirect()->route('generos.index');
   }
 }
