@@ -6,7 +6,7 @@ Proyecto de prácticas Seyte 2023. La aplicación que se va a desarrollar consis
 
 1. Usuario registrado: usuario autenticado vía email y password.
     * Puede acceder a toda la funcionalidad del usuario no registrado.
-    * Puede acceder a todas las películas y descargarlas, simplemente abonando la cuota de registro.
+    * Puede acceder a todas las películas online de manera ilimitada, simplemente abonando la cuota de registro.
     * Puede realizar reseñas.
     * Tendrá un perfil con un registro de películas vistas
 2. Usuario no registrado: usuario visitante sin cuenta.
