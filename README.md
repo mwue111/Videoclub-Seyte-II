@@ -40,9 +40,14 @@ Proyecto de prácticas Seyte 2023. La aplicación que se va a desarrollar consis
     * Título de la película
     * Reproductor
 ## Diagrama Entidad-Relación
+
+![diagrama](images/ent_rel_Videoclub.jpg)
+
    ````mermaid
       erDiagram
          USUARIO ||--o{ COMPRA : realiza
          COMPRA }o--|| PELICULA : contiene
          PELICULA ||--o{ RESENA : tiene
          USUARIO ||--O{ RESENA : escribe
+
+
