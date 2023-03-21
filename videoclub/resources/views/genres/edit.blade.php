@@ -2,7 +2,7 @@
 
 <form action="{{ route('generos.update', $genre) }}" method="POST">
   @csrf
-  @method('PUT')
+  @method('PATCH')
 
   <label for="name">Nombre de la categoría</label>
   <br>
