@@ -4,14 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
 
 class Movie extends Model
 {
-  use HasFactory;
+    use HasFactory, SoftDeletes;
 
   protected $fillable = [
     'title',
+    'poster',
     'year',
     'runtime',
     'plot',
@@ -29,4 +31,5 @@ class Movie extends Model
     return $this->belongsToMany(User::class, 'reviews')
       ->withPivot('title', 'description');
   }
+
 }

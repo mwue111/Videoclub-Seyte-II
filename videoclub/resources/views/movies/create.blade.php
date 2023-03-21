@@ -1,9 +1,15 @@
-<form action="{{ route('peliculas.store') }}" method="POST">
+<h1>Añadir película</h1>
+
+<form action="{{ route('peliculas.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <label for="title">Título de la película</label>
     <br>
     <input type="text" name="title"/>
+    <br>
+    <label for="poster">Póster de la película</label>
+    <br>
+    <input type="file" name="poster"/>
     <br>
     <label for="year">Año de la película</label>
     <br>
@@ -27,6 +33,13 @@
     <br>
     <input type="submit" value="Añadir">
 
+@if($errors->any())
+    <ul>
+        @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+        @endforeach
+    </ul>
+@endif
 </form>
 
 <a href="{{ route('peliculas.index') }}">Volver</a>

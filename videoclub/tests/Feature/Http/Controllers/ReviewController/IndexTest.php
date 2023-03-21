@@ -11,7 +11,7 @@ use App\Models\Review;
 class IndexTest extends TestCase
 {
   use RefreshDatabase;
-  public function test_show_review(): void
+  public function test_display_review(): void
   {
     $review = Review::factory()->create();
     $response = $this->get(route('resenas.index'));
@@ -26,7 +26,7 @@ class IndexTest extends TestCase
     $response->assertViewIs('reviews.index');
     $response->assertSee('No reviews');
   }
-  public function test_show_reviews(): void
+  public function test_display_reviews(): void
   {
     $reviews = Review::factory()->count(5)->create();
     $response = $this->get(route('resenas.index'));

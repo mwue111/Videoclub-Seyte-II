@@ -18,6 +18,7 @@ class MovieFactory extends Factory
     {
         return [
             'title' => fake()->sentence(),
+            'poster' => fake()->image(),
             'year' => fake()->year(),
             'runtime' => fake()->numberBetween(60, 210),
             'plot' => fake()->paragraph(),

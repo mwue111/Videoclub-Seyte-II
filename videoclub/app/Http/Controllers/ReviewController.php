@@ -28,18 +28,13 @@ class ReviewController extends Controller
   {
     //Valido que recibo los campos
     $request->validate([
-      'title' => 'required',
-      'description' => 'required',
       'user_id' => 'required',
       'movie_id' => 'required',
+      'title' => 'required',
+      'description' => 'required',
     ]);
     //Creo el objeto a partir de los datos recibidos, lo guardo y lo devuelvo.
-    $review = Review::create([
-      'title' => $request->input('title'),
-      'description' => $request->input('description'),
-      'user_id' => $request->input('user_id'),
-      'movie_id' => $request->input('movie_id'),
-    ]);
+    $review = Review::create($request->all());
     $review->save();
     return json_encode($review);
   }
