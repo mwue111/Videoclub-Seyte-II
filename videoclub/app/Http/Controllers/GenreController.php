@@ -35,7 +35,12 @@ class GenreController extends Controller
     $request->validate([
       'name' => 'required',
     ]);
+    $name = $request->input('name');
+    $name = strtolower($name);
     $genre = Genre::create($request->all());
+    if (Genre::where($name, strtolower($genre->name))->count() > 1) {
+      return response()->json(['message' => "El género ya existe"], 409);
+    }
     $genre->save();
     return redirect()->route('generos.index');
   }
