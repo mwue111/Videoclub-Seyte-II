@@ -1,5 +1,5 @@
 @forelse($genres as $genre)
-<a href="">{{$genre -> name}}</a>
+<a href="{{ route('generos.show', $genre->id) }}">{{$genre -> name}}</a>
 
 @empty
 <p>No hay géneros disponibles</p>
