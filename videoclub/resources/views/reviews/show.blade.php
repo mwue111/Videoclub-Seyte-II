@@ -3,4 +3,6 @@
   <p>
     {{ $review->description}}
   </p>
+  <button>Eliminar</button>
+  <button>Cancelar</button>
 </div>
