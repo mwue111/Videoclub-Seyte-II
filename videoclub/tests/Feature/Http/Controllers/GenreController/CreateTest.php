@@ -6,6 +6,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
+
+
 class CreateTest extends TestCase
 {
   use RefreshDatabase;
@@ -38,14 +40,20 @@ class CreateTest extends TestCase
       ->assertSessionHasErrors("name");
   }
 
-  public function test_creat_existent_genre(): void
+  public function test_create_existent_genre(): void
   {
     $data = [
       "name" => "Moda"
     ];
+    $array = [
+      'message' => 'El género ya existe'
+    ];
     $this->post(route("generos.store"), $data)
       ->assertRedirect(route("generos.index"));
+
+    $this->expectException(\Illuminate\Database\QueryException::class);
     $this->post(route("generos.store"), $data)
-      ->assertSessionHasErrors("name");
+      ->assertJson($array)
+      ->assertStatus(409);
   }
 }
