@@ -15,7 +15,7 @@ return new class extends Migration
       $table->string('surname')->nullable()->after('name');
       $table->string('image')->nullable()->after('email');
       $table->date('birth_date')->after('image');
-      $table->enum('role', ['registered', 'admin', 'non-registered'])->default('non-registered')->after('birth_date');
+      $table->enum('role', ['premium', 'admin', 'free'])->default('free')->after('birth_date');
     });
   }
 

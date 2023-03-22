@@ -20,8 +20,30 @@ class UsersTableSeeder extends Seeder
             'password' => 'admin',
             'image' => 'url/de/imagen',
             'surname' => 'apellido1',
-            'birth_date' => '1985/01/01'
+            'birth_date' => '1985/01/01',
+            'role' => 'admin',
+        ]);
 
+        DB::table('users')->insert([
+            'name' => 'nombre2',
+            'username' => 'free',
+            'email' => 'free@test.com',
+            'password' => 'free',
+            'image' => 'url/de/imagen',
+            'surname' => 'apellido2',
+            'birth_date' => '1990/01/01',
+            'role' => 'free',
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'nombre3',
+            'username' => 'premium',
+            'email' => 'premium@test.com',
+            'password' => 'premium',
+            'image' => 'url/de/imagen',
+            'surname' => 'apellido3',
+            'birth_date' => '2000/01/01',
+            'role' => 'premium',
         ]);
     }
 }

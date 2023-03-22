@@ -18,9 +18,10 @@ class DatabaseSeeder extends Seeder
         MoviesTableSeeder::class,
         ReviewsTableSeeder::class,
         PurchasesTableSeeder::class,
+        AdminsTableSeeder::class,
+        FreesTableSeeder::class
     ]);
 
-    $this->call(AdminsTableSeeder::class);
     // \App\Models\User::factory(10)->create();
 
     // \App\Models\User::factory()->create([

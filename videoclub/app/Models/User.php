@@ -53,7 +53,9 @@ class User extends Authenticatable
     return $this->hasOne(Admin::class);
   }
 
-  //free y premium
+  public function free() {
+    return $this->hasOne(Free::class);
+  }
 
   public function movies()
   {

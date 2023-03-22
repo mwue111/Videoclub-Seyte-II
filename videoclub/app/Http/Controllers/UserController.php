@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Admin;
-//use App\Models\Free; //usuario gratuito
+use App\Models\Free;
 //use App\Models\Premium;   //usuario de pago
 
 class UserController extends Controller
@@ -15,25 +15,18 @@ class UserController extends Controller
         foreach($users as $user) {
             switch($user->role){
                 case 'admin': $user->admin; break;
-                //case 'free': $user->free; break;
-                //case 'premium': $user->premium; break;
+                case 'free': $user->free; break;
             }
         }
         return $users;
     }
-
-    //create si se hace con blade
 
     public function store(Request $request) {
         $user = User::create($request->all());
 
         switch($user->role){
             case 'admin': Admin::create(['user_id' => $user->id]); break;
-
-            //Añadir en cada case los campos que sean propios de cada tabla
-
-            //case 'free': Free::create(['user_id' => $user->id]); break;
-            //case 'premium': Premium::create(['user_id' => $user->id]); break;
+            case 'free': Free::create(['user_id' => $user->id]); break;
         }
     }
 
