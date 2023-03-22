@@ -49,12 +49,19 @@ class User extends Authenticatable
     'email_verified_at' => 'datetime',
   ];
 
-  public function admin() {
+  public function admin()
+  {
     return $this->hasOne(Admin::class);
   }
 
-  public function free() {
+  public function free()
+  {
     return $this->hasOne(Free::class);
+  }
+
+  public function premium()
+  {
+    return $this->hasOne(Premium::class);
   }
 
   public function movies()
