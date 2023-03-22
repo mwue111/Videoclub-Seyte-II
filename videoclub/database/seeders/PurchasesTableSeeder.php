@@ -14,7 +14,7 @@ class PurchasesTableSeeder extends Seeder
     public function run(): void
     {
         DB::table('purchases')->insert([
-            'user_id' => 1,
+            'user_id' => 2,
             'movie_id' => 1,
             'expiration_date' => '2023/04/14'
         ]);

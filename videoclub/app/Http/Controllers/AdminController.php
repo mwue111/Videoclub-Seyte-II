@@ -12,7 +12,7 @@ class AdminController extends Controller
     }
 
     public function show($id) {
-        $admin = Admin::find($id);
+        $admin = Admin::findOrFail($id);
         $admin->user;
         return $admin;
     }

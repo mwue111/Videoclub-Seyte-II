@@ -14,14 +14,15 @@ class DatabaseSeeder extends Seeder
   public function run(): void
   {
     $this->call([
-      UsersTableSeeder::class,
-      MoviesTableSeeder::class,
-      ReviewsTableSeeder::class,
-      PurchasesTableSeeder::class,
-      GenresTableSeeder::class,
+        UsersTableSeeder::class,
+        MoviesTableSeeder::class,
+        ReviewsTableSeeder::class,
+        PurchasesTableSeeder::class,
+        GenresTableSeeder::class,
+        AdminsTableSeeder::class,
+        FreesTableSeeder::class,
     ]);
 
-    $this->call(AdminsTableSeeder::class);
     // \App\Models\User::factory(10)->create();
 
     // \App\Models\User::factory()->create([
