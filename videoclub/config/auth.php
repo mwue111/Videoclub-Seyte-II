@@ -44,6 +44,13 @@ return [
             'driver' => 'passport',
             'provider' => 'users',
         ],
+        // 'passport' => [
+        //     'password_client' => true,
+        //     'provider' => 'users',
+            // 'client_id' => env('PASSPORT_CLIENT_ID'),
+            // 'client_secret' => env('PASSPORT_CLIENT_SECRET'),
+            // 'scope' => [],
+        //],
     ],
 
     /*
