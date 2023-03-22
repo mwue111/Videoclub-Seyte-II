@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         ReviewsTableSeeder::class,
         PurchasesTableSeeder::class,
     ]);
+
+    $this->call(AdminsTableSeeder::class);
     // \App\Models\User::factory(10)->create();
 
     // \App\Models\User::factory()->create([
