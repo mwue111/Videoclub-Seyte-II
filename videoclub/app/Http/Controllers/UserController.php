@@ -28,6 +28,8 @@ class UserController extends Controller
             case 'admin': Admin::create(['user_id' => $user->id]); break;
             case 'free': Free::create(['user_id' => $user->id]); break;
         }
+
+        return response_json($user);
     }
 
     public function show($id) {
