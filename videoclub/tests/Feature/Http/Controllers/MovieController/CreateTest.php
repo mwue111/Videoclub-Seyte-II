@@ -11,6 +11,7 @@ use App\Models\Movie;
 
 class CreateTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      */
