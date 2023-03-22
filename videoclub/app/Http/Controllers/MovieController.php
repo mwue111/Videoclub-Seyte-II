@@ -32,7 +32,7 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         $attributes = $request->validate([
-            'title' => 'required',
+            'title' => 'required|unique:movies,title',
             'poster' => 'required|image',
             'year' => 'required',
             'runtime' => 'required',
@@ -80,7 +80,7 @@ class MovieController extends Controller
         $movie = Movie::findOrFail($id);
 
         $attributes = $request->validate([
-            'title' => 'required',
+            'title' => 'required|unique:movies,title',
             'poster' => 'image',
             'year' => 'required',
             'runtime' => 'required',

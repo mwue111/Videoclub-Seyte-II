@@ -23,7 +23,7 @@ class MovieFactory extends Factory
             'runtime' => fake()->numberBetween(60, 210),
             'plot' => fake()->paragraph(),
             'genre' => fake()->sentence(),
-            'director'=>fake()->sentence(),
+            'director'=>fake()->sentence()
         ];
     }
 }
