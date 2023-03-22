@@ -8,7 +8,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\Movie;
 
 class User extends Authenticatable
 {
@@ -27,6 +26,7 @@ class User extends Authenticatable
     'image',
     'surname',
     'birth_date',
+    'role',
   ];
 
   /**

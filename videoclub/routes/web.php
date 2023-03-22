@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MovieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +17,10 @@ Route::get('/', function () {
   return view('welcome');
 });
 
-Route::resource('peliculas', MovieController::class);
+Route::resource('peliculas', 'MovieController');
 
 Route::resource('resenas', 'ReviewController');
 
 Route::resource('generos', 'GenreController');
+
+Route::resource('usuarios', 'UserController');
