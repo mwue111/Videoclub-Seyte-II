@@ -10,58 +10,68 @@ use App\Models\Free;
 
 class UserController extends Controller
 {
-    public function index() {
-        $users = User::all();
-        foreach($users as $user) {
-            switch($user->role){
-                case 'admin': $user->admin; break;
-                case 'free': $user->free; break;
-            }
-        }
-        return $users;
+  public function index()
+  {
+    $users = User::all();
+    foreach ($users as $user) {
+      switch ($user->role) {
+        case 'admin':
+          $user->admin;
+          break;
+        case 'free':
+          $user->free;
+          break;
+      }
+    }
+    return $users;
+  }
+
+  public function store(Request $request)
+  {
+    $user = User::create($request->all());
+
+    switch ($user->role) {
+      case 'admin':
+        Admin::create(['user_id' => $user->id]);
+        break;
+      case 'free':
+        Free::create(['user_id' => $user->id]);
+        break;
     }
 
-    public function store(Request $request) {
-        $user = User::create($request->all());
+    return json_encode($user);
+  }
 
-        switch($user->role){
-            case 'admin': Admin::create(['user_id' => $user->id]); break;
-            case 'free': Free::create(['user_id' => $user->id]); break;
-        }
+  public function show($id)
+  {
+    $user = User::findOrFail($id);
+    return json_encode($user);
+  }
 
-        return response_json($user);
-    }
+  public function update(Request $request, $id)
+  {
 
-    public function show($id) {
-        $user = User::findOrFail($id);
-        return json_encode($user);
-    }
+    $user = User::findOrFail($id);
 
-    public function update(Request $request, $id) {
+    $attributes = $request->validate([
+      'name' => 'required',
+      'surname' => 'required',
+      'username' => 'required|unique:users,username',
+      'email' => 'required|email',
+      'password' => 'required',
+      'role' => 'required',
+      'image' => 'required|file',
+      'birth_date' => 'required'
+    ]);
 
-        $user = User::findOrFail($id);
+    $user->update($request->all());
 
-        $attributes = $request->validate([
-            'name' => 'required',
-            'surname' => 'required',
-            'username' => 'required|unique:users,username',
-            'email' => 'required|email',
-            'password' => 'required',
-            'role' => 'required',
-            'image' => 'required|file',
-            'birth_date' => 'required'
-        ]);
+    return json_encode($user);
+  }
 
-        $user->update($request->all());
-
-        return json_encode($user);
-    }
-
-    public function destroy($id) {
-        $user = User::findOrFail($id)->destroy($id);
-        return json_encode($user);
-    }
-
-
-
+  public function destroy($id)
+  {
+    $user = User::findOrFail($id)->destroy($id);
+    return json_encode($user);
+  }
 }
