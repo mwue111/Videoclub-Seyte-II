@@ -38,10 +38,10 @@ class UserController extends Controller
         Free::create(['user_id' => $user->id]);
         break;
       case 'premium':
-        Premium::create(['user_id' => $user->id]);
+        Premium::create(['user_id' => $user->id, 'fecha_ultimo_pago' => now()]);
         break;
     }
-
+    $user->save();
     return json_encode($user);
   }
 
