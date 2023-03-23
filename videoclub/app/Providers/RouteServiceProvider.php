@@ -7,6 +7,8 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Laravel\Passport\Http\Controllers\AccessTokenController;
+use Laravel\Passport\Http\Controllers\AuthorizationController;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,12 @@ class RouteServiceProvider extends ServiceProvider
         $this->configureRateLimiting();
 
         $this->routes(function () {
+
+            Route::prefix('oauth')->group(function() {
+                Route::post('/token', [AccessTokenController::class, 'issueToken'])->middleware('throttle');
+                Route::post('/authorize', [AuthorizationController::class, 'authorize']);
+            });
+
             Route::middleware('api')
                 ->prefix('api')
                 ->namespace('App\Http\Controllers')
@@ -49,3 +57,4 @@ class RouteServiceProvider extends ServiceProvider
         });
     }
 }
+
