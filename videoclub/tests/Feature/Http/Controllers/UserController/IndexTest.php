@@ -34,7 +34,7 @@ class IndexTest extends TestCase
   public function test_get_user_premium(): void
   {
     $user = User::factory()->create();
-    $user->premium()->create();
+    $user->premium()->create(['fecha_ultimo_pago' => '2021-01-01']);
     $premium = $user->premium;
     $response = $this->get(route('usuarios.index'));
     $response->assertStatus(200);
