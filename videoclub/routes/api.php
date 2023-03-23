@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\ProductController;
 //use App\Http\Controllers\API\ProductController;
-use App\Http\Controllers\API\MovieController;
+use App\Http\Controllers\MovieController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,14 @@ use App\Http\Controllers\API\MovieController;
 // });
 
 Route::post('register', [RegisterController::class, 'register']);
-Route::post('login', [RegisterController::class, 'login']);
+Route::post('login', [RegisterController::class, 'login'])->name('login');
+Route::get('test', [RegisterController::class, 'test']);
+
 
 Route::middleware('auth:api')->group( function () {
     //Route::resource('products', ProductController::class);
     Route::resource('peliculas', MovieController::class);
+
 });
+
+Route::middleware('auth:api')->post('logout', [RegisterController::class, 'logout']);

@@ -40,14 +40,10 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $attributes = $request->validate([
-            'name' => 'required',
-            'surname' => 'required',
-            'username' => 'required|unique:users,username',
             'email' => 'required|email',
+            'birth_date' => 'required',
             'password' => 'required',
-            'role' => 'required',
-            'image' => 'file',
-            'birth_date' => 'required'
+            'c_password' => 'required|same:password',
         ]);
 
         $user->update($request->all());
@@ -60,6 +56,17 @@ class UserController extends Controller
         return json_encode($user);
     }
 
+    public function login(Request $request)
+    {
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            $user = Auth::user();
+            $success['token'] =  $user->createToken('MyApp')-> accessToken;
+            $success['name'] =  $user->name;
 
-
+            return $this->sendResponse($success, 'Has iniciado sesión.');
+        }
+        else{
+            return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
+        }
+    }
 }

@@ -17,13 +17,10 @@ class RegisterController extends BaseController
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username' => 'required',
-            'name' => 'required',
-            'surname' => 'required',
             'email' => 'required|email',
             'birth_date' => 'required',
             'password' => 'required',
-            //'c_password' => 'required|same:password',
+            'c_password' => 'required|same:password',
         ]);
 
         if($validator->fails()){
@@ -48,11 +45,20 @@ class RegisterController extends BaseController
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')-> accessToken;
             $success['name'] =  $user->name;
-
             return $this->sendResponse($success, 'Has iniciado sesión.');
         }
         else{
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
         }
+    }
+
+    public function test() {
+        return 'todo ok';
+    }
+
+    public function logout(Request $request){
+        $token = $request->user()->token();
+        $token->revoke();
+        return response(['message' => 'Has cerrado sesión.'], 200);
     }
 }
