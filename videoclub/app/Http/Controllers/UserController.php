@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Free;
-//use App\Models\Premium;   //usuario de pago
+use App\Models\Premium;
 
 class UserController extends Controller
 {
@@ -36,6 +36,9 @@ class UserController extends Controller
         break;
       case 'free':
         Free::create(['user_id' => $user->id]);
+        break;
+      case 'premium':
+        Premium::create(['user_id' => $user->id]);
         break;
     }
 

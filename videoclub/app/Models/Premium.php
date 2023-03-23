@@ -9,8 +9,11 @@ class Premium extends Model
 {
   use HasFactory;
 
+  protected $table = 'premiums';
   protected $primaryKey = 'user_id';
-  protected $fillabe = ['user_id', 'fecha_ultimo_pago'];
+  protected $fillable = [
+    'user_id', 'fecha_ultimo_pago'
+  ];
 
   public function user()
   {
