@@ -23,7 +23,7 @@ class UserController extends Controller
           break;
       }
     }
-    return $users;
+    return json_encode($users);
   }
 
   public function store(Request $request)
