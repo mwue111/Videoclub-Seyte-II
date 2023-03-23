@@ -24,3 +24,5 @@ Route::resource('resenas', 'ReviewController');
 Route::resource('generos', 'GenreController');
 
 Route::resource('usuarios', 'UserController');
+
+//Route::get('alquiler', 'RentController');
