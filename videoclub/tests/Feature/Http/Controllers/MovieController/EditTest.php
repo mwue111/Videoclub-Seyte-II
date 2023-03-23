@@ -141,6 +141,7 @@ class EditTest extends TestCase
             'plot' => 'sinopsis de una película de prueba',
             'genre' => 'drama',
             'director' => 'Alice Guy',
+            'file' => 'movie.mp4'
         ], $overrides);
 
     }

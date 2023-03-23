@@ -94,6 +94,7 @@ class CreateTest extends TestCase
             'plot' => 'sinopsis de una película de prueba',
             'genre' => 'drama',
             'director' => 'Alice Guy',
+            'file' => 'video.mp4'
         ], $overrides);
     }
 

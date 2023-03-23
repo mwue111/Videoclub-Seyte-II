@@ -31,6 +31,10 @@
     <br>
     <input type="text" name="director"/>
     <br>
+    <label for="file">Archivo de la película</label>
+    <br>
+    <input type="file" name="file"/>
+    <br>
     <input type="submit" value="Añadir">
 
 @if($errors->any())

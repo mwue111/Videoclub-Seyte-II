@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use Illuminate\Http\UploadedFile;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Movie>
  */
@@ -16,6 +16,8 @@ class MovieFactory extends Factory
      */
     public function definition(): array
     {
+        $video = UploadedFile::fake()->create('movie.mp4', 1000);
+
         return [
             'title' => fake()->sentence(),
             'poster' => fake()->image(),
@@ -23,7 +25,8 @@ class MovieFactory extends Factory
             'runtime' => fake()->numberBetween(60, 210),
             'plot' => fake()->paragraph(),
             'genre' => fake()->sentence(),
-            'director'=>fake()->sentence()
+            'director'=>fake()->sentence(),
+            'file' => $video
         ];
     }
 }
