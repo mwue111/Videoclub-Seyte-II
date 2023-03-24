@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Route::resource('peliculas', 'MovieController')->middleware('client');
 
-Route::resource('resenas', 'ReviewController');
+Route::resource('resenas', 'ReviewController')->middleware('client');
 
 Route::resource('generos', 'GenreController');
 

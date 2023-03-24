@@ -28,10 +28,10 @@ Route::post('login', [RegisterController::class, 'login'])->name('login');
 Route::get('test', [RegisterController::class, 'test']);
 
 
-Route::middleware('auth:api')->group( function () {
-    //Route::resource('products', ProductController::class);
-    Route::resource('peliculas', MovieController::class);
-
+Route::middleware('auth:api')->group(function () {
+  //Route::resource('products', ProductController::class);
+  Route::resource('peliculas', MovieController::class);
+  Route::resource('resenas', ReviewController::class);
 });
 
 Route::middleware('auth:api')->post('logout', [RegisterController::class, 'logout']);
