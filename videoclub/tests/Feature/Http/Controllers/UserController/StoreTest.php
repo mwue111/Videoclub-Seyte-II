@@ -55,4 +55,18 @@ class StoreTest extends TestCase
     $this->assertDatabaseHas('users', $userData);
     $this->assertDatabaseHas('premiums', ['user_id' => $response->json('id')]);
   }
+  public function test_not_store_with_bad_args(): void
+  {
+    $userData = [
+      'username' => 'username',
+      'name' => 'name',
+      'email' => '',
+      'birth_date' => '2021-01-01',
+      'role' => 'premium',
+      'password' => 'password',
+    ];
+    $response = $this->post(route('usuarios.store'), $userData);
+    $response->assertSessionHasErrors('email');
+    $response->assertStatus(422);
+  }
 }
