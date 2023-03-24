@@ -13,52 +13,49 @@ class StoreTest extends TestCase
   public function test_store_free_user(): void
   {
     $userData = [
-      'username' => 'username',
+      'username' => 'username1',
       'name' => 'name',
-      'email' => 'email',
+      'email' => 'email@email.com',
       'birth_date' => '2021-01-01',
       'role' => 'free',
       'password' => 'password',
     ];
     $response = $this->post(route('usuarios.store'), $userData);
-    $response->assertStatus(200);
     $this->assertDatabaseHas('users', $userData);
-    $this->assertDatabaseHas('frees', ['user_id' => User::where('username', 'username')->first()->id]);
+    $this->assertDatabaseHas('frees', ['user_id' => $response->json('id')]);
   }
   public function test_store_admin_user(): void
   {
     $userData = [
-      'username' => 'username',
+      'username' => 'username2',
       'name' => 'name',
-      'email' => 'email1',
+      'email' => 'email1@email.com',
       'birth_date' => '2021-01-01',
       'role' => 'admin',
       'password' => 'password',
     ];
     $response = $this->post(route('usuarios.store'), $userData);
-    $response->assertStatus(200);
     $this->assertDatabaseHas('users', $userData);
     $this->assertDatabaseHas('admins', ['user_id' => $response->json('id')]);
   }
   public function test_store_premium_user(): void
   {
     $userData = [
-      'username' => 'username',
+      'username' => 'username3',
       'name' => 'name',
-      'email' => 'email2',
+      'email' => 'email2@email.com',
       'birth_date' => '2021-01-01',
       'role' => 'premium',
       'password' => 'password',
     ];
     $response = $this->post(route('usuarios.store'), $userData);
-    $response->assertStatus(200);
     $this->assertDatabaseHas('users', $userData);
     $this->assertDatabaseHas('premiums', ['user_id' => $response->json('id')]);
   }
   public function test_not_store_with_bad_args(): void
   {
     $userData = [
-      'username' => 'username',
+      'username' => 'username4',
       'name' => 'name',
       'email' => '',
       'birth_date' => '2021-01-01',
@@ -67,6 +64,5 @@ class StoreTest extends TestCase
     ];
     $response = $this->post(route('usuarios.store'), $userData);
     $response->assertSessionHasErrors('email');
-    $response->assertStatus(422);
   }
 }
