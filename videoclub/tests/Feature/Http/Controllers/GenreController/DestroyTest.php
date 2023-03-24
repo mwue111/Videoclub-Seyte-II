@@ -16,7 +16,7 @@ class DestroyTest extends TestCase
     $this->delete(route('generos.destroy', $genre))
       ->assertStatus(302)
       ->assertRedirect('generos');
-    $this->assertDatabaseMissing('genres', ['id' => $genre->id]);
+    $this->assertDatabaseHas('genres', ['id' => $genre->id]); //Se comprueba que sigue en la bd porque no se borra, se añade una columna softDelete
   }
 
   public function test_delete_genres(): void
@@ -26,7 +26,7 @@ class DestroyTest extends TestCase
       $this->delete(route('generos.destroy', $genre))
         ->assertStatus(302)
         ->assertRedirect('generos');
-      $this->assertDatabaseMissing('genres', ['id' => $genre->id]);
+      $this->assertDatabaseHas('genres', ['id' => $genre->id]); //Se comprueba que sigue en la bd porque no se borra, se añade una columna softDelete
     }
   }
 
