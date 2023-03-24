@@ -17,7 +17,7 @@ Route::get('/', function () {
   return view('welcome');
 });
 
-Route::resource('peliculas', 'MovieController')->middleware('client');
+Route::resource('peliculas', 'MovieController'); //->middleware('client');
 
 Route::resource('resenas', 'ReviewController');
 
@@ -25,4 +25,4 @@ Route::resource('generos', 'GenreController');
 
 Route::resource('usuarios', 'UserController');
 
-//Route::get('alquiler', 'RentController');
+//Route::resource('alquiler', 'RentController')->middleware('client');

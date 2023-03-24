@@ -62,7 +62,8 @@ class User extends Authenticatable
   public function rents()
   {
     return $this->belongsToMany(Movie::class, 'rents')
-                ->withPivot('expiration_date');
+                ->withPivot('id', 'expiration_date')
+                ->withTimeStamps();
   }
 
   public function reviews()
