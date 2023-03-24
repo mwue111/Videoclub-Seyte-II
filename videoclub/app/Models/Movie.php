@@ -9,7 +9,7 @@ use App\Models\User;
 
 class Movie extends Model
 {
-    use HasFactory, SoftDeletes;
+  use HasFactory, SoftDeletes;
 
   protected $fillable = [
     'title',
@@ -31,5 +31,8 @@ class Movie extends Model
     return $this->belongsToMany(User::class, 'reviews')
       ->withPivot('title', 'description');
   }
-
+  public function genres()
+  {
+    return $this->belongsToMany(Genre::class, 'movies_genres');
+  }
 }
