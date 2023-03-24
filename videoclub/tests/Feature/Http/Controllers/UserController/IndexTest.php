@@ -12,6 +12,7 @@ class IndexTest extends TestCase
   /**
    * A basic feature test example.
    */
+  use RefreshDatabase;
   public function test_get_users(): void
   {
     $user = User::factory()->create();

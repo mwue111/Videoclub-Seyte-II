@@ -9,7 +9,7 @@ use App\Models\User;
 
 class StoreTest extends TestCase
 {
-
+  use RefreshDatabase;
   public function test_store_free_user(): void
   {
     $userData = [

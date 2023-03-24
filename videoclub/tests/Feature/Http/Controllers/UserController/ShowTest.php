@@ -9,7 +9,7 @@ use App\Models\User;
 
 class ShowTest extends TestCase
 {
-
+  use RefreshDatabase;
   public function test_show_user(): void
   {
     $user = User::factory()->create();
