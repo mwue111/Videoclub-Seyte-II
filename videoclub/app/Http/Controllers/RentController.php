@@ -16,17 +16,27 @@ use App\Http\Controllers\API\BaseController as BaseController;
 class RentController extends BaseController
 {
 
-    //listar todos los elementos de la tabla rents
+
     public function index(){
         $rents = Rent::all();
         return response()->json($rents);
     }
 
-    //Para ver un listado de las películas alquiladas por un usuario
-    public function show() {
+    public function show(Request $request) {
         $user = Auth::user();
-        $user->rents->all();
-        return response()->json($user);
+        switch ($user->role){
+            case 'free': $response = $user->rents->all(); break;
+            case 'premium': $response = $user->views->all(); break;
+            case 'admin':
+                        $checkUserRents = User::findOrFail($request->user_id);
+                        if($checkUserRents->role === 'free'){
+                            $response = $checkUserRents->rents->all();
+                        }
+                        else{
+                            $response = $checkUserRents->views->all();
+                        }; break;
+        }
+        return response()->json($response);
     }
 
     //crear un alquiler con datos de usuario, película y añadiendo una fecha de expiración

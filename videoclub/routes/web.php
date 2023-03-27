@@ -21,10 +21,10 @@ Route::group(['middleware' => ['cors']], function () {
   Route::resource('generos', 'GenreController');
 });
 
-Route::resource('peliculas', 'MovieController')->middleware('client', 'cors');
+Route::resource('peliculas', 'MovieController')->middleware('client');
 
 Route::resource('resenas', 'ReviewController')->middleware('client');
 
 Route::resource('usuarios', 'UserController');
 
-//Route::resource('alquiler', 'RentController')->middleware('client');
+Route::resource('alquiler', 'RentController')->middleware('client');
