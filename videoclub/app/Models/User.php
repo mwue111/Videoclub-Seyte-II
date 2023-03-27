@@ -64,11 +64,13 @@ class User extends Authenticatable
     return $this->hasOne(Premium::class);
   }
 
-  public function movies()
+  public function rents()
   {
-    return $this->belongsToMany(Movie::class, 'purchases')
-      ->withPivot('expiration_date');
+    return $this->belongsToMany(Movie::class, 'rents')
+                ->withPivot('id', 'expiration_date')
+                ->withTimeStamps();
   }
+
   public function reviews()
   {
     return $this->belongsToMany(Movie::class, 'reviews')

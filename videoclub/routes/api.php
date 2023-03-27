@@ -4,8 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\ProductController;
-//use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\RentController;
 
 
 /*
@@ -29,9 +29,10 @@ Route::get('test', [RegisterController::class, 'test']);
 
 
 Route::middleware('auth:api')->group(function () {
-  //Route::resource('products', ProductController::class);
-  Route::resource('peliculas', MovieController::class);
-  Route::resource('resenas', ReviewController::class);
+    Route::resource('peliculas', MovieController::class);
+    Route::resource('resenas', ReviewController::class);
+    Route::resource('alquiler', RentController::class);
+
 });
 
 Route::middleware('auth:api')->post('logout', [RegisterController::class, 'logout']);

@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         GenresTableSeeder::class,
         AdminsTableSeeder::class,
         FreesTableSeeder::class,
+        RentsTableSeeder::class,
     ]);
 
     // \App\Models\User::factory(10)->create();

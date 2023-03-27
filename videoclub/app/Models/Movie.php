@@ -24,8 +24,9 @@ class Movie extends Model
 
   public function users()
   {
-    return $this->belongsToMany(User::class, 'purchases')
-      ->withPivot('expiration_date');
+    return $this->belongsToMany(User::class, 'rents')
+      ->withPivot('id', 'expiration_date')
+      ->withTimeStamps();
   }
   public function reviews()
   {

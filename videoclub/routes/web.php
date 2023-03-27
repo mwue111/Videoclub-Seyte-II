@@ -17,10 +17,12 @@ Route::get('/', function () {
   return view('welcome');
 });
 
-Route::resource('peliculas', 'MovieController')->middleware('client');
+Route::resource('peliculas', 'MovieController'); //->middleware('client');
 
 Route::resource('resenas', 'ReviewController')->middleware('client');
 
 Route::resource('generos', 'GenreController');
 
 Route::resource('usuarios', 'UserController');
+
+//Route::resource('alquiler', 'RentController')->middleware('client');
