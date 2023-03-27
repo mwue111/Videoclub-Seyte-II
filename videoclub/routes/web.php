@@ -17,11 +17,13 @@ Route::get('/', function () {
   return view('welcome');
 });
 
-Route::resource('peliculas', 'MovieController')->middleware('client');
+Route::group(['middleware' => ['cors']], function () {
+  Route::resource('generos', 'GenreController');
+});
+
+Route::resource('peliculas', 'MovieController')->middleware('client', 'cors');
 
 Route::resource('resenas', 'ReviewController')->middleware('client');
-
-Route::resource('generos', 'GenreController');
 
 Route::resource('usuarios', 'UserController');
 
