@@ -6,10 +6,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Genre;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class EditTest extends TestCase
 {
   use refreshDatabase;
+  use WithoutMiddleware;
   public function test_show_old_genre_values(): void
   {
     $genre = Genre::factory()->create();

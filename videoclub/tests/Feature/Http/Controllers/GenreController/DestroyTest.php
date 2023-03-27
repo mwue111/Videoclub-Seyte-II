@@ -6,10 +6,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Genre;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class DestroyTest extends TestCase
 {
   use RefreshDatabase;
+  use WithoutMiddleware;
   public function test_delete_genre(): void
   {
     $genre = Genre::factory()->create();

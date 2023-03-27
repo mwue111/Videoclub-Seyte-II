@@ -4,6 +4,7 @@ namespace Tests\Feature\Http\Controllers\GenreController;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 
 
@@ -11,6 +12,7 @@ use Tests\TestCase;
 class CreateTest extends TestCase
 {
   use RefreshDatabase;
+  use WithoutMiddleware;
   public function test_show_form(): void
   {
     $this->get(route("generos.create"))
