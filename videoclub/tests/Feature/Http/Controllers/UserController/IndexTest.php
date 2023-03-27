@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class IndexTest extends TestCase
 {
@@ -13,6 +14,7 @@ class IndexTest extends TestCase
    * A basic feature test example.
    */
   use RefreshDatabase;
+  use WithoutMiddleware;
   public function test_get_users(): void
   {
     $user = User::factory()->create();

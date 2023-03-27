@@ -6,12 +6,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 use function PHPUnit\Framework\assertNotEquals;
 
 class UpdateTest extends TestCase
 {
   use RefreshDatabase;
+  use WithoutMiddleware;
   public function test_update_user()
   {
 
