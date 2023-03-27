@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers\MovieController;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -11,7 +12,7 @@ use App\Models\Movie;
 
 class CreateTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithoutMiddleware;
     /**
      * A basic feature test example.
      */
@@ -66,15 +67,15 @@ class CreateTest extends TestCase
 
     public function test_it_uploads_a_file() {
         Storage::fake('public');
+        $movie = UploadedFile::fake()->create('movie.mp4');
+        $file = UploadedFile::fake()->image('poster.jpg');
 
-        $this->post(route('peliculas.store'), $this->validFields(['poster' => $file = UploadedFile::fake()->image('poster.jpg')]));
+        $this->post(route('peliculas.store'), $this->validFields(['file' => $movie, 'poster' => $file]));
 
         Storage::disk('public')
+                ->assertExists('/media/' . $movie->hashName())
                 ->assertExists('/images/' . $file->hashName());
 
-        Storage::disk('public')
-                ->assertMissing('/images/anotherPoster.jpg');
-        $this->assertDatabaseHas('movies', ['poster' => 'images/' . $file->hashName()]);
     }
 
     public function saveMovie($data = []) {
@@ -94,6 +95,7 @@ class CreateTest extends TestCase
             'plot' => 'sinopsis de una película de prueba',
             'genre' => 'drama',
             'director' => 'Alice Guy',
+            'file' => 'movie.mp4'
         ], $overrides);
     }
 

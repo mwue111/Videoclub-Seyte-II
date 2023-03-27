@@ -33,20 +33,24 @@ class MovieController extends Controller
     {
         $attributes = $request->validate([
             'title' => 'required|unique:movies,title',
-            'poster' => 'required|image',
+            'poster' => 'required|image|mimes:jpg,jpeg,bmp,png',
             'year' => 'required',
             'runtime' => 'required',
             'plot' => 'required',
             'genre' => 'required',
             'director' => 'required',
+            'file' => 'required|file|mimes:mp4,mp3,wav',
         ]);
 
         $attributes['poster'] = request()->file('poster')->store('images', 'public');
+        $attributes['file'] = request()->file('file')->store('media', 'public');
 
         Movie::create($attributes);
 
         return redirect()->route('peliculas.index');
     }
+
+
 
     /**
      * Display the specified resource.
@@ -81,23 +85,26 @@ class MovieController extends Controller
 
         $attributes = $request->validate([
             'title' => 'required|unique:movies,title',
-            'poster' => 'image',
+            'poster' => 'image|mimes:jpg,jpeg,bmp,png',
             'year' => 'required',
             'runtime' => 'required',
             'plot' => 'required',
             'genre' => 'required',
             'director' => 'required',
+            'file' => 'file',
         ]);
 
         if(isset($attributes['poster'])){
             $attributes['poster'] = request()->file('poster')->store('images', 'public');
         }
-        //dd($attributes['poster']);
+
+        if(isset($attributes['file'])){
+            $attributes['file'] = request()->file('file')->store('media', 'public');
+        }
 
         $movie->update($attributes);
 
-        //return redirect()->route('peliculas.index');//->withMessage('success', 'Película editada');
-        return redirect()->route('peliculas.index');
+        return redirect()->route('peliculas.index');//->withMessage('success', 'Película editada');
     }
 
     /**

@@ -31,15 +31,21 @@
     <br>
     <input type="text" name="director"/>
     <br>
+    <label for="file">Archivo de la película</label>
+    <br>
+    <input type="file" name="file"/>
+    <br>
     <input type="submit" value="Añadir">
 
-@if($errors->any())
-    <ul>
-        @foreach($errors->all() as $error)
-            <li>{{$error}}</li>
-        @endforeach
-    </ul>
-@endif
+@isset($errors)
+    @if($errors->any())
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    @endif
+@endisset
 </form>
 
 <a href="{{ route('peliculas.index') }}">Volver</a>

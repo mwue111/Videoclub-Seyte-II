@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class EditTest extends TestCase
 {
-  use refreshDatabase;
+  use RefreshDatabase;
   use WithoutMiddleware;
   public function test_show_old_genre_values(): void
   {

@@ -19,6 +19,7 @@ class Movie extends Model
     'plot',
     'genre',
     'director',
+    'file',
   ];
 
   public function users()
