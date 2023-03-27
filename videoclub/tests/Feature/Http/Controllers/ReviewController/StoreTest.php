@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Movie;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class StoreTest extends TestCase
 {
@@ -14,6 +15,7 @@ class StoreTest extends TestCase
    * A basic feature test example.
    */
   use RefreshDatabase;
+  use WithoutMiddleware;
   public function test_store_review(): void
   {
     $user = User::factory()->create();

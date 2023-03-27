@@ -7,10 +7,12 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 use App\Models\Review;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class IndexTest extends TestCase
 {
   use RefreshDatabase;
+  use WithoutMiddleware;
   public function test_display_review(): void
   {
     $review = Review::factory()->create();

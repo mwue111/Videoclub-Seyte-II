@@ -6,10 +6,12 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Review;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class ShowTest extends TestCase
 {
   use RefreshDatabase;
+  use WithoutMiddleware;
   public function test_show_review(): void
   {
     $review = Review::factory()->create();

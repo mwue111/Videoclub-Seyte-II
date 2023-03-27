@@ -8,10 +8,12 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Movie;
 use App\Models\Review;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class UpdateTest extends TestCase
 {
   use RefreshDatabase;
+  use WithoutMiddleware;
   public function test_update_review(): void
   {
     $review = Review::factory()->create();
