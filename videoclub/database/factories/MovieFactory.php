@@ -16,7 +16,7 @@ class MovieFactory extends Factory
      */
     public function definition(): array
     {
-        $video = UploadedFile::fake()->create('movie.mp4', 1000);
+        $video = UploadedFile::fake()->create('movie.mp4');
 
         return [
             'title' => fake()->sentence(),

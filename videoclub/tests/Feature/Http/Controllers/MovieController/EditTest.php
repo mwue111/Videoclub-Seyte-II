@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers\MovieController;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -12,7 +13,7 @@ use App\Models\Movie;
 
 class EditTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithoutMiddleware;
 
     public function test_it_shows_the_edit_form_with_the_old_values(): void
     {
@@ -29,15 +30,16 @@ class EditTest extends TestCase
             ->assertSee($movie->director);
     }
 
-    public function test_it_saves_new_poster() {
+    public function test_it_saves_new_files() {
         Storage::fake('public');
 
-        $data = $this->oldFields(['poster' => $file = UploadedFile::fake()->image('poster.jpg')]);
+        $data = $this->oldFields(['poster' => $file = UploadedFile::fake()->image('poster.jpg'), 'file' => $movie = UploadedFile::fake()->create('newVideo.mp4')]);
 
         $this->updateMovie($data)
             ->assertRedirect(route('peliculas.index'));
 
-        Storage::disk('public')->assertExists('/images/' . $file->hashName());
+        Storage::disk('public')->assertExists('/images/' . $file->hashName())
+                                ->assertExists('/media/' . $movie->hashName());
 
         $this->assertDatabaseHas('movies', ['poster' => 'images/' . $file->hashName()]);
     }
@@ -122,6 +124,22 @@ class EditTest extends TestCase
 
     }
 
+    public function test_it_doesnt_save_incorrect_files() {
+        Storage::fake('public');
+
+        $data = $this->oldFields(['poster' => $file = UploadedFile::fake()->image('poster.mp4'), 'file' => $movie = UploadedFile::fake()->create('newVideo.jpg')]);
+
+        $this->updateMovie($data)
+            ->assertSessionHasErrors('poster')
+            ->assertSessionHasErrors('file');
+
+        Storage::disk('public')->assertMissing('/images/' . $file->hashName())
+                            ->assertMissing('/media/' . $movie->hashName());
+
+        $this->assertDatabaseMissing('movies', ['poster' => 'images/' . $file->hashName()]);
+    }
+
+
     public function updateMovie($data = []) {
 
         $this->withExceptionHandling();
@@ -131,17 +149,18 @@ class EditTest extends TestCase
 
     public function oldFields($overrides = []): array {
 
-        $file = UploadedFile::fake()->image('poster.jpg');
+        $poster = UploadedFile::fake()->image('poster.jpg');
+        $file = UploadedFile::fake()->create('movie.mp4');
 
         return array_merge([
             'title' => 'Película de prueba',
-            'poster' => $overrides === 'poster' ? 'image.jpg' : $file,
+            'poster' => $overrides === 'poster' ? 'image.jpg' : $poster,
             'year' => 2000,
             'runtime' => 160,
             'plot' => 'sinopsis de una película de prueba',
             'genre' => 'drama',
             'director' => 'Alice Guy',
-            'file' => 'movie.mp4'
+            'file' => $file
         ], $overrides);
 
     }

@@ -9,7 +9,7 @@ use App\Models\Genre;
 
 class EditTest extends TestCase
 {
-  use refreshDatabase;
+  use RefreshDatabase;
   public function test_show_old_genre_values(): void
   {
     $genre = Genre::factory()->create();

@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers\MovieController;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
@@ -10,7 +11,7 @@ use App\Models\Movie;
 
 class IndexTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithoutMiddleware;
 
     public function test_it_shows_all_movies(): void
     {

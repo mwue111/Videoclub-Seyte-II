@@ -39,7 +39,7 @@ class MovieController extends Controller
             'plot' => 'required',
             'genre' => 'required',
             'director' => 'required',
-            'file' => 'required|file',
+            'file' => 'required|file|mimes:mp4,mp3,wav',
         ]);
 
         $attributes['poster'] = request()->file('poster')->store('images', 'public');
@@ -49,6 +49,8 @@ class MovieController extends Controller
 
         return redirect()->route('peliculas.index');
     }
+
+
 
     /**
      * Display the specified resource.

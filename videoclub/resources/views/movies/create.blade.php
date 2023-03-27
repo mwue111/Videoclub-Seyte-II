@@ -37,13 +37,15 @@
     <br>
     <input type="submit" value="Añadir">
 
-@if($errors->any())
-    <ul>
-        @foreach($errors->all() as $error)
-            <li>{{$error}}</li>
-        @endforeach
-    </ul>
-@endif
+@isset($errors)
+    @if($errors->any())
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    @endif
+@endisset
 </form>
 
 <a href="{{ route('peliculas.index') }}">Volver</a>

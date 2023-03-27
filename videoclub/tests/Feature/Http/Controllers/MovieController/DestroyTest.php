@@ -3,6 +3,7 @@
 namespace Tests\Feature\Http\Controllers\MovieController;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Carbon\Carbon;
@@ -11,7 +12,7 @@ use App\Models\Movie;
 
 class DestroyTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithoutMiddleware;
     /**
      * A basic feature test example.
      */
