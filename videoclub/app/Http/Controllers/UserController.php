@@ -21,6 +21,9 @@ class UserController extends Controller
         case 'free':
           $user->free;
           break;
+        case 'premium':
+            $user->premium;
+            break;
       }
     }
     return json_encode($users);
