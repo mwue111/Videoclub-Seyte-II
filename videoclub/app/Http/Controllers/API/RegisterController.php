@@ -44,7 +44,10 @@ class RegisterController extends BaseController
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')-> accessToken;
-            $success['name'] =  $user->name;
+            $success['user'] = [
+                'name' => Auth::user()->name,
+                'email' => Auth::user()->email,
+            ];
             return $this->sendResponse($success, 'Has iniciado sesión.');
         }
         else{
@@ -52,8 +55,8 @@ class RegisterController extends BaseController
         }
     }
 
-    public function test() {
-        return 'todo ok';
+    public function profile() {
+        return response()->json(Auth::user());
     }
 
     public function logout(Request $request){

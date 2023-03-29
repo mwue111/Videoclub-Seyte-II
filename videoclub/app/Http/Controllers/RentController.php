@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Models\User;
 use App\Models\Free;
+use App\Models\Premium;
 use App\Models\Rent;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -26,14 +27,14 @@ class RentController extends BaseController
         $user = Auth::user();
         switch ($user->role){
             case 'free': $response = $user->rents->all(); break;
-            case 'premium': $response = $user->views->all(); break;
+            case 'premium': $response = $user->movies->all(); break;    //este tiene que ser premium
             case 'admin':
                         $checkUserRents = User::findOrFail($request->user_id);
                         if($checkUserRents->role === 'free'){
                             $response = $checkUserRents->rents->all();
                         }
                         else{
-                            $response = $checkUserRents->views->all();
+                            $response = $checkUserRents->movies->all();
                         }; break;
         }
         return response()->json($response);

@@ -25,13 +25,13 @@ use App\Http\Controllers\RentController;
 
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login'])->name('login');
-Route::get('test', [RegisterController::class, 'test']);
 
 
 Route::middleware('auth:api')->group(function () {
     Route::resource('peliculas', MovieController::class);
     Route::resource('resenas', ReviewController::class);
     Route::resource('alquiler', RentController::class);
+    Route::get('profile', [RegisterController::class, 'profile']);
 
 });
 
