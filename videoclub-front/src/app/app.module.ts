@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
