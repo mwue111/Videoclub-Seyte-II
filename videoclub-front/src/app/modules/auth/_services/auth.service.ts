@@ -8,6 +8,8 @@ import { URL_SERVICES } from 'src/app/config/config';
   providedIn: 'root'
 })
 export class AuthService {
+  token: any = '';
+  user: any = null;
 
   constructor(
     private http: HttpClient,
@@ -15,15 +17,25 @@ export class AuthService {
   ) { }
 
   storeLocalStorageToken(auth: any) {
-    //TO DO
-    console.log('auth: ', auth);
+   if(auth.token) {
+    localStorage.setItem('token', auth.token);
+    localStorage.setItem('user', auth.user);
+
+    this.token = auth.token;
+    this.user = auth.user;
+
+    return true;
+   }
+   else{
+    return false;
+   }
   }
 
   login(email: string, password: string) {
     let url = URL_SERVICES + '/login';
     return this.http.post(url, { email, password }).pipe(
       map((auth: any) => {
-        if(auth.access_token){  //en postman se llama token
+        if(auth.token){  //en postman se llama token (dentro de data), en el tutorial access_token
           return this.storeLocalStorageToken(auth);
         }
         else{
