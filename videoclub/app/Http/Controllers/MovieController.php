@@ -11,11 +11,21 @@ class MovieController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $cantidad = $request->input('cantidad');
+      if ($cantidad) {
+        $movies = Movie::orderBy('id', 'DESC')->take($cantidad)->get();
+      } else {
         $movies = Movie::orderBy('id', 'DESC')->get();
-
-        return view('movies.index', ['movies' => $movies ]);
+      }
+      if ($request->path() == 'api/peliculas') {
+        return response()->json($movies);
+      } else {
+        return view('movies.index', [
+          'movies' => $movies
+        ]);
+      }
     }
 
     /**

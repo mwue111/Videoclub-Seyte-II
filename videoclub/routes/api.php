@@ -26,13 +26,17 @@ use App\Http\Controllers\RentController;
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login'])->name('login');
 
+Route::group(['middleware' => ['cors']], function () {
+    Route::resource('generos', 'GenreController');
+    Route::resource('peliculas', 'MovieController'); //->middleware('client');
+  });
 
-Route::middleware('auth:api')->group(function () {
-    Route::resource('peliculas', MovieController::class);
-    Route::resource('resenas', ReviewController::class);
-    Route::resource('alquiler', RentController::class);
-    Route::get('profile', [RegisterController::class, 'profile']);
+// Route::middleware('auth:api')->group(function () {
+//     Route::resource('peliculas', MovieController::class);
+//     Route::resource('resenas', ReviewController::class);
+//     Route::resource('alquiler', RentController::class);
+//     Route::get('profile', [RegisterController::class, 'profile']);
 
-});
+// });
 
 Route::middleware('auth:api')->post('logout', [RegisterController::class, 'logout']);
