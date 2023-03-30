@@ -10,11 +10,21 @@ class GenreController extends Controller
   /**
    * Display a listing of the resource.
    */
-  public function index()
+  public function index(Request $request)
   {
-    //
-    $genres = Genre::orderBy('id', 'ASC')->get();
-    return view('genres.index', ['genres' => $genres]);
+    $cantidad = $request->input('cantidad');
+    if($cantidad){
+        $genres = Genre::orderBy('id', 'ASC')->take($cantidad)->get();
+    }
+    else{
+        $genres = Genre::orderBy('id', 'ASC')->get();
+    }
+    if($request->path() == 'api/generos') {
+        return response()->json($genres);
+    }
+    else{
+        return view('genres.index', ['genres' => $genres]);
+    }
   }
 
   /**
@@ -88,5 +98,21 @@ class GenreController extends Controller
     $genre->delete();
     return redirect()->route('generos.index')
       ->with('success', 'Género eliminado correctamente');
+  }
+
+  public function getMovies(Request $request){
+    $genre = Genre::findOrFail($request->id);
+
+    $amount = $request->input('amount');
+    if($amount){
+        $movies = $genre->movies->take($amount)->get();
+    }
+
+    if($request->path() == 'api/generos/peliculas') {
+        return response()->json($movies);
+    }
+    else{
+        return response()->json(['error' => 'No hay películas']);
+    }
   }
 }

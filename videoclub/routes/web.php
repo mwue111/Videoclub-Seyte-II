@@ -21,7 +21,7 @@ Route::group(['middleware' => ['cors']], function () {
   Route::resource('generos', 'GenreController');
 });
 
-Route::resource('peliculas', 'MovieController'); //->middleware('client');
+Route::resource('peliculas', 'MovieController')->middleware('client');
 
 Route::resource('resenas', 'ReviewController')->middleware('client');
 

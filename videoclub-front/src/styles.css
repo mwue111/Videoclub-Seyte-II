@@ -3,9 +3,19 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+header{
+  margin-bottom: 50px;
+}
+
+.container-app{
+  height: 100%;
+  width: 100%;
+}
+
 #content{
   height: 85%;
 }
+
 .footer-app{
   display: flex;
   justify-content: flex-end;

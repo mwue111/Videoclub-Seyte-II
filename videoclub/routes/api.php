@@ -6,6 +6,7 @@ use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\RentController;
+use App\Http\Controllers\GenreController;
 
 
 /*
@@ -29,6 +30,7 @@ Route::post('login', [RegisterController::class, 'login'])->name('login');
 Route::group(['middleware' => ['cors']], function () {
     Route::resource('generos', 'GenreController');
     Route::resource('peliculas', 'MovieController'); //->middleware('client');
+    Route::get('generos/peliculas', [GenreController::class, 'getMovies']);
   });
 
 // Route::middleware('auth:api')->group(function () {
