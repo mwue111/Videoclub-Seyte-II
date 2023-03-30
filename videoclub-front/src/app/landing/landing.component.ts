@@ -26,6 +26,8 @@ export class LandingComponent implements OnInit{
                 this.movies = res;
                 console.log('movies: ', this.movies);
               })
+
+
   }
 
 }
