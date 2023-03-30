@@ -21,6 +21,12 @@ div{
   justify-content: space-evenly;
 }
 
+.same-page{
+  margin: 0 auto;
+  width: 500px;
+  color: #f5f3f4c3;
+}
+
 .bolder{
   font-weight: bold;
   font-size: 18px;

@@ -33,7 +33,10 @@ class RentController extends BaseController
         $response = $user->rents->all();
         if($user->role === 'premium'){
             //TO DO
-            $response = $user->movies->all();
+            //$premium = $user->premium;
+            //$premium->movies->all();
+
+            $response = $user->premium->movies->all();
         }
 
         return response()->json($response);
