@@ -17,6 +17,7 @@ class MovieFactory extends Factory
     public function definition(): array
     {
         $video = UploadedFile::fake()->create('movie.mp4');
+        $trailer = UploadedFile::fake()->create('trailer.mp4');
 
         return [
             'title' => fake()->sentence(),
@@ -26,7 +27,8 @@ class MovieFactory extends Factory
             'plot' => fake()->paragraph(),
             'genre' => fake()->sentence(),
             'director'=>fake()->sentence(),
-            'file' => $video
+            'file' => $video,
+            'trailer' => $trailer
         ];
     }
 }

@@ -50,10 +50,12 @@ class MovieController extends Controller
             'genre' => 'required',
             'director' => 'required',
             'file' => 'required|file|mimes:mp4,mp3,wav',
+            'trailer' => 'required|file|mimes:mp4,mp3,wav',
         ]);
 
         $attributes['poster'] = request()->file('poster')->store('images', 'public');
         $attributes['file'] = request()->file('file')->store('media', 'public');
+        $attributes['trailer'] = request()->file('trailer')->store('trailer', 'public');
 
         Movie::create($attributes);
 
@@ -102,6 +104,7 @@ class MovieController extends Controller
             'genre' => 'required',
             'director' => 'required',
             'file' => 'file',
+            'trailer' => 'file',
         ]);
 
         if(isset($attributes['poster'])){
@@ -110,6 +113,10 @@ class MovieController extends Controller
 
         if(isset($attributes['file'])){
             $attributes['file'] = request()->file('file')->store('media', 'public');
+        }
+
+        if(isset($attributes['trailer'])){
+            $attributes['trailer'] = request()->file('traielr')->store('trailer', 'public');
         }
 
         $movie->update($attributes);

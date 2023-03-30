@@ -69,12 +69,14 @@ class CreateTest extends TestCase
         Storage::fake('public');
         $movie = UploadedFile::fake()->create('movie.mp4');
         $file = UploadedFile::fake()->image('poster.jpg');
+        $trailer = UploadedFile::fake()->create('trailer.mp4');
 
-        $this->post(route('peliculas.store'), $this->validFields(['file' => $movie, 'poster' => $file]));
+        $this->post(route('peliculas.store'), $this->validFields(['file' => $movie, 'poster' => $file, 'trailer' => $trailer]));
 
         Storage::disk('public')
                 ->assertExists('/media/' . $movie->hashName())
-                ->assertExists('/images/' . $file->hashName());
+                ->assertExists('/images/' . $file->hashName())
+                ->assertExists('/trailer/' . $trailer->hashName());
 
     }
 
@@ -95,7 +97,8 @@ class CreateTest extends TestCase
             'plot' => 'sinopsis de una película de prueba',
             'genre' => 'drama',
             'director' => 'Alice Guy',
-            'file' => 'movie.mp4'
+            'file' => 'movie.mp4',
+            'trailer' => 'trailer.mp4'
         ], $overrides);
     }
 

@@ -33,15 +33,24 @@ class EditTest extends TestCase
     public function test_it_saves_new_files() {
         Storage::fake('public');
 
-        $data = $this->oldFields(['poster' => $file = UploadedFile::fake()->image('poster.jpg'), 'file' => $movie = UploadedFile::fake()->create('newVideo.mp4')]);
+        $data = $this->oldFields([
+            'poster' => $file = UploadedFile::fake()->image('poster.jpg'),
+            'file' => $movie = UploadedFile::fake()->create('newVideo.mp4'),
+            'trailer' => $trailer = UploadedFile::fake()->create('newTrailer.mp4')
+        ]);
 
         $this->updateMovie($data)
             ->assertRedirect(route('peliculas.index'));
 
         Storage::disk('public')->assertExists('/images/' . $file->hashName())
-                                ->assertExists('/media/' . $movie->hashName());
+                                ->assertExists('/media/' . $movie->hashName())
+                                ->assertExists('/trailer/' . $trailer->hashName());
 
-        $this->assertDatabaseHas('movies', ['poster' => 'images/' . $file->hashName()]);
+        $this->assertDatabaseHas('movies', [
+                                    'poster' => 'images/' . $file->hashName(),
+                                    'file' => 'media/' . $movie->hashName(),
+                                    'trailer' => 'trailer/' . $trailer->hashName()
+                                ]);
     }
 
     public function test_it_saves_new_title() {
@@ -127,16 +136,25 @@ class EditTest extends TestCase
     public function test_it_doesnt_save_incorrect_files() {
         Storage::fake('public');
 
-        $data = $this->oldFields(['poster' => $file = UploadedFile::fake()->image('poster.mp4'), 'file' => $movie = UploadedFile::fake()->create('newVideo.jpg')]);
+        $data = $this->oldFields([
+            'poster' => $file = UploadedFile::fake()->create('poster.mp4'),
+            'file' => $movie = UploadedFile::fake()->image('newVideo.jpg'),
+            'trailer' => $trailer = UploadedFile::fake()->image('newTrailer.jpg')
+        ]);
 
         $this->updateMovie($data)
             ->assertSessionHasErrors('poster')
             ->assertSessionHasErrors('file');
 
         Storage::disk('public')->assertMissing('/images/' . $file->hashName())
-                            ->assertMissing('/media/' . $movie->hashName());
+                            ->assertMissing('/media/' . $movie->hashName())
+                            ->assertMissing('/trailer/' . $trailer->hashName());
 
-        $this->assertDatabaseMissing('movies', ['poster' => 'images/' . $file->hashName()]);
+        $this->assertDatabaseMissing('movies', [
+                                        'poster' => 'images/' . $file->hashName(),
+                                        'file' => 'media/' . $movie->hashName(),
+                                        'trailer' => 'trailer/' . $trailer->hashName()
+                                    ]);
     }
 
 
@@ -151,6 +169,7 @@ class EditTest extends TestCase
 
         $poster = UploadedFile::fake()->image('poster.jpg');
         $file = UploadedFile::fake()->create('movie.mp4');
+        $trailer = UploadedFile::fake()->create('trailer.mp4');
 
         return array_merge([
             'title' => 'Película de prueba',
@@ -160,7 +179,8 @@ class EditTest extends TestCase
             'plot' => 'sinopsis de una película de prueba',
             'genre' => 'drama',
             'director' => 'Alice Guy',
-            'file' => $file
+            'file' => $file,
+            'trailer' => $trailer
         ], $overrides);
 
     }
