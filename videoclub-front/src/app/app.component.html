@@ -1,8 +1,10 @@
-<header>
-  <!-- <div *ngIf="usuario autenticado; else elseNavBar">NavBar auth user</div> -->
-  <ng-template #elseNavBar>NavBar no auth user</ng-template>
-</header>
-<section id="content">
-  <router-outlet></router-outlet>
-</section>
+<div class="container">
+  <header>
+    <!-- <div *ngIf="usuario autenticado; else elseNavBar">NavBar auth user</div> -->
+    <ng-template #elseNavBar>NavBar no auth user</ng-template>
+  </header>
+  <section id="content">
+    <router-outlet></router-outlet>
+  </section>
+</div>
 <app-footer></app-footer>
