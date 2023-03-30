@@ -8,6 +8,7 @@ import { MoviesService } from '../services/movies.service';
 })
 export class LandingComponent implements OnInit{
   movies: any = [];
+  genre: any = [];
 
   constructor(
     private _http: MoviesService
@@ -18,9 +19,7 @@ export class LandingComponent implements OnInit{
   }
 
   getMovies() {
-    // this._movieService.getMovies(2).subscribe(res => {
-    //   console.log(res)}
-    //   );
+
     this._http.getMovies(2)
               .subscribe(res => {
                 console.log(res);

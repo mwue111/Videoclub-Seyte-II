@@ -3,9 +3,12 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.footer-app{
+  display: flex;
+  justify-content: flex-end;
+}
+
 .footer{
-  margin: 0 auto;
   position: absolute;
-  bottom: 0;
   width: 100%;
 }
