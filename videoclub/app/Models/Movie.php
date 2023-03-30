@@ -17,7 +17,7 @@ class Movie extends Model
     'year',
     'runtime',
     'plot',
-    'genre',
+    'genre_id',
     'director',
     'file',
     'trailer',

@@ -95,12 +95,12 @@ class EditTest extends TestCase
     }
 
     public function test_it_saves_new_genre(){
-        $data = $this->oldFields(['genre' => 'nuevo']);
+        $data = $this->oldFields(['genre' => 2]);
 
         $this->updateMovie($data)
             ->assertRedirect(route('peliculas.index'));
 
-        $this->assertDatabaseHas('movies', ['genre' => 'nuevo']);
+        $this->assertDatabaseHas('movies', ['genre' => 2]);
     }
 
     public function test_it_saves_new_director(){
@@ -123,7 +123,7 @@ class EditTest extends TestCase
             'year' => 2000,
             'runtime' => 160,
             'plot' => 'sinopsis de una película de prueba',
-            'genre' => 'drama',
+            'genre' => 1,
             'director' => 'Alice Guy',
         ];
 
@@ -177,7 +177,7 @@ class EditTest extends TestCase
             'year' => 2000,
             'runtime' => 160,
             'plot' => 'sinopsis de una película de prueba',
-            'genre' => 'drama',
+            'genre' => 1,
             'director' => 'Alice Guy',
             'file' => $file,
             'trailer' => $trailer

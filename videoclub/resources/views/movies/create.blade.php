@@ -25,7 +25,11 @@
     <br>
     <label for="genre">Género de la película</label>
     <br>
-    <input type="text" name="genre"/>
+    <select name="genre_id" id="genre_id">
+    @foreach($genres as $genre)
+        <option value="{{$genre->id}}">{{$genre->name}}</option>
+    @endforeach
+    </select>
     <br>
     <label for="director">Director de la película</label>
     <br>

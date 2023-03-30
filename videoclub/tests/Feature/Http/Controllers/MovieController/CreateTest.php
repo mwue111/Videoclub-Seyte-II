@@ -54,7 +54,7 @@ class CreateTest extends TestCase
 
     public function test_it_requires_a_genre () {
 
-        $this->saveMovie(['genre' => ''])
+        $this->saveMovie(['genre' => null])
             ->assertSessionHasErrors('genre');
 
     }
@@ -95,7 +95,7 @@ class CreateTest extends TestCase
             'year' => 2000,
             'runtime' => 160,
             'plot' => 'sinopsis de una película de prueba',
-            'genre' => 'drama',
+            'genre' => 1,
             'director' => 'Alice Guy',
             'file' => 'movie.mp4',
             'trailer' => 'trailer.mp4'

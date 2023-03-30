@@ -25,7 +25,7 @@ class MovieFactory extends Factory
             'year' => fake()->numberBetween(1930, 2023),
             'runtime' => fake()->numberBetween(60, 210),
             'plot' => fake()->paragraph(),
-            'genre' => fake()->sentence(),
+            'genre' => fake()->numbeBetween(1, 4),
             'director'=>fake()->sentence(),
             'file' => $video,
             'trailer' => $trailer

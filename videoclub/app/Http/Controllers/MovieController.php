@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
+use App\Models\Genre;
 use Illuminate\Support\Facades\Storage;
 
 class MovieController extends Controller
@@ -19,6 +20,7 @@ class MovieController extends Controller
       } else {
         $movies = Movie::orderBy('id', 'DESC')->get();
       }
+
       if ($request->path() == 'api/peliculas') {
         return response()->json($movies);
       } else {
@@ -33,7 +35,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view('movies.create');
+        return view('movies.create', ['genres' => Genre::all()]);
     }
 
     /**
@@ -47,7 +49,7 @@ class MovieController extends Controller
             'year' => 'required',
             'runtime' => 'required',
             'plot' => 'required',
-            'genre' => 'required',
+            'genre_id' => 'required',
             'director' => 'required',
             'file' => 'required|file|mimes:mp4,mp3,wav',
             'trailer' => 'required|file|mimes:mp4,mp3,wav',
@@ -101,7 +103,7 @@ class MovieController extends Controller
             'year' => 'required',
             'runtime' => 'required',
             'plot' => 'required',
-            'genre' => 'required',
+            'genre_id' => 'required',
             'director' => 'required',
             'file' => 'file',
             'trailer' => 'file',
