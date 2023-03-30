@@ -3,6 +3,9 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+#content{
+  height: 85%;
+}
 .footer-app{
   display: flex;
   justify-content: flex-end;

@@ -35,6 +35,10 @@
     <br>
     <input type="file" name="file"/>
     <br>
+    <label for="file">Archivo de la trailer</label>
+    <br>
+    <input type="file" name="trailer"/>
+    <br>
     <input type="submit" value="Añadir">
 
 @isset($errors)

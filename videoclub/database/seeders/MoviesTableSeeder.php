@@ -24,6 +24,7 @@ class MoviesTableSeeder extends Seeder
       'director' => 'James Cameron',
       'file' => 'file/de/la/pelicula',
       'trailer' => 'trailer/de/la/pelicula',
+      'created_at' => '2023/01/30'
     ]);
 
     DB::table('movies')->insert([
@@ -37,6 +38,7 @@ class MoviesTableSeeder extends Seeder
       'director' => 'Francis Lawrence',
       'file' => 'file/de/la/pelicula',
       'trailer' => 'trailer/de/la/pelicula',
+      'created_at' => '2023/02/28'
     ]);
 
     DB::table('movies')->insert([
@@ -49,6 +51,7 @@ class MoviesTableSeeder extends Seeder
       'director' => 'Zack Snyder',
       'file' => 'file/de/la/pelicula',
       'trailer' => 'trailer/de/la/pelicula',
+      'created_at' => '2023/03/30'
     ]);
   }
 }

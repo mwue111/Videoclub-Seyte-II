@@ -15,7 +15,7 @@ class MovieController extends Controller
     {
         $cantidad = $request->input('cantidad');
       if ($cantidad) {
-        $movies = Movie::orderBy('id', 'DESC')->take($cantidad)->get();
+        $movies = Movie::latest('created_at')->take($cantidad)->get();
       } else {
         $movies = Movie::orderBy('id', 'DESC')->get();
       }

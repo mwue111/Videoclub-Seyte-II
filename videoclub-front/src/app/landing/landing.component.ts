@@ -15,14 +15,16 @@ export class LandingComponent implements OnInit{
   ){}
 
   ngOnInit() :void {
-    this.getMovies();
+    this.getLatestMovies();
   }
 
-  getMovies() {
+  getLatestMovies() {
 
     this._http.getMovies(2)
               .subscribe(res => {
                 console.log(res);
+                this.movies = res;
+                console.log('movies: ', this.movies);
               })
   }
 
