@@ -14,7 +14,20 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private router: Router
-  ) { }
+  ) {
+    this.loadLocalStorage();
+  }
+
+  loadLocalStorage() {
+    if(localStorage['token'] && localStorage['user']){  //getItem vale también
+      this.token = localStorage.getItem('token');
+      this.user = JSON.parse(localStorage.getItem('user') ?? '');
+    }
+    else{
+      this.token = '';
+      this.user = null;
+    }
+  }
 
   storeLocalStorageToken(auth: any) {
    if(auth.token) {
