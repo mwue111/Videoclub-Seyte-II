@@ -20,6 +20,7 @@ class Movie extends Model
     'genre',
     'director',
     'file',
+    'trailer',
   ];
 
   public function users()

@@ -23,6 +23,7 @@ class MoviesTableSeeder extends Seeder
       'genre' => 'accion',
       'director' => 'James Cameron',
       'file' => 'file/de/la/pelicula',
+      'trailer' => 'trailer/de/la/pelicula',
     ]);
 
     DB::table('movies')->insert([
@@ -35,6 +36,7 @@ class MoviesTableSeeder extends Seeder
       'genre' => 'drama',
       'director' => 'Francis Lawrence',
       'file' => 'file/de/la/pelicula',
+      'trailer' => 'trailer/de/la/pelicula',
     ]);
 
     DB::table('movies')->insert([
@@ -46,6 +48,7 @@ class MoviesTableSeeder extends Seeder
       'genre' => 'accion',
       'director' => 'Zack Snyder',
       'file' => 'file/de/la/pelicula',
+      'trailer' => 'trailer/de/la/pelicula',
     ]);
   }
 }

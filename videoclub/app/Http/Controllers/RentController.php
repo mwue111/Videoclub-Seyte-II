@@ -19,31 +19,33 @@ class RentController extends BaseController
 
 
     public function index(){
-        $rents = Rent::all();
-        return response()->json($rents);
+        if(Auth::user()->role === 'admin'){
+            $response = Rent::all();
+        }
+        else{
+            $response = 'No tienes permiso para estar aquí.';
+        }
+        return response()->json($response);
     }
 
     public function show(Request $request) {
         $user = Auth::user();
-        switch ($user->role){
-            case 'free': $response = $user->rents->all(); break;
-            case 'premium': $response = $user->movies->all(); break;    //este tiene que ser premium
-            case 'admin':
-                        $checkUserRents = User::findOrFail($request->user_id);
-                        if($checkUserRents->role === 'free'){
-                            $response = $checkUserRents->rents->all();
-                        }
-                        else{
-                            $response = $checkUserRents->movies->all();
-                        }; break;
+        $response = $user->rents->all();
+        if($user->role === 'premium'){
+            //TO DO
+            //$premium = $user->premium;
+            //$premium->movies->all();
+
+            $response = $user->premium->movies->all();
         }
+
         return response()->json($response);
     }
 
     //crear un alquiler con datos de usuario, película y añadiendo una fecha de expiración
     public function store(Request $request) {
         $user = Auth::user();
-        if($user->role === 'free'){
+        if($user->role === 'free' || $user->role === 'admin'){
             $validator = Validator::make($request->all(), [
                 'movie_id' => 'required',
                 'date' => 'required|date|date_format:Y-m-d'
