@@ -1,6 +1,7 @@
 a{
   text-decoration: none;
   color: #F5F3F4;
+  margin: 0 10px;
 }
 
 .footer{
@@ -12,7 +13,7 @@ a{
 }
 
 div{
-  padding: 15px;
+  padding: 20px;
 }
 
 .links{
@@ -20,12 +21,14 @@ div{
   justify-content: space-evenly;
 }
 
-a{
-  margin: 0 10px;
-}
-
 .bolder{
   font-weight: bold;
+  font-size: 18px;
+}
+
+span{
+  font-size: 13px;
+  color: #f5f3f4c3;
 }
 
 hr{

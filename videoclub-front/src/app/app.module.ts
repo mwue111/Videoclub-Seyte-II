@@ -7,12 +7,18 @@ import { LandingComponent } from './landing/landing.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
+import { ContactComponent } from './contact/contact.component';
+import { FaqsComponent } from './faqs/faqs.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingComponent,
     FooterComponent,
+    ContactComponent,
+    FaqsComponent,
+    AboutUsComponent,
   ],
   imports: [
     BrowserModule,
