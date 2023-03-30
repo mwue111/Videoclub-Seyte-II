@@ -12,8 +12,9 @@
   background: #1874ba;
 }
 
-.title-div {
+.title-div a {
   color: #ffffff;
+  text-decoration: none;
 }
 
 .tracker-div {
