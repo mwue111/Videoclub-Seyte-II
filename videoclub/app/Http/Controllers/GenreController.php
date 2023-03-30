@@ -12,13 +12,15 @@ class GenreController extends Controller
    */
   public function index(Request $request)
   {
-    $cantidad = $request->input('cantidad');
-    if($cantidad){
-        $genres = Genre::orderBy('id', 'ASC')->take($cantidad)->get();
+    $amount = $request->input('cantidad');
+
+    if($amount){
+        $genres = Genre::orderBy('id', 'ASC')->take($amount)->get();
     }
     else{
         $genres = Genre::orderBy('id', 'ASC')->get();
     }
+
     if($request->path() == 'api/generos') {
         return response()->json($genres);
     }

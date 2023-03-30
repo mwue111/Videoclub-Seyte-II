@@ -46,7 +46,10 @@ export class LandingComponent implements OnInit{
   }
 
   getGenresMovies() {
-      this._genres.getMoviesGenre(10, this.genres[1])
+    for(let i = 0; i < this.genres.length; i++){
+      console.log('entra');
+    }
+      this._genres.getMoviesGenre(1, 1)
                   .subscribe(res => {
                     this.genresMovies = res;
                     console.log('genresMovies: ', this.genresMovies);

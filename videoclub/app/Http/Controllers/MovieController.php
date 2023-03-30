@@ -13,19 +13,19 @@ class MovieController extends Controller
      */
     public function index(Request $request)
     {
-        $cantidad = $request->input('cantidad');
-      if ($cantidad) {
-        $movies = Movie::latest('created_at')->take($cantidad)->get();
-      } else {
-        $movies = Movie::orderBy('id', 'DESC')->get();
-      }
-      if ($request->path() == 'api/peliculas') {
-        return response()->json($movies);
-      } else {
-        return view('movies.index', [
-          'movies' => $movies
-        ]);
-      }
+        $amount = $request->input('cantidad');
+
+        if ($amount) {
+            $movies = Movie::latest('created_at')->take($amount)->get();
+        } else {
+            $movies = Movie::orderBy('id', 'DESC')->get();
+        }
+
+        if ($request->path() == 'api/peliculas') {
+            return response()->json($movies);
+        } else {
+            return view('movies.index', ['movies' => $movies]);
+        }
     }
 
     /**

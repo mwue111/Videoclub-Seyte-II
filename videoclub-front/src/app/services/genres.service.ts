@@ -15,15 +15,14 @@ export class GenresService {
     this.url = Global.url;
   }
 
-  getGenres(cantidad: number): Observable<any> {
-    let params = new HttpParams().set('cantidad', cantidad.toString());
+  getGenres(amount: number): Observable<any> {
+    let params = new HttpParams().set('cantidad', amount.toString());
 
     return this._http.get(this.url + '/api/generos', { params: params })
   }
 
-  getMoviesGenre(cantidad: number, id: number){
-    let params = new HttpParams().set('cantidad', cantidad.toString());
-    params.set('id', id.toString());
+  getMoviesGenre(amount: number, id: number){
+    let params = new HttpParams().set('cantidad', amount.toString()).append('id', id);
 
     return this._http.get(this.url + '/api/generos/peliculas', { params:params });
   }
