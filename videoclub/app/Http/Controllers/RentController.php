@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Http\Controllers\API\BaseController as BaseController;
+use DB;
 
 class RentController extends BaseController
 {
@@ -30,13 +31,34 @@ class RentController extends BaseController
 
     public function show(Request $request) {
         $user = Auth::user();
-        $response = $user->rents->all();
+
         if($user->role === 'premium'){
             //TO DO
+
             //$premium = $user->premium;
             //$premium->movies->all();
 
-            $response = $user->premium->movies->all();
+            //$premium = $user->premium->movies->get();
+            //dd($premium);
+
+            //dd($user->id);
+            //$premium = DB::table('premiums')->where('user_id', $user->id)->first();
+            //dd($premium);
+        }
+        if($user->role === 'free'){
+            $response = $user->rents->all();
+        }
+        else{
+            $path = $request->path();
+            $userId = substr($path, 13, 1);
+            $checkUser = User::find($userId);
+
+            if($checkUser->role === 'free'){
+                $response = $checkUser->rents->all();
+            }
+            else{
+                $response = "usuario premium";
+            }
         }
 
         return response()->json($response);
