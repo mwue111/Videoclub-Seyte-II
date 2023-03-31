@@ -18,7 +18,6 @@ class Movie extends Model
     'year',
     'runtime',
     'plot',
-    'genre_id',
     'director',
     'file',
     'trailer',
@@ -30,17 +29,22 @@ class Movie extends Model
       ->withPivot('id', 'expiration_date')
       ->withTimeStamps();
   }
+
   public function reviews()
   {
     return $this->belongsToMany(User::class, 'reviews')
       ->withPivot('title', 'description');
   }
+
   public function genres()
   {
-    return $this->belongsToMany(Genre::class, 'movies_genres');
+    return $this->belongsToMany(Genre::class, 'movies_genre')
+                ->withTimestamps();
   }
+
   public function premiums()
   {
-    return $this->belongsToMany(Premium::class, 'views');
+    return $this->belongsToMany(Premium::class, 'views', 'movie_id', 'user_id')
+                ->withTimestamps();
   }
 }

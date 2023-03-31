@@ -22,9 +22,16 @@ Route::group(['middleware' => ['cors']], function () {
 });
 
 Route::resource('peliculas', 'MovieController');//->middleware('client');
+Route::post('peliculas/{id}/add-genre', 'MovieController@addGenre')->name('peliculas.addGenre');
+
+Route::delete('peliculas/{id}/delete-genre', 'MovieController@deleteGenre')->name('peliculas.deleteGenre');
 
 Route::resource('resenas', 'ReviewController')->middleware('client');
 
 Route::resource('usuarios', 'UserController');
 
 Route::resource('alquiler', 'RentController')->middleware('client');
+
+Route::post('peliculas/{id}/add-genre', 'MovieController@addGenre')->name('peliculas.addGenre');
+
+Route::delete('peliculas/{id}/delete-genre', 'MovieController@deleteGenre')->name('peliculas.deleteGenre');

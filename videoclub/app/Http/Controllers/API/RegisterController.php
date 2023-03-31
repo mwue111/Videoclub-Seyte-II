@@ -4,6 +4,9 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\User;
+use App\Models\Admin;
+use App\Models\Free;
+use App\Models\Premium;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
@@ -29,8 +32,22 @@ class RegisterController extends BaseController
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('MyApp')->accessToken;
+
+        switch ($user->role) {
+            case 'admin':
+              Admin::create(['user_id' => $user->id]);
+              break;
+            case 'free':
+              Free::create(['user_id' => $user->id]);
+              break;
+            case 'premium':
+              Premium::create(['user_id' => $user->id, 'fecha_ultimo_pago' => now()]);
+              break;
+          }
+
+          $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;
+        $user->save();
         return $this->sendResponse($success, 'Registro realizado con éxito.');
     }
 
