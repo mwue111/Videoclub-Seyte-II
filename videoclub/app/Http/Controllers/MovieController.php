@@ -126,9 +126,10 @@ class MovieController extends Controller
     if (isset($attributes['trailer'])) {
       $attributes['trailer'] = request()->file('trailer')->store('trailer', 'public');
     }
-    $movie->genres()->attach($request->input('genre_id'), ['movie_id' => $movie->id]);
-    $movie->update($attributes);
 
+    $movie->update($attributes);
+    $movie->genres()->attach($request->input('genre_id'), ['movie_id' => $movie->id]);
+    // DB::table('movies_genre')->where('movie_id', $id)->update(['genre_id' => $request->input('genre_id')]);
 
 
     return redirect()->route('peliculas.index'); //->withMessage('success', 'Película editada');
