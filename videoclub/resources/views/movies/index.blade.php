@@ -21,7 +21,7 @@
       <td> {{ $movie->year }}</td>
       <td> {{ $movie->runtime }}</td>
       <td> {{ $movie->plot }}</td>
-      <td> {{ $movie->genres->value('name') }}</td>
+      <td> {{ $movie->genres->pluck('name')->implode(', ')}}</td>
       <td> {{ $movie->director }}</td>
       <td>
         <img src="{{ asset('storage/' . $movie->poster ) }}" alt="Poster de la película {{ $movie->title }}" style="width:10%" />

@@ -39,7 +39,26 @@
 
 </form>
 
+
 @foreach($genres as $genre)
-<p value="{{$genre->id}}">{{$genre->name}}</p>
+<p>{{$genre->name}}</p>
+
+@if ($genre->movies->contains($movie))
+<form method="POST" action="{{route('peliculas.deleteGenre', $movie->id)}}">
+  @csrf
+  @method('DELETE')
+  <input type="hidden" name="genre_id" value="{{$genre->id}}">
+  <button>Eliminar</button>
+</form>
+@else
+<form method="POST" action="{{route('peliculas.addGenre', $movie->id)}}">
+  @csrf
+  <input type="hidden" name="genre_id" value="{{$genre->id}}">
+  <button>Añadir</button>
+</form>
+@endif
+
 @endforeach
-<a href="{{ route('peliculas.index') }}">Volver</a>
+
+<br>
+<a href=" {{ route('peliculas.index') }}">Volver</a>

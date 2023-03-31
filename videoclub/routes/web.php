@@ -21,6 +21,10 @@ Route::group(['middleware' => ['cors']], function () {
   Route::resource('generos', 'GenreController');
 });
 
+Route::post('peliculas/{id}/add-genre', 'MovieController@addGenre')->name('peliculas.addGenre');
+
+Route::delete('peliculas/{id}/delete-genre', 'MovieController@deleteGenre')->name('peliculas.deleteGenre');
+
 Route::resource('peliculas', 'MovieController'); //->middleware('client');
 
 Route::resource('resenas', 'ReviewController')->middleware('client');
