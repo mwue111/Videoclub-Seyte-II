@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Models\Genre;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
 {
@@ -60,8 +61,8 @@ class MovieController extends Controller
     $attributes['file'] = request()->file('file')->store('media', 'public');
     $attributes['trailer'] = request()->file('trailer')->store('trailer', 'public');
 
-    Movie::create($attributes);
-
+    $movie = Movie::create($attributes);
+    $movie->genres()->attach($request->input('genre_id'), ['movie_id' => $movie->id]);
     return redirect()->route('peliculas.index');
   }
 
@@ -87,7 +88,7 @@ class MovieController extends Controller
     $movie = Movie::findOrFail($id);
 
     return view('movies.edit', [
-      'movie' => $movie
+      'movie' => $movie, 'genres' => Genre::all()
     ]);
   }
 
@@ -125,8 +126,10 @@ class MovieController extends Controller
     if (isset($attributes['trailer'])) {
       $attributes['trailer'] = request()->file('trailer')->store('trailer', 'public');
     }
-
+    $movie->genres()->attach($request->input('genre_id'), ['movie_id' => $movie->id]);
     $movie->update($attributes);
+
+
 
     return redirect()->route('peliculas.index'); //->withMessage('success', 'Película editada');
   }
@@ -137,6 +140,8 @@ class MovieController extends Controller
   public function destroy($id)
   {
     $movie = Movie::findOrFail($id);
+
+    $movie->genres()->detach();
 
     $movie->delete();
 
