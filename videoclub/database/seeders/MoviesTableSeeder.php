@@ -16,6 +16,7 @@ class MoviesTableSeeder extends Seeder
     DB::table('movies')->insert([
       'title' => 'Avatar',
       'poster' => 'images/FRS0hqqhxjs0x9QUcl1lKeCwcpUjkkI3Xiyve03s.jpg',
+      'banner' => 'images/FRS0hqqhxjs0x9QUcl1lKeCwcpUjkkI3Xiyve03s.jpg',
       'year' => 2009,
       'runtime' => '162',
       'plot' => '
@@ -30,6 +31,7 @@ class MoviesTableSeeder extends Seeder
     DB::table('movies')->insert([
       'title' => 'Soy leyenda',
       'poster' => 'images/VFfWG0JHOM4ruZglNFt9UlqflMgMvHGRfnDJfILM.jpg',
+      'banner' => 'images/VFfWG0JHOM4ruZglNFt9UlqflMgMvHGRfnDJfILM.jpg',
       'year' => 2007,
       'runtime' => '101',
       'plot' => '
@@ -44,6 +46,7 @@ class MoviesTableSeeder extends Seeder
     DB::table('movies')->insert([
       'title' => '300',
       'poster' => 'images/6WMQnzC4bTHC45mk4oN4Foy6aZEoiAZoPFDWMDn7.jpg',
+      'banner' => 'images/6WMQnzC4bTHC45mk4oN4Foy6aZEoiAZoPFDWMDn7.jpg',
       'year' => 2006,
       'runtime' => '117',
       'plot' => 'El rey Leónidas de Esparta y una fuerza de 300 hombres luchan contra los persas en las Termópilas en el 480 a.C.',

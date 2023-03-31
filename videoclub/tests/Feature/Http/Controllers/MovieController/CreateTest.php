@@ -69,13 +69,20 @@ class CreateTest extends TestCase
         Storage::fake('public');
         $movie = UploadedFile::fake()->create('movie.mp4');
         $file = UploadedFile::fake()->image('poster.jpg');
+        $banner = UploadedFile::fake()->image('banner.jpg');
         $trailer = UploadedFile::fake()->create('trailer.mp4');
 
-        $this->post(route('peliculas.store'), $this->validFields(['file' => $movie, 'poster' => $file, 'trailer' => $trailer]));
+        $this->post(route('peliculas.store'), $this->validFields([
+            'file' => $movie,
+            'poster' => $file,
+            'trailer' => $trailer,
+            'banner' => $banner
+        ]));
 
         Storage::disk('public')
                 ->assertExists('/media/' . $movie->hashName())
                 ->assertExists('/images/' . $file->hashName())
+                ->assertExists('/images/' . $banner->hashName())
                 ->assertExists('/trailer/' . $trailer->hashName());
 
     }
@@ -92,10 +99,11 @@ class CreateTest extends TestCase
         return array_merge([
             'title' => 'Película de prueba',
             'poster' => 'image.jpg',
+            'banner' => 'banner.jpg',
             'year' => 2000,
             'runtime' => 160,
             'plot' => 'sinopsis de una película de prueba',
-            'genre' => 1,
+            'genre_id' => 1,
             'director' => 'Alice Guy',
             'file' => 'movie.mp4',
             'trailer' => 'trailer.mp4'

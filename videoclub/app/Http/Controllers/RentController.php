@@ -56,8 +56,11 @@ class RentController extends BaseController
             if($checkUser->role === 'free'){
                 $response = $checkUser->rents->all();
             }
-            else{
+            if($checkUser->role === 'premium'){
                 $response = "usuario premium";
+            }
+            else{
+                $response = "Usuario admin";
             }
         }
 

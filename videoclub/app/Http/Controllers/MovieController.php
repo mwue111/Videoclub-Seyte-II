@@ -46,6 +46,7 @@ class MovieController extends Controller
         $attributes = $request->validate([
             'title' => 'required|unique:movies,title',
             'poster' => 'required|image|mimes:jpg,jpeg,bmp,png',
+            'banner' => 'required|image|mimes:jpg,jpeg,bmp,png',
             'year' => 'required',
             'runtime' => 'required',
             'plot' => 'required',
@@ -56,6 +57,7 @@ class MovieController extends Controller
         ]);
 
         $attributes['poster'] = request()->file('poster')->store('images', 'public');
+        $attributes['banner'] = request()->file('banner')->store('images', 'public');
         $attributes['file'] = request()->file('file')->store('media', 'public');
         $attributes['trailer'] = request()->file('trailer')->store('trailer', 'public');
 
@@ -100,6 +102,7 @@ class MovieController extends Controller
         $attributes = $request->validate([
             'title' => 'required|unique:movies,title',
             'poster' => 'image|mimes:jpg,jpeg,bmp,png',
+            'banner' => 'image|mimes:jpg,jpeg,bmp,png',
             'year' => 'required',
             'runtime' => 'required',
             'plot' => 'required',
@@ -111,6 +114,10 @@ class MovieController extends Controller
 
         if(isset($attributes['poster'])){
             $attributes['poster'] = request()->file('poster')->store('images', 'public');
+        }
+
+        if(isset($attributes['banner'])){
+            $attributes['banner'] = request()->file('banner')->store('images', 'public');
         }
 
         if(isset($attributes['file'])){

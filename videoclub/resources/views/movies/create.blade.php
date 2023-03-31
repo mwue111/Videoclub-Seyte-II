@@ -11,6 +11,10 @@
     <br>
     <input type="file" name="poster"/>
     <br>
+    <label for="banner">Banner de la película</label>
+    <br>
+    <input type="file" name="banner"/>
+    <br>
     <label for="year">Año de la película</label>
     <br>
     <input type="number" name="year"/>
