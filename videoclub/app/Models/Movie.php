@@ -18,7 +18,6 @@ class Movie extends Model
     'year',
     'runtime',
     'plot',
-    'genre_id',
     'director',
     'file',
     'trailer',
@@ -37,7 +36,7 @@ class Movie extends Model
   }
   public function genres()
   {
-    return $this->belongsToMany(Genre::class, 'movies_genres');
+    return $this->belongsToMany(Genre::class, 'movies_genre');
   }
   public function premiums()
   {
