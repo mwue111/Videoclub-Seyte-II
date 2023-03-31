@@ -1,9 +1,8 @@
 .landing-header {
-  height: 4000px;
+  height: 50%;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: aqua;
 }
 
 .landing-header img {
