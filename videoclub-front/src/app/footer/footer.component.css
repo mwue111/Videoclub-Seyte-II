@@ -1,3 +1,5 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 a {
   text-decoration: none;
   color: #f5f3f4;
