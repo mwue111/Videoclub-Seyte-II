@@ -1,1 +1,13 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.footer-app {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.footer {
+  width: 100%;
+}
+.container-app {
+  height: 100%;
+  width: 100%;
+}

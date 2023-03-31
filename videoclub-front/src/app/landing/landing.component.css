@@ -1,15 +1,16 @@
-.landing-header{
-  height: 50%;
+.landing-header {
+  height: 4000px;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  background-color: aqua;
 }
 
-.landing-header img{
+.landing-header img {
   height: 100%;
 }
 
-.landing-body{
-  display:flex;
+.landing-body {
+  display: flex;
   flex-direction: column;
 }
