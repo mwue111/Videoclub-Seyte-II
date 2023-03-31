@@ -31,15 +31,6 @@
   <br>
   <textarea type="text" name="plot">{{ $movie->plot }}</textarea>
   <br>
-  <label for="genre">Género de la película</label>
-  <br>
-  <select name="genre_id" id="genre_id">
-    @foreach($genres as $genre)
-    <option value="{{$genre->id}}">{{$genre->name}}</option>
-    echo $genre->id;
-    @endforeach
-  </select>
-  <br>
   <label for="director">Director de la película</label>
   <br>
   <input type="text" name="director" value="{{ $movie->director }}" />
@@ -48,4 +39,7 @@
 
 </form>
 
+@foreach($genres as $genre)
+<p value="{{$genre->id}}">{{$genre->name}}</p>
+@endforeach
 <a href="{{ route('peliculas.index') }}">Volver</a>
