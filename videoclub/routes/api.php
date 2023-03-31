@@ -33,12 +33,12 @@ Route::group(['middleware' => ['cors']], function () {
     Route::get('generos/peliculas', 'GenreController@getMovies');
   });
 
-// Route::middleware('auth:api')->group(function () {
-//     Route::resource('peliculas', MovieController::class);
-//     Route::resource('resenas', ReviewController::class);
-//     Route::resource('alquiler', RentController::class);
-//     Route::get('profile', [RegisterController::class, 'profile']);
+Route::middleware('auth:api')->group(function () {
+    Route::resource('peliculas', MovieController::class);
+    Route::resource('resenas', ReviewController::class);
+    Route::resource('alquiler', RentController::class);
+    Route::get('profile', [RegisterController::class, 'profile']);
 
-// });
+});
 
 Route::middleware('auth:api')->post('logout', [RegisterController::class, 'logout']);

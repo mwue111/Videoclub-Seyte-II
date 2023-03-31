@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('year');
             $table->float('runtime');
             $table->string('plot', 5000);
-            $table->string('genre', 100);
+            $table->foreignId('genre_id');
             $table->string('director', 200);
             $table->timestamps();
         });

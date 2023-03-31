@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
+use App\Models\Genre;
 use Illuminate\Support\Facades\Storage;
 
 class MovieController extends Controller
@@ -33,7 +34,7 @@ class MovieController extends Controller
      */
     public function create()
     {
-        return view('movies.create');
+        return view('movies.create', ['genres' => Genre::all()]);
     }
 
     /**
@@ -44,16 +45,18 @@ class MovieController extends Controller
         $attributes = $request->validate([
             'title' => 'required|unique:movies,title',
             'poster' => 'required|image|mimes:jpg,jpeg,bmp,png',
+            'banner' => 'required|image|mimes:jpg,jpeg,bmp,png',
             'year' => 'required',
             'runtime' => 'required',
             'plot' => 'required',
-            'genre' => 'required',
+            'genre_id' => 'required',
             'director' => 'required',
             'file' => 'required|file|mimes:mp4,mp3,wav',
             'trailer' => 'required|file|mimes:mp4,mp3,wav',
         ]);
 
         $attributes['poster'] = request()->file('poster')->store('images', 'public');
+        $attributes['banner'] = request()->file('banner')->store('images', 'public');
         $attributes['file'] = request()->file('file')->store('media', 'public');
         $attributes['trailer'] = request()->file('trailer')->store('trailer', 'public');
 
@@ -98,10 +101,11 @@ class MovieController extends Controller
         $attributes = $request->validate([
             'title' => 'required|unique:movies,title',
             'poster' => 'image|mimes:jpg,jpeg,bmp,png',
+            'banner' => 'image|mimes:jpg,jpeg,bmp,png',
             'year' => 'required',
             'runtime' => 'required',
             'plot' => 'required',
-            'genre' => 'required',
+            'genre_id' => 'required',
             'director' => 'required',
             'file' => 'file',
             'trailer' => 'file',
@@ -109,6 +113,10 @@ class MovieController extends Controller
 
         if(isset($attributes['poster'])){
             $attributes['poster'] = request()->file('poster')->store('images', 'public');
+        }
+
+        if(isset($attributes['banner'])){
+            $attributes['banner'] = request()->file('banner')->store('images', 'public');
         }
 
         if(isset($attributes['file'])){
