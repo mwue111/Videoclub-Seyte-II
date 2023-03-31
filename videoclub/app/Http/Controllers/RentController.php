@@ -33,24 +33,15 @@ class RentController extends BaseController
         $user = Auth::user();
 
         if($user->role === 'premium'){
-            //TO DO
-
-            //$premium = $user->premium;
-            //$premium->movies->all();
-
-            //$premium = $user->premium->movies->get();
-            //dd($premium);
-
-            //dd($user->id);
-            //$premium = DB::table('premiums')->where('user_id', $user->id)->first();
-            //dd($premium);
+            $premium = $user->premium;
+            $response = $premium->movies->all();
         }
-        if($user->role === 'free'){
+        else if($user->role === 'free'){
             $response = $user->rents->all();
         }
         else{
             $path = $request->path();
-            $userId = substr($path, 13, 1);
+            $userId = substr($path, 13, 3);
             $checkUser = User::find($userId);
 
             if($checkUser->role === 'free'){
@@ -70,6 +61,7 @@ class RentController extends BaseController
     //crear un alquiler con datos de usuario, película y añadiendo una fecha de expiración
     public function store(Request $request) {
         $user = Auth::user();
+
         if($user->role === 'free' || $user->role === 'admin'){
             $validator = Validator::make($request->all(), [
                 'movie_id' => 'required',
@@ -85,6 +77,22 @@ class RentController extends BaseController
             ]);
 
             return $this->sendResponse($rent, 'Alquiler creado');
+        }
+        else if($user->role === 'premium'){
+            $validator = Validator::make($request->all(), [
+                'movie_id' => 'required'
+            ]);
+
+            if($validator->fails()){
+                return $this->sendError('Error de validación. ', $validator->errors());
+            }
+
+            $premium = $user->premium;
+
+            $view = $premium->movies()->attach($request->input('movie_id'), ['user_id' => $premium->user_id]);
+
+
+            return $this->sendResponse($view, 'Vista creada');
         }
         else{
             return $this->sendError('No tienes permiso para alquilar esta película.');

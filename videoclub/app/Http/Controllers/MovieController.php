@@ -127,9 +127,6 @@ class MovieController extends Controller
       $attributes['trailer'] = request()->file('trailer')->store('trailer', 'public');
     }
     $movie->update($attributes);
-
-
-
     return redirect()->route('peliculas.index'); //->withMessage('success', 'Película editada');
   }
 
@@ -146,18 +143,16 @@ class MovieController extends Controller
 
     return redirect()->route('peliculas.index');
   }
-  // Add genre to a film
-  public function addGenre(Request $request, $id)
-  {
+
+  public function addGenre(Request $request, $id){
     $movie = Movie::findOrFail($id);
 
     $movie->genres()->attach($request->input('genre_id'), ['movie_id' => $movie->id]);
 
     return redirect()->route('peliculas.index');
   }
-  // Remove genre from a film
-  public function deleteGenre(Request $request, $id)
-  {
+
+  public function deleteGenre(Request $request, $id){
     $movie = Movie::findOrFail($id);
 
     $movie->genres()->detach($request->input('genre_id'));
