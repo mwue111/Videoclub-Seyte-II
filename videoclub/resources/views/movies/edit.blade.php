@@ -31,15 +31,6 @@
   <br>
   <textarea type="text" name="plot">{{ $movie->plot }}</textarea>
   <br>
-  <label for="genre">Género de la película</label>
-  <br>
-  <select name="genre_id" id="genre_id">
-    @foreach($genres as $genre)
-    <option value="{{$genre->id}}">{{$genre->name}}</option>
-    echo $genre->id;
-    @endforeach
-  </select>
-  <br>
   <label for="director">Director de la película</label>
   <br>
   <input type="text" name="director" value="{{ $movie->director }}" />
@@ -47,5 +38,30 @@
   <input type="submit" value="Guardar">
 
 </form>
+
+<fieldset>
+
+        <legend>Cambiar género de la película </legend>
+        @foreach($genres as $genre)
+        <p>{{$genre->name}}</p>
+            @if($genre->movies->contains($movie))
+            <form action="{{ route('peliculas.deleteGenre', $movie->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" name="genre_id" value="{{$genre->id}}">
+                <button>Eliminar</button>
+            </form>
+            @else
+
+            <form action="{{ route('peliculas.addGenre', $movie->id) }}" method="POST">
+                @csrf
+                <input type="hidden" name="genre_id" value="{{$genre->id}}">
+                <button>Añadir</button>
+            </form>
+            @endif
+        @endforeach
+
+
+</fieldset>
 
 <a href="{{ route('peliculas.index') }}">Volver</a>
