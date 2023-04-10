@@ -28,10 +28,10 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login'])->name('login');
 
 Route::group(['middleware' => ['cors']], function () {
-    Route::resource('generos', 'GenreController');
-    Route::resource('peliculas', 'MovieController'); //->middleware('client');
-    Route::get('generos/peliculas', 'GenreController@getMovies');
-  });
+  Route::resource('generos', 'GenreController');
+  Route::resource('peliculas', 'MovieController'); //->middleware('client');
+  Route::get('generos/{id}/peliculas', 'GenreController@getMovies')->name('generos.getMovies');;
+});
 
 // Route::middleware('auth:api')->group(function () {
 //     Route::resource('peliculas', MovieController::class);
