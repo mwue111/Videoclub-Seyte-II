@@ -5,8 +5,25 @@
 <div class="landing-body">
   <div *ngFor="let genre of genres">
     <span>{{ genre.name }}</span>
-    <span *ngFor="let movie of actionMovies" class="movie-genre">
-      <img [src]="url + movie.poster" alt="" />
-    </span>
+    <div *ngIf="genre.name == 'Accion'">
+      <span *ngFor="let movie of actionMovies" class="movie-genre">
+        <img [src]="url + movie.poster" alt="" />
+      </span>
+    </div>
+    <div *ngIf="genre.name == 'Aventura'">
+      <span *ngFor="let movie of adventureMovies" class="movie-genre">
+        <img [src]="url + movie.poster" alt="" />
+      </span>
+    </div>
+    <div *ngIf="genre.name == 'Comedia'">
+      <span *ngFor="let movie of comedyMovies" class="movie-genre">
+        <img [src]="url + movie.poster" alt="" />
+      </span>
+    </div>
+    <div *ngIf="genre.name == 'Drama'">
+      <span *ngFor="let movie of animationMovies" class="movie-genre">
+        <img [src]="url + movie.poster" alt="" />
+      </span>
+    </div>
   </div>
 </div>
