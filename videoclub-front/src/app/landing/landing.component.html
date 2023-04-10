@@ -1,15 +1,12 @@
 <div class="landing-header">
-  <img *ngFor="let movie of movies" [src]="url + movie.poster" alt="">
-
+  <img *ngFor="let movie of movies" [src]="url + movie.poster" alt="" />
 </div>
 
 <div class="landing-body">
-  <span *ngFor="let genre of genres">
-    {{genre.name}}
-
-    <!-- <span *ngFor="let movie of genresMovies" class="movie-genre">
-        <img *ngIf="genre === movie.genre" [src]="url + movie.poster" alt="">
-      </span> -->
-  </span>
-
+  <div *ngFor="let genre of genres">
+    <span>{{ genre.name }}</span>
+    <span *ngFor="let movie of actionMovies" class="movie-genre">
+      <img [src]="url + movie.poster" alt="" />
+    </span>
+  </div>
 </div>

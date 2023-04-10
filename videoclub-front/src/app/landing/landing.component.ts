@@ -11,7 +11,10 @@ import { URL_BACKEND } from '../config/config';
 export class LandingComponent implements OnInit {
   movies: any = [];
   genres: any = [];
-  genresMovies: any = [];
+  actionMovies: any = [];
+  adventureMovies: any = [];
+  animationMovies: any = [];
+  comedyMovies: any = [];
   url: string = URL_BACKEND + '/storage/';
 
   constructor(private _movies: MoviesService, private _genres: GenresService) {}
@@ -40,9 +43,21 @@ export class LandingComponent implements OnInit {
 
   getGenresMovies() {
     console.log(this.genres.length);
-    this._genres.getMoviesGenre(1, 1).subscribe((res) => {
-      this.genresMovies = res;
-      console.log('genresMovies: ', this.genresMovies);
+    this._genres.getMoviesGenre(10, 1).subscribe((res) => {
+      this.actionMovies = res;
+      console.log('actionMovies: ', this.actionMovies);
+    });
+    this._genres.getMoviesGenre(10, 2).subscribe((res) => {
+      this.animationMovies = res;
+      console.log('genresMovies: ', this.animationMovies);
+    });
+    this._genres.getMoviesGenre(10, 3).subscribe((res) => {
+      this.adventureMovies = res;
+      console.log('genresMovies: ', this.adventureMovies);
+    });
+    this._genres.getMoviesGenre(10, 4).subscribe((res) => {
+      this.comedyMovies = res;
+      console.log('genresMovies: ', this.comedyMovies);
     });
   }
 }
