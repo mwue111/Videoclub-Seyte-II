@@ -45,19 +45,15 @@ export class LandingComponent implements OnInit {
     console.log(this.genres.length);
     this._genres.getMoviesGenre(10, 1).subscribe((res) => {
       this.actionMovies = res;
-      console.log('actionMovies: ', this.actionMovies);
     });
     this._genres.getMoviesGenre(10, 2).subscribe((res) => {
-      this.animationMovies = res;
-      console.log('genresMovies: ', this.animationMovies);
+      this.adventureMovies = res;
     });
     this._genres.getMoviesGenre(10, 3).subscribe((res) => {
-      this.adventureMovies = res;
-      console.log('genresMovies: ', this.adventureMovies);
+      this.animationMovies = res;
     });
     this._genres.getMoviesGenre(10, 4).subscribe((res) => {
       this.comedyMovies = res;
-      console.log('genresMovies: ', this.comedyMovies);
     });
   }
 }

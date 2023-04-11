@@ -1,28 +1,33 @@
 <div class="landing-header">
-  <img *ngFor="let movie of movies" [src]="url + movie.poster" alt="" />
+  <img
+    *ngFor="let movie of movies"
+    [src]="url + movie.banner"
+    alt=""
+    class="banner"
+  />
 </div>
 
 <div class="landing-body">
   <div *ngFor="let genre of genres">
-    <span>{{ genre.name }}</span>
-    <div *ngIf="genre.name == 'Accion'">
-      <span *ngFor="let movie of actionMovies" class="movie-genre">
-        <img [src]="url + movie.poster" alt="" />
+    <span class="genre-name">{{ genre.name }}</span>
+    <div *ngIf="genre.name == 'Accion'" class="genre">
+      <span *ngFor="let movie of actionMovies">
+        <img [src]="url + movie.poster" alt="" class="poster" />
       </span>
     </div>
-    <div *ngIf="genre.name == 'Aventura'">
-      <span *ngFor="let movie of adventureMovies" class="movie-genre">
-        <img [src]="url + movie.poster" alt="" />
+    <div *ngIf="genre.name == 'Aventura'" class="genre">
+      <span *ngFor="let movie of adventureMovies">
+        <img [src]="url + movie.poster" alt="" class="poster" />
       </span>
     </div>
-    <div *ngIf="genre.name == 'Comedia'">
-      <span *ngFor="let movie of comedyMovies" class="movie-genre">
-        <img [src]="url + movie.poster" alt="" />
+    <div *ngIf="genre.name == 'Comedia'" class="genre">
+      <span *ngFor="let movie of actionMovies">
+        <img [src]="url + movie.poster" alt="" class="poster" />
       </span>
     </div>
-    <div *ngIf="genre.name == 'Drama'">
-      <span *ngFor="let movie of animationMovies" class="movie-genre">
-        <img [src]="url + movie.poster" alt="" />
+    <div *ngIf="genre.name == 'Drama'" class="genre">
+      <span *ngFor="let movie of adventureMovies">
+        <img [src]="url + movie.poster" alt="" class="poster" />
       </span>
     </div>
   </div>
