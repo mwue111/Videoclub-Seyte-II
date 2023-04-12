@@ -11,7 +11,7 @@
   </thead>
   <tbody>
     @forelse($movies as $movie)
-    echo {{$movie->genres}};
+    <!-- echo {{$movie->genres}}; -->
     <tr>
       <td>
         <a href="{{ route('peliculas.show', $movie) }}" target="_blank">
