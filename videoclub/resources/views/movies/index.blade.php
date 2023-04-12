@@ -14,7 +14,7 @@
     <!-- echo {{$movie->genres}}; -->
     <tr>
       <td>
-        <a href="{{ route('peliculas.show', $movie) }}" target="_blank">
+        <a href="{{ route('peliculas.show', $movie) }}">
           {{ $movie->title }}
         </a>
       </td>
@@ -27,7 +27,7 @@
         <img src="{{ asset('storage/' . $movie->poster ) }}" alt="Poster de la película {{ $movie->title }}" style="width:10%" />
       </td>
       <td>
-        <a href="{{ route('peliculas.edit', $movie) }}" target="_blank">
+        <a href="{{ route('peliculas.edit', $movie) }}">
           Editar
         </a>
       </td>
