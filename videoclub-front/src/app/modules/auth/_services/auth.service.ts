@@ -32,7 +32,7 @@ export class AuthService {
   storeLocalStorageToken(auth: any) {
    if(auth.token) {
     localStorage.setItem('token', auth.token);
-    localStorage.setItem('user', auth.user);
+    localStorage.setItem('user', JSON.stringify(auth.user));
 
     this.token = auth.token;
     this.user = auth.user;
@@ -57,8 +57,28 @@ export class AuthService {
       }),
       catchError(error => {
         console.log('Ha habido un error iniciando sesión: ', error);
-        return of(undefined);
+        return of(error);
       })
     )
+  }
+
+  register(data: any) {
+    let url = URL_SERVICES + '/register';
+    return this.http.post(url, data);
+  }
+
+  logout() {
+    this.token = '';
+    this.user = null;
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.router.navigate(['auth/login'], {//quizás hay que añadir una /
+      queryParams: {},
+    });
+  }
+
+  isLogged() {
+    return localStorage.getItem('token') !== null;
   }
 }

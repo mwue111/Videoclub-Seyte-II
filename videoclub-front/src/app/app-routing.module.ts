@@ -16,6 +16,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./modules/auth/auth.module').then((res) => res.AuthModule),
   },
+  { path: '**', redirectTo: 'error/404' },
 ];
 
 export const appRoutingProviders: any[] = [];
