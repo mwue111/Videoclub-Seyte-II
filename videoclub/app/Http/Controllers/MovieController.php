@@ -98,10 +98,11 @@ class MovieController extends Controller
    */
   public function update(Request $request, $id)
   {
+
     $movie = Movie::findOrFail($id);
 
     $attributes = $request->validate([
-      'title' => 'required|unique:movies,title',
+      'title' => 'required',
       'poster' => 'image|mimes:jpg,jpeg,bmp,png',
       'banner' => 'image|mimes:jpg,jpeg,bmp,png',
       'year' => 'required',
@@ -111,23 +112,29 @@ class MovieController extends Controller
       'file' => 'file',
       'trailer' => 'file',
     ]);
+    // dd($request->all());
 
-    // dd($request->file('poster'));
-    if (isset($_FILES['poster']) && $_FILES['poster'] != null) {
+
+    if ($request->hasFile('poster')) {
+      $old_poster = $movie->poster;
       $attributes['poster'] = request()->file('poster')->store('images', 'public');
+      Storage::disk('public')->delete($old_poster);
     }
 
-    if (isset($attributes['banner'])) {
+    if ($request->hasFile('banner')) {
+      $old_banner = $movie->banner;
       $attributes['banner'] = request()->file('banner')->store('images', 'public');
+      Storage::disk('public')->delete($old_banner);
     }
 
-    if (isset($attributes['file'])) {
-      $attributes['file'] = request()->file('file')->store('media', 'public');
-    }
+    // if (isset($attributes['file'])) {
+    //   $attributes['file'] = request()->file('file')->store('media', 'public');
+    // }
 
-    if (isset($attributes['trailer'])) {
-      $attributes['trailer'] = request()->file('trailer')->store('trailer', 'public');
-    }
+    // if (isset($attributes['trailer'])) {
+    //   $attributes['trailer'] = request()->file('trailer')->store('trailer', 'public');
+    // }
+
     $movie->update($attributes);
 
 
