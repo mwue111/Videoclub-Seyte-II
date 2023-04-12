@@ -7,6 +7,7 @@ use App\Models\Movie;
 use App\Models\Genre;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Termwind\Components\Dd;
 
 class MovieController extends Controller
 {
@@ -96,13 +97,15 @@ class MovieController extends Controller
    */
   public function update(Request $request, $id)
   {
+
     $movie = Movie::findOrFail($id);
 
     $attributes = $request->validate([
-      'poster' => 'image|mimes:jpg,jpeg,bmp,png',
-      'banner' => 'image|mimes:jpg,jpeg,bmp,png',
-      'file' => 'file',
-      'trailer' => 'file',
+        'title' => 'unique:movies,title,' . $movie->id,
+        'poster' => 'image|mimes:jpg,jpeg,bmp,png',
+        'banner' => 'image|mimes:jpg,jpeg,bmp,png',
+        'file' => 'file|mimes:mp4,mp3,wav',
+        'trailer' => 'file|mimes:mp4,mp3,wav',
     ]);
 
     if ($request->hasFile('poster')) {

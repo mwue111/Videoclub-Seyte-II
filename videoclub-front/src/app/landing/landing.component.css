@@ -12,6 +12,16 @@
 
 .banner {
   width: 45%;
+  transition: 0.5s, color 0.1s;
+  -webkit-transition: 0.5s, color 0.1s;
+  -moz-transition: 0.5s, color 0.1s;
+}
+
+.banner:hover {
+  box-shadow: 0 2px 2px 0 #000000, 0 2px 2px 0 #000000;
+  transform: translate(0px, 5px);
+  -webkit-transform: translate(0px, 5px);
+  -moz-transform: translate(0px, 5px);
 }
 
 .landing-body {
@@ -32,10 +42,20 @@
   justify-content: flex-start;
   flex-wrap: nowrap;
   margin-top: 10px;
+  padding: 20px 5px;
 }
 
 .genre span {
+  transition: 0.5s, color 0.1s;
+  -webkit-transition: 0.5s, color 0.1s;
+  -moz-transition: 0.5s, color 0.1s;
   margin-right: 25px;
+}
+
+.genre span:hover {
+  transform: scale3d(1.1, 1.1, 0.3);
+  -webkit-transform: scale3d(1.1, 1.1, 0.3);
+  -moz-transform: scale3d(1.1, 1.1, 0.3);
 }
 
 .genre:last-child {

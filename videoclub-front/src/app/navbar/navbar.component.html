@@ -1,6 +1,6 @@
 <div id="content-navbar">
   <mat-toolbar class="navbar">
-    <div class="title-div"><a href="''">SEYTECLUB</a></div>
+    <div class="title-div"><a href="/">SEYTECLUB</a></div>
     <div class="tracker-div">
       <input
         type="text"
@@ -14,8 +14,8 @@
       />
     </div>
     <div class="auth-div">
-      <button class="register-btn">Registrarse</button>
-      <button class="login-btn">Entrar</button>
+      <button class="register-btn" [routerLink]="['/auth']">Registrarse</button>
+      <button class="login-btn" [routerLink]="['/auth']">Entrar</button>
     </div>
   </mat-toolbar>
 </div>
