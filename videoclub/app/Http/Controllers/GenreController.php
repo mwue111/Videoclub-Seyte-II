@@ -14,18 +14,16 @@ class GenreController extends Controller
   {
     $amount = $request->input('cantidad');
 
-    if($amount){
-        $genres = Genre::orderBy('id', 'ASC')->take($amount)->get();
-    }
-    else{
-        $genres = Genre::orderBy('id', 'ASC')->get();
+    if ($amount) {
+      $genres = Genre::orderBy('id', 'ASC')->take($amount)->get();
+    } else {
+      $genres = Genre::orderBy('id', 'ASC')->get();
     }
 
-    if($request->path() == 'api/generos') {
-        return response()->json($genres);
-    }
-    else{
-        return view('genres.index', ['genres' => $genres]);
+    if ($request->path() == 'api/generos') {
+      return response()->json($genres);
+    } else {
+      return view('genres.index', ['genres' => $genres]);
     }
   }
 
@@ -102,19 +100,19 @@ class GenreController extends Controller
       ->with('success', 'Género eliminado correctamente');
   }
 
-  public function getMovies(Request $request){
-    $genre = Genre::findOrFail($request->id);
+  public function getMovies(Request $request, $id)
+  {
+    $genre = Genre::findOrFail($id);
 
-    $amount = $request->input('amount');
-    if($amount){
-        $movies = $genre->movies->take($amount)->get();
+    $amount = $request->input('cantidad');
+    if ($amount) {
+      $movies = $genre->movies()->take($amount)->get();
     }
 
-    if($request->path() == 'api/generos/peliculas') {
-        return response()->json($movies);
-    }
-    else{
-        return response()->json(['error' => 'No hay películas']);
+    if ($request->path() == 'api/generos/' . $id . '/peliculas') {
+      return response()->json($movies);
+    } else {
+      return response()->json(['error' => 'No hay películas']);
     }
   }
 }

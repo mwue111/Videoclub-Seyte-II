@@ -29,14 +29,6 @@ class MovieController extends Controller
     } else {
       return view('movies.index', ['movies' => $movies]);
     }
-
-    if ($request->path() == 'api/peliculas') {
-      return response()->json($movies);
-    } else {
-      return view('movies.index', [
-        'movies' => $movies
-      ]);
-    }
   }
 
   /**
