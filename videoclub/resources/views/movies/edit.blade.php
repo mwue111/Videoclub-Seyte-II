@@ -39,7 +39,7 @@
     <br>
     <input type="file" name="file"/>
     <br>
-    <label for="file">Archivo de la trailer</label>
+    <label for="file">Archivo del trailer</label>
     <br>
     <input type="file" name="trailer"/>
     <br>
