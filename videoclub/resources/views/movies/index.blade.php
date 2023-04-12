@@ -32,7 +32,7 @@
         </a>
       </td>
       <td>
-        <form action="{{ route('peliculas.destroy', $movie) }}" method="POST">
+        <form action="{{ route('peliculas.destroy', $movie->id) }}" method="POST">
           @csrf
           @method('DELETE')
           <input type="submit" value="Eliminar">
