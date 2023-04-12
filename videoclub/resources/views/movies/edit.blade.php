@@ -1,6 +1,6 @@
 <h1>Editar película</h1>
 
-<form action="{{ route('peliculas.update', $movie) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('peliculas.update', $movie->id) }}" method="POST" enctype="multipart/form-data">
   @csrf
   @method('PUT')
   <label for="title">Título de la película</label>

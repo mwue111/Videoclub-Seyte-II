@@ -17,11 +17,11 @@ Route::get('/', function () {
   return view('welcome');
 });
 
-Route::group(['middleware' => ['cors']], function () {
-  Route::resource('generos', 'GenreController');
-});
+// Route::group(['middleware' => ['cors']], function () {
+//   Route::resource('generos', 'GenreController');
+// });
 
-Route::resource('peliculas', 'MovieController');//->middleware('client');
+Route::resource('peliculas', 'MovieController'); //->middleware('client');
 Route::post('peliculas/{id}/add-genre', 'MovieController@addGenre')->name('peliculas.addGenre');
 
 Route::delete('peliculas/{id}/delete-genre', 'MovieController@deleteGenre')->name('peliculas.deleteGenre');
