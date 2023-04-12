@@ -102,13 +102,8 @@ class MovieController extends Controller
     $movie = Movie::findOrFail($id);
 
     $attributes = $request->validate([
-      'title' => 'required',
       'poster' => 'image|mimes:jpg,jpeg,bmp,png',
       'banner' => 'image|mimes:jpg,jpeg,bmp,png',
-      'year' => 'required',
-      'runtime' => 'required',
-      'plot' => 'required',
-      'director' => 'required',
       'file' => 'file',
       'trailer' => 'file',
     ]);
