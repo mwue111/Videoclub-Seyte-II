@@ -15,6 +15,10 @@ export class MoviesService {
 
   getMovies(amount: number): Observable<any> {
     let params = new HttpParams().set('cantidad', amount.toString());
-    return this._http.get(this.url + '/api/peliculas' , { params: params, });
+    return this._http.get(this.url + '/api/peliculas', { params: params });
   }
+
+  // getGenreMovie(id: number): Observable<any> {
+  //   return this._http.get(this.url + '/api/generos/' + id + '/peliculas');
+  // }
 }
