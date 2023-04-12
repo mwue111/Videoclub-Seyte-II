@@ -112,34 +112,10 @@ class MovieController extends Controller
       'trailer' => 'file',
     ]);
 
-    // if ($request->poster != '') {
-    //   $path = 'storage/app/public/images/';
-
-    //   if ($movie->poster != '' && $movie->poster != null) {
-    //     $old_poster = $path . $movie->poster;
-    //     unlink($old_poster);
-    //   }
-
-    //   $new_poster = $request->poster;
-    //   $new_poster_name = $new_poster->getClientOriginalName();
-    //   $new_poster->move($path, $new_poster_name);
-    //   $attributes['poster'] = $new_poster_name;
-    // }
-    dd($request->file('poster'));
+    // dd($request->file('poster'));
     if (isset($_FILES['poster']) && $_FILES['poster'] != null) {
-      $poster = $request->file('poster');
-      // dd($poster);
-      // $name = $poster->getClientOriginalName();
-      // $poster->move(public_path() . 'storage/images', $name);
-      // $attributes['poster'] = $name;
       $attributes['poster'] = request()->file('poster')->store('images', 'public');
     }
-
-    // if ($request->hasFile('poster')) {
-    //   $new_poster = request()->file('poster');
-    //   $ruta = $new_poster->store('images', 'public');
-    //   $attributes['poster'] = $ruta;
-    // }
 
     if (isset($attributes['banner'])) {
       $attributes['banner'] = request()->file('banner')->store('images', 'public');
