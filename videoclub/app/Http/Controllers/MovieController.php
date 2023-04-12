@@ -105,27 +105,28 @@ class MovieController extends Controller
       'trailer' => 'file',
     ]);
 
-    if (isset($attributes['poster'])) {
-        $attributes['poster'] = request()->file('poster')->store('images', 'public');
+    if ($request->hasFile('poster')) {
+      $old_poster = $movie->poster;
+      $attributes['poster'] = request()->file('poster')->store('images', 'public');
+      Storage::disk('public')->delete($old_poster);
     }
 
-    //  if ($request->hasFile('poster')) {
-    //   $old_poster = $movie->poster;
-    //   $attributes['poster'] = request()->file('poster')->store('images', 'public');
-    //   Storage::disk('public')->delete($old_poster);
-    // }
-
-
-    if (isset($attributes['banner'])) {
+    if($request->hasFile('banner')) {
+      $old_banner = $movie->banner;
       $attributes['banner'] = request()->file('banner')->store('images', 'public');
+      Storage::disk('public')->delete($old_banner);
     }
 
     if (isset($attributes['file'])) {
+      $old_file = $movie->file;
       $attributes['file'] = request()->file('file')->store('media', 'public');
+      Storage::disk('public')->delete($old_file);
     }
 
     if (isset($attributes['trailer'])) {
+      $old_trailer = $movie->trailer;
       $attributes['trailer'] = request()->file('trailer')->store('trailer', 'public');
+      Storage::disk('public')->delete($old_trailer);
     }
 
     $movie->update($attributes);
