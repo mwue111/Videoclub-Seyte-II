@@ -1,0 +1,72 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+#content-navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #1874ba;
+}
+
+.title-div a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.tracker-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tracker-navbar {
+  width: 25em;
+  height: 2em;
+  border: none;
+  box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 0.5);
+  border-radius: 20px;
+  padding-left: 10px;
+  margin-right: 20px;
+}
+
+.tracker-glass {
+  width: 2em;
+  height: 2em;
+  cursor: pointer;
+}
+
+.auth-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.register-btn {
+  background: #159ca3;
+  width: 10em;
+  height: 2.5em;
+  border-radius: 20px;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  margin-right: 10px;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.login-btn {
+  background: #ffffff;
+  width: 10em;
+  height: 2.5em;
+  border-radius: 20px;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  margin-right: 10px;
+  color: #159ca3;
+  font-size: 14px;
+}

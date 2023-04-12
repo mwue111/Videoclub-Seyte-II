@@ -13,8 +13,8 @@ export class MoviesService {
     this.url = Global.url;
   }
 
-  getMovies(cantidad: number): Observable<any> {
-    let params = new HttpParams().set('cantidad', cantidad.toString());
-    return this._http.get(this.url + '/api/peliculas/' , { params: params, });
+  getMovies(amount: number): Observable<any> {
+    let params = new HttpParams().set('cantidad', amount.toString());
+    return this._http.get(this.url + '/api/peliculas' , { params: params, });
   }
 }

@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule, appRoutingProviders, routing } from './app-routing.module';
+import { RouterModule, Routes } from '@angular/router';
+import {
+  AppRoutingModule,
+  appRoutingProviders,
+  routing,
+} from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,6 +14,10 @@ import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+const material = [MatToolbarModule];
 
 @NgModule({
   declarations: [
@@ -19,6 +27,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
     ContactComponent,
     FaqsComponent,
     AboutUsComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,8 +35,10 @@ import { AboutUsComponent } from './about-us/about-us.component';
     routing,
     HttpClientModule,
     BrowserAnimationsModule,
+    material,
   ],
+  exports: [material, RouterModule],
   providers: [appRoutingProviders],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

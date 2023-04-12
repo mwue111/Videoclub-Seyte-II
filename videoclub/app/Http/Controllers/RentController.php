@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Http\Controllers\API\BaseController as BaseController;
+use DB;
 
 class RentController extends BaseController
 {
@@ -30,13 +31,28 @@ class RentController extends BaseController
 
     public function show(Request $request) {
         $user = Auth::user();
-        $response = $user->rents->all();
-        if($user->role === 'premium'){
-            //TO DO
-            //$premium = $user->premium;
-            //$premium->movies->all();
 
-            $response = $user->premium->movies->all();
+        if($user->role === 'premium'){
+            $premium = $user->premium;
+            $response = $premium->movies->all();
+        }
+        else if($user->role === 'free'){
+            $response = $user->rents->all();
+        }
+        else{
+            $path = $request->path();
+            $userId = substr($path, 13, 3);
+            $checkUser = User::find($userId);
+
+            if($checkUser->role === 'free'){
+                $response = $checkUser->rents->all();
+            }
+            if($checkUser->role === 'premium'){
+                $response = "usuario premium";
+            }
+            else{
+                $response = "Usuario admin";
+            }
         }
 
         return response()->json($response);
@@ -45,6 +61,7 @@ class RentController extends BaseController
     //crear un alquiler con datos de usuario, película y añadiendo una fecha de expiración
     public function store(Request $request) {
         $user = Auth::user();
+
         if($user->role === 'free' || $user->role === 'admin'){
             $validator = Validator::make($request->all(), [
                 'movie_id' => 'required',
@@ -60,6 +77,22 @@ class RentController extends BaseController
             ]);
 
             return $this->sendResponse($rent, 'Alquiler creado');
+        }
+        else if($user->role === 'premium'){
+            $validator = Validator::make($request->all(), [
+                'movie_id' => 'required'
+            ]);
+
+            if($validator->fails()){
+                return $this->sendError('Error de validación. ', $validator->errors());
+            }
+
+            $premium = $user->premium;
+
+            $view = $premium->movies()->attach($request->input('movie_id'), ['user_id' => $premium->user_id]);
+
+
+            return $this->sendResponse($view, 'Vista creada');
         }
         else{
             return $this->sendError('No tienes permiso para alquilar esta película.');

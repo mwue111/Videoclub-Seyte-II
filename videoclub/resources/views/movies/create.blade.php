@@ -11,6 +11,10 @@
     <br>
     <input type="file" name="poster"/>
     <br>
+    <label for="banner">Banner de la película</label>
+    <br>
+    <input type="file" name="banner"/>
+    <br>
     <label for="year">Año de la película</label>
     <br>
     <input type="number" name="year"/>
@@ -25,7 +29,11 @@
     <br>
     <label for="genre">Género de la película</label>
     <br>
-    <input type="text" name="genre"/>
+    <select name="genre_id" id="genre_id">
+    @foreach($genres as $genre)
+        <option value="{{$genre->id}}">{{$genre->name}}</option>
+    @endforeach
+    </select>
     <br>
     <label for="director">Director de la película</label>
     <br>
@@ -34,6 +42,10 @@
     <label for="file">Archivo de la película</label>
     <br>
     <input type="file" name="file"/>
+    <br>
+    <label for="file">Archivo de la trailer</label>
+    <br>
+    <input type="file" name="trailer"/>
     <br>
     <input type="submit" value="Añadir">
 
