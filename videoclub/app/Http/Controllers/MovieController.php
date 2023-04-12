@@ -97,37 +97,24 @@ class MovieController extends Controller
   public function update(Request $request, $id)
   {
     $movie = Movie::findOrFail($id);
-    $oldPoster = $movie->poster;
 
-    $request->validate([
-      'title' => 'required|unique:movies,title',
+    $attributes = $request->validate([
       'poster' => 'image|mimes:jpg,jpeg,bmp,png',
       'banner' => 'image|mimes:jpg,jpeg,bmp,png',
-      'year' => 'required',
-      'runtime' => 'required',
-      'plot' => 'required',
-      'director' => 'required',
       'file' => 'file',
       'trailer' => 'file',
     ]);
 
-    $movie->update($request->only(['title', 'year', 'runtime', 'plot', 'director', 'file', 'trailer']));
-
     if (isset($attributes['poster'])) {
-        $newPoster = $request->file('poster');
-        $request->file('poster')
-                ->storeAs('images', 'public', $newPoster);
-        $movie->update(['poster' => $newPoster]);
-        // $path = 'storage/app/public/images';
-        // $name = $newPoster->getClientOriginalName();
-        // $newPoster->storeAs($path, $name);
+        $attributes['poster'] = request()->file('poster')->store('images', 'public');
+    }
 
-        // $movie->poster = $path . '/' . $name;
-        //$attributes['poster'] = request()->file('poster')->store('images', 'public');
-    }
-    else{
-        $movie->poster = $oldPoster;
-    }
+    //  if ($request->hasFile('poster')) {
+    //   $old_poster = $movie->poster;
+    //   $attributes['poster'] = request()->file('poster')->store('images', 'public');
+    //   Storage::disk('public')->delete($old_poster);
+    // }
+
 
     if (isset($attributes['banner'])) {
       $attributes['banner'] = request()->file('banner')->store('images', 'public');
@@ -140,6 +127,8 @@ class MovieController extends Controller
     if (isset($attributes['trailer'])) {
       $attributes['trailer'] = request()->file('trailer')->store('trailer', 'public');
     }
+
+    $movie->update($attributes);
 
     return redirect()->route('peliculas.index'); //->withMessage('success', 'Película editada');
   }

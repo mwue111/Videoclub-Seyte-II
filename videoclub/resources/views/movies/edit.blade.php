@@ -3,6 +3,7 @@
 <form action="{{ route('peliculas.update', $movie) }}" method="POST" enctype="multipart/form-data">
   @csrf
   @method('PUT')
+    <input type="hidden" name="_method" value="PUT" />
   <label for="title">Título de la película</label>
   <br>
   <input type="text" name="title" value="{{ $movie->title }}" />
