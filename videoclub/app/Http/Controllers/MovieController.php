@@ -10,24 +10,23 @@ use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(Request $request)
-    {
-        $amount = $request->input('cantidad');
+  /**
+   * Display a listing of the resource.
+   */
+  public function index(Request $request)
+  {
+    $amount = $request->input('cantidad');
 
-        if ($amount) {
-            $movies = Movie::latest('created_at')->take($amount)->get();
-        } else {
-            $movies = Movie::orderBy('id', 'DESC')->get();
-        }
+    if ($amount) {
+      $movies = Movie::latest('created_at')->take($amount)->get();
+    } else {
+      $movies = Movie::orderBy('id', 'DESC')->get();
+    }
 
-        if ($request->path() == 'api/peliculas') {
-            return response()->json($movies);
-        } else {
-            return view('movies.index', ['movies' => $movies]);
-        }
+    if ($request->path() == 'api/peliculas') {
+      return response()->json($movies);
+    } else {
+      return view('movies.index', ['movies' => $movies]);
     }
 
     if ($request->path() == 'api/peliculas') {
@@ -152,7 +151,8 @@ class MovieController extends Controller
     return redirect()->route('peliculas.index');
   }
 
-  public function addGenre(Request $request, $id){
+  public function addGenre(Request $request, $id)
+  {
     $movie = Movie::findOrFail($id);
 
     $movie->genres()->attach($request->input('genre_id'), ['movie_id' => $movie->id]);
@@ -160,7 +160,8 @@ class MovieController extends Controller
     return redirect()->route('peliculas.index');
   }
 
-  public function deleteGenre(Request $request, $id){
+  public function deleteGenre(Request $request, $id)
+  {
     $movie = Movie::findOrFail($id);
 
     $movie->genres()->detach($request->input('genre_id'));
