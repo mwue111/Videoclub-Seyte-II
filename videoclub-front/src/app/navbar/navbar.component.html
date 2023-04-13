@@ -20,7 +20,11 @@
       <button class="login-btn" [routerLink]="['/auth/login']">Entrar</button>
     </div>
     <div class="logged-div" *ngIf="logged">
-      <p>logged</p>
+      <img *ngIf="user.image" src="user.image" alt="" />
+      <img *ngIf="!user.image" src="../../assets/user.png" alt="" />
+      <p *ngIf="user.name">{{ user.name }}</p>
+      <p *ngIf="!user.name">User</p>
+      <button (click)="logout()">Cerrar sesión</button>
     </div>
   </mat-toolbar>
 </div>

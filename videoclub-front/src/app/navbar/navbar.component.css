@@ -70,3 +70,42 @@
   color: #159ca3;
   font-size: 14px;
 }
+
+.logged-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.logged-div button {
+  background: #159ca3;
+  width: 10em;
+  height: 2.5em;
+  border-radius: 20px;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  margin-right: 10px;
+  color: #ffffff;
+  font-size: 14px;
+  margin-left: 3em;
+  transition: 0.3s;
+}
+
+.logged-div button:hover {
+  transition: 0.3s;
+  background: #fff;
+  color: #1874ba;
+}
+
+.logged-div img {
+  width: 2em;
+  height: 2em;
+}
+
+.logged-div p {
+  margin-left: 0.5em;
+  color: white;
+  font-size: 0.9em;
+}
