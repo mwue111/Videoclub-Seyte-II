@@ -30,12 +30,6 @@
       <p style="color:green;">{{ hasSuccessText }}</p>
     </ng-container>
 
-    <div>
-        <div>
-            <input type="checkbox" checked="" id="checkbox-remember">
-            <label for="checkbox-remember">Recuérdame</label>
-        </div>
-    </div>
     <button type="submit" (click)="submit()" [disabled]="loginForm.invalid">¡Entra!</button>
   </form>
 
