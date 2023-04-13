@@ -1,10 +1,102 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+*{
+  text-decoration: none;
+  color: black;
+}
+
 #content-register {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   background-color: #f5f3f4;
-  width: 100%;
+  width: 90%;
   margin-bottom: 5em;
   padding: 2em;
+  border-radius: 15px;
+  text-align: center;
+}
+
+h1{
+  font-size: 2em;
+  width: 80%;
+}
+
+.register-form{
+  width: 100%;
+}
+
+input{
+  border: none;
+  border-bottom: solid #B1A7A6 1px;
+  padding: 20px;
+  width: 60%;
+  height: 100%;
+  color: #B1A7A6;
+  margin: 10px;
+}
+
+.submit{
+  background-color: #1874BA;
+  padding: 20px;
+  width: 65%;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 40px;
+  color: #FFFFFF;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.submit:hover{
+  background-color: #125385;
+}
+
+.submit:active{
+  background-color: #1c7fca;
+}
+
+.submit:disabled{
+  background-color: #1253857a;
+  cursor: default;
+}
+
+.links{
+  font-size: 18px;
+}
+
+.links a{
+  color: #159CA3;
+}
+
+.error-container{
+  position: absolute;
+  background-color: rgba(255, 0, 0, 0.615);
+  border-radius: 15px;
+  left: 2%;
+  top: 75%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 20%;
+  padding: 20px;
+}
+
+.success-container{
+  position: absolute;
+  background-color: rgba(26, 185, 74, 0.615);
+  border-radius: 15px;
+  left: 2%;
+  top: 75%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 20%;
+  padding: 20px;
+}
+.message{
+  color: white;
 }

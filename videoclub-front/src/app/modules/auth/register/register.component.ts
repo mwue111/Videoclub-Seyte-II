@@ -28,6 +28,7 @@ export class RegisterComponent implements OnInit{
 
   ngOnInit(): void {
     this.initForm();
+    console.log('¿Hay errores? ', this.hasError);
   }
 
   initForm() {
@@ -98,24 +99,26 @@ export class RegisterComponent implements OnInit{
       this.hasErrorText = 'Los emails no coinciden. ';
     }
 
-    this.authServices.register(this.loginForm.value)
-                      .subscribe((res: any) => {
-                        console.log('respuesta en submit al registrarse: ', res);
-                        if(!res.error && res){
-                          this.hasSuccess = true;
-                          this.hasSuccessText = 'El registro se ha realizado con éxito.';
-                          setTimeout(() => {
-                            this.route.navigate(['auth/login']);
-                          }, 2000);
-                        }
-                      },
-                      error => {
-                        console.log(error);
-                        if(error.error.message.includes('Integrity constraint violation')) {
-                          this.hasError = true;
-                          this.hasErrorText += 'El usuario con email ' + this.loginForm.value.email + ' ya existe. ';
-                        }
-                      })
+    if(this.hasError == false){
+      this.authServices.register(this.loginForm.value)
+                        .subscribe((res: any) => {
+                          console.log('respuesta en submit al registrarse: ', res);
+                          if(!res.error && res){
+                            this.hasSuccess = true;
+                            this.hasSuccessText = 'El registro se ha realizado con éxito.';
+                            setTimeout(() => {
+                              this.route.navigate(['auth/login']);
+                            }, 2000);
+                          }
+                        },
+                        error => {
+                          console.log(error);
+                          if(error.error.message.includes('Integrity constraint violation')) {
+                            this.hasError = true;
+                            this.hasErrorText += 'El usuario con email ' + this.loginForm.value.email + ' ya existe. ';
+                          }
+                        })
+    }
   }
 
 }

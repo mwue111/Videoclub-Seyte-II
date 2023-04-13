@@ -20,11 +20,11 @@
 
       </div>
 
-      <div class="error-container">
-        <ng-container *ngIf="hasError">
+      <ng-container *ngIf="hasError">
+          <div class="error-container">
             <p class="error">{{ hasErrorText }}</p>
-        </ng-container>
-      </div>
+          </div>
+      </ng-container>
 
       <button class="submit" type="submit" (click)="submit()" [disabled]="loginForm.invalid">Iniciar sesión</button>
 
