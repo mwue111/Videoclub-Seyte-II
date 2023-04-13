@@ -24,7 +24,7 @@
       <img *ngIf="!user.image" src="../../assets/user.png" alt="" />
       <p *ngIf="user.name">{{ user.name }}</p>
       <p *ngIf="!user.name">User</p>
-      <button (click)="(logout)">Cerrar sesión</button>
+      <button (click)="logout()">Cerrar sesión</button>
     </div>
   </mat-toolbar>
 </div>

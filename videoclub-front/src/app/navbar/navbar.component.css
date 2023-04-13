@@ -90,6 +90,13 @@
   color: #ffffff;
   font-size: 14px;
   margin-left: 3em;
+  transition: 0.3s;
+}
+
+.logged-div button:hover {
+  transition: 0.3s;
+  background: #fff;
+  color: #1874ba;
 }
 
 .logged-div img {
