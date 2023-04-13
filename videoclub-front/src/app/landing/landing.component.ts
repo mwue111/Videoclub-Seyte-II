@@ -27,7 +27,6 @@ export class LandingComponent implements OnInit {
 
   getLatestMovies() {
     this._movies.getMovies(2).subscribe((res) => {
-      console.log(res);
       this.movies = res;
       console.log('movies: ', this.movies);
     });

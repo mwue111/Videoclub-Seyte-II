@@ -30,12 +30,12 @@ export class AuthService {
   }
 
   storeLocalStorageToken(auth: any) {
-   if(auth.token) {
-    localStorage.setItem('token', auth.token);
-    localStorage.setItem('user', JSON.stringify(auth.user));
+   if(auth.data.token) {
+    localStorage.setItem('token', auth.data.token);
+    localStorage.setItem('user', JSON.stringify(auth.data.user));
 
-    this.token = auth.token;
-    this.user = auth.user;
+    this.token = auth.data.token;
+    this.user = auth.data.user;
 
     return true;
    }
@@ -48,7 +48,8 @@ export class AuthService {
     let url = URL_SERVICES + '/login';
     return this.http.post(url, { email, password }).pipe(
       map((auth: any) => {
-        if(auth.token){  //en postman se llama token (dentro de data), en el tutorial access_token
+        if(auth.data.token){
+          console.log('auth: ', auth);
           return this.storeLocalStorageToken(auth);
         }
         else{

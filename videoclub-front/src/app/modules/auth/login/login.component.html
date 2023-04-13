@@ -1,0 +1,28 @@
+<div>
+  <h1>Inicia sesión</h1>
+  <form [formGroup]="loginForm">
+    <div>
+        <label for="email">Email: </label>
+        <input type="email" formControlName="email"  id="email" placeholder="Escribe tu email">
+    </div>
+    <div>
+        <label for="password">Contraseña: </label>
+        <input type="password" formControlName="password" id="password" placeholder="Escribe tu contraseña">
+    </div>
+
+    <ng-container *ngIf="hasError">
+      <p style="color:red;">{{ hasErrorText }}</p>
+    </ng-container>
+
+    <div>
+        <div>
+            <input type="checkbox" checked="" id="checkbox-remember">
+            <label for="checkbox-remember">Recuérdame</label>
+        </div>
+        <a href="./reset-password.html">¿Olvidaste tu contraseña?</a>
+    </div>
+    <button type="submit" (click)="submit()" [disabled]="loginForm.invalid">¡Entra!</button>
+  </form>
+
+  <p>¿Aún no tienes cuenta? <a routerLink="/auth/registro">Regístrate</a>.</p>
+</div>
