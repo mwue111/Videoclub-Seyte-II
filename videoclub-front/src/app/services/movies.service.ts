@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Global } from './global';
 
@@ -13,9 +13,11 @@ export class MoviesService {
     this.url = Global.url;
   }
 
-  getMovies(amount: number): Observable<any> {
+  getMovies(amount: number, token: any): Observable<any> {
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+
     let params = new HttpParams().set('cantidad', amount.toString());
-    return this._http.get(this.url + '/api/peliculas', { params: params });
+    return this._http.get(this.url + '/api/peliculas', { params: params, headers: headers });
   }
 
   // getGenreMovie(id: number): Observable<any> {
