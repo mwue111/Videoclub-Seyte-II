@@ -13,9 +13,14 @@
         class="tracker-glass"
       />
     </div>
-    <div class="auth-div">
-      <button class="register-btn" [routerLink]="['/auth/registro']">Registrarse</button>
+    <div class="auth-div" *ngIf="!logged">
+      <button class="register-btn" [routerLink]="['/auth/registro']">
+        Registrarse
+      </button>
       <button class="login-btn" [routerLink]="['/auth/login']">Entrar</button>
+    </div>
+    <div class="logged-div" *ngIf="logged">
+      <p>logged</p>
     </div>
   </mat-toolbar>
 </div>
