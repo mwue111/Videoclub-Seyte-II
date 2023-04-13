@@ -1,0 +1,98 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+*{
+  text-decoration: none;
+  color: black;
+}
+
+.container{
+  display: flex;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  width: 30%;
+  padding: 15px;
+}
+
+.background{
+  background-color: #F5F3F4;
+  padding: 20px 50px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.login-form{
+  width: 100%;
+}
+
+h1{
+  margin: 40px;
+  margin-bottom: 0;
+  font-size: 2em;
+}
+
+.label{
+  color: #B1A7A6;
+  font-size: 25px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-bottom: solid #B1A7A6 1px;
+}
+
+.inputs{
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.email, .pass{
+  padding-top: 30px;
+}
+
+input{
+  border: none;
+  border-bottom: solid #B1A7A6 1px;
+  padding: 20px;
+  width: 80%;
+  height: 100%;
+  color: #B1A7A6;
+}
+
+.error{
+  color: red;
+}
+
+.remember-me{
+  display: flex;
+  width: 120px;
+  justify-content: flex-start;
+  text-align: center;
+  margin-left: 12px;
+  margin-top: 20px;
+}
+
+.submit{
+  background-color: #1874BA;
+  padding: 20px;
+  width: 80%;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 30px;
+  color: #FFFFFF;
+  font-weight: bolder;
+  font-size: 25px;
+}
+
+.links{
+  font-size: 18px;
+}
+
+.links a{
+  color: #159CA3;
+}
+
