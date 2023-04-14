@@ -27,19 +27,19 @@ use App\Http\Controllers\GenreController;
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
 
-Route::group(['middleware' => ['cors']], function () {
-    Route::resource('generos', 'GenreController');
-  Route::resource('peliculas', 'MovieController');//->middleware('client');
+Route::group(['middleware' => ['guest']], function () {
+  Route::get('peliculas', 'MovieController@index')->name('peliculas.index');
+  Route::get('generos', 'GenreController@index')->name('generos.index');
   Route::get('generos/{id}/peliculas', 'GenreController@getMovies')->name('generos.getMovies');;
+});
+
+Route::group(['middleware' => ['auth:api', 'cors']], function () {
+  Route::resource('resenas', ReviewController::class);
+  Route::resource('alquiler', RentController::class);
+  Route::get('profile', [RegisterController::class, 'profile']);
 });
 
 //Pendiente: segmentar la ruta de géneros y de movies para que solo el index esté disponible sin token
 
-// Route::middleware('auth:api')->group(function () {
-//     Route::resource('peliculas', MovieController::class);
-//     Route::resource('resenas', ReviewController::class);
-//     Route::resource('alquiler', RentController::class);
-//     Route::get('profile', [RegisterController::class, 'profile']);
-// });
 
 Route::middleware('auth:api')->post('logout', [RegisterController::class, 'logout']);
