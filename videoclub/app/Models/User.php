@@ -37,7 +37,6 @@ class User extends Authenticatable
   protected $hidden = [
     'password',
     'remember_token',
-    'role',
   ];
 
   /**
@@ -66,9 +65,9 @@ class User extends Authenticatable
 
   public function rents()
   {
-      return $this->belongsToMany(Movie::class, 'rents')
-                  ->withPivot('id', 'expiration_date')
-                  ->withTimeStamps();
+    return $this->belongsToMany(Movie::class, 'rents')
+      ->withPivot('id', 'expiration_date')
+      ->withTimeStamps();
   }
 
   public function reviews()

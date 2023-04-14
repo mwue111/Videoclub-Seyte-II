@@ -16,7 +16,7 @@ export class LandingComponent implements OnInit {
   adventureMovies: any = [];
   animationMovies: any = [];
   comedyMovies: any = [];
-  url: string = URL_BACKEND + '/public/images/';
+  url: string = URL_BACKEND + '/storage/';
 
   constructor(
     private _movies: MoviesService,
