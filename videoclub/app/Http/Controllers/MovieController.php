@@ -101,11 +101,11 @@ class MovieController extends Controller
     $movie = Movie::findOrFail($id);
 
     $attributes = $request->validate([
-        'title' => 'unique:movies,title,' . $movie->id,
-        'poster' => 'image|mimes:jpg,jpeg,bmp,png',
-        'banner' => 'image|mimes:jpg,jpeg,bmp,png',
-        'file' => 'file|mimes:mp4,mp3,wav',
-        'trailer' => 'file|mimes:mp4,mp3,wav',
+      'title' => 'unique:movies,title,' . $movie->id,
+      'poster' => 'image|mimes:jpg,jpeg,bmp,png',
+      'banner' => 'image|mimes:jpg,jpeg,bmp,png',
+      'file' => 'file|mimes:mp4,mp3,wav',
+      'trailer' => 'file|mimes:mp4,mp3,wav',
     ]);
 
     if ($request->hasFile('poster')) {
@@ -114,7 +114,7 @@ class MovieController extends Controller
       Storage::disk('public')->delete($old_poster);
     }
 
-    if($request->hasFile('banner')) {
+    if ($request->hasFile('banner')) {
       $old_banner = $movie->banner;
       $attributes['banner'] = request()->file('banner')->store('', 'images');
       Storage::disk('public')->delete($old_banner);
@@ -167,5 +167,14 @@ class MovieController extends Controller
     $movie->genres()->detach($request->input('genre_id'));
 
     return redirect()->route('peliculas.index');
+  }
+
+  public function getMoviesByName(Request $request)
+  {
+    $name = $request->input('name');
+
+    $movies = Movie::where('title', 'like', '%' . $name . '%')->get();
+
+    return response()->json($movies);
   }
 }
