@@ -83,6 +83,7 @@ export class AuthService {
     return localStorage.getItem('token') !== null;
   }
 
+  //AQUÍ - https://www.positronx.io/angular-laravel-password-reset-for-jwt-tutorial/
   sendResetPasswordLink(data: any) {
     let url = URL_SERVICES + '/auth/reset-password-request';
 
