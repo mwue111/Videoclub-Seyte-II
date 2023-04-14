@@ -118,7 +118,7 @@ class MovieController extends Controller
 
     if ($request->hasFile('banner')) {
       $old_banner = $movie->banner;
-      $attributes['banner'] = request()->file('banner')->store('images', 'public');
+      $attributes['banner'] = request()->file('banner')->store('', 'images');
       Storage::disk('public')->delete($old_banner);
     }
 
