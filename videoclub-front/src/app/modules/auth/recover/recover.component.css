@@ -70,3 +70,13 @@ input {
   background-color: #1253857a;
   cursor: default;
 }
+
+.links {
+  font-size: 18px;
+  color: #159ca3;
+  text-decoration: none;
+}
+
+.links:visited {
+  text-decoration: none;
+}
