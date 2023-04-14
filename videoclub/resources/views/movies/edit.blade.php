@@ -9,7 +9,7 @@
   <br>
   <label for="oldPoster">Antiguo póster de la película</label>
   <br>
-  <img src="{{ asset('storage/' . $movie->poster) }}" alt="Póster de la película {{$movie->title}}" style="width: 15%">
+  <img src="{{ asset('public/images/' . $movie->poster) }}" alt="Póster de la película {{$movie->title}}" style="width: 15%">
   <br>
   <label for="poster">Nuevo póster de la película</label>
   <br>
