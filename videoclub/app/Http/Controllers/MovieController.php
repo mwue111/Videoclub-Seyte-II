@@ -57,8 +57,8 @@ class MovieController extends Controller
       'trailer' => 'required|file|mimes:mp4,mp3,wav',
     ]);
 
-    $attributes['poster'] = request()->file('poster')->store('images', 'public');
-    $attributes['banner'] = request()->file('banner')->store('images', 'public');
+    $attributes['poster'] = request()->file('poster')->store('', 'images');
+    $attributes['banner'] = request()->file('banner')->store('', 'images');
     $attributes['file'] = request()->file('file')->store('media', 'public');
     $attributes['trailer'] = request()->file('trailer')->store('trailer', 'public');
 
@@ -112,7 +112,7 @@ class MovieController extends Controller
 
     if ($request->hasFile('poster')) {
       $old_poster = $movie->poster;
-      $attributes['poster'] = request()->file('poster')->store('images', 'public');
+      $attributes['poster'] = request()->file('poster')->store('', 'images');
       Storage::disk('public')->delete($old_poster);
     }
 
