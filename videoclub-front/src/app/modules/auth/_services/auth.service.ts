@@ -82,4 +82,10 @@ export class AuthService {
   isLogged() {
     return localStorage.getItem('token') !== null;
   }
+
+  sendResetPasswordLink(data: any) {
+    let url = URL_SERVICES + '/auth/reset-password-request';
+
+    return this.http.post(url, data)
+  }
 }
