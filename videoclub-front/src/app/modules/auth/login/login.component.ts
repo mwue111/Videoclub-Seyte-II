@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit{
         ])
       ],
       remember_me: [
-        null,
+        true,
       ]
     })
   }
