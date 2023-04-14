@@ -1,28 +1,38 @@
-<div>
-  <h1>Inicia sesión</h1>
-  <form [formGroup]="loginForm">
-    <div>
-        <label for="email">Email: </label>
-        <input type="email" formControlName="email"  id="email" placeholder="Escribe tu email">
-    </div>
-    <div>
-        <label for="password">Contraseña: </label>
-        <input type="password" formControlName="password" id="password" placeholder="Escribe tu contraseña">
-    </div>
+<div class="container">
+  <div class="background">
+    <h1>¡Bienvenido/a de vuelta!</h1>
+    <form class="login-form" [formGroup]="loginForm">
 
-    <ng-container *ngIf="hasError">
-      <p style="color:red;">{{ hasErrorText }}</p>
-    </ng-container>
-
-    <div>
-        <div>
-            <input type="checkbox" checked="" id="checkbox-remember">
-            <label for="checkbox-remember">Recuérdame</label>
+      <div class="inputs">
+        <div class="email">
+            <!-- <label class="label" for="email">Email</label> -->
+            <input type="email" formControlName="email"  id="email" placeholder="Email">
         </div>
-        <a href="./reset-password.html">¿Olvidaste tu contraseña?</a>
-    </div>
-    <button type="submit" (click)="submit()" [disabled]="loginForm.invalid">¡Entra!</button>
-  </form>
+        <div class="pass">
+            <!-- <label class="label" for="password">Contraseña</label> -->
+            <input type="password" formControlName="password" id="password" placeholder="Contraseña">
+        </div>
 
-  <p>¿Aún no tienes cuenta? <a routerLink="/auth/registro">Regístrate</a>.</p>
+        <div class="remember-me">
+          <input type="checkbox" checked="" id="checkbox-remember">
+          <label for="checkbox-remember">Recuérdame</label>
+        </div>
+
+      </div>
+
+      <ng-container *ngIf="hasError">
+          <div class="error-container">
+            <p class="error">{{ hasErrorText }}</p>
+          </div>
+      </ng-container>
+
+      <button class="submit" type="submit" (click)="submit()" [disabled]="loginForm.invalid">Iniciar sesión</button>
+
+      <div class="links">
+          <a href="./reset-password.html">He olvidado mi contraseña</a>
+          <p>¿Aún no tienes cuenta? <a routerLink="/auth/registro">Regístrate</a>.</p>
+      </div>
+    </form>
+
+  </div>
 </div>
