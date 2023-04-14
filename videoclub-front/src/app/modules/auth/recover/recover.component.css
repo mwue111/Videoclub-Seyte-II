@@ -1,10 +1,3 @@
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
-* {
-  text-decoration: none;
-  color: black;
-}
-
 .container {
   display: flex;
   margin: 0 auto;
@@ -24,28 +17,11 @@
   width: 100%;
 }
 
-.login-form {
-  margin: 0 auto;
-  width: 80%;
-}
-
 h1 {
   margin: 40px;
   margin-bottom: 0;
   font-size: 2em;
 }
-
-/* .label{
-  color: #B1A7A6;
-  font-size: 25px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  border-bottom: solid #B1A7A6 1px;
-} */
 
 .inputs {
   padding: 25px;
@@ -66,30 +42,6 @@ input {
   width: 80%;
   height: 100%;
   color: #b1a7a6;
-}
-
-.error-container {
-  position: absolute;
-  background-color: rgba(255, 0, 0, 0.615);
-  border-radius: 15px;
-  left: 2%;
-  top: 63%;
-  display: flex;
-  margin: 0 auto;
-  width: 20%;
-}
-
-.error-container .error {
-  color: white;
-}
-
-.remember-me {
-  display: flex;
-  width: 120px;
-  justify-content: flex-start;
-  text-align: center;
-  margin-left: 2.5%;
-  margin-top: 20px;
 }
 
 .submit {
@@ -117,12 +69,4 @@ input {
 .submit:disabled {
   background-color: #1253857a;
   cursor: default;
-}
-
-.links {
-  font-size: 18px;
-}
-
-.links a {
-  color: #159ca3;
 }

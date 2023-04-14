@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="background">
+    <h1>Recuperar contraseña</h1>
+    <p>
+      Proporciónanos el correo electrónico con el que te registraste para poder
+      recuperar tu contraseña
+    </p>
+    <form class="email-form" [formGroup]="emailForm">
+      <div class="inputs">
+        <div class="email">
+          <!-- <label class="label" for="email">Email</label> -->
+          <input
+            type="email"
+            formControlName="email"
+            id="email"
+            placeholder="Email"
+          />
+        </div>
+      </div>
+      <button class="submit" type="submit" (click)="submit()">Enviar</button>
+    </form>
+  </div>
+</div>
