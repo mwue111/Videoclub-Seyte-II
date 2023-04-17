@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +9,7 @@ import { throwError } from 'rxjs';
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.css']
 })
-export class ChangePasswordComponent implements OnInit{
+export class ChangePasswordComponent{
   changePasswordForm: FormGroup;
   errors: any;
   constructor(private fb: FormBuilder, private _auth: AuthService, private route: ActivatedRoute) {
@@ -24,41 +24,15 @@ export class ChangePasswordComponent implements OnInit{
     });
   }
 
-  ngOnInit(): void {
-    this.initForm();
-  }
-  
-initForm() {
-    this.changePasswordForm = this.fb.group({
-      email: [
-        null,
-        Validators.compose([
-          Validators.required,
-          Validators.email,
-          Validators.minLength(3),
-          Validators.maxLength(250)
-        ])
-      ],
-      password: [
-        null,
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(100)
-        ])
-      ],
-      password_confirmation: [
-        null,
-        Validators.compose([
-          Validators.required,
-          Validators.minLength(8),
-          Validators.maxLength(100)
-        ])
-      ]
-    })
-  }
-
   onSubmit() {
+    if (this.changePasswordForm.value.password_confirmation !== this.changePasswordForm.value.password) {
+      alert('Las contraseñas no coinciden');
+      return;
+    }
+    if (this.changePasswordForm.value.password.length < 8) {
+      alert('La contraseña debe tener al menos 8 caracteres');
+      return;
+    }
     this._auth.resetPassword(this.changePasswordForm.value).subscribe(
       (result) => {
         alert('Contraseña cambiada correctamente');

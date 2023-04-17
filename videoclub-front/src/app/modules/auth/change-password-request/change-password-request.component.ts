@@ -22,6 +22,7 @@ export class ChangePasswordRequestComponent {
     this._auth.sendResetPasswordEmail(this.resetForm.value).subscribe(
       (resp) => {
         this.successMsg = resp;
+        alert(this.successMsg.message)
       },
       (error) => {
         this.errors = error.error.message;
