@@ -1,7 +1,7 @@
 import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { throwError } from 'rxjs';
 
 @Component({
@@ -12,6 +12,7 @@ import { throwError } from 'rxjs';
 export class ChangePasswordComponent{
   changePasswordForm: FormGroup;
   errors: any;
+  router!: Router;
   constructor(private fb: FormBuilder, private _auth: AuthService, private route: ActivatedRoute) {
     this.changePasswordForm = this.fb.group({
       email: [''],
@@ -36,6 +37,7 @@ export class ChangePasswordComponent{
     this._auth.resetPassword(this.changePasswordForm.value).subscribe(
       (result) => {
         alert('Contraseña cambiada correctamente');
+        this.router.navigate(['auth/login']);
         this.changePasswordForm.reset();
       },
       (error) => {

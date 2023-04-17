@@ -7,7 +7,6 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RecoverComponent } from './recover/recover.component';
 import { ChangePasswordRequestComponent } from './change-password-request/change-password-request.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 
@@ -17,7 +16,6 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     AuthComponent,
     LoginComponent,
     RegisterComponent,
-    RecoverComponent,
     ChangePasswordRequestComponent,
     ChangePasswordComponent
   ],
