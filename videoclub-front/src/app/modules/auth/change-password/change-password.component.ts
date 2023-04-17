@@ -15,7 +15,7 @@ export class ChangePasswordComponent{
   hasErrorText: any = '';
   hasSuccess!: Boolean;
   hasSuccessText: any = '';
-
+  passCount: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -24,9 +24,18 @@ export class ChangePasswordComponent{
     private router: Router,
     ) {
     this.changePasswordForm = this.fb.group({
-      email: [''],
-      password: [''],
-      password_confirmation: [''],
+      email: [
+        '',
+        [Validators.required, Validators.email,]
+      ],
+      password: [
+        '',
+        [Validators.required, Validators.minLength(8), Validators.maxLength(100)]
+      ],
+      password_confirmation: [
+        '',
+        [Validators.required, Validators.minLength(8), Validators.maxLength(100)]
+      ],
       passwordToken: ['']
     });
     route.queryParams.subscribe(params => {
@@ -34,21 +43,27 @@ export class ChangePasswordComponent{
     });
   }
 
+  onChange(passLength: number) {
+    this.hasError = false;
+    this.hasErrorText = '';
+
+    console.log(passLength);
+    if(passLength < 8){
+      this.hasError = true;
+      this.hasErrorText = 'La contraseña debe tener al menos 8 caracteres.'
+    }
+  }
+
+  verifyPassword(password: string, password_confirmation: string) {
+    return password !== password_confirmation;
+    // return this.changePasswordForm.value.password_confirmation !== this.changePasswordForm.value.password;
+  }
+
   onSubmit() {
     this.hasError = false;
     this.hasErrorText = '';
     this.hasSuccessText = '';
 
-    if (this.changePasswordForm.value.password_confirmation !== this.changePasswordForm.value.password) {
-      this.hasError = true;
-      this.hasErrorText = 'Las contraseñas no coinciden.';
-      return;
-    }
-    if (this.changePasswordForm.value.password.length < 8) {
-      this.hasError = true;
-      this.hasErrorText = 'La contraseña debe tener más de 8 caracteres.';
-      return;
-    }
     this._auth.resetPassword(this.changePasswordForm.value).subscribe(
       (result: any) => {
         // alert('Contraseña cambiada correctamente');
@@ -69,14 +84,17 @@ export class ChangePasswordComponent{
     let errorMsg = '';
     if (error.error instanceof ErrorEvent) {
       errorMsg = `Error: ${error.error.message}`;
-      this.hasError = true;
-      this.hasErrorText = 'Ha ocurrido un error al cambiar la contraseña, revise los datos introducidos.';
+
     } else {
-      this.hasError = true;
-      this.hasErrorText = 'Ha ocurrido un error al cambiar la contraseña, revise los datos introducidos.';
+      if(this.verifyPassword(this.changePasswordForm.value.password_confirmation, this.changePasswordForm.value.password)){
+        this.hasError = true;
+        this.hasErrorText = 'Las contraseñas no coinciden.';
+      }
+      else{
+        this.hasError = true;
+        this.hasErrorText = 'Ha ocurrido un error al cambiar la contraseña, revise los datos introducidos.';
+      }
       errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
-      this.hasError = true;
-      this.hasErrorText = 'Ha ocurrido un error al cambiar la contraseña, revise los datos introducidos.';
     }
     console.log(errorMsg);
     return throwError(() => {
