@@ -8,6 +8,8 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RecoverComponent } from './recover/recover.component';
+import { ChangePasswordRequestComponent } from './change-password-request/change-password-request.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { RecoverComponent } from './recover/recover.component';
     AuthComponent,
     LoginComponent,
     RegisterComponent,
-    RecoverComponent
+    RecoverComponent,
+    ChangePasswordRequestComponent,
+    ChangePasswordComponent
   ],
   imports: [
     CommonModule,

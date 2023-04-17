@@ -16,6 +16,7 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ChangePasswordRequestComponent } from './change-password-request/change-password-request.component';
 
 const material = [MatToolbarModule];
 
@@ -28,6 +29,7 @@ const material = [MatToolbarModule];
     FaqsComponent,
     AboutUsComponent,
     NavbarComponent,
+    ChangePasswordRequestComponent,
   ],
   imports: [
     BrowserModule,
