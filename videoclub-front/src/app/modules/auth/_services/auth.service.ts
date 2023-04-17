@@ -41,9 +41,9 @@ export class AuthService {
     }
   }
 
-  login(email: string, password: string) {
+  login(email: string, password: string, remember_me: Boolean) {
     let url = URL_SERVICES + '/login';
-    return this.http.post(url, { email, password }).pipe(
+    return this.http.post(url, { email, password, remember_me }).pipe(
       map((auth: any) => {
         if (auth.data.token) {
           console.log('auth: ', auth);

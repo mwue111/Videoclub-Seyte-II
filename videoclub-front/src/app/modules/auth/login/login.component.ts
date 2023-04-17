@@ -46,6 +46,9 @@ export class LoginComponent implements OnInit{
           Validators.minLength(8),
           Validators.maxLength(100),
         ])
+      ],
+      remember_me: [
+        true,
       ]
     })
   }
@@ -54,7 +57,7 @@ export class LoginComponent implements OnInit{
     this.hasError = false;
     console.log('valores: ', this.loginForm.value);
 
-    this.authServices.login(this.loginForm.value.email, this.loginForm.value.password)
+    this.authServices.login(this.loginForm.value.email, this.loginForm.value.password, this.loginForm.value.remember_me)
                       .subscribe((res: any) => {
                         console.log('respuesta en la función submit() de login.component.ts: ', res);
                         if(!res.error && res){

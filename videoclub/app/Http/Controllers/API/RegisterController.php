@@ -10,6 +10,8 @@ use App\Models\Free;
 use App\Models\Premium;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use Laravel\Passport\Passport;
+use Carbon\Carbon;
 
 class RegisterController extends BaseController
 {
@@ -60,13 +62,23 @@ class RegisterController extends BaseController
    */
   public function login(Request $request)
   {
-    if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+
+    $remember_me = $request->remember_me;
+
+    if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember_me)) {
+        if($remember_me === 'null'){
+            Passport::personalAccessTokensExpireIn(Carbon::now()->addDays(1));
+        }
       $user = Auth::user();
-      $success['token'] =  $user->createToken('MyApp')->accessToken;
+      //$success['token'] =  $user->createToken('MyApp')->accessToken;
+      $success['token'] =  $user->createToken('MyApp');
+      $strToken = $success['token']->accessToken;
+      $expiration = $success['token']->token->expires_at->diffInSeconds(Carbon::now());
       $success['user'] = [
         'name' => Auth::user()->name,
         'email' => Auth::user()->email,
       ];
+
       return $this->sendResponse($success, 'Has iniciado sesión.');
     } else {
       return $this->sendError('Unauthorised.', ['error' => 'Unauthorized']);
