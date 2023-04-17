@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/modules/auth/_services/auth.service';
 import { throwError } from 'rxjs';
 
+//Tutorial: https://www.positronx.io/angular-laravel-password-reset-for-jwt-tutorial/
+
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
