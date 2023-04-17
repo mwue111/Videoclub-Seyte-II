@@ -47,7 +47,6 @@ export class ChangePasswordComponent{
     this.hasError = false;
     this.hasErrorText = '';
 
-    console.log(passLength);
     if(passLength < 8){
       this.hasError = true;
       this.hasErrorText = 'La contraseña debe tener al menos 8 caracteres.'
@@ -81,24 +80,16 @@ export class ChangePasswordComponent{
   }
 
   handleError(error: any) {
-    let errorMsg = '';
-    if (error.error instanceof ErrorEvent) {
-      errorMsg = `Error: ${error.error.message}`;
-
-    } else {
-      if(this.verifyPassword(this.changePasswordForm.value.password_confirmation, this.changePasswordForm.value.password)){
-        this.hasError = true;
-        this.hasErrorText = 'Las contraseñas no coinciden.';
-      }
-      else{
-        this.hasError = true;
-        this.hasErrorText = 'Ha ocurrido un error al cambiar la contraseña, revise los datos introducidos.';
-      }
-      errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
+    if(this.verifyPassword(this.changePasswordForm.value.password_confirmation, this.changePasswordForm.value.password)){
+      this.hasError = true;
+      this.hasErrorText = 'Las contraseñas no coinciden.';
     }
-    console.log(errorMsg);
+    else{
+      this.hasError = true;
+      this.hasErrorText = 'Email incorrecto.';
+    }
     return throwError(() => {
-      errorMsg;
+      error;
     });
   }
 }
