@@ -11,6 +11,7 @@ export class ChangePasswordRequestComponent {
   resetForm: FormGroup;
   errors: any;
   successMsg: any;
+  
   constructor(private fb: FormBuilder, private _auth: AuthService) {
     this.resetForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],

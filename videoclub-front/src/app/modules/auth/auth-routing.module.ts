@@ -5,6 +5,7 @@ import { AuthComponent } from './auth.component';
 import { RegisterComponent } from './register/register.component';
 import { RecoverComponent } from './recover/recover.component';
 import { ChangePasswordRequestComponent } from './change-password-request/change-password-request.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
       { path: 'registro', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
       { path: 'recuperar', component: ChangePasswordRequestComponent },
+      {path: 'cambiar-contrasena', component: ChangePasswordComponent},
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' },
     ],

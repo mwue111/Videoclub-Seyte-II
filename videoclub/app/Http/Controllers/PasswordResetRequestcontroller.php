@@ -9,6 +9,7 @@ use App\Mail\SendMail;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class PasswordResetRequestController extends Controller
 {
@@ -51,10 +52,10 @@ class PasswordResetRequestController extends Controller
 
   public function storeToken($token, $email)
   {
-    DB::table('recover_password')->insert([
+    DB::table('password_reset_tokens')->insert([
       'email' => $email,
       'token' => $token,
-      'created_at' => now()
+      'created_at' => Carbon::now(),
     ]);
   }
 }

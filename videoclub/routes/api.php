@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\RegisterController;
 use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\RentController;
 use App\Http\Controllers\GenreController;
@@ -32,7 +33,7 @@ Route::group(['middleware' => ['guest']], function () {
   Route::get('generos', 'GenreController@index')->name('generos.index');
   Route::get('generos/{id}/peliculas', 'GenreController@getMovies')->name('generos.getMovies');
   Route::post('/reset-password', 'PasswordResetRequestController@sendPasswordResetEmail');
-  Route::post('/change-password', [PasswordResetRequestController::class, 'passwordResetProcess']);
+  Route::post('/change-password', 'ChangePasswordController@passwordResetProcess');
 });
 
 Route::group(['middleware' => ['auth:api', 'cors']], function () {

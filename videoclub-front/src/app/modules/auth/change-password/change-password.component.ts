@@ -20,7 +20,7 @@ export class ChangePasswordComponent {
       passwordToken: ['']
     });
     route.queryParams.subscribe(params => {
-      this.changePasswordForm.controls['passwordToken'].setValue(params['passwordToken']);
+      this.changePasswordForm.controls['passwordToken'].setValue(params['token']);
     });
   }
 

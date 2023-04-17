@@ -82,7 +82,7 @@ export class AuthService {
 
   sendResetPasswordEmail(email: string) {
     let url = URL_SERVICES + '/reset-password';
-    return this.http.post(url, { email });
+    return this.http.post(url, email );
   }
 
   resetPassword(data: any) {
