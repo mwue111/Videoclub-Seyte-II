@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthComponent } from './auth.component';
 import { RegisterComponent } from './register/register.component';
 import { RecoverComponent } from './recover/recover.component';
+import { ChangePasswordRequestComponent } from './change-password-request/change-password-request.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,7 @@ const routes: Routes = [
     children: [
       { path: 'registro', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'recuperar', component: RecoverComponent },
+      { path: 'recuperar', component: ChangePasswordRequestComponent },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' },
     ],

@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class PasswordResetRequestcontroller extends Controller
+class PasswordResetRequestController extends Controller
 {
   //
   public function sendPasswordResetEmail(Request $request)
@@ -40,7 +40,7 @@ class PasswordResetRequestcontroller extends Controller
 
   public function generateToken($email)
   {
-    $isOtherToken = DB::table('password_resets')->where('email', $email)->first();
+    $isOtherToken = DB::table('password_reset_tokens')->where('email', $email)->first();
     if ($isOtherToken) {
       return $isOtherToken->token;
     }
