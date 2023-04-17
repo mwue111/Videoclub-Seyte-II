@@ -21,6 +21,7 @@ const routes: Routes = [
   // { path: 'welcome', canActivate: [AuthGuard], loadChildren: () =>
   //     import('./modules/user-landing/user-landing.module')
   //           .then(res => res.UserLandingModule)  },
+
   { path: '**', redirectTo: 'error/404' },
 ];
 

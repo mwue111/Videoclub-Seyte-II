@@ -80,13 +80,19 @@ export class AuthService {
   }
 
   isLogged() {
+    console.log('usuario: ', localStorage.getItem('user'));
     return localStorage.getItem('token') !== null;
   }
 
-  //AQUÍ - https://www.positronx.io/angular-laravel-password-reset-for-jwt-tutorial/
   sendResetPasswordLink(data: any) {
     let url = URL_SERVICES + '/auth/reset-password-request';
 
     return this.http.post(url, data)
+  }
+
+  resetPassword(data: any) {
+    let url = URL_SERVICES + '/auth/change-password';
+
+    return this.http.post(url, data);
   }
 }

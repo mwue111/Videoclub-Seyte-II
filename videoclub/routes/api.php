@@ -27,6 +27,9 @@ use App\Http\Controllers\GenreController;
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
 
+Route::post('/reset-password-request', [PasswordResetRequestController::class, 'sendPasswordResetEmail']);
+Route::post('/change-password', [PasswordResetRequestController::class, 'passwordResetProcess']);
+
 Route::group(['middleware' => ['guest']], function () {
   Route::get('peliculas', 'MovieController@index')->name('peliculas.index');
   Route::get('generos', 'GenreController@index')->name('generos.index');
