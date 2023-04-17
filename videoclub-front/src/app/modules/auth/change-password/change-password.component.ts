@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/modules/auth/_services/auth.service';
 import { throwError } from 'rxjs';
 
@@ -16,7 +16,8 @@ export class ChangePasswordComponent implements OnInit {
   constructor(
     public fb: FormBuilder,
     route: ActivatedRoute,
-    public authService: AuthService
+    public authService: AuthService,
+    private router: Router,
   ) {
     this.changePasswordForm = this.fb.group({
       email: [''],
@@ -41,6 +42,9 @@ export class ChangePasswordComponent implements OnInit {
         alert('Se ha actualizado la contraseña.');
         console.log('result en change-password.component.ts: ', result);
         this.changePasswordForm.reset();
+        setTimeout(() => {
+          this.router.navigate(['auth/login']);
+        }, 2000);
       },
       (error: any) => {
         console.log('ha habido un error: ', error);
