@@ -13,6 +13,8 @@ export class ChangePasswordComponent{
   changePasswordForm: FormGroup;
   errors: any;
   router!: Router;
+  hasError: any;
+  hasErrorText: any;
   constructor(private fb: FormBuilder, private _auth: AuthService, private route: ActivatedRoute) {
     this.changePasswordForm = this.fb.group({
       email: [''],
@@ -27,11 +29,13 @@ export class ChangePasswordComponent{
 
   onSubmit() {
     if (this.changePasswordForm.value.password_confirmation !== this.changePasswordForm.value.password) {
-      alert('Las contraseñas no coinciden');
+      this.hasError = true;
+      this.hasErrorText = 'Las contraseñas no coinciden.';
       return;
     }
     if (this.changePasswordForm.value.password.length < 8) {
-      alert('La contraseña debe tener al menos 8 caracteres');
+      this.hasError = true;
+      this.hasErrorText = 'La contraseña debe tener más de 8 caracteres.';
       return;
     }
     this._auth.resetPassword(this.changePasswordForm.value).subscribe(
@@ -50,8 +54,12 @@ export class ChangePasswordComponent{
     let errorMsg = '';
     if (error.error instanceof ErrorEvent) {
       errorMsg = `Error: ${error.error.message}`;
+      this.hasError = true;
+      this.hasErrorText = 'Ha ocurrido un error al cambiar la contraseña, revise los datos introducidos.';
     } else {
       errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
+      this.hasError = true;
+      this.hasErrorText = 'Ha ocurrido un error al cambiar la contraseña, revise los datos introducidos.';
     }
     console.log(errorMsg);
     return throwError(() => {
