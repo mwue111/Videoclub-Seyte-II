@@ -11,9 +11,11 @@ import { throwError } from 'rxjs';
 })
 export class ChangePasswordComponent{
   changePasswordForm: FormGroup;
-  errors: any;
-  hasError: any;
-  hasErrorText: any;
+  hasError: Boolean = false;
+  hasErrorText: any = '';
+  hasSuccess!: Boolean;
+  hasSuccessText: any = '';
+
 
   constructor(
     private fb: FormBuilder,
@@ -33,6 +35,10 @@ export class ChangePasswordComponent{
   }
 
   onSubmit() {
+    this.hasError = false;
+    this.hasErrorText = '';
+    this.hasSuccessText = '';
+
     if (this.changePasswordForm.value.password_confirmation !== this.changePasswordForm.value.password) {
       this.hasError = true;
       this.hasErrorText = 'Las contraseñas no coinciden.';
@@ -45,8 +51,10 @@ export class ChangePasswordComponent{
     }
     this._auth.resetPassword(this.changePasswordForm.value).subscribe(
       (result: any) => {
-        alert('Contraseña cambiada correctamente');
+        // alert('Contraseña cambiada correctamente');
         this.changePasswordForm.reset();
+        this.hasSuccess = true;
+        this.hasSuccessText = "La contraseña se ha cambiado correctamente."
         setTimeout(() => {
           this.router.navigate(['auth/login']);
         }, 2000);
@@ -64,6 +72,8 @@ export class ChangePasswordComponent{
       this.hasError = true;
       this.hasErrorText = 'Ha ocurrido un error al cambiar la contraseña, revise los datos introducidos.';
     } else {
+      this.hasError = true;
+      this.hasErrorText = 'Ha ocurrido un error al cambiar la contraseña, revise los datos introducidos.';
       errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
       this.hasError = true;
       this.hasErrorText = 'Ha ocurrido un error al cambiar la contraseña, revise los datos introducidos.';

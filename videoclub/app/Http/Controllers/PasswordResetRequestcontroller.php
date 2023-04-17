@@ -17,14 +17,13 @@ class PasswordResetRequestController extends Controller
   public function sendPasswordResetEmail(Request $request)
   {
     if (!$this->validEmail($request->email)) {
-      return response()->json([
-        'message' => 'Email no existe'
-      ], Response::HTTP_NOT_FOUND);
-    } else {
-      $this->sendMail($request->email);
-      return response()->json([
-        'message' => 'Se ha enviado un correo para restablecer la contraseña'
-      ], Response::HTTP_OK);
+      return response()->json(['message' => 'non-existent']);
+    }
+    else {
+      return $this->sendMail($request->email);
+    //   return response()->json([
+    //     'message' => 'ok'
+    //   ], Response::HTTP_OK);
     }
   }
 
