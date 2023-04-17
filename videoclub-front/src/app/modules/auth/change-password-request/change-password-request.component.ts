@@ -9,23 +9,40 @@ import { AuthService } from '../_services/auth.service';
 })
 export class ChangePasswordRequestComponent {
   resetForm: FormGroup;
-  errors: any;
+  hasError: boolean = false;
+  hasErrorText: any = '';
+  hasSuccess!: boolean;
+  hasSuccessText: any = '';
   successMsg: any;
-  
-  constructor(private fb: FormBuilder, private _auth: AuthService) {
+
+  constructor(
+    private fb: FormBuilder,
+    private _auth: AuthService
+    ) {
     this.resetForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
     });
   }
-
   onSubmit() {
+    this.hasError = false;
+    this.hasErrorText = '';
+    this.hasSuccessText = '';
+
     this._auth.sendResetPasswordEmail(this.resetForm.value).subscribe(
       (resp) => {
-        this.successMsg = resp;
-        alert(this.successMsg.message)
+        if(resp){
+          this.hasError = true;
+          this.hasErrorText = 'El email proporcionado no existe.'
+        }
+        else{
+          this.hasSuccess = true;
+          this.hasSuccessText = 'Se ha enviado un correo para restablecer la contraseña.';
+          // alert(this.successMsg.message)
+        }
       },
       (error) => {
-        this.errors = error.error.message;
+        this.hasError = true;
+        this.hasErrorText = error.error.message;
       }
     );
   }

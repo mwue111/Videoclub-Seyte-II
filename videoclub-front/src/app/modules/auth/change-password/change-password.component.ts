@@ -11,7 +11,11 @@ import { throwError } from 'rxjs';
 })
 export class ChangePasswordComponent{
   changePasswordForm: FormGroup;
-  errors: any;
+  hasError: Boolean = false;
+  hasErrorText: any = '';
+  hasSuccess!: Boolean;
+  hasSuccessText: any = '';
+
 
   constructor(
     private fb: FormBuilder,
@@ -31,23 +35,35 @@ export class ChangePasswordComponent{
   }
 
   onSubmit() {
+    this.hasError = false;
+    this.hasErrorText = '';
+    this.hasSuccessText = '';
+
     if (this.changePasswordForm.value.password_confirmation !== this.changePasswordForm.value.password) {
-      alert('Las contraseñas no coinciden');
+      // alert('Las contraseñas no coinciden');
+      this.hasError = true;
+      this.hasErrorText = "Las contraseñas no coinciden."
       return;
     }
     if (this.changePasswordForm.value.password.length < 8) {
-      alert('La contraseña debe tener al menos 8 caracteres');
+      // alert('La contraseña debe tener al menos 8 caracteres');
+      this.hasError = true;
+      this.hasErrorText = "La contraseña debe tener al menos 8 caracteres.";
       return;
     }
     this._auth.resetPassword(this.changePasswordForm.value).subscribe(
       (result: any) => {
-        alert('Contraseña cambiada correctamente');
+        // alert('Contraseña cambiada correctamente');
         this.changePasswordForm.reset();
+        this.hasSuccess = true;
+        this.hasSuccessText = "La contraseña se ha cambiado correctamente."
         setTimeout(() => {
           this.router.navigate(['auth/login']);
         }, 2000);
       },
       (error) => {
+        this.hasError = true;
+        this.hasErrorText = 'Revisa si has puesto el correo correctamente.';
         this.handleError(error);
       }
     );
