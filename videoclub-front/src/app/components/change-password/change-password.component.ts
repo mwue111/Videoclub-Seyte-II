@@ -7,7 +7,7 @@ import { throwError } from 'rxjs';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.scss'],
+  styleUrls: ['./change-password.component.css'],
 })
 export class ChangePasswordComponent implements OnInit {
   changePasswordForm: FormGroup;
@@ -20,8 +20,8 @@ export class ChangePasswordComponent implements OnInit {
   ) {
     this.changePasswordForm = this.fb.group({
       email: [''],
-      password: ['admin123'],
-      password_confirmation: ['admin123'],
+      password: [''], //admin123
+      password_confirmation: [''],
       passwordToken: [''],
     });
 
@@ -43,6 +43,7 @@ export class ChangePasswordComponent implements OnInit {
         this.changePasswordForm.reset();
       },
       (error: any) => {
+        console.log('ha habido un error: ', error);
         this.handleError(error);
       }
     );

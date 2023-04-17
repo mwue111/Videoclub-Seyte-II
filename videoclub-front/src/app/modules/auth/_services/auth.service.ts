@@ -85,13 +85,13 @@ export class AuthService {
   }
 
   sendResetPasswordLink(data: any) {
-    let url = URL_SERVICES + '/auth/reset-password-request';
+    let url = URL_SERVICES + '/reset-password-request';
 
     return this.http.post(url, data)
   }
 
   resetPassword(data: any) {
-    let url = URL_SERVICES + '/auth/change-password';
+    let url = URL_SERVICES + '/change-password';
 
     return this.http.post(url, data);
   }

@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/modules/auth/_services/auth.service';
 @Component({
   selector: 'app-change-password-request',
   templateUrl: './change-password-request.component.html',
-  styleUrls: ['./change-password-request.component.scss']
+  styleUrls: ['./change-password-request.component.css']
 })
 export class ChangePasswordRequestComponent implements OnInit {
   resetForm: FormGroup;
@@ -26,6 +26,7 @@ export class ChangePasswordRequestComponent implements OnInit {
   onSubmit(){
     this.authService.sendResetPasswordLink(this.resetForm.value).subscribe(
       (result) => {
+        console.log('resultado al hacer la request: ', result);
         this.successMsg = result;
       },(error) => {
         this.errors = error.error.message;

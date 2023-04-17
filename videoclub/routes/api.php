@@ -7,7 +7,8 @@ use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\RentController;
 use App\Http\Controllers\GenreController;
-
+use App\Http\Controllers\PasswordResetRequestController;
+use App\Http\Controllers\ChangePasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
 
 Route::post('/reset-password-request', [PasswordResetRequestController::class, 'sendPasswordResetEmail']);
-Route::post('/change-password', [PasswordResetRequestController::class, 'passwordResetProcess']);
+Route::post('/change-password', [ChangePasswordController::class, 'passwordResetProcess']);
 
 Route::group(['middleware' => ['guest']], function () {
   Route::get('peliculas', 'MovieController@index')->name('peliculas.index');
