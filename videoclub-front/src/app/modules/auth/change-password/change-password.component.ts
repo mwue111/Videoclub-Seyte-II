@@ -62,8 +62,6 @@ export class ChangePasswordComponent{
         }, 2000);
       },
       (error) => {
-        this.hasError = true;
-        this.hasErrorText = 'Revisa si has puesto el correo correctamente.';
         this.handleError(error);
       }
     );
@@ -73,7 +71,12 @@ export class ChangePasswordComponent{
     let errorMsg = '';
     if (error.error instanceof ErrorEvent) {
       errorMsg = `Error: ${error.error.message}`;
+      console.log('errorMsg: ', errorMsg);
+      this.hasError = true;
+      this.hasErrorText = 'Ha ocurrido un error al cambiar la contraseña, revise los datos introducidos.';
     } else {
+      this.hasError = true;
+      this.hasErrorText = 'Ha ocurrido un error al cambiar la contraseña, revise los datos introducidos.';
       errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
     }
     console.log(errorMsg);
