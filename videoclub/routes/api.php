@@ -28,13 +28,13 @@ use App\Http\Controllers\ChangePasswordController;
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
 
-Route::post('/reset-password-request', [PasswordResetRequestController::class, 'sendPasswordResetEmail']);
-Route::post('/change-password', [ChangePasswordController::class, 'passwordResetProcess']);
 
 Route::group(['middleware' => ['guest']], function () {
-  Route::get('peliculas', 'MovieController@index')->name('peliculas.index');
-  Route::get('generos', 'GenreController@index')->name('generos.index');
-  Route::get('generos/{id}/peliculas', 'GenreController@getMovies')->name('generos.getMovies');;
+    Route::post('/reset-password-request', [PasswordResetRequestController::class, 'sendPasswordResetEmail']);
+    Route::post('/change-password', [ChangePasswordController::class, 'passwordResetProcess']);
+    Route::get('peliculas', 'MovieController@index')->name('peliculas.index');
+    Route::get('generos', 'GenreController@index')->name('generos.index');
+    Route::get('generos/{id}/peliculas', 'GenreController@getMovies')->name('generos.getMovies');;
 });
 
 Route::group(['middleware' => ['auth:api', 'cors']], function () {

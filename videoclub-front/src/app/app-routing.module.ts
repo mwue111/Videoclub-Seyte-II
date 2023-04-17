@@ -6,8 +6,6 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AuthGuard } from './modules/auth/_services/auth.guard';
-import { ChangePasswordComponent } from './components/change-password/change-password.component';
-import { ChangePasswordRequestComponent } from './components/change-password-request/change-password-request.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -23,9 +21,6 @@ const routes: Routes = [
   // { path: 'welcome', canActivate: [AuthGuard], loadChildren: () =>
   //     import('./modules/user-landing/user-landing.module')
   //           .then(res => res.UserLandingModule)  },
-
-  { path:'change-password', component: ChangePasswordComponent },
-  { path: 'change-password-request', component: ChangePasswordRequestComponent },
 
   { path: '**', redirectTo: 'error/404' },
 ];
