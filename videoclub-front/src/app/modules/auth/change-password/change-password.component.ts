@@ -55,7 +55,12 @@ export class ChangePasswordComponent{
 
   verifyPassword(password: string, password_confirmation: string) {
     return password !== password_confirmation;
-    // return this.changePasswordForm.value.password_confirmation !== this.changePasswordForm.value.password;
+  }
+
+  verifyNewPassword(password: string) {
+    let oldPassword = this._auth.verifyOldPass(this.changePasswordForm.value.email);
+    console.log(oldPassword);
+    return password;
   }
 
   onSubmit() {
@@ -65,13 +70,18 @@ export class ChangePasswordComponent{
 
     this._auth.resetPassword(this.changePasswordForm.value).subscribe(
       (result: any) => {
-        // alert('Contraseña cambiada correctamente');
-        this.changePasswordForm.reset();
-        this.hasSuccess = true;
-        this.hasSuccessText = "La contraseña se ha cambiado correctamente."
-        setTimeout(() => {
-          this.router.navigate(['auth/login']);
-        }, 2000);
+        if(this.verifyNewPassword(this.changePasswordForm.value.password)){
+          this.changePasswordForm.reset();
+          this.hasSuccess = true;
+          this.hasSuccessText = "La contraseña se ha cambiado correctamente."
+          // setTimeout(() => {
+          //   this.router.navigate(['auth/login']);
+          // }, 2000);
+        }
+        else{
+          this.hasError = true;
+          this.hasErrorText = 'La nueva contraseña no puede ser igual a la antigua contraseña.';
+        }
       },
       (error) => {
         this.handleError(error);

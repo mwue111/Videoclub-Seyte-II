@@ -90,6 +90,11 @@ class RegisterController extends BaseController
     return response()->json(Auth::user());
   }
 
+  public function oldPassword($email){
+    $user = User::where('email', '=', $email)->first();
+    return response()->json();
+  }
+
   public function logout(Request $request)
   {
     $token = $request->user()->token();

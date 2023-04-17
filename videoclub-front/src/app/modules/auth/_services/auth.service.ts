@@ -13,7 +13,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {
     this.loadLocalStorage();
-    
+
   }
 
   loadLocalStorage() {
@@ -87,5 +87,13 @@ export class AuthService {
 
   resetPassword(data: any) {
     return this.http.post(URL_SERVICES + '/change-password', data);
+  }
+
+  verifyOldPass(email: any){
+    return this.http.get(URL_SERVICES + '/check-password', email)
+                .subscribe((res: any) => {
+                  console.log('respuesta: ', res);
+                })
+
   }
 }

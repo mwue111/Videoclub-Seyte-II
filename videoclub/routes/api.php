@@ -34,6 +34,7 @@ Route::group(['middleware' => ['guest']], function () {
   Route::get('generos/{id}/peliculas', 'GenreController@getMovies')->name('generos.getMovies');
   Route::post('/reset-password', 'PasswordResetRequestController@sendPasswordResetEmail');
   Route::post('/change-password', 'ChangePasswordController@passwordResetProcess');
+  Route::get('/check-password/{email}', [RegisterController::class, 'oldPassword']);
 });
 
 Route::group(['middleware' => ['auth:api', 'cors']], function () {
