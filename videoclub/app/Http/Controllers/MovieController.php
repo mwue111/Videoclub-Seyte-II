@@ -48,9 +48,9 @@ class MovieController extends Controller
       'title' => 'required|unique:movies,title',
       'poster' => 'required|image|mimes:jpg,jpeg,bmp,png',
       'banner' => 'required|image|mimes:jpg,jpeg,bmp,png',
-      'year' => 'required',
-      'runtime' => 'required',
-      'plot' => 'required',
+      'year' => 'required|numeric',
+      'runtime' => 'required|numeric',
+      'plot' => 'required|max:5000',
       'director' => 'required',
       'file' => 'required|file|mimes:mp4,mp3,wav',
       'trailer' => 'required|file|mimes:mp4,mp3,wav',
@@ -104,19 +104,13 @@ class MovieController extends Controller
       'title' => 'required|unique:movies,title,' . $movie->id,
       'poster' => 'image|mimes:jpg,jpeg,bmp,png',
       'banner' => 'image|mimes:jpg,jpeg,bmp,png',
-      'year' => 'required',
-      'runtime' => 'required',
-      'plot' => 'required',
+      'year' => 'required|numeric',
+      'runtime' => 'required|numeric',
+      'plot' => 'required|max:5000',
       'director' => 'required',
       'file' => 'file|mimes:mp4,mp3,wav',
       'trailer' => 'file|mimes:mp4,mp3,wav',
     ]);
-
-    /*
-
-      'file' => 'required|file|mimes:mp4,mp3,wav',
-      'trailer' => 'required|file|mimes:mp4,mp3,wav',
-    */
 
     if ($request->hasFile('poster')) {
       $old_poster = $movie->poster;

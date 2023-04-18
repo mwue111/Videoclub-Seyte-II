@@ -28,7 +28,6 @@ export class RegisterComponent implements OnInit{
 
   ngOnInit(): void {
     this.initForm();
-    console.log('¿Hay errores? ', this.hasError);
   }
 
   initForm() {
@@ -83,6 +82,16 @@ export class RegisterComponent implements OnInit{
 
   verifyPassword(password: string, c_password: string) {
     return password !== c_password;
+  }
+
+  onChange(passLength: number) {
+    this.hasError = false;
+    this.hasErrorText = '';
+
+    if(passLength < 8){
+      this.hasError = true;
+      this.hasErrorText = 'La contraseña debe tener al menos 8 caracteres.';
+    }
   }
 
   submit() {
