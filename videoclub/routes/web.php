@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-  return view('welcome');
-});
+// Route::get('/', function () {
+//   return view('welcome');
+// });
+
+Route::get('/', 'MovieController@index');
 
 Route::resource('peliculas', 'MovieController');//->middleware('client');
 

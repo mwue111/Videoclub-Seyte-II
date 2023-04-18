@@ -161,7 +161,8 @@ class MovieController extends Controller
 
     $movie->genres()->attach($request->input('genre_id'), ['movie_id' => $movie->id]);
 
-    return redirect()->route('peliculas.index');
+    // return redirect()->route('peliculas.index');
+    return redirect()->route('peliculas.edit', ['pelicula' => $movie->id]);
   }
 
   public function deleteGenre(Request $request, $id)
@@ -170,6 +171,7 @@ class MovieController extends Controller
 
     $movie->genres()->detach($request->input('genre_id'));
 
-    return redirect()->route('peliculas.index');
+    // return redirect()->route('peliculas.index');
+    return redirect()->route('peliculas.edit', ['pelicula' => $movie->id]);
   }
 }
