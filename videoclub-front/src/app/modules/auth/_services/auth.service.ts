@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError, map, of } from 'rxjs';
 import { URL_SERVICES } from 'src/app/config/config';
@@ -89,11 +89,11 @@ export class AuthService {
     return this.http.post(URL_SERVICES + '/change-password', data);
   }
 
-  verifyOldPass(email: any){
-    return this.http.get(URL_SERVICES + '/check-password', email)
-                .subscribe((res: any) => {
-                  console.log('respuesta: ', res);
-                })
+  verifyOldPass(email: any, password: string){
+    let params = new HttpParams().set('email', email)
+                                .set('new', password);
+
+    return this.http.get(URL_SERVICES + '/check-password', { params: params });
 
   }
 }

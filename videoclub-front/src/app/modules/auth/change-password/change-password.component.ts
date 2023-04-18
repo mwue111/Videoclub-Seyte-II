@@ -51,17 +51,26 @@ export class ChangePasswordComponent{
       this.hasError = true;
       this.hasErrorText = 'La contraseña debe tener al menos 8 caracteres.'
     }
+    if(passLength >= 8){
+      this.verifyNewPassword(this.changePasswordForm.value.email, this.changePasswordForm.value.password);
+    }
   }
 
   verifyPassword(password: string, password_confirmation: string) {
     return password !== password_confirmation;
   }
 
-  verifyNewPassword(password: string) {
-    let oldPassword = this._auth.verifyOldPass(this.changePasswordForm.value.email);
-    console.log(oldPassword);
-    return password;
+  verifyNewPassword(email: string, password: string) {
+
+    this._auth.verifyOldPass(email, password)
+              .subscribe((res: any) => {
+                if(res === 1){
+                  this.hasError = true;
+                  this.hasErrorText = 'La nueva contraseña no puede ser igual a la antigua contraseña.';
+                }
+              });
   }
+
 
   onSubmit() {
     this.hasError = false;
@@ -70,18 +79,12 @@ export class ChangePasswordComponent{
 
     this._auth.resetPassword(this.changePasswordForm.value).subscribe(
       (result: any) => {
-        if(this.verifyNewPassword(this.changePasswordForm.value.password)){
-          this.changePasswordForm.reset();
-          this.hasSuccess = true;
-          this.hasSuccessText = "La contraseña se ha cambiado correctamente."
-          // setTimeout(() => {
-          //   this.router.navigate(['auth/login']);
-          // }, 2000);
-        }
-        else{
-          this.hasError = true;
-          this.hasErrorText = 'La nueva contraseña no puede ser igual a la antigua contraseña.';
-        }
+        this.changePasswordForm.reset();
+        this.hasSuccess = true;
+        this.hasSuccessText = "La contraseña se ha cambiado correctamente."
+        setTimeout(() => {
+          this.router.navigate(['auth/login']);
+        }, 2000);
       },
       (error) => {
         this.handleError(error);

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Validator;
 use Laravel\Passport\Passport;
 use Carbon\Carbon;
+use Hash;
 
 class RegisterController extends BaseController
 {
@@ -90,9 +91,10 @@ class RegisterController extends BaseController
     return response()->json(Auth::user());
   }
 
-  public function oldPassword($email){
-    $user = User::where('email', '=', $email)->first();
-    return response()->json();
+  public function oldPassword(Request $request){
+    $user = User::where('email', '=', $request->email)->first();
+    // return response()->json(['oldPass' => $user->password]);
+    return Hash::check($request->new, $user->password, []);
   }
 
   public function logout(Request $request)

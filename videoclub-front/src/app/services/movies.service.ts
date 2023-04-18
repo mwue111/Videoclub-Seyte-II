@@ -15,8 +15,8 @@ export class MoviesService {
 
   getMovies(amount: number, token: any): Observable<any> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-
     let params = new HttpParams().set('cantidad', amount.toString());
+
     return this._http.get(this.url + '/api/peliculas', { params: params, headers: headers });
   }
 

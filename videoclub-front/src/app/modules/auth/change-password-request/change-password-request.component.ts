@@ -23,6 +23,7 @@ export class ChangePasswordRequestComponent {
       email: ['', [Validators.required, Validators.email]],
     });
   }
+
   onSubmit() {
     this.hasError = false;
     this.hasErrorText = '';
