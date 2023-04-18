@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'MovieController@index');
 
 Route::resource('peliculas', 'MovieController');//->middleware('client');
+Route::resource('generos', 'GenreController'); //->name('generos.index');
 
 Route::post('peliculas/{id}/add-genre', 'MovieController@addGenre')->name('peliculas.addGenre');
 
