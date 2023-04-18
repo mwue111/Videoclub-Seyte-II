@@ -24,7 +24,7 @@
       <td> {{ $movie->genres->pluck('name')->implode(', ')}}</td>
       <td> {{ $movie->director }}</td>
       <td>
-        <img src="{{ asset('public/images/' . $movie->poster ) }}" alt="Poster de la película {{ $movie->title }}" style="width:10%" />
+        <img src="{{ asset('storage/' . $movie->poster ) }}" alt="Poster de la película {{ $movie->title }}" style="width:10%" />
       </td>
       <td>
         <a href="{{ route('peliculas.edit', $movie) }}">

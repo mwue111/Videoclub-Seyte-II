@@ -101,12 +101,22 @@ class MovieController extends Controller
     $movie = Movie::findOrFail($id);
 
     $attributes = $request->validate([
-      'title' => 'unique:movies,title,' . $movie->id,
+      'title' => 'required|unique:movies,title,' . $movie->id,
       'poster' => 'image|mimes:jpg,jpeg,bmp,png',
       'banner' => 'image|mimes:jpg,jpeg,bmp,png',
+      'year' => 'required',
+      'runtime' => 'required',
+      'plot' => 'required',
+      'director' => 'required',
       'file' => 'file|mimes:mp4,mp3,wav',
       'trailer' => 'file|mimes:mp4,mp3,wav',
     ]);
+
+    /*
+
+      'file' => 'required|file|mimes:mp4,mp3,wav',
+      'trailer' => 'required|file|mimes:mp4,mp3,wav',
+    */
 
     if ($request->hasFile('poster')) {
       $old_poster = $movie->poster;
