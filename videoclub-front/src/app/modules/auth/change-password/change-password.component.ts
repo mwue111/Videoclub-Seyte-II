@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { throwError } from 'rxjs';
+import { throwError, tap, map, Observable, switchMap, of } from 'rxjs';
 
 @Component({
   selector: 'app-change-password',
@@ -16,6 +16,7 @@ export class ChangePasswordComponent{
   hasSuccess!: Boolean;
   hasSuccessText: any = '';
   passCount: number = 0;
+  // matchingPass: Boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -51,24 +52,18 @@ export class ChangePasswordComponent{
       this.hasError = true;
       this.hasErrorText = 'La contraseña debe tener al menos 8 caracteres.'
     }
-    if(passLength >= 8){
-      this.verifyNewPassword(this.changePasswordForm.value.email, this.changePasswordForm.value.password);
-    }
   }
 
   verifyPassword(password: string, password_confirmation: string) {
     return password !== password_confirmation;
   }
 
-  verifyNewPassword(email: string, password: string) {
-
-    this._auth.verifyOldPass(email, password)
-              .subscribe((res: any) => {
-                if(res === 1){
-                  this.hasError = true;
-                  this.hasErrorText = 'La nueva contraseña no puede ser igual a la antigua contraseña.';
-                }
-              });
+  verifyNewPassword(email: string, password: string): Observable<boolean> {
+    return this._auth.verifyOldPass(email, password).pipe(
+      map((res:any) => {
+        return res === 1;
+      })
+    )
   }
 
 
@@ -77,19 +72,32 @@ export class ChangePasswordComponent{
     this.hasErrorText = '';
     this.hasSuccessText = '';
 
-    this._auth.resetPassword(this.changePasswordForm.value).subscribe(
-      (result: any) => {
-        this.changePasswordForm.reset();
-        this.hasSuccess = true;
-        this.hasSuccessText = "La contraseña se ha cambiado correctamente."
-        setTimeout(() => {
-          this.router.navigate(['auth/login']);
-        }, 2000);
-      },
-      (error) => {
-        this.handleError(error);
-      }
-    );
+    this.verifyNewPassword(this.changePasswordForm.value.email, this.changePasswordForm.value.password)
+        .pipe(
+          switchMap((passMatches: boolean) => {
+            if(passMatches) {
+              this.hasError = true;
+              this.hasErrorText = 'La nueva contraseña no puede ser igual a la anterior.';
+              return of(null);
+            }
+            else{
+              return this._auth.resetPassword(this.changePasswordForm.value);
+            }
+          })
+        )
+        .subscribe((res: any) => {
+          if(res){
+            this.changePasswordForm.reset();
+            this.hasSuccess = true;
+            this.hasSuccessText = 'La contraseña se ha cambiado correctamente.';
+            setTimeout(() => {
+              this.router.navigate(['auth/login']);
+            }, 2000);
+          }
+        },
+        (error) => {
+          this.handleError(error);
+        })
   }
 
   handleError(error: any) {
