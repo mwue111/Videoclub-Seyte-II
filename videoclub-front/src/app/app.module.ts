@@ -8,7 +8,7 @@ import {
 } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LandingComponent } from './landing/landing.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './contact/contact.component';
@@ -16,6 +16,8 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { SpinnerComponent } from './spinner/spinner.component';
+import { LoadingInterceptor } from './loading.interceptor';
 
 
 const material = [MatToolbarModule];
@@ -29,6 +31,7 @@ const material = [MatToolbarModule];
     FaqsComponent,
     AboutUsComponent,
     NavbarComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,7 @@ const material = [MatToolbarModule];
     material,
   ],
   exports: [material, RouterModule],
-  providers: [appRoutingProviders],
+  providers: [appRoutingProviders, { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
