@@ -20,14 +20,17 @@ class MovieController extends Controller
 
     if ($amount) {
       $movies = Movie::latest('created_at')->take($amount)->get();
-    } else {
+    }
+    else {
       $movies = Movie::orderBy('id', 'DESC')->get();
     }
 
     if ($request->path() == 'api/peliculas') {
       return response()->json($movies);
-    } else {
-      return view('movies.index', ['movies' => $movies]);
+    }
+    else {
+    //   return view('movies.index', ['movies' => $movies]);
+    return view('movies.index', ['movies' => Movie::latest()->paginate(5)]);
     }
   }
 
@@ -101,7 +104,7 @@ class MovieController extends Controller
     $movie = Movie::findOrFail($id);
 
     $attributes = $request->validate([
-      'title' => 'required|unique:movies,title,' . $movie->id,
+      'title' => 'required', //unique:movies,title,' . $movie->id
       'poster' => 'image|mimes:jpg,jpeg,bmp,png',
       'banner' => 'image|mimes:jpg,jpeg,bmp,png',
       'year' => 'required|numeric',

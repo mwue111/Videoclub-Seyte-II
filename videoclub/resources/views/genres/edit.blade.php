@@ -1,15 +1,17 @@
-<h1>Editar género</h1>
+<x-layout>
+    <h1>Editar género</h1>
 
-<form action="{{ route('generos.update', $genre) }}" method="POST">
-  @csrf
-  @method('PATCH')
+    <form action="{{ route('generos.update', $genre) }}" method="POST">
+      @csrf
+      @method('PATCH')
 
-  <label for="name">Nombre de la categoría</label>
-  <br>
-  <input type="text" name="name" value="{{ $genre->name }}" />
+      <label for="name">Nombre de la categoría</label>
+      <br>
+      <input type="text" name="name" value="{{ $genre->name }}" />
 
-  <input type="submit" value="Guardar">
+      <input type="submit" value="Guardar">
 
-</form>
+    </form>
 
-<a href="{{ route('generos.index') }}">Volver</a>
+    <a href="{{ route('generos.index') }}">Volver</a>
+</x-layout>
