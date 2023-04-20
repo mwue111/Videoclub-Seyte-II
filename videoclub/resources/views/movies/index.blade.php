@@ -1,10 +1,9 @@
 <x-layout>
-    <div style="padding: 20px;">
-        <form action="{{ route('peliculas.create') }}" method="GET">
-        @csrf
-            <input type="submit" value="Añadir película" class="btn btn-primary">
-        </form>
-    </div>
+    <form action="{{ route('peliculas.create') }}" method="GET">
+    @csrf
+            <!-- <input type="submit" value="Añadir película" class="btn btn-primary"> -->
+        <x-form.button class="my-3 px-8">Añadir película</x-form>
+    </form>
 
     <table class="table">
       <thead class="table-light">
