@@ -31,7 +31,7 @@
 
                 <x-form.button class="mt-4 w-64 h-10">Guardar</x-form.button>
 
-                <a href=" {{ route('peliculas.index') }}" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover float-right mt-8">Volver</a>
+                <x-link url="{{ route('peliculas.index') }}">Volver</x-link>
             </form>
         </x-panel>
     <x-panel class="w-50 ml-2 p-2 float-right flex">

@@ -23,7 +23,8 @@ class GenreController extends Controller
     if ($request->path() == 'api/generos') {
       return response()->json($genres);
     } else {
-      return view('genres.index', ['genres' => $genres]);
+    //   return view('genres.index', ['genres' => $genres]);
+      return view('genres.index', ['genres' => Genre::latest()->paginate(5)]);
     }
   }
 

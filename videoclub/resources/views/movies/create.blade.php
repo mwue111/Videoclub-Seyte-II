@@ -3,7 +3,7 @@
         <h1 class="text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white">Añadir película</h1>
 
         <form action="{{ route('peliculas.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
+        @csrf
 
             <x-form.input name="title" label="Título de la película" required/>
 
@@ -26,7 +26,8 @@
             <x-form.file name="trailer" label="Tráiler de la película" class="mt-4"/>
 
             <x-form.button class="mt-4 w-64 h-10">Añadir</x-form.button>
-            <a href=" {{ route('peliculas.index') }}" class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover float-right mt-8">Volver</a>
+
+            <x-link url="{{ route('peliculas.index') }}">Volver</x-link>
         </form>
     </x-panel>
 
