@@ -65,7 +65,8 @@ class MovieController extends Controller
     $attributes['trailer'] = request()->file('trailer')->store('trailer', 'public');
 
     $movie = Movie::create($attributes);
-    $movie->genres()->attach($request->input('genre_id'), ['movie_id' => $movie->id]);
+    // $movie->genres()->attach($request->input('genre_id'), ['movie_id' => $movie->id]);
+    $movie->genres()->attach($request->input('genre_id'));
     return redirect()->route('peliculas.index');
   }
 

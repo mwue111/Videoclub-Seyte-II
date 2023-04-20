@@ -8,7 +8,7 @@
             name="{{ $name }}"
             id="{{ $name }}"
     >
-        {{ $data ? $data : null }}
+        {{ $data ? $data : old($name) }}
     </textarea>
 </x-form.panel>
 <x-form.error name="{{ $name }}" />

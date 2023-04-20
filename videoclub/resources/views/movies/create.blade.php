@@ -17,7 +17,7 @@
 
             <x-form.textarea name="plot" label="Sinopsis de la película" required class="mt-4"/>
 
-            <x-form.select name="genre_id" label="Género de la película" :data="$genres" class="mt-4"/>
+            <x-form.multiselect name="genre_id[]" label="Género/s de la película" :data="$genres" class="mt-4"/>
 
             <x-form.input name="director" label="Director/a de la película" required class="mt-4"/>
 

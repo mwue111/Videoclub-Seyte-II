@@ -5,3 +5,8 @@ function confirmErase(){
 
     return false;
 }
+
+function selectedGenre(data){
+    const genres = Array.from(document.querySelectorAll('input[name="genre_id[]"]:checked')).map((input) => parseInt(input.value));
+    console.log(genres);
+}

@@ -5,7 +5,7 @@
     <input  {{ $attributes(['class' => 'border border-gray-200 p-2 w-full rounded']) }}
             name="{{ $name }}"
             id="{{ $name }}"
-            value="{{ $data ? $data : null }}"
+            {{ $attributes(['value' => $data ? $data : old($name)])}}
     >
 </x-form.panel>
 <x-form.error name="{{ $name }}" />

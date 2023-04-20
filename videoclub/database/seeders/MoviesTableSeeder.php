@@ -290,8 +290,8 @@ class MoviesTableSeeder extends Seeder
 
     DB::table('movies')->insert([
         'title' => 'Ready Player One',
-        'poster' => 'images/1bsa0iQJuiAJVbCg8sEuswigQJ4hKXbVkyMfGDIb.jpg',
-        'banner' => 'images/aL1E8qDK4yEqA2GABvkdpHMXiV4azwliM3rqXnUb.jpg',
+        'poster' => 'images/7yDIP7yFZb2eQdTm8NUjPf3eknhL2cjS3flOsyyJ.jpg',
+        'banner' => 'images/XhtuBrRq1LwnzhmzAbkhpVEqMYK0J3uy3t8SfiRW.jpg',
         'year' => 2018,
         'runtime' => 139,
         'plot' => 'Año 2045. El adolescente Wade Watts es solo una de las millones de personas que se evaden del sombrío mundo real para sumergirse en un mundo utópico virtual donde todo es posible: OASIS. Wade participa en la búsqueda del tesoro que el creador de este mundo imaginario dejó oculto en su obra.',
