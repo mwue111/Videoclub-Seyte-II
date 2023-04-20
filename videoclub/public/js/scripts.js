@@ -1,12 +1,8 @@
-function confirmErase(){
+function confirmErase(route){
+    console.log(route);
     if(confirm("¿Seguro/a que desea eliminar esta película?")){
-        return true;
+        window.location.href = route;
     }
 
     return false;
-}
-
-function selectedGenre(data){
-    const genres = Array.from(document.querySelectorAll('input[name="genre_id[]"]:checked')).map((input) => parseInt(input.value));
-    console.log(genres);
 }

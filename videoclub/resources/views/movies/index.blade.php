@@ -44,12 +44,11 @@
             </form>
           </td>
           <td>
-              <!-- <a href="#" onclick="confirmErase('{{ route('peliculas.destroy', $movie->id) }}')">Eliminar</a> -->
-              <!-- <td><a href="#" onclick="confirmErase(' . $resource['id'] . ', \'' . $route . '\')">Eliminar</a></td> -->
-            <form action="{{ route('peliculas.destroy', $movie->id) }}" method="POST">
+              <form action="{{ route('peliculas.destroy', $movie->id) }}" method="POST">
             @csrf
             @method('DELETE')
                 <input type="submit" value="Eliminar" onclick="return confirm('¿Seguro que quieres eliminar esta película?')" class="btn btn-danger">
+                <!-- <input value="Eliminar" onclick="confirmErase('{{ route('peliculas.destroy', $movie->id) }}')" class="btn btn-danger"> -->
             </form>
           </td>
         </tr>
@@ -63,5 +62,3 @@
     </table>
     {{ $movies->links() }}
 </x-layout>
-
-
