@@ -290,7 +290,7 @@ class MoviesTableSeeder extends Seeder
 
     DB::table('movies')->insert([
         'title' => 'Ready Player One',
-        'poster' => 'images/7yDIP7yFZb2eQdTm8NUjPf3eknhL2cjS3flOsyyJ.jpg',
+        'poster' => 'images/Spxbm5kjn3jy9MFRvYoA9HeTnsMbZF0D2n8JS5aw.jpg',
         'banner' => 'images/XhtuBrRq1LwnzhmzAbkhpVEqMYK0J3uy3t8SfiRW.jpg',
         'year' => 2018,
         'runtime' => 139,
