@@ -296,8 +296,8 @@ class MoviesTableSeeder extends Seeder
         'runtime' => 139,
         'plot' => 'Año 2045. El adolescente Wade Watts es solo una de las millones de personas que se evaden del sombrío mundo real para sumergirse en un mundo utópico virtual donde todo es posible: OASIS. Wade participa en la búsqueda del tesoro que el creador de este mundo imaginario dejó oculto en su obra.',
         'director' => 'Steven Spielberg',
-        'file' => 'media/EdVfMXxJzxCBtB8rVywKvcWCI7pJGV2XObLU2xBn.mp4',
-        'trailer' => 'trailer/VdNmSrsQ6x4KgrvbwG3Q2gLyVWFi1qEc12jcfD3r.mp4',
+        'file' => 'media/IREYmRQadfrOHNbleTMEkbPI62Z2nRxWQGu5y92F.mp4',
+        'trailer' => 'trailer/Nf22zHPruXyQluJa3mVGAOMgjkJGeXPfixFMFLN9.mp4',
         'created_at' => '2023-04-11 11:49:28'
       ]);
 
