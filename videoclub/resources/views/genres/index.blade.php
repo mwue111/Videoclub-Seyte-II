@@ -16,7 +16,8 @@
                     <form action="{{route('generos.destroy', $genre->id) }}" method="POST" class="mx-2">
                     @csrf
                     @method('DELETE')
-                    <input type="submit" value="Eliminar" onclick="return confirm('¿Seguro que quieres eliminar este género?')" class="btn btn-danger">
+                    <button type="submit" class="btn btn-danger show-alert-delete-box" data-toggle="tooltip" title='Delete'>Borrar</button>
+                    <!-- <input type="submit" value="Eliminar" onclick="return confirm('¿Seguro que quieres eliminar este género?')" class="btn btn-danger"> -->
                     </form>
                 </div>
             </li>
@@ -36,3 +37,30 @@
         {{ $genres->links() }}
     </x-panel>
 </x-layout>
+
+<script type="text/javascript">
+$('.show-alert-delete-box').click(function(event){
+    var form =  $(this).closest("form");
+    var name = $(this).data("name");
+    event.preventDefault();
+    Swal.fire({
+        title: "¿Seguro/a que quieres eliminar este género?",
+        icon: "warning",
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+    }).then((willDelete) => {
+        if (willDelete.isConfirmed) {
+            form.submit();
+            Swal.fire(
+                '¡Género borrado!'
+            )
+        }
+    });
+});
+
+</script>

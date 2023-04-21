@@ -44,11 +44,12 @@
             </form>
           </td>
           <td>
-              <form action="{{ route('peliculas.destroy', $movie->id) }}" method="POST">
+            <form action="{{ route('peliculas.destroy', $movie->id) }}" method="POST">
             @csrf
             @method('DELETE')
-                <input type="submit" value="Eliminar" onclick="return confirm('¿Seguro que quieres eliminar esta película?')" class="btn btn-danger">
-                <!-- <input value="Eliminar" onclick="confirmErase('{{ route('peliculas.destroy', $movie->id) }}')" class="btn btn-danger"> -->
+                <!-- <input type="submit" value="Eliminar" onclick="return confirm('¿Seguro que quieres eliminar esta película?')" class="btn btn-danger"> -->
+
+                <button type="submit" class="btn btn-danger show-alert-delete-box" data-toggle="tooltip" title='Delete'>Borrar</button>
             </form>
           </td>
         </tr>
@@ -62,3 +63,30 @@
     </table>
     {{ $movies->links() }}
 </x-layout>
+
+<script type="text/javascript">
+$('.show-alert-delete-box').click(function(event){
+    var form =  $(this).closest("form");
+    var name = $(this).data("name");
+    event.preventDefault();
+    Swal.fire({
+        title: "¿Seguro/a que quieres eliminar esta película?",
+        icon: "warning",
+        showCloseButton: true,
+        showCancelButton: true,
+        focusConfirm: false,
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+    }).then((willDelete) => {
+        if (willDelete.isConfirmed) {
+            form.submit();
+            Swal.fire(
+                '¡Película borrada!'
+            )
+        }
+    });
+});
+
+</script>

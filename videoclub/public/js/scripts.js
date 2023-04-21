@@ -6,3 +6,4 @@ function confirmErase(route){
 
     return false;
 }
+
