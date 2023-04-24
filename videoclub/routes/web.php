@@ -32,4 +32,7 @@ Route::resource('usuarios', 'UserController');
 
 Route::resource('alquiler', 'RentController'); //->middleware('client');
 
-Route::get('buscar', 'SearchController@search')->name('peliculas.buscar');
+Route::get('buscar', 'SearchController@search')->name('movies.search');
+
+Route::get('eliminadas', 'MovieController@deleted')->name('movies.deleted');
+Route::get('restaurar', 'MovieController@restore')->name('movies.restore');

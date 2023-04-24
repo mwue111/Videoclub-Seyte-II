@@ -1,9 +1,19 @@
 <x-layout>
-    <form action="{{ route('peliculas.create') }}" method="GET">
-    @csrf
-            <!-- <input type="submit" value="Añadir película" class="btn btn-primary"> -->
-        <x-form.button class="my-3 px-8">Añadir película</x-form>
-    </form>
+    <div>
+        <div class="float-left">
+            <form action="{{ route('peliculas.create') }}" method="GET">
+            @csrf
+                    <!-- <input type="submit" value="Añadir película" class="btn btn-primary"> -->
+                <x-form.button class="my-3 px-8">Añadir película</x-form>
+            </form>
+        </div>
+        <div class="float-right">
+            <form action="{{ route('movies.deleted') }}" method="GET">
+            @csrf
+                <x-form.button class="my-3 px-8 bg-success">Recuperar películas</x-form>
+            </form>
+        </div>
+    </div>
 
     <table class="table">
       <thead class="table-light">

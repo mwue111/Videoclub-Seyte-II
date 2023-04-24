@@ -40,7 +40,7 @@
                 </li>
             </ul>
 
-            <form class="d-flex" role="search" method="GET" action="{{ route('peliculas.buscar') }}">
+            <form class="d-flex" role="search" method="GET" action="{{ route('movies.search') }}">
             @csrf
                 <input
                     class="form-control me-2"
