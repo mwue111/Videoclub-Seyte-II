@@ -11,9 +11,11 @@ export class AuthService {
   token: any = '';
   user: any = null;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {
     this.loadLocalStorage();
-
   }
 
   loadLocalStorage() {

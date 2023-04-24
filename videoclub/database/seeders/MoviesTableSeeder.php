@@ -225,79 +225,79 @@ class MoviesTableSeeder extends Seeder
 
     DB::table('movies')->insert([
         'title' => 'Ciudad Perdida',
-        'poster' => 'images/5nByRSv5WXENKEduflWkojVD6fWbfUXL1lXilu3H.jpg',
-        'banner' => 'images/vQltxfLWwSymlQe0ElEFM4T5yfZYRImWPD0eaCj7.jpg',
+        'poster' => 'images/T9Sj7J2JyeTxp5DjORe8cKbfDGw7mrZXTESVurDO.jpg',
+        'banner' => 'images/MeLBDweNNP5z1HyaNGxt29Sgrz6K1WrgVTqcWVfU.jpg',
         'year' => 2022,
         'runtime' => 102,
         'plot' => 'La escritora solitaria Loretta Sage escribe sobre lugares exóticos en sus populares novelas de aventuras con un atractivo modelo de portada, Alan. Mientras está de gira promocionando su nuevo libro, es secuestrada por un excéntrico multimillonario.',
         'director' => 'Aaron Nee y Adam Nee',
-        'file' => 'media/KDbJtxAv6SpjB5KzNXIBPIUcJxUCi7ZX6rebcyv6.mp4',
-        'trailer' => 'trailer/WtEYIbvcrnBLOgxJmdcbVeCnUQZh0AuRZUh6AJxz.mp4',
+        'file' => 'media/Gqz5oafw3IBM6BSnlY28EtLKdBgWPtc6eakBNZt4.mp4',
+        'trailer' => 'trailer/0jMEuX2O15u8DMdLqd1lyVWhq7i9o4BEmvBWJoIQ.mp4',
         'created_at' => '2023-04-11 11:32:55'
       ]);
 
     DB::table('movies')->insert([
         'title' => 'Free Guy',
-        'poster' => 'images/C0DEEu0DZFvuSlCxrb5Vjkl8bHt3MwZ13dG5khOY.jpg',
-        'banner' => 'images/DpvpeowoW6Opk46wul2dv314MfLeDziyTkMT2Iha.jpg',
+        'poster' => 'images/mRSF1UHmOCFvUukaMwutdH5hQqkNXJoqQsJ4i73s.jpg',
+        'banner' => 'images/TUhNKANnB6pJ9FJp81Yz866P8UgCtd4kIp8xcCvD.jpg',
         'year' => 2021,
         'runtime' => 115,
         'plot' => 'Un cajero de un banco descubre que en realidad es un personaje sin papel dentro de un brutal videojuego de mundo interactivo.',
         'director' => 'Shawn Levy',
-        'file' => 'media/tO0w7zN1LZkSdJduBqcbX9e7DDdIVfL8DwhoUvWD.mp4',
-        'trailer' => 'trailer/jHvmd8TQEfcti4IZHeh6r5FjN04WIxPwDSc9yBmH.mp4',
+        'file' => 'media/Svno7Udp9bsSr38iVFhIykJgYgE9kHheg40Dikgh.mp4',
+        'trailer' => 'trailer/bgYbEJKa9td4xg8oeNAqLQWmkIN8xgZ28mJ5qMpF.mp4',
         'created_at' => '2023-04-11 11:36:57'
       ]);
 
     DB::table('movies')->insert([
         'title' => 'Black Panther: Wakanda Forever',
-        'poster' => 'images/4lbtP6wSm8ELcJm89tW6JERizlshCymFy7oDhM9z.jpg',
-        'banner' => 'images/HCFLPbgX8FCrXL7P5IPh3voV3ZKpovJqoFDB7z4u.jpg',
+        'poster' => 'images/ZDED5jS6hmOi1d17GhZsXnSqMTtpDjDwiBoB4MLL.jpg',
+        'banner' => 'images/NBHPckDTTkwVjgtiAZDzke7TEtlCKtZMJHLAuasQ.jpg',
         'year' => 2022,
         'runtime' => 161,
         'plot' => 'Una secuela que seguirá explorando el incomparable mundo de Wakanda y todos los ricos y variados personajes presentados en la película de 2018.',
         'director' => 'Ryan Coogler',
-        'file' => 'media/yoOdMVgZZXKUH3ihOnBnVt6DZKG1smxo1o8KV6M9.mp4',
-        'trailer' => 'trailer/IquOX2GIlSptQdhphff31v6Mp273JKApAO3YGX4M.mp4',
+        'file' => 'media/yZmrejyGze7PZUQDOIkjKJpFsPQsw2J58GnXaCVb.mp4',
+        'trailer' => 'trailer/LhyCIuawC1WmNg9acQiA352aHBgX1oZOTFawUxz0.mp4',
         'created_at' => '2023-04-11 11:38:43'
       ]);
 
     DB::table('movies')->insert([
         'title' => 'The Batman',
-        'poster' => 'images/lnNnPyKEb4QokeWIzfhD333GBq8MwYbgdtqtrX7X.jpg',
-        'banner' => 'images/7cwDk6NMHe8MlMby8wN0HxD7ShgKNWZaSgF0Ew5T.jpg',
+        'poster' => 'images/Eye6NE3JMvjdHVm03P6NABwXWti8xZKzpxF3XiKN.jpg',
+        'banner' => 'images/awYzxG77DWcEtt7Yjav7dyxUzU5LxVMVR2dow1an.jpg',
         'year' => 2022,
         'runtime' => 175,
         'plot' => 'En su segundo año luchando contra el crimen, Batman explora la corrupción existente en la ciudad de Gotham y el vínculo de esta con su propia familia. Además, entrará en conflicto con un asesino en serie conocido como "el Acertijo".',
         'director' => 'Matt Reeves',
-        'file' => 'media/UzYpWvAFsBE41EnrblQ18HlL8NRYGAWR82FZ155T.mp4',
-        'trailer' => 'trailer/mCV9PD4ixXgE8r1DwiMz5CzxWMu5TacGRKIzqs2h.mp4',
+        'file' => 'media/ke2r4dox3BQOkqj0JaDxJikU89MmY65oOCKyRDF8.mp4',
+        'trailer' => 'trailer/Y6C0A1GtuNYqi7V1PL3yjzOsu4NnSu9wvpMkbTa3.mp4',
         'created_at' => '2023-04-11 11:44:00'
       ]);
 
     DB::table('movies')->insert([
         'title' => 'Bloodshot',
-        'poster' => 'images/BUXO3Z1DIKez7b4hX2beqUBa0SmZiBtehwTDAv8d.jpg',
-        'banner' => 'images/DKwqzN5Ri2giD9w3s3nOBHB4LC13OlF96JNoJLtU.jpg',
+        'poster' => 'images/vOu3ZjTSzx5lglGzo5P19oZljiYBoVj4H2T4QBsB.jpg',
+        'banner' => 'images/Z1xlftNEYqwyYbNFI69CO0XSH7ERPVvhHsZCA053.jpg',
         'year' => 2020,
         'runtime' => 109,
         'plot' => 'Murray Ray Garrison es resucitado por un equipo de científicos. Mejorado con nanotecnología, se convierte en una máquina de matar biotecnológica sobrehumana. Cuando Ray entrena por primera vez con otros super soldados, no recuerda nada de su vida anterior. Pero cuando recuerda que lo mataron, sale de las instalaciones para vengarse, solo para descubrir que la conspiración va más allá de lo que pensaba.',
         'director' => 'David S F Wilson',
-        'file' => 'media/IHrIbKHXUvvdMbKTPD0sPCRQZWdjzogpvRfkw4Xt.mp4',
-        'trailer' => 'trailer/QGK9qhzHRvRzp5WjaF7813JqLZTo0UI52YM7uTkb.mp4',
+        'file' => 'media/6LlFdr750zaDWnC3z2HdZL4xiY6pRFQz5LUTTBjT.mp4',
+        'trailer' => 'trailer/1KYh6DibdD566B5O4XdjCK4CycAoFK5wnxGFlcAq.mp4',
         'created_at' => '2023-04-11 11:47:24'
       ]);
 
     DB::table('movies')->insert([
         'title' => 'Ready Player One',
-        'poster' => 'images/7yDIP7yFZb2eQdTm8NUjPf3eknhL2cjS3flOsyyJ.jpg',
-        'banner' => 'images/XhtuBrRq1LwnzhmzAbkhpVEqMYK0J3uy3t8SfiRW.jpg',
+        'poster' => 'images/7xalSXW7PfHiiZ4p9vauiTfFz0Qzpbu3MBvK7alT.jpg',
+        'banner' => 'images/UcfEQfs1DFAvMZIKGHbfjXSEGEd6RzL0diMp2sZW.jpg',
         'year' => 2018,
         'runtime' => 139,
         'plot' => 'Año 2045. El adolescente Wade Watts es solo una de las millones de personas que se evaden del sombrío mundo real para sumergirse en un mundo utópico virtual donde todo es posible: OASIS. Wade participa en la búsqueda del tesoro que el creador de este mundo imaginario dejó oculto en su obra.',
         'director' => 'Steven Spielberg',
-        'file' => 'media/IREYmRQadfrOHNbleTMEkbPI62Z2nRxWQGu5y92F.mp4',
-        'trailer' => 'trailer/Nf22zHPruXyQluJa3mVGAOMgjkJGeXPfixFMFLN9.mp4',
+        'file' => 'media/Rc4NhWF1C2x01dJ8xUS8PARUbnNZoG9npQglg0Yq.mp4',
+        'trailer' => 'trailer/LeVUZIcoSmi7kzNodSAJBWvxJ7iVJZkviEAwFETT.mp4',
         'created_at' => '2023-04-11 11:49:28'
       ]);
 
