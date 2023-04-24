@@ -31,3 +31,5 @@ Route::resource('resenas', 'ReviewController')->middleware('client');
 Route::resource('usuarios', 'UserController');
 
 Route::resource('alquiler', 'RentController'); //->middleware('client');
+
+Route::get('buscar', 'SearchController@search')->name('peliculas.buscar');
