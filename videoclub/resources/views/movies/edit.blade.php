@@ -11,8 +11,8 @@
                 @if(!empty($movie->poster))
                     @php
                         $poster_path = public_path('storage/' . $movie->poster);
-                        $banner_path = public_path('storage/' . $movie->banner);
                     @endphp
+
                     @if(file_exists($poster_path))
                         <x-form.image name="oldPoster" class="mt-3" label="Antiguo póster de la película" :data="$movie->poster" :movie="$movie->title"/>
                     @endif
@@ -20,8 +20,14 @@
 
                 <x-form.file name="poster" label="Nuevo póster de la película" class="mt-4"/>
 
-                @if(file_exists($banner_path))
-                    <x-form.image name="oldBanner" class="mt-3" label="Antiguo banner de la película" :data="$movie->banner" :movie="$movie->title"/>
+                @if(!empty($movie->banner))
+                    @php
+                        $banner_path = public_path('storage/' . $movie->banner);
+                    @endphp
+
+                    @if(file_exists($banner_path))
+                        <x-form.image name="oldBanner" class="mt-3" label="Antiguo banner de la película" :data="$movie->banner" :movie="$movie->title"/>
+                    @endif
                 @endif
 
                 <x-form.file name="banner" label="Nuevo banner de la película" class="mt-4"/>
@@ -41,7 +47,7 @@
 
                 <x-form.button class="mt-4 w-64 h-10">Guardar</x-form.button>
 
-                <x-link url="{{ route('peliculas.index') }}">Volver</x-link>
+                <x-link url="{{ url()->previous() }}">Volver</x-link>
             </form>
         </x-panel>
     <x-panel class="w-50 ml-2 p-2 float-right flex">
