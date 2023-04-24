@@ -10,7 +10,10 @@ class SearchController extends Controller
     public function search(Request $request) {
         $data = $request->search;
 
-        $querys = Movie::where('title', 'LIKE', '%'. $data . '%')->paginate(5);
+        $querys = Movie::where('title', 'LIKE', '%'. $data . '%')
+                        ->orWhere('director', 'LIKE', '%' . $data . '%')
+                        ->orWhere('year', '=', $data)
+                        ->paginate(5);
 
         //con autocomplete de jQuery será necesario que se pase una key label:
         // $response = [];
