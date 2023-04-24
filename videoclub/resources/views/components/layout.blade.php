@@ -19,8 +19,6 @@
 </head>
 <body>
 
-<!-- https://laracasts.com/series/laravel-8-from-scratch/episodes/31 -->
-
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ route('peliculas.index') }}">SeyteClub Admins</a>
@@ -41,10 +39,10 @@
                 <a class="nav-link" href="{{ route('generos.index') }}">Géneros</a>
                 </li>
             </ul>
-            <!-- <form class="d-flex" role="search">
+            <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
-            </form> -->
+            </form>
             </div>
         </div>
     </nav>
