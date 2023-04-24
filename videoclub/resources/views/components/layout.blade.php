@@ -51,7 +51,7 @@
                     aria-label="Search"
                     value="{{ request('search') }}"
                 >
-                <button class="btn btn-outline-success" type="submit">Buscar</button>
+                <button class="btn btn-outline-primary" type="submit">Buscar</button>
             </form>
 
             </div>
