@@ -23,6 +23,21 @@ class Movie extends Model
     'trailer',
   ];
 
+  public function scopeFilter($query, array $filters) {
+
+    if(isset($filters['search'])) {
+        $query
+                ->where('title', 'LIKE', '%'. $filters['search'] . '%')
+                ->orWhere('director', 'LIKE', '%' . $filters['search'] . '%')
+                ->orWhere('year', '=', $filters['search'])
+                ->paginate(5);
+    }
+    else{
+        $query = Movie::latest()->paginate(5);
+    }
+
+  }
+
   public function users()
   {
     return $this->belongsToMany(User::class, 'rents')
