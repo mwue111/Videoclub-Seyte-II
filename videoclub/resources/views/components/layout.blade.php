@@ -42,7 +42,15 @@
 
             <form class="d-flex" role="search" method="GET" action="{{ route('peliculas.buscar') }}">
             @csrf
-                <input class="form-control me-2" type="search" name="search" id="search" placeholder="Introduce un título" aria-label="Search">
+                <input
+                    class="form-control me-2"
+                    type="search"
+                    name="search"
+                    id="search"
+                    placeholder="Introduce un título"
+                    aria-label="Search"
+                    value="{{ request('search') }}"
+                >
                 <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
 

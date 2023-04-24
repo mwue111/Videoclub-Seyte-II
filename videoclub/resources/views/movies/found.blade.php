@@ -4,6 +4,7 @@
         <x-form.button class="my-3 px-8">Añadir película</x-form>
     </form>
 
+    @if(isset($movies) && $movies !== null)
     <table class="table">
     <thead class="table-light">
         <th>Título</th>
@@ -17,7 +18,7 @@
         <th colspan="2">Acciones</th>
       </thead>
       <tbody>
-        @if(isset($movies))
+
             @foreach($movies as $movie)
                 <tr>
                     <td>
@@ -50,11 +51,17 @@
                         </form>
                     </td>
                 </tr>
-            @endforeach
+                @endforeach
+        @else
+        <div class="bg bg-danger my-4 p-2 text-center text-white w-1/2 m-auto rounded-xl">
+            <p>Ninguna película coincide con el criterio de búsqueda.</p>
+        </div>
         @endif
       </tbody>
     </table>
-    {{ $movies->links() }}
+    @if($movies !== null)
+        {{ $movies->links() }}
+    @endif
 </x-layout>
 
 <script type="text/javascript">
