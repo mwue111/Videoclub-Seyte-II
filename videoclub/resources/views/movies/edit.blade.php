@@ -40,7 +40,27 @@
 
                 <x-form.input name="director" label="Director/a de la película" :data="$movie->director" class="mt-4" required/>
 
+                @if(!empty($movie->file))
+                    @php
+                        $file_path = public_path('storage/' . $movie->file);
+                    @endphp
+
+                    @if(file_exists($file_path))
+                        <x-form.video name="oldFile" label="Archivo actual de {{ $movie->title }}" :data="$movie->file" />
+                    @endif
+                @endif
+
                 <x-form.file name="file" label="Archivo de la película" class="mt-4"/>
+
+                @if(!empty($movie->trailer))
+                    @php
+                        $trailer_path = public_path('storage/' . $movie->trailer);
+                    @endphp
+
+                    @if(file_exists($trailer_path))
+                        <x-form.video name="oldTrailer" label="Tráiler actual de {{ $movie->title }}" :data="$movie->trailer" />
+                    @endif
+                @endif
 
                 <x-form.file name="trailer" label="Tráiler de la película" class="mt-4"/>
 

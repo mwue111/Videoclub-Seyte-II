@@ -19,6 +19,24 @@
             <li class="list-group-item flex flex-row justify-between">Director: {{ $movie->director }}</li>
             <li class="list-group-item flex flex-row justify-between">Sinopsis: {{ $movie->plot }}</li>
         </ul>
+
+        </div>
+        <div class="flex flex-column flex-between">
+            @if(!empty($movie->file) || !empty($movie->trailer))
+                @php
+                    $file_path = public_path('storage/' . $movie->file);
+                    $trailer_path = public_path('storage/' . $movie->trailer);
+                @endphp
+
+                @if(file_exists($trailer_path))
+                    <x-form.video name="oldFile" label="Tráiler actual de {{ $movie->title }}" :data="$movie->trailer" />
+                @endif
+
+                @if(file_exists($file_path))
+                    <x-form.video name="oldTrailer" label="Archivo actual de {{ $movie->title }}" :data="$movie->file" />
+                @endif
+
+            @endif
         </div>
 
         <x-link url="{{ url()->previous() }}">Volver</x-link>
