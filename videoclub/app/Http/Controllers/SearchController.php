@@ -10,7 +10,7 @@ class SearchController extends Controller
     public function search(Request $request) {
         $data = $request->search;
 
-        $querys = Movie::where('title', 'LIKE', '%'. $data . '%')->get();
+        $querys = Movie::where('title', 'LIKE', '%'. $data . '%')->paginate(5);
 
         //con autocomplete de jQuery será necesario que se pase una key label:
         // $response = [];
@@ -24,6 +24,5 @@ class SearchController extends Controller
 
         // return response()->json($response);
         return view('movies.found', ['movies' => $querys]);
-        // return view('movies.index', ['movies' => Movie::where('title', 'LIKE', '%' . $data . '%')->paginate(5)]);
     }
 }

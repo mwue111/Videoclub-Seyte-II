@@ -54,6 +54,7 @@
         @endif
       </tbody>
     </table>
+    {{ $movies->links() }}
 </x-layout>
 
 <script type="text/javascript">
