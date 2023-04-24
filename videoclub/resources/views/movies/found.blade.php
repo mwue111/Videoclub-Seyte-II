@@ -62,6 +62,9 @@
     @if($movies !== null)
         {{ $movies->appends(Request::except('page'))->links() }}
     @endif
+    <div class="float-right">
+        <x-link url="{{ url()->previous() }}">Volver</x-link>
+    </div>
 </x-layout>
 
 <script type="text/javascript">
