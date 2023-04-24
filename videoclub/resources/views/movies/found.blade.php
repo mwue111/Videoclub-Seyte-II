@@ -60,7 +60,7 @@
       </tbody>
     </table>
     @if($movies !== null)
-        {{ $movies->links() }}
+        {{ $movies->appends(Request::except('page'))->links() }}
     @endif
 </x-layout>
 
