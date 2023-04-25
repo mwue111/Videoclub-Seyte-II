@@ -161,12 +161,11 @@ class MovieController extends Controller
 
   public function deleted() {
     $deleted = Movie::withTrashed()->where('deleted_at', '!=', null)->get();
-
     return view('movies.deleted', [ 'movies' => $deleted]);
   }
 
   public function restore($id) {
-    Movie::withTrashed()->findOrFail($id)->restore();
+    $movie = Movie::withTrashed()->findOrFail($id)->restore();
     return redirect()->route('peliculas.index');
   }
 
