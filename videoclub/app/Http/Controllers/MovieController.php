@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Movie;
 use App\Models\Genre;
+use App\Models\MovieGenre;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Termwind\Components\Dd;
@@ -152,8 +153,9 @@ class MovieController extends Controller
   {
     $movie = Movie::findOrFail($id);
 
-    $movie->genres()->detach();
-
+    foreach($movie->genres as $genre) {
+        $movie->genres()->detach($genre->id);
+    }
     $movie->delete();
 
     return redirect()->route('peliculas.index');
