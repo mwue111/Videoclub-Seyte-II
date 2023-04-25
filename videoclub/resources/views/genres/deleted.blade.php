@@ -2,28 +2,28 @@
 
     <table class="table">
         <thead class="table-light text-center">
-            <th>Título</th>
+            <th>Género</th>
             <th>Fecha eliminación</th>
             <th colspan="2">Acciones</th>
         </thead>
         <tbody>
-            @if($movies)
-                @foreach($movies as $movie)
+            @if($genres)
+                @foreach($genres as $genre)
                     <tr>
                         <td>
-                            {{ $movie->title }}
+                            {{ $genre->name }}
                         </td>
                         <td>
-                            {{ $movie->deleted_at->format('d-m-Y') }}
+                            {{ $genre->deleted_at->format('d-m-Y') }}
                         </td>
                         <td>
-                            <form action="{{ route('movies.restore', $movie->id) }}" method="POST">
+                            <form action="{{ route('genres.restore', $genre->id) }}" method="POST">
                             @csrf
                                 <button type="submit" class="btn btn-success show-alert-recover-box">Recuperar</button>
                             </form>
                         </td>
                         <td>
-                            <form action="{{ route('movies.force-delete', $movie->id) }}" method="POST">
+                            <form action="{{ route('genres.force-delete', $genre->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
                                 <button type="submit" class="btn btn-danger show-alert-delete-box">Borrar</button>
@@ -35,6 +35,9 @@
             @endif
         </tbody>
     </table>
+    <div class="float-right">
+        <x-link url="{{ url()->previous() }}">Volver</x-link>
+    </div>
 </x-layout>
 
 <script type="text/javascript">
@@ -44,7 +47,7 @@ $('.show-alert-recover-box').click(function(event){
     var name = $(this).data("name");
     event.preventDefault();
     Swal.fire({
-        title: "¿Quieres recuperar esta película?",
+        title: "¿Quieres recuperar este género?",
         icon: "warning",
         showCloseButton: true,
         showCancelButton: true,
@@ -57,7 +60,7 @@ $('.show-alert-recover-box').click(function(event){
         if (willRecover.isConfirmed) {
             form.submit();
             Swal.fire(
-                '¡Película recuperada!'
+                '¡Género recuperado!'
             )
         }
     });
@@ -68,7 +71,7 @@ $('.show-alert-delete-box').click(function(event){
     var name = $(this).data("name");
     event.preventDefault();
     Swal.fire({
-        title: "¿Seguro/a que quieres eliminar esta película?",
+        title: "¿Seguro/a que quieres eliminar este género?",
         text: "Esta acción no podrá deshacerse.",
         icon: "warning",
         showCloseButton: true,
@@ -82,7 +85,7 @@ $('.show-alert-delete-box').click(function(event){
         if (willDelete.isConfirmed) {
             form.submit();
             Swal.fire(
-                '¡Película borrada!'
+                '¡Género borrado!'
             )
         }
     });

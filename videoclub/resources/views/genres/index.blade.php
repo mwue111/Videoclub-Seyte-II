@@ -31,6 +31,14 @@
             @csrf
                 <x-form.button class="my-3 px-8">Añadir nuevo género</x-form>
             </form>
+
+            <form action="{{ route('genres.deleted') }}">
+            @csrf
+                <x-form.button class="my-3 px-8 bg-success">Recuperar borrados</x-form>
+            </form>
+        </div>
+
+        <div class="float-right">
             <x-link url="{{ route('peliculas.index') }}" class="mt-4">Ir a películas</x-link>
         </div>
 

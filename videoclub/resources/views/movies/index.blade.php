@@ -16,7 +16,7 @@
     </div>
 
     <table class="table">
-      <thead class="table-light">
+      <thead class="table-light text-center">
         <th>Título</th>
         <th>Año</th>
         <th>Duración</th>

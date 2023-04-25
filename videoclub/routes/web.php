@@ -32,7 +32,17 @@ Route::resource('usuarios', 'UserController');
 
 Route::resource('alquiler', 'RentController'); //->middleware('client');
 
+//Buscador en el back:
 Route::get('buscar', 'SearchController@search')->name('movies.search');
 
+//Recuperación y eliminación de películas:
 Route::get('eliminadas', 'MovieController@deleted')->name('movies.deleted');
-Route::get('restaurar', 'MovieController@restore')->name('movies.restore');
+
+Route::post('restaurar/{id}', 'MovieController@restore')->name('movies.restore');
+
+Route::delete('borrar-def/{id}', 'MovieController@forceDelete')->name('movies.force-delete');
+
+//Recuperación y eliminación de géneros:
+Route::get('eliminados', 'GenreController@deleted')->name('genres.deleted');
+Route::post('restaurar/{id}', 'GenreController@restore')->name('genres.restore');
+Route::delete('borrar-def/{id}', 'GenreController@forceDelete')->name('genres.force-delete');

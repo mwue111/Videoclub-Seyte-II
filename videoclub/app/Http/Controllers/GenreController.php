@@ -101,6 +101,23 @@ class GenreController extends Controller
       ->with('success', 'Género eliminado correctamente');
   }
 
+
+  public function deleted() {
+    $deleted = Genre::withTrashed()->where('deleted_at', '!=', null)->get();
+
+    return view('genres.deleted', [ 'genres' => $deleted]);
+  }
+
+  public function restore($id) {
+    Genre::withTrashed()->findOrFail($id)->restore();
+    return redirect()->route('generos.index');
+  }
+
+  public function forceDelete($id){
+    Genre::withTrashed()->findOrFail($id)->forceDelete();
+    return redirect()->route('generos.index');
+  }
+
   public function getMovies(Request $request, $id)
   {
     $genre = Genre::findOrFail($id);
