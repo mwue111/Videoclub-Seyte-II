@@ -19,6 +19,6 @@ class Genre extends Model
   {
     return $this->belongsToMany(Movie::class, 'movie_genres')
                 ->using(MovieGenre::class)
-                ->withTimestamps();;
+                ->withTimestamps();
   }
 }

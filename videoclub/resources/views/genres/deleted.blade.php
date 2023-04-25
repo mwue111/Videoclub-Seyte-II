@@ -10,13 +10,13 @@
             @if($genres)
                 @foreach($genres as $genre)
                     <tr>
-                        <td>
+                        <td  class="text-center">
                             {{ $genre->name }}
                         </td>
-                        <td>
+                        <td class="text-center">
                             {{ $genre->deleted_at->format('d-m-Y') }}
                         </td>
-                        <td>
+                        <td class="text-right">
                             <form action="{{ route('genres.restore', $genre->id) }}" method="POST">
                             @csrf
                                 <button type="submit" class="btn btn-success show-alert-recover-box">Recuperar</button>

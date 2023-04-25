@@ -10,13 +10,13 @@
             @if($movies)
                 @foreach($movies as $movie)
                     <tr>
-                        <td>
+                        <td class="text-center">
                             {{ $movie->title }}
                         </td>
-                        <td>
+                        <td class="text-center">
                             {{ $movie->deleted_at->format('d-m-Y') }}
                         </td>
-                        <td>
+                        <td class="text-right">
                             <form action="{{ route('movies.restore', $movie->id) }}" method="POST">
                             @csrf
                                 <button type="submit" class="btn btn-success show-alert-recover-box">Recuperar</button>
@@ -35,6 +35,9 @@
             @endif
         </tbody>
     </table>
+    <div class="float-right">
+        <x-link url="{{ url()->previous() }}">Volver</x-link>
+    </div>
 </x-layout>
 
 <script type="text/javascript">

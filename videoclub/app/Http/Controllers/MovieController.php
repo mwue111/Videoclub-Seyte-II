@@ -153,8 +153,8 @@ class MovieController extends Controller
   {
     $movie = Movie::findOrFail($id);
 
-    foreach($movie->genres as $genre) {
-        $movie->genres()->detach($genre->id);
+    foreach($movie->genres as $genre) {         //Recorre todos los géneros asociados a la película
+        $movie->genres()->detach($genre->id);   //Elimina la relación en la tabla relacionada atendiendo al id de c/género
     }
     $movie->delete();
 
@@ -163,11 +163,25 @@ class MovieController extends Controller
 
   public function deleted() {
     $deleted = Movie::withTrashed()->where('deleted_at', '!=', null)->get();
-    return view('movies.deleted', [ 'movies' => $deleted]);
+    return view('movies.deleted', ['movies' => $deleted]);
   }
 
   public function restore($id) {
-    $movie = Movie::withTrashed()->findOrFail($id)->restore();
+    $movie = Movie::withTrashed()->findOrFail($id);
+    $movie->restore();
+
+    $genres = $movie->genres()->withTrashed()->get();
+
+    foreach($genres as $genre){
+        $movie->genres()->withTrashed()->findOrFail($genre->id)->pivot->restore();
+    }
+
+    /*//Si mantengo el withTimeStamps en los modelos:
+    foreach($genres as $genre){
+        $movie->genres()->withTimestamps()->attach($genre->id, ['deleted_at' => null]);
+    }
+    */
+
     return redirect()->route('peliculas.index');
   }
 
@@ -182,17 +196,16 @@ class MovieController extends Controller
 
     $movie->genres()->attach($request->input('genre_id'), ['movie_id' => $movie->id]);
 
-    // return redirect()->route('peliculas.index');
     return redirect()->route('peliculas.edit', ['pelicula' => $movie->id]);
   }
 
   public function deleteGenre(Request $request, $id)
   {
     $movie = Movie::findOrFail($id);
+    // dd($request->input('genre_id'));
 
-    $movie->genres()->detach($request->input('genre_id'));
+    $movie->genres()->detach($request->input('genre_id'), ['movie_id' => $movie->id]);
 
-    // return redirect()->route('peliculas.index');
     return redirect()->route('peliculas.edit', ['pelicula' => $movie->id]);
   }
 }

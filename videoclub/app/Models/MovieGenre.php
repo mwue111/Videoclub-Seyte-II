@@ -18,7 +18,8 @@ class MovieGenre extends Pivot
 
     protected $fillable = [
         'movie_id',
-        'genre_id'
+        'genre_id',
+        'deleted_at',
     ];
 
     public function movie() {

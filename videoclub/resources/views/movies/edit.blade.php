@@ -74,28 +74,32 @@
 
         <fieldset>
             <legend>Géneros</legend>
-                @foreach($genres as $genre)
+            @foreach($genres as $genre)
                 <div class="block m-2 p-2">
                     <x-form.label :name="$genre->name">{{$genre->name}}</x-form>
 
-                    @if ($genre->movies->contains($movie))
-                        <form method="POST" action="{{route('peliculas.deleteGenre', $movie->id)}}">
-                        @csrf
-                        @method('DELETE')
-                            <input type="hidden" name="genre_id" value="{{$genre->id}}">
-                            <x-form.button class="bg-danger p-4">Eliminar</x-form.button>
-                        </form>
+                    @php
+                        $movieGenre = $genre->movies->where('id', $movie->id)->first();
+                        $isAttached = $movieGenre && $movieGenre->pivot && !$movieGenre->pivot->deleted_at;
+                    @endphp
 
-                        @else
+                    @if(!$isAttached)
                         <form method="POST" action="{{route('peliculas.addGenre', $movie->id)}}">
-                        @csrf
+                            @csrf
                             <input type="hidden" name="genre_id" value="{{$genre->id}}">
                             <x-form.button class="bg-success p-4">Añadir</x-form.button>
                         </form>
+
+                    @else
+                        <form method="POST" action="{{route('peliculas.deleteGenre', $movie->id)}}">
+                            @csrf
+                            @method('DELETE')
+                            <input type="hidden" name="genre_id" value="{{$genre->id}}">
+                            <x-form.button class="bg-danger p-4">Eliminar</x-form.button>
+                        </form>
                     @endif
                 </div>
-
-                @endforeach
+            @endforeach
             </fieldset>
         </x-panel>
     </x-panel>
