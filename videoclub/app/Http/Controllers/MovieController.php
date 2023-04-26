@@ -203,8 +203,11 @@ class MovieController extends Controller
   {
     $movie = Movie::findOrFail($id);
 
-    // $movie->genres()->detach($request->input('genre_id'), ['movie_id' => $movie->id]);
-    $movie->genres()->updateExistingPivot($request->input('genre_id'), ['deleted_at' => now()]);
+    $pivotRow = MovieGenre::where('movie_id', '=', $movie->id)->where('genre_id', '=', $request->input('genre_id'))->first();
+
+    if ($pivotRow) {
+        $pivotRow->forceDelete();
+    }
 
     return redirect()->route('peliculas.edit', ['pelicula' => $movie->id]);
   }

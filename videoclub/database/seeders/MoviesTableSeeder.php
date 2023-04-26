@@ -22,8 +22,8 @@ class MoviesTableSeeder extends Seeder
       'plot' => '
             Un infante de marina parapléjico enviado a la luna Pandora en una misión única se debate entre seguir sus órdenes y proteger el mundo que siente que es su hogar.',
       'director' => 'James Cameron',
-      'file' => 'media/br7zSUxpRlTjOWimrpveOFy1mXeZWmdJuC8f5rCM.mp4',
-      'trailer' => 'trailer/a9NS36oYXJXUgdX2KTeK89CdilxxaqwkZF2bGvUh.mp4',
+      'file' => 'media/PmrQlXdn6NlSbeLqAYyQi12wg40MTjQ70m4AfbFn.mp4',
+      'trailer' => 'trailer/Z6pDLp9Maz0SIboBDxpczSiAQ9assTDS24gTDZxM.mp4',
       'created_at' => '2023/01/30'
     ]);
 
@@ -36,8 +36,8 @@ class MoviesTableSeeder extends Seeder
       'plot' => '
             Años después de que una plaga mate a la mayor parte de la humanidad y transforme al resto en monstruos, el único sobreviviente en la ciudad de Nueva York lucha valientemente para encontrar una cura.',
       'director' => 'Francis Lawrence',
-      'file' => 'media/mhKM4CGriX0gotlhrRusOEUgJUHCfDq5gCgGwuzb.mp4',
-      'trailer' => 'trailer/SBsJUw6ZrN2VIzdyZK55R4JK9898BGdpdKCdwLwG.mp4',
+      'file' => 'media/hCkrTQ0D98foZSoh0daWZQoOoAONDQZlWFb6amT6.mp4',
+      'trailer' => 'trailer/R8yyxGfMNkyXtse1X48zKHyliiM7sLKG62SKHGJh.mp4',
       'created_at' => '2023/02/28'
     ]);
 
@@ -49,8 +49,8 @@ class MoviesTableSeeder extends Seeder
       'runtime' => 117,
       'plot' => 'El rey Leónidas de Esparta y una fuerza de 300 hombres luchan contra los persas en las Termópilas en el 480 a.C.',
       'director' => 'Zack Snyder',
-      'file' => 'media/cOQwlcZZyf2QZ5z65FhismPMQZH5h07TVHBRyYUz.mp4',
-      'trailer' => 'trailer/LTswmdzpxogUFMEunIUvumKg44pk2K9RYlBOnLxb.mp4',
+      'file' => 'media/Tol2MOGMJmyAJjJNjsPqjZIHqb8uohVcTn2abVNF.mp4',
+      'trailer' => 'trailer/zDvIh33yREbwoI7VhSD0RTWcIJbdXuYT8parTF6r.mp4',
       'created_at' => '2023/03/30'
     ]);
 
@@ -62,8 +62,8 @@ class MoviesTableSeeder extends Seeder
       'runtime' => 126,
       'plot' => 'Cinco asesinos a sueldo se encuentran a bordo de un tren bala que viaja de Tokio a Morioka. Los sicarios descubrirán que sus misiones no son ajenas entre sí.',
       'director' => 'David Leitch',
-      'file' => 'media/qSn9UuViZp2NkNRwWnf09kfkhY7vfNAHpoFszVgd.mp4',
-      'trailer' => 'trailer/a4dtasCj6Hi8CwHFWivT1yRXPYRdm87rAzsVZ7Hn.mp4',
+      'file' => 'media/lqRGBo8HkYS4lymCbAQ3CQjGwO6Oavo6JyzYvIHs.mp4',
+      'trailer' => 'trailer/jfUy9WYuVccWYyrR1nuddErOtflrvemXa71z5XdA.mp4',
       'created_at' => '2023-04-11 08:50:32'
     ]);
 
@@ -75,8 +75,8 @@ class MoviesTableSeeder extends Seeder
       'runtime' => 95,
       'plot' => 'Nathan Drake y su compañero Victor Sullivan se adentran en la peligrosa búsqueda del "mayor tesoro jamás encontrado". Al mismo tiempo, rastrean pistas que puedan conducir al hermano perdido de Drake.',
       'director' => 'Ruben Fleischer',
-      'file' => 'media/VCBsV3ybY12nYJAEG9AX2IpPE3BHoI9LQcHCNOKE.mp4',
-      'trailer' => 'trailer/rdO9DHwroPV1LUUPK7C50eggJwWDL5N92pNHPiJp.mp4',
+      'file' => 'media/fC5Xzm7vsO22t72ncv2uhgPVT3Cbbh6hVPaXQomK.mp4',
+      'trailer' => 'trailer/12Z2fJ2JBpPgZU0JmRtP1T4vMMdBWRvadkKNehSb.mp4',
       'created_at' => '2023-04-11 09:12:53'
     ]);
 
@@ -88,8 +88,8 @@ class MoviesTableSeeder extends Seeder
       'runtime' => 125,
       'plot' => 'Unos arqueólogos liberan de su tumba a Black Adam, quien llevaba 5000 años preso tras haber recibido los poderes de los dioses. De nuevo entre los humanos, Black Adam se dispone a imponer su justicia, muy diferente a la del mundo en el que despertó.',
       'director' => 'Jaume Collet-Serra',
-      'file' => 'media/tdMGrav1VNrg9gF9hgqKMMmlSvlb5GtL1zS00pTA.mp4',
-      'trailer' => 'trailer/lWIQgFRLrDl6Al4QFOn7DpJfm9rwveoFa2zIQH2K.mp4',
+      'file' => 'media/aH7rkF7rDUAvWWBop0I235Ke47WuKpkgSVZePMQ9.mp4',
+      'trailer' => 'trailer/gLxHu00BjBIvc5aQEtXoGiI9lvoi30zVjB6Dbkd0.mp4',
       'created_at' => '2023-04-11 09:14:56'
     ]);
 
@@ -101,8 +101,8 @@ class MoviesTableSeeder extends Seeder
       'runtime' => 122,
       'plot' => 'Cuando un misterioso agente de la CIA descubre trapos sucios de la Agencia, un excompañero desquiciado pone precio a su cabeza y lo persigue por todo el mundo.',
       'director' => 'Joe Russo y Anthony Russo',
-      'file' => 'media/bJatlZDWa3m3d6FDbtqclPN6T4zeyugCu98kDVWg.mp4',
-      'trailer' => 'trailer/tuDkGBHHKuWyHvQAVDkGb7SpLnubfusdCOZIJ4pF.mp4',
+      'file' => 'media/3MlLWWdV0QUWanvvwhadiC8bCxJiRX044fcQABAC.mp4',
+      'trailer' => 'trailer/aUQN7Pn6bFe9BqbSzTzvobb1KbUdxHSFtMD1BSn8.mp4',
       'created_at' => '2023-04-11 09:19:49'
     ]);
 
@@ -114,8 +114,8 @@ class MoviesTableSeeder extends Seeder
       'runtime' => 86,
       'plot' => 'Cuatro años después de la destrucción de la Isla Nublar, los dinosaurios viven y cazan junto a los humanos en todo el mundo. Este frágil equilibrio remodelará el futuro y determinará si los humanos seguirán siendo o no la especie dominante.',
       'director' => 'Colin Trevorrow',
-      'file' => 'media/WLFJXmCzi2Mjgo7XrmdMoi5wprnXNhLKz13CsH6s.mp4',
-      'trailer' => 'trailer/LXScxua9B5WqaEsAJonhZME7NtZsKx51Iyo0BmlA.mp4',
+      'file' => 'media/2qflyUoCLi2hXu3o42zyK9AVbU43JJaTV5VFn3YA.mp4',
+      'trailer' => 'trailer/i17ec1yJQFJHPU7zU3WWUEUz7lXiHa7UcDhAGAnC.mp4',
       'created_at' => '2023-04-11 09:27:59'
     ]);
 
@@ -127,8 +127,8 @@ class MoviesTableSeeder extends Seeder
       'runtime' => 120,
       'plot' => 'El príncipe Amleth está a punto de convertirse en hombre pero, en ese momento, su tío asesina brutalmente a su padre y secuestra a la madre del niño. Dos décadas después, Amleth es un vikingo que tiene la misión de salvar a su madre.',
       'director' => 'Robert Eggers',
-      'file' => 'media/1UyoikG5d8CrJoDP9HLCaLCvH00pC3NDXAh2RHrJ.mp4',
-      'trailer' => 'trailer/appMGjwoLlrvTnhd4jG0gf2rKgHlbwQvtBJw0bOl.mp4',
+      'file' => 'media/yMlE19UqGAvBD8iUgFe5eqUmVzPy0BWsMpqa1FHu.mp4',
+      'trailer' => 'trailer/nMK9u25UI4TcMykpaODxabz94a2J7h8CkwioJ8cB.mp4',
       'created_at' => '2023-04-11 09:31:01'
     ]);
 
@@ -140,8 +140,8 @@ class MoviesTableSeeder extends Seeder
         'runtime' => 148,
         'plot' => 'Esta versión extendida cuenta con más de 11 minutos contenido extra, incluyendo escenas eliminadas.Por primera vez en la historia cinematográfica de Spider-Man, nuestro héroe, vecino y amigo es desenmascarado y por tanto ya no es capaz de separar su vida normal de los enormes riesgos que conlleva ser un Súper Héroe. Cuando pide ayuda a Doctor Strange, los riesgos pasan a ser aún más peligrosos, obligándole a descubrir lo que realmente significa ser Spider-Man.',
         'director' => 'Jon Watts',
-        'file' => 'media/WcADSrBUu9Bh0rVneGW7JDHjQsSb853WJZ0p0WDk.mp4',
-        'trailer' => 'trailer/TNhxTNN5S6qEXJAEzcI7v1fCXE2kwQ1URGoQ2PEX.mp4',
+        'file' => 'media/yNW2TFNNkKIOFDaaaPiR5EehuxSuVaBB8FIG1DUn.mp4',
+        'trailer' => 'trailer/gTqfiG7Aroc8kpTEPNdUI5qkYFTlcqLrKCtFSHbm.mp4',
         'created_at' => '2023-04-11 09:33:54'
       ]);
 
@@ -153,8 +153,8 @@ class MoviesTableSeeder extends Seeder
         'runtime' => 130,
         'plot' => 'Tras más de 30 años de servicio como uno de los mejores aviadores de la Armada, Pete "Maverick" Mitchel se encuentra donde siempre quiso estar, empujando los límites como un valiente piloto de pruebas.',
         'director' => 'Joseph Kosinski',
-        'file' => 'media/Vuebww2gDFtMihBIY7p0rouBjaMESDQhzQ5CruqH.mp4',
-        'trailer' => 'trailer/uOOmLOTp7fkQ9rudBnmFhkn7KgwigayKqsLshYIB.mp4',
+        'file' => 'media/bLstkPI9fyVqy3Sn5bqGlzT1FEDG97xo3FgOBbV0.mp4',
+        'trailer' => 'trailer/k1W4bz3e93NbbKJvdCfLP8Qx4wsYoLCebwqox2tL.mp4',
         'created_at' => '2023-04-11 09:36:31'
       ]);
 
@@ -166,8 +166,8 @@ class MoviesTableSeeder extends Seeder
         'runtime' => 104,
         'plot' => 'Ambientada en el universo de Spider Man, se centra en uno de sus villanos más icónicos, Morbius, un doctor que tras sufrir una enfermedad en la sangre y fallar al intentar curarse, se convirtió en un vampiro.',
         'director' => 'Daniel Espinosa',
-        'file' => 'media/mONxfqi46CEUbBCGffAzRVppObuXmt85dRYLVlDZ.mp4',
-        'trailer' => 'trailer/LkEvvLsUCdoW5qaSzNaHMzZcUZfXDvu2AO5cmqNl.mp4',
+        'file' => 'media/ICjdraunJiJMamYEmfbt0EJDkSBL3a6aOpdh4tct.mp4',
+        'trailer' => 'trailer/uZFOXg6jaPoc7d1K6itLbKiObhBwokYRqNyyp7YQ.mp4',
         'created_at' => '2023-04-11 09:37:51'
       ]);
 
@@ -179,8 +179,8 @@ class MoviesTableSeeder extends Seeder
         'runtime' => 97,
         'plot' => 'Una alpinista empieza el descenso antes de alcanzar la cumbre porque se avecina una tormenta de nieve. En el camino, encuentra a un hombre en peligro de muerte y, juntos, tratan de llegar vivos al pie de la montaña en unas condiciones infernales.',
         'director' => 'Malgorzata Szumowska y Michal Englert',
-        'file' => 'media/ybEeyGaSWxsSEoIpbTusPwM8xZVUEu12HSWHZR1Q.mp4',
-        'trailer' => 'trailer/bz6n6NS6UAXG9aOA4GmLAAcOkY77PehOZv85V9Yk.mp4',
+        'file' => 'media/AXf80L5Xfz21TI7giLJyXhueCpefjHXSds8OQtjQ.mp4',
+        'trailer' => 'trailer/DbBNlhnV9us3jAEaE1Av9ROrCs69VPCgu2uM3CGv.mp4',
         'created_at' => '2023-04-11 11:16:13'
       ]);
 
@@ -192,8 +192,8 @@ class MoviesTableSeeder extends Seeder
         'runtime' => 93,
         'plot' => 'Un hombre que acaba de enviudar y sus dos hijas adolescentes viajan a una reserva de caza en Sudáfrica. Sin embargo, su viaje de curación pronto se convierte en una lucha por la supervivencia cuando un león sediento de sangre comienza a acecharlos.',
         'director' => 'Baltasar Kormákur',
-        'file' => 'media/zDPczizECvd2wx2EOEYfCcGNNWYv7DsLExWJs6Ox.mp4',
-        'trailer' => 'trailer/uwaXcxb68HQzik2Mpzn1WKZAWFidHsx8VoNigmXG.mp4',
+        'file' => 'media/IxWuN1vStZyxwCc9fPYBbxcTXBjf5RAMvt5Yw4Ud.mp4',
+        'trailer' => 'trailer/XGkFiCrAfD0phgrijWqsHoM0u67s2AlXEr2RBwom.mp4',
         'created_at' => '2023-04-11 11:19:58'
       ]);
 
@@ -205,8 +205,8 @@ class MoviesTableSeeder extends Seeder
         'runtime' => 120,
         'plot' => 'La historia tiene lugar en Río de Janeiro, Brasil y conduce a la participación del Mundo Mágico en la Segunda Guerra Mundial.',
         'director' => 'David Yates',
-        'file' => 'media/AGbjpypFlzfsjTx2sRQRzncFwZDWEzpggvrsB8ON.mp4',
-        'trailer' => 'trailer/au8Xm0R4I5uqOfiyKjz4wMjdWsIdsa88hqMqKQVe.mp4',
+        'file' => 'media/jXjYbdQ9vdZ99j027PAiS0or1Dl7kTpLNgq9drZE.mp4',
+        'trailer' => 'trailer/0DdI8HCmtlDSCikgCc8CXOvLTmqioqdIyDLkCtVp.mp4',
         'created_at' => '2023-04-11 11:22:54'
       ]);
 
@@ -218,8 +218,8 @@ class MoviesTableSeeder extends Seeder
         'runtime' => 155,
         'plot' => 'Arrakis, también denominado "Dune", se ha convertido en el planeta más importante del universo. A su alrededor comienza una gigantesca lucha por el poder que culmina en una guerra interestelar.',
         'director' => 'Denis Villeneuve',
-        'file' => 'media/rMIZMoIoTseSSTIt7GsePsLEkmHn3VpXpRkl5OEn.mp4',
-        'trailer' => 'trailer/tS1TepHarmDAX90UD22KpKNGbir7CO7ehR40Ujzb.mp4',
+        'file' => 'media/voMmwBLyN5lSQmH3QidBOYtaBQb9nSb0eltrzHHm.mp4',
+        'trailer' => 'trailer/DdGfoIvXIrONmOVKpNAJ4We5xKXS72LXwrEcq1NJ.mp4',
         'created_at' => '2023-04-11 11:27:53'
       ]);
 
@@ -231,8 +231,8 @@ class MoviesTableSeeder extends Seeder
         'runtime' => 102,
         'plot' => 'La escritora solitaria Loretta Sage escribe sobre lugares exóticos en sus populares novelas de aventuras con un atractivo modelo de portada, Alan. Mientras está de gira promocionando su nuevo libro, es secuestrada por un excéntrico multimillonario.',
         'director' => 'Aaron Nee y Adam Nee',
-        'file' => 'media/Gqz5oafw3IBM6BSnlY28EtLKdBgWPtc6eakBNZt4.mp4',
-        'trailer' => 'trailer/0jMEuX2O15u8DMdLqd1lyVWhq7i9o4BEmvBWJoIQ.mp4',
+        'file' => 'media/KSqcuXd5e4NX4MX4x1tZ7qjTWVK4ZJ4EJzdblOw0.mp4',
+        'trailer' => 'trailer/B9u0QkMUfse9q8cBnQilSBCOxb9Mq2mw2OfyG6z9.mp4',
         'created_at' => '2023-04-11 11:32:55'
       ]);
 
@@ -244,8 +244,8 @@ class MoviesTableSeeder extends Seeder
         'runtime' => 115,
         'plot' => 'Un cajero de un banco descubre que en realidad es un personaje sin papel dentro de un brutal videojuego de mundo interactivo.',
         'director' => 'Shawn Levy',
-        'file' => 'media/Svno7Udp9bsSr38iVFhIykJgYgE9kHheg40Dikgh.mp4',
-        'trailer' => 'trailer/bgYbEJKa9td4xg8oeNAqLQWmkIN8xgZ28mJ5qMpF.mp4',
+        'file' => 'media/sdZDxhxTIQXhgemaOMaTzSzE7kGiLZYwiKwCI4ei.mp4',
+        'trailer' => 'trailer/EJLcOh92pmbDKwNgB5Dm3MzlBms3mtLhiLVXLQQU.mp4',
         'created_at' => '2023-04-11 11:36:57'
       ]);
 
@@ -257,8 +257,8 @@ class MoviesTableSeeder extends Seeder
         'runtime' => 161,
         'plot' => 'Una secuela que seguirá explorando el incomparable mundo de Wakanda y todos los ricos y variados personajes presentados en la película de 2018.',
         'director' => 'Ryan Coogler',
-        'file' => 'media/yZmrejyGze7PZUQDOIkjKJpFsPQsw2J58GnXaCVb.mp4',
-        'trailer' => 'trailer/LhyCIuawC1WmNg9acQiA352aHBgX1oZOTFawUxz0.mp4',
+        'file' => 'media/aBNoO5aAsVztUDrnV27uEr0acDSxTKLEWgZf7wi8.mp4',
+        'trailer' => 'trailer/1zFeEdJEEo1AnJYTn2PcUjr1mepZmRCjLXfKJukJ.mp4',
         'created_at' => '2023-04-11 11:38:43'
       ]);
 
@@ -270,8 +270,8 @@ class MoviesTableSeeder extends Seeder
         'runtime' => 175,
         'plot' => 'En su segundo año luchando contra el crimen, Batman explora la corrupción existente en la ciudad de Gotham y el vínculo de esta con su propia familia. Además, entrará en conflicto con un asesino en serie conocido como "el Acertijo".',
         'director' => 'Matt Reeves',
-        'file' => 'media/ke2r4dox3BQOkqj0JaDxJikU89MmY65oOCKyRDF8.mp4',
-        'trailer' => 'trailer/Y6C0A1GtuNYqi7V1PL3yjzOsu4NnSu9wvpMkbTa3.mp4',
+        'file' => 'media/45vZ3hWpytw862loStrV2oIzugZ2DDVCLeXUmRcx.mp4',
+        'trailer' => 'trailer/Q9dXTYG7CXHpEng2fI9cjB6s29R2A357oDil99ph.mp4',
         'created_at' => '2023-04-11 11:44:00'
       ]);
 
@@ -283,8 +283,8 @@ class MoviesTableSeeder extends Seeder
         'runtime' => 109,
         'plot' => 'Murray Ray Garrison es resucitado por un equipo de científicos. Mejorado con nanotecnología, se convierte en una máquina de matar biotecnológica sobrehumana. Cuando Ray entrena por primera vez con otros super soldados, no recuerda nada de su vida anterior. Pero cuando recuerda que lo mataron, sale de las instalaciones para vengarse, solo para descubrir que la conspiración va más allá de lo que pensaba.',
         'director' => 'David S F Wilson',
-        'file' => 'media/6LlFdr750zaDWnC3z2HdZL4xiY6pRFQz5LUTTBjT.mp4',
-        'trailer' => 'trailer/1KYh6DibdD566B5O4XdjCK4CycAoFK5wnxGFlcAq.mp4',
+        'file' => 'media/N2dM9Tf4gdKTxBEhDiEGdjbHYzA8dnZgTuVNVQZT.mp4',
+        'trailer' => 'trailer/4j7kKtCospnv5k3IobF1aHshcFxJLzDQLBO9NDTQ.mp4',
         'created_at' => '2023-04-11 11:47:24'
       ]);
 
@@ -296,8 +296,8 @@ class MoviesTableSeeder extends Seeder
         'runtime' => 139,
         'plot' => 'Año 2045. El adolescente Wade Watts es solo una de las millones de personas que se evaden del sombrío mundo real para sumergirse en un mundo utópico virtual donde todo es posible: OASIS. Wade participa en la búsqueda del tesoro que el creador de este mundo imaginario dejó oculto en su obra.',
         'director' => 'Steven Spielberg',
-        'file' => 'media/Rc4NhWF1C2x01dJ8xUS8PARUbnNZoG9npQglg0Yq.mp4',
-        'trailer' => 'trailer/LeVUZIcoSmi7kzNodSAJBWvxJ7iVJZkviEAwFETT.mp4',
+        'file' => 'media/az6JcYqKdEk0R3lvDhmSdSrNxFIaSvfp1EobSAZ6.mp4',
+        'trailer' => 'trailer/6iFPAjyeOjs4EQ82n1IaXDYSKKd97B89k0sW3F1h.mp4',
         'created_at' => '2023-04-11 11:49:28'
       ]);
 
