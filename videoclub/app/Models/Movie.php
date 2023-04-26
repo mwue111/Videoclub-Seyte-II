@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
+use App\Models\MovieGenre;
 
 class Movie extends Model
 {
@@ -14,13 +15,29 @@ class Movie extends Model
   protected $fillable = [
     'title',
     'poster',
+    'banner',
     'year',
     'runtime',
     'plot',
-    'genre',
     'director',
     'file',
+    'trailer',
   ];
+
+  public function scopeFilter($query, array $filters) {
+
+    if(isset($filters['search'])) {
+        $query
+                ->where('title', 'LIKE', '%'. $filters['search'] . '%')
+                ->orWhere('director', 'LIKE', '%' . $filters['search'] . '%')
+                ->orWhere('year', '=', $filters['search'])
+                ->paginate(5);
+    }
+    else{
+        $query = Movie::latest()->paginate(5);
+    }
+
+  }
 
   public function users()
   {
@@ -28,17 +45,23 @@ class Movie extends Model
       ->withPivot('id', 'expiration_date')
       ->withTimeStamps();
   }
+
   public function reviews()
   {
     return $this->belongsToMany(User::class, 'reviews')
       ->withPivot('title', 'description');
   }
+
   public function genres()
   {
-    return $this->belongsToMany(Genre::class, 'movies_genres');
+    return $this->belongsToMany(Genre::class, 'movie_genres')
+                ->using(MovieGenre::class)
+                ->withTimestamps();
   }
+
   public function premiums()
   {
-    return $this->belongsToMany(Premium::class, 'views');
+    return $this->belongsToMany(Premium::class, 'views', 'movie_id', 'user_id')
+                ->withTimestamps();
   }
 }

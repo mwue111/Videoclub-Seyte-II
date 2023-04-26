@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         AdminsTableSeeder::class,
         FreesTableSeeder::class,
         RentsTableSeeder::class,
+        MovieGenresSeeder::class,
     ]);
 
     // \App\Models\User::factory(10)->create();

@@ -21,34 +21,12 @@ class UserController extends Controller
         case 'free':
           $user->free;
           break;
+        case 'premium':
+            $user->premium;
+            break;
       }
     }
     return json_encode($users);
-  }
-
-  public function store(Request $request)
-  {
-    $request->validate([
-      'username' => 'unique:users,username',
-      'email' => 'required|email',
-      'password' => 'required',
-      'role' => 'required',
-    ]);
-    $user = User::create($request->all());
-
-    switch ($user->role) {
-      case 'admin':
-        Admin::create(['user_id' => $user->id]);
-        break;
-      case 'free':
-        Free::create(['user_id' => $user->id]);
-        break;
-      case 'premium':
-        Premium::create(['user_id' => $user->id, 'fecha_ultimo_pago' => now()]);
-        break;
-    }
-    $user->save();
-    return json_encode($user);
   }
 
   public function show($id)

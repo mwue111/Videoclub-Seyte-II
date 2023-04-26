@@ -1,51 +1,34 @@
-<h1>Añadir película</h1>
+<x-layout>
+    <x-panel class="mt-2 mb-4 w-1/2 m-auto">
+        <h1 class="text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white">Añadir película</h1>
 
-<form action="{{ route('peliculas.store') }}" method="POST" enctype="multipart/form-data">
-    @csrf
+        <form action="{{ route('peliculas.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
 
-    <label for="title">Título de la película</label>
-    <br>
-    <input type="text" name="title"/>
-    <br>
-    <label for="poster">Póster de la película</label>
-    <br>
-    <input type="file" name="poster"/>
-    <br>
-    <label for="year">Año de la película</label>
-    <br>
-    <input type="number" name="year"/>
-    <br>
-    <label for="runtime">Duración de la película</label>
-    <br>
-    <input type="text" name="runtime"/>
-    <br>
-    <label for="plot">Sinopsis de la película</label>
-    <br>
-    <textarea type="text" name="plot"></textarea>
-    <br>
-    <label for="genre">Género de la película</label>
-    <br>
-    <input type="text" name="genre"/>
-    <br>
-    <label for="director">Director de la película</label>
-    <br>
-    <input type="text" name="director"/>
-    <br>
-    <label for="file">Archivo de la película</label>
-    <br>
-    <input type="file" name="file"/>
-    <br>
-    <input type="submit" value="Añadir">
+            <x-form.input name="title" label="Título de la película" required/>
 
-@isset($errors)
-    @if($errors->any())
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
-        </ul>
-    @endif
-@endisset
-</form>
+            <x-form.file name="poster" label="Póster de la película" class="mt-4"/>
 
-<a href="{{ route('peliculas.index') }}">Volver</a>
+            <x-form.file name="banner" label="Banner de la película" class="mt-4"/>
+
+            <x-form.number name="year" label="Año de la película" required class="mt-4"/>
+
+            <x-form.number name="runtime" label="Duración de la película" required class="mt-4"/>
+
+            <x-form.textarea name="plot" label="Sinopsis de la película" required class="mt-4"/>
+
+            <x-form.multiselect name="genre_id[]" label="Género/s de la película" :data="$genres" class="mt-4"/>
+
+            <x-form.input name="director" label="Director/a de la película" required class="mt-4"/>
+
+            <x-form.file name="file" label="Archivo de la película" class="mt-4"/>
+
+            <x-form.file name="trailer" label="Tráiler de la película" class="mt-4"/>
+
+            <x-form.button class="mt-4 w-64 h-10">Añadir</x-form.button>
+
+            <x-link url="{{ route('peliculas.index') }}">Volver</x-link>
+        </form>
+    </x-panel>
+
+</x-layout>

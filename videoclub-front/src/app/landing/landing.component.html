@@ -1,0 +1,34 @@
+<div class="landing-header">
+  <img
+    *ngFor="let movie of movies"
+    [src]="url + movie.banner"
+    alt=""
+    class="banner"
+  />
+</div>
+
+<div class="landing-body">
+  <div *ngFor="let genre of genres">
+    <span class="genre-name">{{ genre.name }}</span>
+    <div *ngIf="genre.name == 'Accion'" class="genre">
+      <span *ngFor="let movie of actionMovies">
+        <img [src]="url + movie.poster" alt="" class="poster" />
+      </span>
+    </div>
+    <div *ngIf="genre.name == 'Aventura'" class="genre">
+      <span *ngFor="let movie of adventureMovies">
+        <img [src]="url + movie.poster" alt="" class="poster" />
+      </span>
+    </div>
+    <div *ngIf="genre.name == 'Comedia'" class="genre">
+      <span *ngFor="let movie of actionMovies">
+        <img [src]="url + movie.poster" alt="" class="poster" />
+      </span>
+    </div>
+    <div *ngIf="genre.name == 'Drama'" class="genre">
+      <span *ngFor="let movie of adventureMovies">
+        <img [src]="url + movie.poster" alt="" class="poster" />
+      </span>
+    </div>
+  </div>
+</div>
