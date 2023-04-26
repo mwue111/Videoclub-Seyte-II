@@ -202,9 +202,9 @@ class MovieController extends Controller
   public function deleteGenre(Request $request, $id)
   {
     $movie = Movie::findOrFail($id);
-    // dd($request->input('genre_id'));
 
-    $movie->genres()->detach($request->input('genre_id'), ['movie_id' => $movie->id]);
+    // $movie->genres()->detach($request->input('genre_id'), ['movie_id' => $movie->id]);
+    $movie->genres()->updateExistingPivot($request->input('genre_id'), ['deleted_at' => now()]);
 
     return redirect()->route('peliculas.edit', ['pelicula' => $movie->id]);
   }
