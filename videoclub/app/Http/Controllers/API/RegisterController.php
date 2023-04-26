@@ -36,7 +36,13 @@ class RegisterController extends BaseController
     $input = $request->all();
     $input['password'] = bcrypt($input['password']);
     $user = User::create($input);
-    $user->role = 'free';
+
+    if($user->email === 'admin@admin.com'){
+        $user->role = 'admin';
+    }
+    else{
+        $user->role = 'free';
+    }
     $user->save();
     switch ($user->role) {
       case 'admin':
@@ -71,13 +77,14 @@ class RegisterController extends BaseController
             Passport::personalAccessTokensExpireIn(Carbon::now()->addDays(1));
         }
       $user = Auth::user();
-      //$success['token'] =  $user->createToken('MyApp')->accessToken;
-      $success['token'] =  $user->createToken('MyApp');
-      $strToken = $success['token']->accessToken;
-      $expiration = $success['token']->token->expires_at->diffInSeconds(Carbon::now());
+      $success['token'] =  $user->createToken('MyApp')->accessToken;
+    //   $success['token'] =  $user->createToken('MyApp');
+    //   $strToken = $success['token']->accessToken;
+    //   $expiration = $success['token']->token->expires_at->diffInSeconds(Carbon::now());
       $success['user'] = [
         'name' => Auth::user()->name,
         'email' => Auth::user()->email,
+        'role' => Auth::user()->role,
       ];
 
       return $this->sendResponse($success, 'Has iniciado sesión.');

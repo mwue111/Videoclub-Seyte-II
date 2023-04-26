@@ -16,6 +16,7 @@ export class AuthService {
     private router: Router
   ) {
     this.loadLocalStorage();
+    console.log('Usuario: ', this.user);
   }
 
   loadLocalStorage() {

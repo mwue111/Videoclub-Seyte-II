@@ -19,6 +19,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingInterceptor } from './loading.interceptor';
 
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 const material = [MatToolbarModule];
 
@@ -40,6 +42,8 @@ const material = [MatToolbarModule];
     HttpClientModule,
     BrowserAnimationsModule,
     material,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   exports: [material, RouterModule],
   providers: [appRoutingProviders, { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }],

@@ -19,7 +19,25 @@
       </button>
       <button class="login-btn" [routerLink]="['/auth/login']">Entrar</button>
     </div>
-    <div class="logged-div" *ngIf="logged">
+
+    <div class="logged-div" *ngIf="logged && user.role === 'admin'">
+      <mat-form-field appearance="fill">
+        <mat-label *ngIf="user.name">{{ user.name }}</mat-label>
+        <mat-label *ngIf="!user.name">Admin</mat-label>
+        <mat-select>
+          <mat-option>
+            <a href="http://localhost/peliculas">Panel admin</a>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <img *ngIf="user.image" src="user.image" alt="" />
+      <img *ngIf="!user.image" src="../../assets/user.png" alt="" />
+
+      <button (click)="logout()">Cerrar sesión</button>
+    </div>
+
+    <div class="logged-div" *ngIf="logged && user.role !== 'admin'">
       <img *ngIf="user.image" src="user.image" alt="" />
       <img *ngIf="!user.image" src="../../assets/user.png" alt="" />
       <p *ngIf="user.name">{{ user.name }}</p>

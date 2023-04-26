@@ -22,7 +22,13 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        //Para el momento del despliegue - ver documentación oficial passport:keys
+        //Passport::loadKeysFrom(__DIR__.'/../secrets/oauth');
+
+        //Para que los secrets estén hasheados en la base de datos. Daba conflictos al crear usuario, Postman devolvía error
+        //https://stackoverflow.com/questions/39572957/laravel-passport-password-grant-client-authentication-failed
         //Passport::hashClientSecrets();
+
         //Passport::routes();
         //$this->registerPolicies();
     }
