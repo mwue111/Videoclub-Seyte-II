@@ -35,9 +35,10 @@ export class NavbarComponent {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     // let params = new HttpParams().set('token', token)
 
-    this._http.get(url + '/peliculas', { headers:headers })
+    this._http.get(url + '/peliculas', { headers:headers, responseType: 'text' })
               .subscribe((res: any) => {
-                window.open(res['url']);
+                const newWindow = window.open();
+                newWindow?.document.write(res);
               })
   }
 

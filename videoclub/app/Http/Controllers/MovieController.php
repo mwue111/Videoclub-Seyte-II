@@ -54,6 +54,14 @@ class MovieController extends Controller
    */
   public function create()
   {
+    $token = request()->bearerToken();
+
+    $user = Auth::guard('api')->user();
+
+    if(!$token || !$user){
+        abort(401, 'Unauthorized');
+    }
+
     return view('movies.create', ['genres' => Genre::all()]);
   }
 

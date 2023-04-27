@@ -21,29 +21,30 @@ Route::get('/', function () {
 
 // Route::post('admin/register', 'RegisterController@register');
 // Route::post('admin/login', 'RegisterController@login');
+Route::group(['middleware' => ['auth:api']], function () {
+    Route::resource('peliculas', 'MovieController');//->middleware('cors') //->middleware('client');
+    Route::resource('generos', 'GenreController'); //->name('generos.index');
+    Route::post('peliculas/{id}/add-genre', 'MovieController@addGenre')->name('peliculas.addGenre');
 
-Route::resource('peliculas', 'MovieController')->middleware('auth:api');//->middleware('cors') //->middleware('client');
-Route::resource('generos', 'GenreController'); //->name('generos.index');
+    Route::delete('peliculas/{id}/delete-genre', 'MovieController@deleteGenre')->name('peliculas.deleteGenre');
 
-Route::post('peliculas/{id}/add-genre', 'MovieController@addGenre')->name('peliculas.addGenre');
+    Route::resource('resenas', 'ReviewController')->middleware('client');
 
-Route::delete('peliculas/{id}/delete-genre', 'MovieController@deleteGenre')->name('peliculas.deleteGenre');
+    Route::resource('usuarios', 'UserController');
 
-Route::resource('resenas', 'ReviewController')->middleware('client');
+    Route::resource('alquiler', 'RentController'); //->middleware('client');
 
-Route::resource('usuarios', 'UserController');
+    //Buscador en el back:
+    Route::get('buscar', 'SearchController@search')->name('movies.search');
 
-Route::resource('alquiler', 'RentController'); //->middleware('client');
+    //Recuperación y eliminación de películas:
+    Route::get('peliculas-eliminadas', 'MovieController@deleted')->name('movies.deleted');
+    Route::post('restaurar-peliculas/{id}', 'MovieController@restore')->name('movies.restore');
+    Route::delete('borrar-def-peliculas/{id}', 'MovieController@forceDelete')->name('movies.force-delete');
 
-//Buscador en el back:
-Route::get('buscar', 'SearchController@search')->name('movies.search');
+    //Recuperación y eliminación de géneros:
+    Route::get('generos-liminados', 'GenreController@deleted')->name('genres.deleted');
+    Route::post('restaurar-generos/{id}', 'GenreController@restore')->name('genres.restore');
+    Route::delete('borrar-def-generos/{id}', 'GenreController@forceDelete')->name('genres.force-delete');
 
-//Recuperación y eliminación de películas:
-Route::get('peliculas-eliminadas', 'MovieController@deleted')->name('movies.deleted');
-Route::post('restaurar-peliculas/{id}', 'MovieController@restore')->name('movies.restore');
-Route::delete('borrar-def-peliculas/{id}', 'MovieController@forceDelete')->name('movies.force-delete');
-
-//Recuperación y eliminación de géneros:
-Route::get('generos-liminados', 'GenreController@deleted')->name('genres.deleted');
-Route::post('restaurar-generos/{id}', 'GenreController@restore')->name('genres.restore');
-Route::delete('borrar-def-generos/{id}', 'GenreController@forceDelete')->name('genres.force-delete');
+});
