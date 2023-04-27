@@ -32,6 +32,23 @@ class MovieController extends Controller
     }
     else {
 
+        //Con esto tengo la url y el token, pero no permite auth:api en web.php:
+        /*
+        $token = $request->input('token');
+        if(!$token){
+            abort(401, 'Unauthorized');
+        }
+
+        if (!Auth::guard('api')->check()) {
+            Auth::guard('api')->setToken($token);   //no existe setToken.
+
+            if (!Auth::guard('api')->check()) {
+              abort(401, 'Unauthorized');
+            }
+        }
+          */
+
+        //Con esto tengo auth:api pero no almacena el token:
         $token = $request->bearerToken();
 
         if(!$token){
@@ -44,8 +61,15 @@ class MovieController extends Controller
         if(!$user){
             abort(401, 'Unauthorized');
         }
+        else{
+            //almacenar el token para que esté disponible en toda la sesión del back
+            $user = Auth::user();
+            $value = $request->session();
+            dd($value);
 
-        return view('movies.index', ['movies' => Movie::latest()->paginate(5)]);
+        }
+
+        return view('movies.index', ['movies' => Movie::latest()->paginate(5), 'user' => $user]);
     }
   }
 

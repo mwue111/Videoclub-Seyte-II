@@ -1,4 +1,11 @@
 <x-layout>
+
+    @if($user)
+        <div class="flex justify-center">
+            <p class="m-2 mt-4 text-white bg-warning w-1/2 rounded p-2 text-center">Has iniciado sesión con el email {{ $user->email }}</p>
+        </div>
+    @endif
+
     <div>
         <div class="float-left">
             <form action="{{ route('peliculas.create') }}" method="GET">
