@@ -19,6 +19,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingInterceptor } from './loading.interceptor';
 
+import {MatButtonModule} from '@angular/material/button';
+import {MatMenuModule} from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 
@@ -42,6 +44,8 @@ const material = [MatToolbarModule];
     HttpClientModule,
     BrowserAnimationsModule,
     material,
+    MatButtonModule,
+    MatMenuModule,
     MatFormFieldModule,
     MatSelectModule
   ],

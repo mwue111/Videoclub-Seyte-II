@@ -9,6 +9,7 @@ use App\Models\MovieGenre;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Termwind\Components\Dd;
+use Illuminate\Support\Facades\Auth;
 
 class MovieController extends Controller
 {
@@ -30,8 +31,21 @@ class MovieController extends Controller
       return response()->json($movies);
     }
     else {
-    //   return view('movies.index', ['movies' => $movies]);
-    return view('movies.index', ['movies' => Movie::latest()->paginate(5)]);
+
+        $token = $request->bearerToken();
+
+        if(!$token){
+            abort(401, 'Unauthorized');
+        }
+
+        $user = Auth::guard('api')->user();
+
+        // dd($user);
+        if(!$user){
+            abort(401, 'Unauthorized');
+        }
+
+        return view('movies.index', ['movies' => Movie::latest()->paginate(5)]);
     }
   }
 

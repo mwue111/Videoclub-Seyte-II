@@ -21,20 +21,17 @@
     </div>
 
     <div class="logged-div" *ngIf="logged && user.role === 'admin'">
-      <mat-form-field appearance="fill">
-        <mat-label *ngIf="user.name">{{ user.name }}</mat-label>
-        <mat-label *ngIf="!user.name">Admin</mat-label>
-        <mat-select>
-          <mat-option>
-            <a href="http://localhost/peliculas">Panel admin</a>
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <img *ngIf="user.image" src="user.image" alt="" />
-      <img *ngIf="!user.image" src="../../assets/user.png" alt="" />
-
-      <button (click)="logout()">Cerrar sesión</button>
+      <button id="admin-button" mat-button [matMenuTriggerFor]="menu">
+        <span class="admin-menu">
+          {{ user.email }}
+          <img *ngIf="user.image" src="user.image" alt="" />
+          <img *ngIf="!user.image" src="../../assets/user.png" alt="" />
+        </span>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="toAdmin()">Panel admin</button>
+        <button mat-menu-item (click)="logout()">Cerrar sesión</button>
+      </mat-menu>
     </div>
 
     <div class="logged-div" *ngIf="logged && user.role !== 'admin'">

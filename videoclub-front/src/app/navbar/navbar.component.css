@@ -109,3 +109,19 @@
   color: white;
   font-size: 0.9em;
 }
+
+#admin-button{
+  background-color: #1874ba;
+  width: 80%;
+  padding: 0 20px;
+}
+
+.admin-menu{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-menu img{
+  margin: 0 15px;
+}
