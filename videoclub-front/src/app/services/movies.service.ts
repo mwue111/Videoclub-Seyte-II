@@ -20,6 +20,13 @@ export class MoviesService {
     return this._http.get(this.url + '/api/peliculas', { params: params, headers: headers });
   }
 
+  getOneMovie(id: number, token: any) {
+    console.log('id: ', id);
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+
+    return this._http.get(this.url + '/api/peliculas/' + id, { headers:headers });
+  }
+
   // getGenreMovie(id: number): Observable<any> {
   //   return this._http.get(this.url + '/api/generos/' + id + '/peliculas');
   // }

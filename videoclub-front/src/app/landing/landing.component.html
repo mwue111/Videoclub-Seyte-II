@@ -1,10 +1,13 @@
 <div class="landing-header">
-  <img
-    *ngFor="let movie of movies"
-    [src]="url + movie.banner"
-    alt=""
-    class="banner"
-  />
+
+    <img
+      *ngFor="let movie of movies"
+      [src]="url + movie.banner"
+      alt=""
+      class="banner"
+      [routerLink]="['/pelicula', movie.id]"
+    />
+
 </div>
 
 <div class="landing-body">

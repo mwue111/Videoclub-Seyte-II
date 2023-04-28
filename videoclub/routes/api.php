@@ -30,6 +30,7 @@ Route::post('login', [RegisterController::class, 'login']);
 
 Route::group(['middleware' => ['guest']], function () {
   Route::get('peliculas', 'MovieController@index')->name('peliculas.index');
+  Route::get('peliculas/{id}', 'MovieController@show')->name('peliculas.index');
   Route::get('generos', 'GenreController@index')->name('generos.index');
   Route::get('generos/{id}/peliculas', 'GenreController@getMovies')->name('generos.getMovies');
   Route::post('/reset-password', 'PasswordResetRequestController@sendPasswordResetEmail');

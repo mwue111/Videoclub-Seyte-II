@@ -18,6 +18,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingInterceptor } from './loading.interceptor';
+import { MovieComponent } from './movie/movie.component';
 
 
 const material = [MatToolbarModule];
@@ -32,6 +33,7 @@ const material = [MatToolbarModule];
     AboutUsComponent,
     NavbarComponent,
     SpinnerComponent,
+    MovieComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import { LandingComponent } from './landing/landing.component';
 import { ContactComponent } from './contact/contact.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { MovieComponent } from './movie/movie.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AuthGuard } from './modules/auth/_services/auth.guard';
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'faqs', component: FaqsComponent },
   { path: 'nosotros', component: AboutUsComponent },
+  { path: 'pelicula/:id', component: MovieComponent },
   {
     path: 'auth',
     loadChildren: () =>

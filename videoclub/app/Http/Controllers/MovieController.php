@@ -78,7 +78,20 @@ class MovieController extends Controller
    */
   public function show($id)
   {
+    /*
+    if ($request->path() == 'api/peliculas') {
+      return response()->json($movies);
+    }
+    else {
+    //   return view('movies.index', ['movies' => $movies]);
+    return view('movies.index', ['movies' => Movie::latest()->paginate(5)]);
+    }
+    */
     $movie = Movie::findOrfail($id);
+
+    if(request()->path() == "api/peliculas/$id") {
+        return response()->json($movie);
+    }
 
     return view('movies.show', [
       'movie' => $movie
