@@ -23,7 +23,7 @@ Route::get('/', function () {
 // Route::post('admin/login', 'RegisterController@login');
 
 Route::group(['middleware' => ['auth:api']], function () {
-    Route::resource('peliculas', 'MovieController');//->middleware('cors') //->middleware('client');
+    Route::resource('peliculas', 'MovieController');//->middleware('client');
     Route::resource('generos', 'GenreController'); //->name('generos.index');
     Route::post('peliculas/{id}/add-genre', 'MovieController@addGenre')->name('peliculas.addGenre');
 

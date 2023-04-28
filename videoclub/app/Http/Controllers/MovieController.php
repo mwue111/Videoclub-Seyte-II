@@ -64,9 +64,6 @@ class MovieController extends Controller
         else{
             //almacenar el token para que esté disponible en toda la sesión del back
             $user = Auth::user();
-            $value = $request->session();
-            dd($value);
-
         }
 
         return view('movies.index', ['movies' => Movie::latest()->paginate(5), 'user' => $user]);
