@@ -19,8 +19,7 @@ class MoviesTableSeeder extends Seeder
       'banner' => 'images/qfiApqiHCSD7syXwa6D5vkSNFVc2247klbdrUhq5.jpg',
       'year' => 2009,
       'runtime' => 162,
-      'plot' => '
-            Un infante de marina parapléjico enviado a la luna Pandora en una misión única se debate entre seguir sus órdenes y proteger el mundo que siente que es su hogar.',
+      'plot' => 'AVATAR nos lleva a un mundo situado más allá de la imaginación, en donde un recién llegado de la Tierra se embarca en una aventura épica, llegando a luchar, al final, por salvar el extraño mundo al que ha aprendido a llamar su hogar. James Cameron, el oscarizado director de "Titanic" imaginó por primera vez la película hace quince años, cuando los medios para llevar a cabo y plasmar su visión todavía eran inexistentes.',
       'director' => 'James Cameron',
       'file' => 'media/PmrQlXdn6NlSbeLqAYyQi12wg40MTjQ70m4AfbFn.mp4',
       'trailer' => 'trailer/Z6pDLp9Maz0SIboBDxpczSiAQ9assTDS24gTDZxM.mp4',
@@ -33,8 +32,7 @@ class MoviesTableSeeder extends Seeder
       'banner' => 'images/TVi90emZt91OHGlPZ6W1L4UJlLgDzNzHKFVRJfs0.jpg',
       'year' => 2007,
       'runtime' => 101,
-      'plot' => '
-            Años después de que una plaga mate a la mayor parte de la humanidad y transforme al resto en monstruos, el único sobreviviente en la ciudad de Nueva York lucha valientemente para encontrar una cura.',
+      'plot' => 'Años después de que una plaga mate a la mayor parte de la humanidad y transforme al resto en monstruos, el único sobreviviente en la ciudad de Nueva York lucha valientemente para encontrar una cura.',
       'director' => 'Francis Lawrence',
       'file' => 'media/hCkrTQ0D98foZSoh0daWZQoOoAONDQZlWFb6amT6.mp4',
       'trailer' => 'trailer/R8yyxGfMNkyXtse1X48zKHyliiM7sLKG62SKHGJh.mp4',

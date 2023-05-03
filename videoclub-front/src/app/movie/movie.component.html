@@ -43,6 +43,40 @@
   </div>
 
   <div class="comments">
+
+    <div *ngIf="!logged">
+      <div class="comment-block-panel">
+        <p>Para escribir una reseña</p>
+        <div class="buttons">
+          <button class="view-button" [routerLink]="['/auth/login']">INICIA SESIÓN</button> O
+          <button class="view-button" [routerLink]="['/auth/registro']">REGÍSTRATE</button>
+        </div>
+      </div>
+
+      <div class="movie-review">
+        <div class="movie-user">
+          <img src="../../assets/user.png" alt="imagen de usuario">
+          <h3>Usuario/a</h3>
+        </div>
+
+        <div class="movie-review-form">
+          <form action="#">
+            <div class="movie-review-title">
+              <label for="review-title">Título</label>
+              <input type="text" name="review-title">
+            </div>
+            <div class="movie-review-body">
+              <label for="review-body">Comentario</label>
+              <textarea name="review-body" id="review-body" cols="30" rows="10"></textarea>
+            </div>
+
+            <input type="submit" class="view-button" value="Enviar">
+          </form>
+
+        </div>
+      </div>
+      </div>
+
     <div *ngIf="logged" class="movie-review">
       <div class="movie-user">
         <img src="../../assets/user.png" alt="imagen de usuario">

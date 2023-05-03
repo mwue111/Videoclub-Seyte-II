@@ -180,4 +180,25 @@
   text-align: justify;
 }
 
+.comment-block-panel{
+  position: absolute;
+  z-index: 99;
+  background: #f5f3f4de;
+  width: 70%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  margin-left: 300px;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+  border-radius: 15px;
+  justify-content: center;
+}
 
+.comment-block-panel button{
+  width: 20%;
+  margin: 20px;
+}
