@@ -21,7 +21,6 @@ export class MoviesService {
   }
 
   getOneMovie(id: number, token: any) {
-    console.log('id: ', id);
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
     return this._http.get(this.url + '/api/peliculas/' + id, { headers:headers });

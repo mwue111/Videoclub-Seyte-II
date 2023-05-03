@@ -1,0 +1,172 @@
+*{
+  text-decoration: none;
+}
+
+.movie-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-header{
+  margin-top: -50px;
+}
+
+.movie-header img{
+  width: 100%;
+  height: 500px;
+}
+
+.movie-data{
+  margin-top: -5px;
+}
+
+.movie-data span{
+  padding: 10px;
+  color: white;
+}
+
+.movie-data-header{
+  background-color: #161A1D;
+  padding: 25px;
+}
+
+.movie-data .movie-title{
+  font-size: 2rem;
+  margin-left: 250px;
+}
+
+.movie-data .movie-info{
+  margin: 10px 0 0 250px;
+  font-weight: lighter;
+}
+
+.movie-plot{
+  width: 70%;
+  padding: 10px;
+  margin-left: 300px;
+}
+
+.movie-poster{
+  width: 180px;
+  margin-top: -300px;
+  margin-left: 50px;
+}
+
+.movie-poster img{
+  width: 100%;
+}
+
+.movie-poster .movie-buttons{
+  padding: 10px;
+}
+
+.view-button{
+  font-size: 20px;
+  border: none;
+  box-shadow: none;
+  background-color: green;
+  cursor: pointer;
+  width: 100%;
+  background-color: #1874BA;
+  border-radius: 40px;
+  color: white;
+  padding: 10px 20px;
+}
+
+.comments{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.movie-review{
+  width: 70%;
+  margin-left: 300px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.movie-user{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  margin-right: 40px;
+  font-size: 15px;
+}
+
+.movie-review img{
+  margin: 0 auto;
+  width: 40%;
+}
+
+.movie-review-form{
+  width: 100%;
+}
+
+.movie-review-form form{
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.movie-review-form div{
+  margin: 10px;
+}
+
+.movie-review-form label{
+  float:left;
+  font-size: 15px;
+  padding: 5px;
+}
+
+.movie-review-form input, textarea{
+  width: 85%;
+  height: 100%;
+  float: right;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.movie-review-form .view-button{
+  width: 150px;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+
+.users-reviews{
+  margin-left: 300px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  padding: 20px;
+  background: #F5F3F4;
+  border-radius: 15px;
+}
+
+.users-reviews img{
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
+  margin: 15px;
+}
+
+.users-reviews header h3{
+  width: 50%;
+  margin: 20px 0 0 0;
+  padding: 0;
+}
+
+.users-reviews header p{
+  width: 50%;
+  font-size: small;
+  margin: 0;
+  padding: 0;
+}
+
+

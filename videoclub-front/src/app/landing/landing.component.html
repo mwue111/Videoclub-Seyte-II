@@ -14,23 +14,23 @@
   <div *ngFor="let genre of genres">
     <span class="genre-name">{{ genre.name }}</span>
     <div *ngIf="genre.name == 'Accion'" class="genre">
-      <span *ngFor="let movie of actionMovies">
-        <img [src]="url + movie.poster" alt="" class="poster" />
+      <span *ngFor="let movie of actionMovies" >
+        <img [src]="url + movie.poster" alt="" class="poster" [routerLink]="['/pelicula', movie.id]"/>
       </span>
     </div>
     <div *ngIf="genre.name == 'Aventura'" class="genre">
       <span *ngFor="let movie of adventureMovies">
-        <img [src]="url + movie.poster" alt="" class="poster" />
+        <img [src]="url + movie.poster" alt="" class="poster" [routerLink]="['/pelicula', movie.id]" />
       </span>
     </div>
     <div *ngIf="genre.name == 'Comedia'" class="genre">
       <span *ngFor="let movie of actionMovies">
-        <img [src]="url + movie.poster" alt="" class="poster" />
+        <img [src]="url + movie.poster" alt="" class="poster" [routerLink]="['/pelicula', movie.id]" />
       </span>
     </div>
     <div *ngIf="genre.name == 'Drama'" class="genre">
       <span *ngFor="let movie of adventureMovies">
-        <img [src]="url + movie.poster" alt="" class="poster" />
+        <img [src]="url + movie.poster" alt="" class="poster" [routerLink]="['/pelicula', movie.id]" />
       </span>
     </div>
   </div>
