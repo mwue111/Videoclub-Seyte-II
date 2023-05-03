@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Genre;
+use App\Models\Movie;
 
 class GenreController extends Controller
 {
@@ -131,6 +132,15 @@ class GenreController extends Controller
       return response()->json($movies);
     } else {
       return response()->json(['error' => 'No hay películas']);
+    }
+  }
+
+  public function getGenres(Request $request, $id) {
+    $movie = Movie::findOrFail($id);
+
+    if($request->path() == 'api/pelicula/' . $id . '/generos') {
+        $genres = $movie->genres()->get();
+        return response()->json($genres);
     }
   }
 }

@@ -11,6 +11,13 @@
 
       <div class="movie-info">
         <span>Director/a: {{ movie.director }}</span>
+        <ng-container *ngIf="genreNames">
+          <span>Género/s:
+            <ng-container *ngFor="let genre of genreNames">
+              <span class="genre-names">{{genre}}</span>
+            </ng-container>
+          </span>
+        </ng-container>
         <span>Duración: {{ movie.runtime }} minutos</span>
       </div>
     </div>
@@ -32,10 +39,10 @@
   </div>
 
   <div class="comments">
-    <div class="movie-review">
+    <div *ngIf="logged" class="movie-review">
       <div class="movie-user">
         <img src="../../assets/user.png" alt="imagen de usuario">
-        <h3>nombre de usuario</h3>
+        <h3>{{ user.email }}</h3>
       </div>
 
       <div class="movie-review-form">
@@ -61,7 +68,7 @@
 
         <div>
           <header>
-            <h3>Usuario 1</h3>
+            <h3>Usuario/a</h3>
             <p>Publicado hace <time>8 meses</time></p>
           </header>
 

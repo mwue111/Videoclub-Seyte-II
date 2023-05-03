@@ -40,6 +40,12 @@
   font-weight: lighter;
 }
 
+.genre-names{
+  background-color: blue;
+  margin: 0;
+  padding: 0;
+}
+
 .movie-plot{
   width: 70%;
   padding: 10px;
@@ -86,6 +92,7 @@
   display: flex;
   justify-content: flex-start;
   text-align: center;
+  padding: 20px;
 }
 
 .movie-user{

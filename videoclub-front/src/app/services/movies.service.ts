@@ -26,6 +26,10 @@ export class MoviesService {
     return this._http.get(this.url + '/api/peliculas/' + id, { headers:headers });
   }
 
+  getMovieGenre(id: number) {
+    return this._http.get(this.url + '/api/pelicula/' + id + '/generos');
+  }
+
   // getGenreMovie(id: number): Observable<any> {
   //   return this._http.get(this.url + '/api/generos/' + id + '/peliculas');
   // }
