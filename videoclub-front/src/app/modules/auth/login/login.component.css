@@ -120,10 +120,21 @@ input {
   cursor: default;
 }
 
-.links {
+.links, a {
   font-size: 18px;
 }
 
-.links a {
+.links a, a {
   color: #159ca3;
+}
+
+.go-back{
+  margin: 15px;
+  padding: 20px 50px;
+  text-align: right;
+  width: 115%;
+}
+
+a{
+  cursor: pointer;
 }
