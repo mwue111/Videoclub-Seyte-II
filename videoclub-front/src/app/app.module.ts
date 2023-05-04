@@ -19,6 +19,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingInterceptor } from './loading.interceptor';
 import { MovieComponent } from './movie/movie.component';
+// import { CommentsComponent } from './modules/comments/components/comments/comments.component';
+import { CommentsModule } from './modules/comments/comments.module';
 
 
 const material = [MatToolbarModule];
@@ -34,6 +36,7 @@ const material = [MatToolbarModule];
     NavbarComponent,
     SpinnerComponent,
     MovieComponent,
+    // CommentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ const material = [MatToolbarModule];
     HttpClientModule,
     BrowserAnimationsModule,
     material,
+    CommentsModule
   ],
   exports: [material, RouterModule],
   providers: [appRoutingProviders, { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }],

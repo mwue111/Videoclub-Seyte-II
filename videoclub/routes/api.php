@@ -29,20 +29,22 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
 
 Route::group(['middleware' => ['guest']], function () {
-  Route::get('peliculas', 'MovieController@index')->name('peliculas.index');
-  Route::get('peliculas/{id}', 'MovieController@show')->name('peliculas.index');
-  Route::get('generos', 'GenreController@index')->name('generos.index');
-  Route::get('pelicula/{id}/generos', 'GenreController@getGenres')->name('generos.getMovies');
-  Route::get('generos/{id}/peliculas', 'GenreController@getMovies')->name('generos.getMovies');
-  Route::post('/reset-password', 'PasswordResetRequestController@sendPasswordResetEmail');
-  Route::post('/change-password', 'ChangePasswordController@passwordResetProcess');
-  Route::get('/check-password', [RegisterController::class, 'oldPassword']);
+    Route::get('resenas', 'ReviewController@index');
+    Route::get('peliculas', 'MovieController@index')->name('peliculas.index');
+    Route::get('peliculas/{id}', 'MovieController@show')->name('peliculas.index');
+    Route::get('generos', 'GenreController@index')->name('generos.index');
+    Route::get('pelicula/{id}/generos', 'GenreController@getGenres')->name('generos.getMovies');
+    Route::get('generos/{id}/peliculas', 'GenreController@getMovies')->name('generos.getMovies');
+    Route::post('/reset-password', 'PasswordResetRequestController@sendPasswordResetEmail');
+    Route::post('/change-password', 'ChangePasswordController@passwordResetProcess');
+    Route::get('/check-password', [RegisterController::class, 'oldPassword']);
 });
 
 Route::group(['middleware' => ['auth:api', 'cors']], function () {
-  Route::resource('resenas', ReviewController::class);
-  Route::resource('alquiler', RentController::class);
-  Route::get('profile', [RegisterController::class, 'profile']);
+//   Route::resource('resenas', ReviewController::class);
+    Route::get('resenas', 'ReviewController@index');
+    Route::resource('alquiler', RentController::class);
+    Route::get('profile', [RegisterController::class, 'profile']);
 });
 
 //Pendiente: segmentar la ruta de géneros y de movies para que solo el index esté disponible sin token

@@ -14,7 +14,13 @@ class ReviewController extends Controller
   {
     //
     $reviews = Review::orderBy('id', 'ASC')->get();
-    return view('reviews.index', ['reviews' => $reviews]);
+
+    if ($request->path() == 'api/resenas') {
+        return response()->json($reviews);
+    }
+    else {
+        return view('reviews.index', ['reviews' => $reviews]);
+    }
   }
 
   /**
