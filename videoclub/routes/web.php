@@ -26,7 +26,7 @@ Route::post('peliculas/{id}/add-genre', 'MovieController@addGenre')->name('pelic
 
 Route::delete('peliculas/{id}/delete-genre', 'MovieController@deleteGenre')->name('peliculas.deleteGenre');
 
-// Route::resource('resenas', 'ReviewController');//->middleware('client');
+Route::resource('resenas', 'ReviewController');//->middleware('client');
 
 Route::resource('usuarios', 'UserController');
 

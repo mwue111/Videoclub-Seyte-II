@@ -71,10 +71,10 @@ class RegisterController extends BaseController
             Passport::personalAccessTokensExpireIn(Carbon::now()->addDays(1));
         }
       $user = Auth::user();
-      //$success['token'] =  $user->createToken('MyApp')->accessToken;
-      $success['token'] =  $user->createToken('MyApp');
-      $strToken = $success['token']->accessToken;
-      $expiration = $success['token']->token->expires_at->diffInSeconds(Carbon::now());
+      $success['token'] =  $user->createToken('MyApp')->accessToken;
+    //   $success['token'] =  $user->createToken('MyApp');
+    //   $strToken = $success['token']->accessToken;
+    //   $expiration = $success['token']->token->expires_at->diffInSeconds(Carbon::now());
       $success['user'] = [
         'name' => Auth::user()->name,
         'email' => Auth::user()->email,

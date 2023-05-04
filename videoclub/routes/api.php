@@ -47,7 +47,4 @@ Route::group(['middleware' => ['auth:api', 'cors']], function () {
     Route::get('profile', [RegisterController::class, 'profile']);
 });
 
-//Pendiente: segmentar la ruta de géneros y de movies para que solo el index esté disponible sin token
-
-
 Route::middleware('auth:api')->post('logout', [RegisterController::class, 'logout']);

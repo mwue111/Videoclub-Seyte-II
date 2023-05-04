@@ -11,7 +11,8 @@ export class CommentsService {
 
   constructor(
     private _httpClient: HttpClient,
-  ) { }
+  ) {
+  }
 
   getComments(token: any): Observable<CommentInterface[]> {
     let url = URL_SERVICES + '/resenas';

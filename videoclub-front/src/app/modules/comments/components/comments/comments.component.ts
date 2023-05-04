@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommentsService } from '../../_services/comments.service';
 import { AuthService } from 'src/app/modules/auth/_services/auth.service';
+import { CommentInterface } from '../../types/comment.interface';
 
 @Component({
   selector: 'comments',
@@ -8,7 +9,8 @@ import { AuthService } from 'src/app/modules/auth/_services/auth.service';
   styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent implements OnInit {
-  @Input() currentUserId: any; //string + añadir !.
+  @Input() currentUserId: any; //o string + añadir !.
+  comments: CommentInterface[] = [];
 
   constructor(
     private _comments: CommentsService,
@@ -18,7 +20,8 @@ export class CommentsComponent implements OnInit {
   ngOnInit(): void {
     this._comments.getComments(this._auth.token)
                   .subscribe((res: any) => {
-                    console.log('comentarios: ', res);
+                    // console.log('comentarios: ', res);
+                    this.comments = res;
                   })
   }
 

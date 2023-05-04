@@ -10,7 +10,7 @@ class ReviewController extends Controller
   /**
    * Display a listing of the resource.
    */
-  public function index()
+  public function index(Request $request)
   {
     //
     $reviews = Review::orderBy('id', 'ASC')->get();

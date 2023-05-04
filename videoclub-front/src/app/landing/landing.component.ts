@@ -33,20 +33,20 @@ export class LandingComponent implements OnInit {
   getLatestMovies() {
     this._movies.getMovies(2, this._authServices.token).subscribe((res) => {
       this.movies = res;
-      console.log('movies: ', this.movies);
+      // console.log('movies: ', this.movies);
     });
   }
 
   getGenres() {
     this._genres.getGenres(4, this._authServices.token).subscribe((res) => {
-      console.log(res);
+      // console.log(res);
       this.genres = res;
       console.log('genres: ', this.genres);
     });
   }
 
   getGenresMovies() {
-    console.log(this.genres.length);
+    // console.log(this.genres.length);
     this._genres
       .getMoviesGenre(10, 1, this._authServices.token)
       .subscribe((res) => {

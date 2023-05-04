@@ -38,8 +38,8 @@ export class MovieComponent {
             for(let i = 0; i < res.length; i++){
               this.genreNames.push(res[i].name)
             }
-            console.log('res: ', res);
-            console.log('genreNames: ', this.genreNames);
+            // console.log('res: ', res);
+            // console.log('genreNames: ', this.genreNames);
           })
     })
 
