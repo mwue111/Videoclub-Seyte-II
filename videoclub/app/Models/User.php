@@ -70,9 +70,14 @@ class User extends Authenticatable
       ->withTimeStamps();
   }
 
-  public function reviews()
-  {
-    return $this->belongsToMany(Movie::class, 'reviews')
-      ->withPivot('title', 'description');
-  }
+  //Lo que había:
+//   public function reviews()
+//   {
+//     return $this->belongsToMany(Movie::class, 'reviews')
+//       ->withPivot('title', 'description');
+//   }
+
+    public function reviews() {
+        return $this->hasMany(Review::class);
+    }
 }
