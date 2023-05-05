@@ -11,8 +11,6 @@ export class CommentComponent {
   @Input() comment!: CommentInterface;
   user: any = '';
 
-  //Aquí: https://www.youtube.com/watch?v=_DACuv_xYCs&ab_channel=MonsterlessonsAcademy
-
   constructor(
     private _comments: CommentsService,
   ) {
