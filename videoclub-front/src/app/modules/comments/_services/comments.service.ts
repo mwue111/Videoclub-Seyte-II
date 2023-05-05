@@ -20,4 +20,10 @@ export class CommentsService {
 
     return this._httpClient.get<CommentInterface[]>(url, { headers:headers });
   }
+
+  getAuthors(id: any) {
+    let url = URL_SERVICES + `/autor-resena/${id}`;
+
+    return this._httpClient.get(url);
+  }
 }

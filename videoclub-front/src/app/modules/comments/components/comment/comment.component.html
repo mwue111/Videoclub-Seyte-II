@@ -1,1 +1,27 @@
-<p>comment works!</p>
+<div class="comment">
+  <div class="comment-image-container">
+    <img src="https://i.pravatar.cc/100" alt="imagen de usuario">
+  </div>
+
+  <div class="comment-right-part">
+    <div class="comment-content">
+      <div class="comment-author">
+        <h3>{{ comment.user_id }}</h3>
+      </div>
+      <div *ngIf="comment.updated_at !== null" class="comment-date">
+        <p>Publicado hace <time>{{ comment.created_at }}</time> </p>
+      </div>
+      <div *ngIf="comment.updated_at === null" class="comment-date">
+        <p>Publicado desde el principio de los tiempos</p>
+      </div>
+    </div>
+
+    <div class="comment-title">
+      <h4>{{ comment.title }}</h4>
+    </div>
+
+    <div class="comment-text">
+      {{ comment.description }}
+    </div>
+  </div>
+</div>

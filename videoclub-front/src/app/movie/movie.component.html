@@ -12,7 +12,7 @@
       <div class="movie-info">
         <span>Director/a: {{ movie.director }}</span>
 
-        <ng-container *ngIf="genreNames.length >= 1">
+        <ng-container *ngIf="genreNames.length > 1">
           <span>Géneros:
             <span class="genre-names">{{genreNames.join(', ')}}</span>
           </span>
@@ -41,10 +41,6 @@
       <!-- <button class="view-button">Alquilar</button> -->
     </div>
   </div>
-
-  <!-- Probando los componentes para comentarios -->
-  <comments currentUserId="1"></comments>
-  <!-- Probando los componentes para comentarios -->
 
   <div class="comments">
 
@@ -103,8 +99,11 @@
 
       </div>
     </div>
+
     <!-- comentarios de otros usuarios -->
-    <section>
+    <comments currentUserId="1"></comments>
+
+    <!-- <section>
       <article class="users-reviews">
         <img src="https://i.pravatar.cc/100" alt="imagen de usuario">
 
@@ -122,7 +121,7 @@
         </div>
 
       </article>
-    </section>
+    </section> -->
   </div>
 
 </div>

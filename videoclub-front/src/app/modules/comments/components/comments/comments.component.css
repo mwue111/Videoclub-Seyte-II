@@ -1,0 +1,8 @@
+.comments-container{
+  margin-left: 300px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  padding: 20px;
+}

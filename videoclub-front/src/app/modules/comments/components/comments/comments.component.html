@@ -1,10 +1,9 @@
 <div class="comments">
   <h3 class="comments-title">Reseñas: </h3>
   <div class="comment-form-title">Escribe un comentario: </div>
+  <comment-form submitLabel="Publicar"></comment-form>
   <div class="comments-container">
-    <div *ngFor="let comment of comments">
-      {{ comment.description }}
-    </div>
+    <comment *ngFor="let comment of comments" [comment]="comment"/>
   </div>
 
 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Review;
+use App\Models\Movie;
 
 class ReviewController extends Controller
 {
@@ -93,5 +94,19 @@ class ReviewController extends Controller
     $review = Review::findOrFail($id);
     $review->delete();
     return redirect()->route('resenas.index');
+  }
+
+  public function getAuthor($id){
+    $movie = Movie::findOrFail($id);
+
+    $reviews = $movie->reviews;
+    $authors = [];
+
+    foreach($reviews as $review){
+        $authors[] = $review->user;
+    }
+
+    // dd($authors);
+    return response()->json($authors);
   }
 }
