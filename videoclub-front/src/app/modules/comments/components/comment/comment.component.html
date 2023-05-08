@@ -6,8 +6,9 @@
   <div class="comment-right-part">
     <div class="comment-content">
       <div class="comment-author">
-        <h3>{{ comment.user_id }}</h3>
+        <h3>{{ username }}</h3>
       </div>
+
       <div *ngIf="comment.updated_at !== null" class="comment-date">
         <p>Publicado hace <time>{{ comment.created_at }}</time> </p>
       </div>
