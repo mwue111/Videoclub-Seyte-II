@@ -24,12 +24,16 @@
     <div class="comment-text">
       {{ comment.description }}
     </div>
-    <!-- Edición y borrado del comentario -->
+    <!-- opciones de edición y borrado del comentario -->
     <div class="comment-actions">
-      <button *ngIf="canEdit" class="comment-action-button button-edit">Editar</button>
+      <button *ngIf="canEdit" class="comment-action-button button-edit" (click)="setActiveComment.emit({ id: comment.id, type: activeCommentType.editing })">Editar</button>
       <button *ngIf="canDelete" class="comment-action-button button-delete">Eliminar</button>
     </div>
-    <!-- fin de edición y borrado del comentario -->
+    <!-- fin de opciones edición y borrado del comentario -->
+
+    <!-- edición de comentario -->
+    <comment-form *ngIf="isEditing()" submitLabel="Editar" (handleSubmit)="addComment.emit($event)"></comment-form>
+    <!-- fin de edición de comentario -->
   </div>
 </div>
 

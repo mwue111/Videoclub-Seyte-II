@@ -5,7 +5,11 @@
     <comment-form submitLabel="Publicar" (handleSubmit)="addComment($event)"></comment-form>
   </div>
   <div class="comments-container" *ngIf="displayComments">
-    <comment *ngFor="let comment of comments" [comment]="comment"/>
+    <comment *ngFor="let comment of comments"
+              [comment]="comment"
+              (setActiveComment)="setActiveComment($event)"
+              [activeComment] = "activeComment"
+    />
   </div>
 
   <div class="no-comments" *ngIf="!displayComments">

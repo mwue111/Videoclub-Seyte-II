@@ -3,6 +3,7 @@ import { CommentsService } from '../../_services/comments.service';
 import { AuthService } from 'src/app/modules/auth/_services/auth.service';
 import { CommentInterface } from '../../types/comment.interface';
 import { ActivatedRoute } from '@angular/router';
+import { ActiveCommentInterface } from '../../types/activeComment.interface';
 
 @Component({
   selector: 'comments',
@@ -11,7 +12,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CommentsComponent implements OnInit {
   @Input() currentUserId: any; //o string + añadir !.
+
   comments: CommentInterface[] = [];
+  activeComment: ActiveCommentInterface | null = null;
+
   displayComments: boolean = true;
   movieId: any;
 
@@ -43,4 +47,7 @@ export class CommentsComponent implements OnInit {
         })
   }
 
+  setActiveComment(activeComment: ActiveCommentInterface | null): void {
+    this.activeComment = activeComment;
+  }
 }
