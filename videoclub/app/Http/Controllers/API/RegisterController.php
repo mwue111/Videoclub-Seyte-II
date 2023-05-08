@@ -76,6 +76,7 @@ class RegisterController extends BaseController
     //   $strToken = $success['token']->accessToken;
     //   $expiration = $success['token']->token->expires_at->diffInSeconds(Carbon::now());
       $success['user'] = [
+        'id' => Auth::user()->id,
         'name' => Auth::user()->name,
         'email' => Auth::user()->email,
       ];

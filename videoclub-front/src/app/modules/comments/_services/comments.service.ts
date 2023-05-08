@@ -21,9 +21,28 @@ export class CommentsService {
     return this._httpClient.get<CommentInterface[]>(url, { headers:headers });
   }
 
+  getMovieComments(token: any, id: number): Observable<CommentInterface[]> {
+    let url = URL_SERVICES + `/resenas/pelicula/${id}`
+    let headers = new HttpHeaders().set('Authorization', 'Bearer' + token);
+
+    return this._httpClient.get<CommentInterface[]>(url, { headers:headers })
+  }
+
   getAuthors(id: any) {
     let url = URL_SERVICES + `/autor-resena/${id}`;
 
     return this._httpClient.get(url);
+  }
+
+  createComment(token: any, title: string, body: string, email: string, movie: number): Observable<CommentInterface> {
+    let url = URL_SERVICES + '/resenas';
+    let headers = new HttpHeaders().set('Authorization', 'Bearer' + token);
+
+    return this._httpClient.post<CommentInterface>(url, {
+      title: title,
+      description: body,
+      user_id: email,
+      movie_id: movie
+     }, { headers:headers })
   }
 }

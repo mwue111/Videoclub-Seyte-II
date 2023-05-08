@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\Movie;
+use App\Models\User;
 
 class ReviewController extends Controller
 {
@@ -13,7 +14,6 @@ class ReviewController extends Controller
    */
   public function index(Request $request)
   {
-    //
     $reviews = Review::orderBy('id', 'ASC')->get();
 
     if ($request->path() == 'api/resenas') {
@@ -40,10 +40,17 @@ class ReviewController extends Controller
       'title' => 'required',
       'description' => 'required',
     ]);
-    //Creo el objeto a partir de los datos recibidos, lo guardo y lo devuelvo.
-    $review = Review::create($request->all());
-    $review->save();
-    return json_encode($review);
+
+    $user = User::where('email', '=', $request->user_id)->first();
+    if(!$user){
+        return response()->json(['error' => 'Usuario no encontrado'], 404);
+    }
+
+    $data = $request->all();
+    $data['user_id'] = $user->id;
+    $review = Review::create($data);
+
+    return json_encode($review, 201);
   }
 
   /**
@@ -96,17 +103,32 @@ class ReviewController extends Controller
     return redirect()->route('resenas.index');
   }
 
-  public function getAuthor($id){
+  public function findMovieReviews($id){
     $movie = Movie::findOrFail($id);
+    return $movie->reviews;
+  }
 
-    $reviews = $movie->reviews;
-    $authors = [];
+  public function getReviews($id){
+    $reviews = $this->findMovieReviews($id);
+    return response()->json($reviews);
+  }
 
-    foreach($reviews as $review){
-        $authors[] = $review->user;
+  public function getAuthor($id){
+
+    $reviews = $this->findMovieReviews($id);
+
+    if(count($reviews) > 0){
+        $authors = [];
+
+        foreach($reviews as $review){
+            $authors[] = $review->user;
+        }
+    }
+    else{
+        $authors = 'none';
     }
 
-    // dd($authors);
     return response()->json($authors);
   }
+
 }

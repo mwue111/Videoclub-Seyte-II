@@ -31,6 +31,8 @@ Route::post('login', [RegisterController::class, 'login']);
 Route::group(['middleware' => ['guest']], function () {
     Route::get('autor-resena/{id}', 'ReviewController@getAuthor');
     Route::get('resenas', 'ReviewController@index');
+    Route::post('resenas', 'ReviewController@store');
+    Route::get('resenas/pelicula/{id}', 'ReviewController@getReviews');
     Route::get('peliculas', 'MovieController@index')->name('peliculas.index');
     Route::get('peliculas/{id}', 'MovieController@show')->name('peliculas.index');
     Route::get('generos', 'GenreController@index')->name('generos.index');

@@ -16,7 +16,7 @@ export class AuthService {
     private router: Router
   ) {
     this.loadLocalStorage();
-    // console.log('token: ', this.token, ' - user: ', this.user);
+    // console.log('user: ', this.user);
   }
 
   loadLocalStorage() {

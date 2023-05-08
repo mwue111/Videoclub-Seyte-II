@@ -1,9 +1,14 @@
 <div class="comments">
-  <h3 class="comments-title">Reseñas: </h3>
-  <div class="comment-form-title">Escribe un comentario: </div>
-  <comment-form submitLabel="Publicar"></comment-form>
-  <div class="comments-container">
+  <div class="comment-form">
+    <h3 class="comments-title">Reseñas: </h3>
+    <div class="comment-form-title">Escribe un comentario: </div>
+    <comment-form submitLabel="Publicar" (handleSubmit)="addComment($event)"></comment-form>
+  </div>
+  <div class="comments-container" *ngIf="displayComments">
     <comment *ngFor="let comment of comments" [comment]="comment"/>
   </div>
 
+  <div class="no-comments" *ngIf="!displayComments">
+    <p>¡Sé el primero en escribir una reseña para esta película!</p>
+  </div>
 </div>

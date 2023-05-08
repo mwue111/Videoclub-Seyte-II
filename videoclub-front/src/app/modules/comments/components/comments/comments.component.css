@@ -1,8 +1,16 @@
-.comments-container{
+.comments-container,
+.no-comments{
   margin-left: 300px;
   margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   width: 70%;
+  padding: 20px;
+}
+
+.no-comments{
+  background-color: #F5F3F4;
+  text-align: center;
+  border-radius: 15px;
   padding: 20px;
 }

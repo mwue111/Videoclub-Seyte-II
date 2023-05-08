@@ -1,4 +1,4 @@
-<div class="comment">
+<div class="comment" *ngIf="displayComment">
   <div class="comment-image-container">
     <img src="https://i.pravatar.cc/100" alt="imagen de usuario">
   </div>
@@ -10,7 +10,7 @@
       </div>
 
       <div *ngIf="comment.updated_at !== null" class="comment-date">
-        <p>Publicado hace <time>{{ comment.created_at }}</time> </p>
+        <p>Publicado el <time>{{ comment.created_at | date:'short' }}</time> </p>
       </div>
       <div *ngIf="comment.updated_at === null" class="comment-date">
         <p>Publicado desde el principio de los tiempos</p>
@@ -24,5 +24,12 @@
     <div class="comment-text">
       {{ comment.description }}
     </div>
+    <!-- Edición y borrado del comentario -->
+    <div class="comment-actions">
+      <button *ngIf="canEdit" class="comment-action-button button-edit">Editar</button>
+      <button *ngIf="canDelete" class="comment-action-button button-delete">Eliminar</button>
+    </div>
+    <!-- fin de edición y borrado del comentario -->
   </div>
 </div>
+

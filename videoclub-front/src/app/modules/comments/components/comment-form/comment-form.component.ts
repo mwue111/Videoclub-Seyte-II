@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -10,6 +10,7 @@ export class CommentFormComponent implements OnInit{
   @Input() submitLabel!: string;
   @Input() hasCancelButton: boolean = false;
   @Input() initialText: string = '';
+  @Output() handleSubmit = new EventEmitter<any>();
   form!: FormGroup;
 
   constructor(
@@ -19,12 +20,13 @@ export class CommentFormComponent implements OnInit{
   ngOnInit(): void {
     this.form = this.fb.group({
       title: [this.initialText, Validators.required],
+      description: [this.initialText, Validators.required]
     });
   }
 
   //Aquí: https://www.youtube.com/watch?v=_DACuv_xYCs&ab_channel=MonsterlessonsAcademy
 
   onSubmit() {
-    console.log('enviado: ', this.form.value);
+    this.handleSubmit.emit(this.form.value);
   }
 }
