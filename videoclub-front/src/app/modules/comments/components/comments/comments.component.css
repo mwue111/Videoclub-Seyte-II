@@ -36,7 +36,7 @@
 .comment-block-panel{
   position: absolute;
   z-index: 99;
-  background: #f5f3f4de;
+  background: #f5f3f4b3;
   width: 70%;
   height: 350px;
   display: flex;
