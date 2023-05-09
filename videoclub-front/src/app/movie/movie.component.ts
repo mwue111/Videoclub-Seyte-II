@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MoviesService } from '../services/movies.service';
 import { AuthService } from '../modules/auth/_services/auth.service';
 import { URL_BACKEND } from '../config/config';
+
 
 @Component({
   selector: 'app-movie',
@@ -38,7 +39,6 @@ export class MovieComponent {
             }
           })
     })
-
   }
 
 

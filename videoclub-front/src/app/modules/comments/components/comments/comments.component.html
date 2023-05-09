@@ -4,7 +4,7 @@
     <div class="comment-form-title">Escribe un comentario: </div>
     <comment-form submitLabel="Publicar" (handleSubmit)="addComment($event)"></comment-form>
   </div>
-  <div class="comments-container" *ngIf="displayComments">
+  <div class="comments-container">
     <comment *ngFor="let comment of comments"
               [comment]="comment"
               (setActiveComment)="setActiveComment($event)"
@@ -14,7 +14,8 @@
     />
   </div>
 
-  <div class="no-comments" *ngIf="!displayComments">
-    <p>¡Sé el primero en escribir una reseña para esta película!</p>
+  <div class="no-comments" *ngIf="comments.length === 0">
+    <p>Aún no hay reseñas para esta película. ¡Sé la primera persona en dar su opinión!</p>
   </div>
+
 </div>

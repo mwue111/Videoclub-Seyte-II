@@ -14,8 +14,6 @@ export class CommentsComponent implements OnInit {
 
   comments: CommentInterface[] = [];
   activeComment: ActiveCommentInterface | null = null;
-
-  displayComments: boolean = true;
   movieId: any;
 
   constructor(
@@ -26,16 +24,15 @@ export class CommentsComponent implements OnInit {
     this.ngOnInit();
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.movieId = params.get('id');
       if(this.movieId){
         this._comments.getMovieComments(this._auth.token, Number(this.movieId))
             .subscribe((res: any) => {
-              console.log('¿El back detecta que hay un nuevo comentario? ', res);
               this.comments = res;
               if(res.length === 0){
-                this.displayComments = false;
+                this.comments = [];
               }
             })
       }
