@@ -15,7 +15,11 @@ export class CommentComponent implements OnInit {
   @Input() comment!: CommentInterface;
   @Input() activeComment!: ActiveCommentInterface | null;
   @Output() setActiveComment = new EventEmitter<ActiveCommentInterface | null>();
-
+  @Output() updateComment = new EventEmitter<{
+    body: string;
+    commentId: string | number;
+  }>();
+  @Output() deleteComment = new EventEmitter<string|number>();
   //aquí: https://www.youtube.com/watch?v=_DACuv_xYCs&ab_channel=MonsterlessonsAcademy
 
   username: string = '';
@@ -52,8 +56,8 @@ export class CommentComponent implements OnInit {
       const fiveMinutes = 300000;
       const timePassed = new Date().getTime() - Date.parse(this.comment.created_at) > fiveMinutes;
 
-      this.canEdit = Boolean(this._auth.isLogged()) && this._auth.user.id === this.comment.user_id && !timePassed;
-      this.canDelete = Boolean(this._auth.isLogged()) && this._auth.user.id === this.comment.user_id && !timePassed;
+      this.canEdit = Boolean(this._auth.isLogged()) && this._auth.user.id === this.comment.user_id; // && !timePassed;
+      this.canDelete = Boolean(this._auth.isLogged()) && this._auth.user.id === this.comment.user_id;
   }
 
   isEditing(): boolean {
@@ -64,6 +68,7 @@ export class CommentComponent implements OnInit {
     return this.activeComment.id === this.comment.id &&
             this.activeComment.type === this.activeCommentType.editing;
   }
+
 
 
 }

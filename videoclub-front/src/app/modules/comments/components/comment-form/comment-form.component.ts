@@ -10,7 +10,9 @@ export class CommentFormComponent implements OnInit{
   @Input() submitLabel!: string;
   @Input() hasCancelButton: boolean = false;
   @Input() initialText: string = '';
+  @Input() initialTitle: string = '';
   @Output() handleSubmit = new EventEmitter<any>();
+  @Output() handleCancel = new EventEmitter<void>();
   form!: FormGroup;
 
   constructor(
@@ -19,12 +21,10 @@ export class CommentFormComponent implements OnInit{
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      title: [this.initialText, Validators.required],
+      title: [this.initialTitle, Validators.required],
       description: [this.initialText, Validators.required]
     });
   }
-
-  //Aquí: https://www.youtube.com/watch?v=_DACuv_xYCs&ab_channel=MonsterlessonsAcademy
 
   onSubmit() {
     this.handleSubmit.emit(this.form.value);

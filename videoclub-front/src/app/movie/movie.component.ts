@@ -25,8 +25,6 @@ export class MovieComponent {
     this.user = this._auth.user;
 
     this.route.params.subscribe((res: any) => {
-      //Aquí: mandar un número, no un objeto
-      //https://www.youtube.com/watch?v=jMNUpe62WnI&ab_channel=ProgramadorNovato
       let movieId = res.id;
       this._movie.getOneMovie(movieId, this._auth.token)
           .subscribe((res: any) => {
@@ -38,8 +36,6 @@ export class MovieComponent {
             for(let i = 0; i < res.length; i++){
               this.genreNames.push(res[i].name)
             }
-            // console.log('res: ', res);
-            // console.log('genreNames: ', this.genreNames);
           })
     })
 

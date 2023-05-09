@@ -11,7 +11,6 @@ import { ActiveCommentInterface } from '../../types/activeComment.interface';
   styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent implements OnInit {
-  @Input() currentUserId: any; //o string + añadir !.
 
   comments: CommentInterface[] = [];
   activeComment: ActiveCommentInterface | null = null;
@@ -23,7 +22,9 @@ export class CommentsComponent implements OnInit {
     private _comments: CommentsService,
     private _auth: AuthService,
     private route: ActivatedRoute,
-  ) {}
+  ) {
+    this.ngOnInit();
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -31,6 +32,7 @@ export class CommentsComponent implements OnInit {
       if(this.movieId){
         this._comments.getMovieComments(this._auth.token, Number(this.movieId))
             .subscribe((res: any) => {
+              console.log('¿El back detecta que hay un nuevo comentario? ', res);
               this.comments = res;
               if(res.length === 0){
                 this.displayComments = false;
@@ -49,5 +51,26 @@ export class CommentsComponent implements OnInit {
 
   setActiveComment(activeComment: ActiveCommentInterface | null): void {
     this.activeComment = activeComment;
+  }
+
+  updateComment({body, commentId}: {body: any, commentId: string|number}){
+
+    this._comments.updateComment(this._auth.token, body.title, body.description, commentId, this._auth.user.id, this.movieId)
+        .subscribe((updatedComment: any) => {
+          this.comments = this.comments.map((comment) => {
+            if(comment.id === commentId) {
+              return updatedComment;
+            }
+            return comment;
+          });
+          this.activeComment = null;
+        });
+  }
+
+  deleteComment(commentId: string|number): void {
+    this._comments.deleteComment(this._auth.token, commentId)
+        .subscribe(() => {
+          this.comments = this.comments.filter((comment: any) => comment.id !== commentId);
+        })
   }
 }

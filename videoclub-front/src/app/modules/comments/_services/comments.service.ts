@@ -45,4 +45,23 @@ export class CommentsService {
       movie_id: movie
      }, { headers:headers })
   }
+
+  updateComment(token: any, title: string, body: string, id: string|number, user: number, movie: number): Observable<CommentInterface> {
+    let url = URL_SERVICES + `/resenas/${id}`;
+    let headers = new HttpHeaders().set('Authorization','Bearer' + token);
+
+    return this._httpClient.put<CommentInterface>(url, {
+      title: title,
+      description: body,
+      user_id: user,
+      movie_id: movie
+    }, { headers:headers })
+  }
+
+  deleteComment(token: any, id: string|number){
+    let url = URL_SERVICES + `/resenas/${id}`;
+    let headers = new HttpHeaders().set('Authorization', 'Bearer' + token);
+
+    return this._httpClient.delete(url, { headers:headers })
+  }
 }

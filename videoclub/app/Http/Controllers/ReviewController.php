@@ -99,8 +99,8 @@ class ReviewController extends Controller
   {
     //
     $review = Review::findOrFail($id);
-    $review->delete();
-    return redirect()->route('resenas.index');
+    return $review->delete();
+    // return redirect()->route('resenas.index');
   }
 
   public function findMovieReviews($id){
