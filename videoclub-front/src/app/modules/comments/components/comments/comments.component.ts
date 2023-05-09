@@ -11,7 +11,8 @@ import { ActiveCommentInterface } from '../../types/activeComment.interface';
   styleUrls: ['./comments.component.css']
 })
 export class CommentsComponent implements OnInit {
-
+  logged: boolean;
+  user: any;
   comments: CommentInterface[] = [];
   activeComment: ActiveCommentInterface | null = null;
   movieId: any;
@@ -21,6 +22,8 @@ export class CommentsComponent implements OnInit {
     private _auth: AuthService,
     private route: ActivatedRoute,
   ) {
+    this.logged = this._auth.isLogged();
+    this.user = this._auth.user;
     this.ngOnInit();
   }
 

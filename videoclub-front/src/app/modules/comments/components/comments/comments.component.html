@@ -1,8 +1,26 @@
+<div class="comment-block-panel" *ngIf="!logged">
+  <p>Para escribir una reseña</p>
+  <div class="buttons">
+    <button [routerLink]="['/auth/login']">INICIA SESIÓN</button> O <button [routerLink]="['/auth/registro']">REGÍSTRATE</button>
+  </div>
+</div>
+
 <div class="comments">
   <div class="comment-form">
-    <h3 class="comments-title">Reseñas: </h3>
-    <div class="comment-form-title">Escribe un comentario: </div>
-    <comment-form submitLabel="Publicar" (handleSubmit)="addComment($event)"></comment-form>
+    <div class="logged-user">
+      <div *ngIf="user">
+        <div *ngIf="!user.image">
+          <img src="../../../../../assets/user.png" alt="Imagen de usuario">
+        </div>
+        <div *ngIf="user.image">
+          <img src="{{ user.image }}" alt="Imagen de perfil de {{ user.email }}">
+        </div>
+        <h3>{{ user.email }}</h3>
+      </div>
+    </div>
+    <div class="movie-review-form">
+      <comment-form submitLabel="Publicar" (handleSubmit)="addComment($event)"></comment-form>
+    </div>
   </div>
   <div class="comments-container">
     <comment *ngFor="let comment of comments"

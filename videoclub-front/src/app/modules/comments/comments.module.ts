@@ -5,11 +5,13 @@ import { CommonModule } from "@angular/common";
 import { CommentComponent } from "./components/comment/comment.component";
 import { CommentFormComponent } from './components/comment-form/comment-form.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    RouterModule
   ],
   declarations: [
     CommentsComponent,

@@ -1,6 +1,21 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <input class="comment-form-title" formControlName="title" placeholder="Título" required/>
-  <textarea class="comment-form-textarea" formControlName="description" required></textarea>
-  <button class="comment-form-button" type="submit" [disabled]="form.invalid">{{ submitLabel }}</button>
-  <button *ngIf="hasCancelButton" class="comment-form-button comment-form-cancel-button" type="button" (click)="handleCancel.emit()">Cancelar</button>
-</form>
+<div class="movie-review-form">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="moview-review-title">
+      <label for="title">Título</label>
+      <input class="comment-form-title" formControlName="title" required/>
+    </div>
+    <div class="movie-review-body">
+      <label for="description">Comentario</label>
+      <textarea class="comment-form-textarea" formControlName="description" cols="30" rows="10" required></textarea>
+    </div>
+
+    <button class="comment-form-button"
+            type="submit"
+            [disabled]="form.invalid"
+    >
+            {{ submitLabel }}
+    </button>
+
+    <button *ngIf="hasCancelButton" class="comment-form-button comment-form-cancel-button" type="button" (click)="handleCancel.emit()">Cancelar</button>
+  </form>
+</div>

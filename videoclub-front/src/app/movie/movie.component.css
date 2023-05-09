@@ -30,6 +30,11 @@
   padding: 25px;
 }
 
+.movie-title,
+.movie-info{
+  font-weight: lighter;
+}
+
 .movie-data .movie-title{
   font-size: 2rem;
   margin-left: 250px;
@@ -37,7 +42,6 @@
 
 .movie-data .movie-info{
   margin: 10px 0 0 250px;
-  font-weight: lighter;
 }
 
 .genre-names{
@@ -79,13 +83,13 @@
   padding: 10px 20px;
 }
 
-.comments{
+/*.comments{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
 
-.movie-review{
+.movie-review{ comment-form
   width: 70%;
   margin-left: 300px;
   margin-bottom: 50px;
@@ -95,7 +99,7 @@
   padding: 20px;
 }
 
-.movie-user{
+.movie-user{ logged-user
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -105,7 +109,7 @@
   font-size: 15px;
 }
 
-.movie-review img{
+.movie-review img{ comment-form
   margin: 0 auto;
   width: 40%;
 }
@@ -139,45 +143,24 @@
   padding: 5px;
 }
 
-.movie-review-form .view-button{
+.movie-review-form .view-button{ comment-form-button
+  width: 150px;
+  margin: 0 auto;
+  border-radius: 20px;
+} */
+
+.view-button{
   width: 150px;
   margin: 0 auto;
   border-radius: 20px;
 }
 
-.users-reviews{
-  margin-left: 300px;
-  margin-bottom: 50px;
-  display: flex;
-  flex-direction: row;
-  width: 70%;
-  padding: 20px;
-  background: #F5F3F4;
-  border-radius: 15px;
+.view-button:hover{
+  background: #125385;
 }
 
-.users-reviews img{
-  width: 70px;
-  height: 70px;
-  border-radius: 100%;
-  margin: 15px;
-}
-
-.users-reviews header h3{
-  width: 50%;
-  margin: 20px 0 0 0;
-  padding: 0;
-}
-
-.users-reviews header p{
-  width: 50%;
-  font-size: small;
-  margin: 0;
-  padding: 0;
-}
-
-.users-reviews-card{
-  text-align: justify;
+.view-button:active{
+  background-color: #1c7fca;
 }
 
 .comment-block-panel{

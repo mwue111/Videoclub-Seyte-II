@@ -20,7 +20,6 @@ export class CommentComponent implements OnInit {
     commentId: string | number;
   }>();
   @Output() deleteComment = new EventEmitter<string|number>();
-  //aquí: https://www.youtube.com/watch?v=_DACuv_xYCs&ab_channel=MonsterlessonsAcademy
 
   username: string = '';
   displayComment: boolean = true;
@@ -56,8 +55,8 @@ export class CommentComponent implements OnInit {
       const fiveMinutes = 300000;
       const timePassed = new Date().getTime() - Date.parse(this.comment.created_at) > fiveMinutes;
 
-      this.canEdit = Boolean(this._auth.isLogged()) && this._auth.user.id === this.comment.user_id; // && !timePassed;
-      this.canDelete = Boolean(this._auth.isLogged()) && this._auth.user.id === this.comment.user_id;
+      this.canEdit = Boolean(this._auth.isLogged()) && this._auth.user.id === this.comment.user_id && !timePassed;
+      this.canDelete = Boolean(this._auth.isLogged()) && this._auth.user.id === this.comment.user_id; //&& !timePassed;
   }
 
   isEditing(): boolean {

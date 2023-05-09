@@ -1,3 +1,69 @@
+.comments{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.comment-form{
+  width: 70%;
+  margin-left: 300px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: flex-start;
+  text-align: center;
+  padding: 20px;
+}
+
+.comment-form img{
+  margin: 0 auto;
+  width: 40%;
+}
+
+.logged-user{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  margin: 0 30px 0 40px;
+  font-size: 15px;
+}
+
+.movie-review-form{
+  width: 100%;
+}
+
+.comment-block-panel{
+  position: absolute;
+  z-index: 99;
+  background: #f5f3f4de;
+  width: 70%;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 300px;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+  border-radius: 15px;
+  justify-content: center;
+}
+
+.comment-block-panel button{
+  font-size: 20px;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  background-color: #1874BA;
+  border-radius: 40px;
+  color: white;
+  padding: 10px 20px;
+  width: 20%;
+  margin: 20px;
+}
+
+
 .comments-container,
 .no-comments{
   margin-left: 300px;

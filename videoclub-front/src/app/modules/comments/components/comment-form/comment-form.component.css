@@ -1,0 +1,60 @@
+.movie-review-form{
+  width: 100%;
+}
+
+.movie-review-form form{
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.movie-review-form div{
+  margin: 10px;
+}
+
+.movie-review-form label{
+  float: left;
+  font-size: 17px;
+  padding: 5px;
+}
+
+.movie-review-form input, textarea{
+  width: 85%;
+  height: 100%;
+  float: right;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.movie-review-form .comment-form-button{
+  width: 150px;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+
+.comment-form-button{
+  font-size: 20px;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  width: 100%;
+  background-color: #1874BA;
+  border-radius: 40px;
+  color: white;
+  padding: 10px 20px;
+}
+
+.comment-form-button:hover{
+  background: #125385;
+}
+
+.comment-form-button:active{
+  background: #1c7fca;
+}
+
+.comment-form-button:disabled{
+  background: #1253857a;
+  cursor: default;
+}
+

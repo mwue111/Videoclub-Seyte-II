@@ -6,7 +6,7 @@
   <div class="movie-data">
     <div class="movie-data-header">
       <div class="movie-title">
-        <span>{{ movie.title }}</span>
+        <span>{{ movie.title | uppercase }}</span>
       </div>
 
       <div class="movie-info">
@@ -43,85 +43,7 @@
   </div>
 
   <div class="comments">
-
-    <div *ngIf="!logged">
-      <div class="comment-block-panel">
-        <p>Para escribir una reseña</p>
-        <div class="buttons">
-          <button class="view-button" [routerLink]="['/auth/login']">INICIA SESIÓN</button> O
-          <button class="view-button" [routerLink]="['/auth/registro']">REGÍSTRATE</button>
-        </div>
-      </div>
-
-      <div class="movie-review">
-        <div class="movie-user">
-          <img src="../../assets/user.png" alt="imagen de usuario">
-          <h3>Usuario/a</h3>
-        </div>
-
-        <div class="movie-review-form">
-          <form action="#">
-            <div class="movie-review-title">
-              <label for="review-title">Título</label>
-              <input type="text" name="review-title">
-            </div>
-            <div class="movie-review-body">
-              <label for="review-body">Comentario</label>
-              <textarea name="review-body" id="review-body" cols="30" rows="10"></textarea>
-            </div>
-
-            <input type="submit" class="view-button" value="Enviar">
-          </form>
-
-        </div>
-      </div>
-      </div>
-
-    <div *ngIf="logged" class="movie-review">
-      <div class="movie-user">
-        <img src="../../assets/user.png" alt="imagen de usuario">
-        <h3>{{ user.email }}</h3>
-      </div>
-
-      <div class="movie-review-form">
-        <form action="#">
-          <div class="movie-review-title">
-            <label for="review-title">Título</label>
-            <input type="text" name="review-title">
-          </div>
-          <div class="movie-review-body">
-            <label for="review-body">Comentario</label>
-            <textarea name="review-body" id="review-body" cols="30" rows="10"></textarea>
-          </div>
-
-          <input type="submit" class="view-button" value="Enviar">
-        </form>
-
-      </div>
-    </div>
-
-    <!-- comentarios de otros usuarios -->
     <comments></comments>
-
-    <!-- <section>
-      <article class="users-reviews">
-        <img src="https://i.pravatar.cc/100" alt="imagen de usuario">
-
-        <div class="users-reviews-card">
-          <header>
-            <h3>Usuario/a</h3>
-            <p>Publicado hace <time>8 meses</time></p>
-          </header>
-
-            <h4>Título</h4>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur voluptate, porro sint pariatur modi vero provident aliquid tempore accusantium repellat similique illum molestias dolor. Nemo doloremque nam accusamus asperiores fugiat!
-              Doloribus aperiam, ea debitis optio cupiditate suscipit necessitatibus ab incidunt blanditiis, eaque praesentium nam exercitationem dolor autem, rerum doloremque minus voluptatum laboriosam? Mollitia perferendis quibusdam nisi libero sint id quaerat.
-            </p>
-        </div>
-
-      </article>
-    </section> -->
   </div>
 
 </div>
