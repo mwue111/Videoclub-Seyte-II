@@ -36,9 +36,13 @@
     <img [src]="url + movie.poster" alt="Poster de la película {{movie.poster}}">
     <div class="movie-buttons">
       <!-- Si el usuario está registrado:  -->
+      <!-- Si es tipo premium: -->
       <button class="view-button" [routerLink]="['#']">Ver</button>
-      <!-- Si el usuario no está registrado:  -->
+      <!-- Si es tipo free: -->
       <!-- <button class="view-button">Alquilar</button> -->
+
+      <!-- Si el usuario no está registrado:  -->
+      <!-- bloqueo del botón ver película -->
     </div>
   </div>
 

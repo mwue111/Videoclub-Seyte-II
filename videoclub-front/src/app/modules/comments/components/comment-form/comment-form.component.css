@@ -29,8 +29,13 @@
 
 .movie-review-form .comment-form-button{
   width: 150px;
-  margin: 0 auto;
+  /* margin: 0 auto; */
   border-radius: 20px;
+}
+
+.buttons{
+  display: flex;
+  justify-content: center;
 }
 
 .comment-form-button{
@@ -43,6 +48,7 @@
   border-radius: 40px;
   color: white;
   padding: 10px 20px;
+  margin: 0 15px;
 }
 
 .comment-form-button:hover{

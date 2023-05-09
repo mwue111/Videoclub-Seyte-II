@@ -26,20 +26,33 @@
     </div>
 
     <!-- edición de comentario -->
-    <comment-form *ngIf="isEditing()"
-                  submitLabel="Guardar"
-                  [hasCancelButton]="true"
-                  [initialText]="comment.description"
-                  [initialTitle]="comment.title"
-                  (handleSubmit)="updateComment.emit({ body: $event, commentId: comment.id })"
-                  (handleCancel)="setActiveComment.emit(null)"
-    ></comment-form>
+    <div class="edit-comment">
+      <comment-form *ngIf="isEditing()"
+                    submitLabel="Guardar"
+                    [hasCancelButton]="true"
+                    [initialText]="comment.description"
+                    [initialTitle]="comment.title"
+                    (handleSubmit)="updateComment.emit({ body: $event, commentId: comment.id })"
+                    (handleCancel)="setActiveComment.emit(null)"
+      ></comment-form>
+    </div>
     <!-- fin de edición de comentario -->
 
     <!-- opciones de edición y borrado del comentario -->
     <div class="comment-actions" *ngIf="!isEditing()">
-      <button *ngIf="canEdit" class="comment-action-button button-edit" (click)="setActiveComment.emit({ id: comment.id, type: activeCommentType.editing })">Editar</button>
-      <button *ngIf="canDelete" class="comment-action-button button-delete" (click)="deleteComment.emit(comment.id)" >Eliminar</button>
+      <button *ngIf="canEdit"
+              class="comment-action-button button-edit"
+              (click)="setActiveComment.emit({ id: comment.id, type: activeCommentType.editing })"
+      >
+        Editar
+      </button>
+
+      <button *ngIf="canDelete"
+              class="comment-action-button button-delete"
+              (click)="deleteComment.emit(comment.id)"
+      >
+        Eliminar
+      </button>
     </div>
     <!-- fin de opciones edición y borrado del comentario -->
   </div>
