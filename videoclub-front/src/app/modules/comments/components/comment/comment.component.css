@@ -68,18 +68,6 @@ h3, h4{
   background: #1c7fca;
 }
 
-.button-edit{
-  background: #159CA3;
-}
-
-.button-edit:hover{
-  background: #10787e;
-}
-
-.button-edit:active{
-  background: #1bc6cf;
-}
-
 .button-delete{
   background: #FF8811;
   color: #FFFFFF;

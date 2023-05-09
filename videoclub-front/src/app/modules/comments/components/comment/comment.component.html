@@ -41,7 +41,7 @@
     <!-- opciones de edición y borrado del comentario -->
     <div class="comment-actions" *ngIf="!isEditing()">
       <button *ngIf="canEdit"
-              class="comment-action-button button-edit"
+              class="comment-action-button"
               (click)="setActiveComment.emit({ id: comment.id, type: activeCommentType.editing })"
       >
         Editar
