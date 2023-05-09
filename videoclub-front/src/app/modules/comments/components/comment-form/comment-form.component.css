@@ -29,7 +29,6 @@
 
 .movie-review-form .comment-form-button{
   width: 150px;
-  /* margin: 0 auto; */
   border-radius: 20px;
 }
 
@@ -62,4 +61,29 @@
 .comment-form-button:disabled{
   background: #1253857a;
   cursor: default;
+}
+
+.comment-form-save-button{
+  background: #159CA3;
+}
+
+.comment-form-save-button:hover{
+  background: #10787e;
+}
+
+.comment-form-save-button:active{
+  background: #1bc6cf;
+}
+
+.comment-form-cancel-button{
+  background: #FF8811;
+  color: #FFFFFF;
+}
+
+.comment-form-cancel-button:hover{
+  background: #c96b0e;
+}
+
+.comment-form-cancel-button:active{
+  background: #ff9730;
 }

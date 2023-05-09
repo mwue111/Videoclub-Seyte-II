@@ -43,3 +43,52 @@ h3, h4{
 .edit-comment{
   width: 100%;
 }
+
+.comment-actions{
+  display: flex;
+  width: 15%;
+}
+
+.comment-action-button {
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  background: #1874BA;
+  border-radius: 20px;
+  color: white;
+  padding: 5px 10px;
+  margin: 5px;
+}
+
+.comment-action-button:hover{
+  background: #125385;
+}
+
+.comment-action-button:active{
+  background: #1c7fca;
+}
+
+.button-edit{
+  background: #159CA3;
+}
+
+.button-edit:hover{
+  background: #10787e;
+}
+
+.button-edit:active{
+  background: #1bc6cf;
+}
+
+.button-delete{
+  background: #FF8811;
+  color: #FFFFFF;
+}
+
+.button-delete:hover{
+  background: #c96b0e;
+}
+
+.button-delete:active{
+  background: #ff9730;
+}

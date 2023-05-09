@@ -55,7 +55,7 @@ export class CommentComponent implements OnInit {
       const fiveMinutes = 300000;
       const timePassed = new Date().getTime() - Date.parse(this.comment.created_at) > fiveMinutes;
 
-      this.canEdit = Boolean(this._auth.isLogged()) && this._auth.user.id === this.comment.user_id && !timePassed;
+      this.canEdit = Boolean(this._auth.isLogged()) && this._auth.user.id === this.comment.user_id;// && !timePassed;
       this.canDelete = Boolean(this._auth.isLogged()) && this._auth.user.id === this.comment.user_id; //&& !timePassed;
   }
 
