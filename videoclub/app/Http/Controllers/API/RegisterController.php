@@ -36,7 +36,17 @@ class RegisterController extends BaseController
     $input = $request->all();
     $input['password'] = bcrypt($input['password']);
     $user = User::create($input);
-    $user->role = 'free';
+
+    if($user->email === 'premium@premium.com'){
+        $user->role = 'premium';
+    }
+    else if($user->email === 'admin@admin.com'){
+        $user->role = 'admin';
+    }
+    else{
+        $user->role = 'free';
+    }
+
     $user->save();
     switch ($user->role) {
       case 'admin':
