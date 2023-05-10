@@ -25,7 +25,7 @@ export class DateAgoPipe implements PipeTransform {
                 counter = Math.floor(seconds / intervals[i]);
                 if (counter > 0)
                     if (counter === 1) {
-                        return counter + ' ' + i; // singular (1 day ago)
+                        return 'hace ' + counter + ' ' + i; // singular (1 day ago)
                     } else {
                       // return counter + ' ' + i + 's ago'; // plural (2 days ago)
                       let ending = '';
@@ -42,7 +42,7 @@ export class DateAgoPipe implements PipeTransform {
                         case 'hora': ending = 's'; break;
                       }
 
-                      return counter + ' ' + i + ending;
+                      return 'hace ' + counter + ' ' + i + ending;
                     }
             }
         }
