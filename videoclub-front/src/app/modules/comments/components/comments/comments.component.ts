@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/modules/auth/_services/auth.service';
 import { CommentInterface } from '../../types/comment.interface';
 import { ActivatedRoute } from '@angular/router';
 import { ActiveCommentInterface } from '../../types/activeComment.interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'comments',
@@ -43,6 +44,12 @@ export class CommentsComponent implements OnInit {
   }
 
   addComment(review: any): void {
+    Swal.fire({
+      icon: 'success',
+      title: '¡Comentario publicado!',
+      text: '¡No te preocupes! Si te has equivocado, tienes cinco minutos para editarlo.'
+    })
+
     this._comments.createComment(this._auth.token, review.title, review.description, this._auth.user.email, this.movieId)
         .subscribe((res: any) => {
           this.comments = [...this.comments, res];
@@ -54,7 +61,7 @@ export class CommentsComponent implements OnInit {
   }
 
   updateComment({body, commentId}: {body: any, commentId: string|number}){
-
+    Swal.fire('¡Comentario editado!', '', 'success')
     this._comments.updateComment(this._auth.token, body.title, body.description, commentId, this._auth.user.id, this.movieId)
         .subscribe((updatedComment: any) => {
           this.comments = this.comments.map((comment) => {
@@ -68,9 +75,26 @@ export class CommentsComponent implements OnInit {
   }
 
   deleteComment(commentId: string|number): void {
-    this._comments.deleteComment(this._auth.token, commentId)
+    Swal.fire({
+      icon: 'warning',
+      title: '¡Cuidado!',
+      text: '¿Seguro/a que quieres borrar este comentario? No podrás recuperarlo.',
+      showCloseButton: true,
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then(res => {
+      if(res.isConfirmed){
+        Swal.fire('¡Comentario eliminado!', '', 'success')
+
+        this._comments.deleteComment(this._auth.token, commentId)
         .subscribe(() => {
           this.comments = this.comments.filter((comment: any) => comment.id !== commentId);
         })
+
+      }
+    })
+
   }
 }
