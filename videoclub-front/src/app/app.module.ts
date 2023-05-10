@@ -27,6 +27,7 @@ import {VgCoreModule} from '@videogular/ngx-videogular/core';
 import {VgControlsModule} from '@videogular/ngx-videogular/controls';
 import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
 import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
+import { VideogularComponent } from './videogular/videogular.component';
 // import {SingleMediaPlayer} from './single-media-player';
 
 
@@ -44,6 +45,7 @@ const material = [MatToolbarModule];
     SpinnerComponent,
     MovieComponent,
     ViewMovieComponent,
+    VideogularComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,11 @@ const material = [MatToolbarModule];
     VgOverlayPlayModule,
     VgBufferingModule,
   ],
-  exports: [material, RouterModule],
+  exports: [
+    material,
+    RouterModule,
+    VideogularComponent,
+  ],
   providers: [appRoutingProviders, { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }],
   bootstrap: [
     AppComponent,

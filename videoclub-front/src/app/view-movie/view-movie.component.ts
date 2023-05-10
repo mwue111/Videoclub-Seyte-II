@@ -14,6 +14,7 @@ export class ViewMovieComponent {
   movie: any;
   logged: boolean;
   url: string = URL_BACKEND + '/storage/';
+  source: string = '';
 
   constructor(
     private _auth: AuthService,
@@ -28,7 +29,7 @@ export class ViewMovieComponent {
       this._movie.getOneMovie(movieId, this._auth.token)
           .subscribe((movie: any) => {
             this.movie = movie;
-            console.log(this.movie);
+            this.source = this.url + this.movie.file;
           })
     })
   }
