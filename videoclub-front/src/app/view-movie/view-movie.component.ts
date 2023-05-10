@@ -3,6 +3,7 @@ import { MoviesService } from '../services/movies.service';
 import { AuthService } from '../modules/auth/_services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { URL_BACKEND } from '../config/config';
 
 @Component({
   selector: 'app-view-movie',
@@ -12,6 +13,7 @@ import { Location } from '@angular/common';
 export class ViewMovieComponent {
   movie: any;
   logged: boolean;
+  url: string = URL_BACKEND + '/storage/';
 
   constructor(
     private _auth: AuthService,

@@ -1,13 +1,13 @@
-<div class="container">
+<div class="container" *ngIf="movie">
   <div class="view-header">
-    <h1 *ngIf="movie">{{ movie.title }}</h1>
+    <h1>{{ movie.title | uppercase }}</h1>
   </div>
   <div class="view-body">
-    <!-- reproductor  -->
+    <video [src]="url + movie.file" controls></video>
   </div>
-
   <div class="go-back">
     <a (click)="goBack()">Volver</a>
   </div>
+
 </div>
 

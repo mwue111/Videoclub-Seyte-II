@@ -1,4 +1,34 @@
-a{
+.container{
+  margin: 50px;
+}
+
+.view-header{
+  width: 70%;
+  margin: 0 auto;
+}
+
+h1{
+  font-weight: light;
+}
+
+.view-body{
+  display: flex;
+  justify-content: center;
+}
+
+.view-body video{
+  width: 70%;
+}
+
+.go-back{
+  margin: 0 auto;
+  width: 70%;
+  padding: 15px;
+  text-align: end;
+}
+
+
+.go-back a{
   cursor: pointer;
   color: #159ca3;
   font-size: 18px;
