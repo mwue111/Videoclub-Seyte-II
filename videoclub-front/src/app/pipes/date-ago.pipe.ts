@@ -17,8 +17,8 @@ export class DateAgoPipe implements PipeTransform {
                 'semana': 604800,
                 'día': 86400,
                 'hora': 3600,
-                'minutos': 60,
-                'segundos': 1
+                'minuto': 60,
+                'segundo': 1
             };
             let counter;
             for (const i in intervals) {
@@ -28,20 +28,10 @@ export class DateAgoPipe implements PipeTransform {
                         return 'hace ' + counter + ' ' + i; // singular (1 day ago)
                     } else {
                       // return counter + ' ' + i + 's ago'; // plural (2 days ago)
-                      let ending = '';
-                      switch(intervals){
-                        // case 'año': return counter + ' ' + i + 's'; break;
-                        // case 'mes': return counter + ' ' + i + 'es'; break;
-                        // case 'semana': return counter + ' ' + i + 's'; break;
-                        // case 'día': return counter + ' ' + i + 's'; break;
-                        // case 'hora': return counter + ' ' + i + 's'; break;
-                        case 'año': ending = 's'; break;
-                        case 'mes': ending = 'es'; break;
-                        case 'semana': ending = 's'; break;
-                        case 'día': ending = 's'; break;
-                        case 'hora': ending = 's'; break;
+                      let ending = 's';
+                      if(intervals === 'mes'){
+                        ending = 'es';
                       }
-
                       return 'hace ' + counter + ' ' + i + ending;
                     }
             }
