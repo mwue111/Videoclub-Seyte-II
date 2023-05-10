@@ -19,10 +19,15 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { LoadingInterceptor } from './loading.interceptor';
 import { MovieComponent } from './movie/movie.component';
-// import { CommentsComponent } from './modules/comments/components/comments/comments.component';
 import { CommentsModule } from './modules/comments/comments.module';
 import { ViewMovieComponent } from './view-movie/view-movie.component';
-// import { DateAgoPipe } from './pipes/date-ago.pipe';
+
+//videogular:
+import {VgCoreModule} from '@videogular/ngx-videogular/core';
+import {VgControlsModule} from '@videogular/ngx-videogular/controls';
+import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
+import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
+// import {SingleMediaPlayer} from './single-media-player';
 
 
 const material = [MatToolbarModule];
@@ -39,8 +44,6 @@ const material = [MatToolbarModule];
     SpinnerComponent,
     MovieComponent,
     ViewMovieComponent,
-    // DateAgoPipe,
-    // CommentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,10 +52,17 @@ const material = [MatToolbarModule];
     HttpClientModule,
     BrowserAnimationsModule,
     material,
-    CommentsModule
+    CommentsModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
   ],
   exports: [material, RouterModule],
   providers: [appRoutingProviders, { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }],
-  bootstrap: [AppComponent],
+  bootstrap: [
+    AppComponent,
+    // SingleMediaPlayer
+ ],
 })
 export class AppModule {}
