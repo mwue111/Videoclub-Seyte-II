@@ -6,6 +6,7 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { MovieComponent } from './movie/movie.component';
 import { ViewMovieComponent } from './view-movie/view-movie.component';
+import { UserPageComponent } from './user-page/user-page.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'nosotros', component: AboutUsComponent },
   { path: 'pelicula/:id', component: MovieComponent },
   { path: 'ver-pelicula/:id', component: ViewMovieComponent },
+  { path: 'usuario/:id', component: UserPageComponent },
   {
     path: 'auth',
     loadChildren: () =>

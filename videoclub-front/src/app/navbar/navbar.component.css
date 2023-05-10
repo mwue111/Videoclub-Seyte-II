@@ -106,6 +106,12 @@
 
 .logged-div p {
   margin-left: 0.5em;
+  margin-top: 10px;
   color: white;
   font-size: 0.9em;
+}
+
+.user-page{
+  display: flex;
+  cursor: pointer;
 }
