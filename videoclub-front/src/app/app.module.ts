@@ -21,6 +21,7 @@ import { LoadingInterceptor } from './loading.interceptor';
 import { MovieComponent } from './movie/movie.component';
 // import { CommentsComponent } from './modules/comments/components/comments/comments.component';
 import { CommentsModule } from './modules/comments/comments.module';
+import { ViewMovieComponent } from './view-movie/view-movie.component';
 // import { DateAgoPipe } from './pipes/date-ago.pipe';
 
 
@@ -37,6 +38,7 @@ const material = [MatToolbarModule];
     NavbarComponent,
     SpinnerComponent,
     MovieComponent,
+    ViewMovieComponent,
     // DateAgoPipe,
     // CommentsComponent,
   ],

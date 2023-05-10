@@ -5,8 +5,7 @@ import { ContactComponent } from './contact/contact.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { MovieComponent } from './movie/movie.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { AuthGuard } from './modules/auth/_services/auth.guard';
+import { ViewMovieComponent } from './view-movie/view-movie.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -14,6 +13,7 @@ const routes: Routes = [
   { path: 'faqs', component: FaqsComponent },
   { path: 'nosotros', component: AboutUsComponent },
   { path: 'pelicula/:id', component: MovieComponent },
+  { path: 'ver-pelicula/:id', component: ViewMovieComponent },
   {
     path: 'auth',
     loadChildren: () =>

@@ -36,7 +36,7 @@
     <img [src]="url + movie.poster" alt="Poster de la película {{movie.poster}}">
     <div class="movie-buttons">
       <div *ngIf="logged">
-        <button *ngIf="user.role === 'premium'" class="view-button" [routerLink]="['#']">Ver película</button>
+        <button *ngIf="user.role === 'premium'" class="view-button" [routerLink]="['/ver-pelicula', movie.id]">Ver película</button>
         <button *ngIf="user.role === 'free'" class="view-button" [routerLink]="['#']">Alquilar</button>
       </div>
       <div *ngIf="!logged">
