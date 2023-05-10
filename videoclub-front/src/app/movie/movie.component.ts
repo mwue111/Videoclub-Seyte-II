@@ -54,6 +54,7 @@ export class MovieComponent {
       focusConfirm: true,
       confirmButtonText: 'Iniciar sesión',
       cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#159CA3'
     }).then(res => {
       if(res.isConfirmed){
         this.router.navigate(['auth/login'])

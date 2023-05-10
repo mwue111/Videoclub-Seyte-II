@@ -48,12 +48,12 @@ h3{
   width: 100%;
 }
 
-.comment-block-panel{
+.comment-block-panel {
   position: absolute;
   z-index: 99;
-  background: #f5f3f4b3;
-  width: 70%;
-  height: 350px;
+  background: #ffffffc2;
+  width: 69%;
+  height: 450px;
   display: flex;
   flex-direction: column;
   margin-left: 300px;
@@ -63,6 +63,7 @@ h3{
   font-size: 20px;
   border-radius: 15px;
   justify-content: center;
+  margin: 24px 0px 20px 300px;
 }
 
 .comment-block-panel button{
