@@ -74,7 +74,6 @@
   font-size: 20px;
   border: none;
   box-shadow: none;
-  background-color: green;
   cursor: pointer;
   width: 100%;
   background-color: #1874BA;
@@ -83,71 +82,18 @@
   padding: 10px 20px;
 }
 
-/*.comments{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-.movie-review{ comment-form
-  width: 70%;
-  margin-left: 300px;
-  margin-bottom: 50px;
-  display: flex;
-  justify-content: flex-start;
-  text-align: center;
-  padding: 20px;
-}
-
-.movie-user{ logged-user
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 150px;
-  height: 150px;
-  margin-right: 40px;
-  font-size: 15px;
-}
-
-.movie-review img{ comment-form
-  margin: 0 auto;
-  width: 40%;
-}
-
-.movie-review-form{
+.view-button-unlogged{
+  font-size: 20px;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
   width: 100%;
-}
+  background-color: #FF8811;
+  border-radius: 40px;
+  color: white;
+  padding: 10px 20px;
 
-.movie-review-form form{
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
 }
-
-.movie-review-form div{
-  margin: 10px;
-}
-
-.movie-review-form label{
-  float:left;
-  font-size: 15px;
-  padding: 5px;
-}
-
-.movie-review-form input, textarea{
-  width: 85%;
-  height: 100%;
-  float: right;
-  border: 1px solid #d1d1d1;
-  border-radius: 5px;
-  padding: 5px;
-}
-
-.movie-review-form .view-button{ comment-form-button
-  width: 150px;
-  margin: 0 auto;
-  border-radius: 20px;
-} */
 
 .view-button{
   width: 150px;

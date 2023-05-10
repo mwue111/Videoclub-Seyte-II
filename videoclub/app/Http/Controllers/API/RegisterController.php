@@ -79,6 +79,7 @@ class RegisterController extends BaseController
         'id' => Auth::user()->id,
         'name' => Auth::user()->name,
         'email' => Auth::user()->email,
+        'role' => Auth::user()->role
       ];
 
       return $this->sendResponse($success, 'Has iniciado sesión.');

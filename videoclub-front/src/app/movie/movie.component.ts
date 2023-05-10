@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MoviesService } from '../services/movies.service';
 import { AuthService } from '../modules/auth/_services/auth.service';
 import { URL_BACKEND } from '../config/config';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-movie',
@@ -21,6 +21,7 @@ export class MovieComponent {
     private route: ActivatedRoute,
     private _movie: MoviesService,
     private _auth: AuthService,
+    private router: Router
   ) {
     this.logged = this._auth.isLogged();
     this.user = this._auth.user;
@@ -41,5 +42,22 @@ export class MovieComponent {
     })
   }
 
+  unloggedHandle() {
+    Swal.fire({
+      icon:'info',
+      title:'¡Necesitas iniciar sesión para ver esta película!',
+      text: 'Sólo te llevará un minuto y podrás ver esta película y muchas otras cuando quieras.',
+      showCloseButton: true,
+      showCancelButton: true,
+      focusConfirm: true,
+      confirmButtonText: 'Iniciar sesión',
+      cancelButtonText: 'Cancelar',
+    }).then(res => {
+      if(res.isConfirmed){
+        this.router.navigate(['auth/login'])
+      }
+    })
+
+  }
 
 }

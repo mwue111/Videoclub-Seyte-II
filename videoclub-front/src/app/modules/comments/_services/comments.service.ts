@@ -34,14 +34,14 @@ export class CommentsService {
     return this._httpClient.get(url);
   }
 
-  createComment(token: any, title: string, body: string, email: string, movie: number): Observable<CommentInterface> {
+  createComment(token: any, title: string, body: string, user: string|number, movie: number): Observable<CommentInterface> {
     let url = URL_SERVICES + '/resenas';
     let headers = new HttpHeaders().set('Authorization', 'Bearer' + token);
 
     return this._httpClient.post<CommentInterface>(url, {
       title: title,
       description: body,
-      user_id: email,
+      user_id: user,
       movie_id: movie
      }, { headers:headers })
   }

@@ -50,7 +50,7 @@ export class CommentsComponent implements OnInit {
       text: '¡No te preocupes! Si te has equivocado, tienes cinco minutos para editarlo.'
     })
 
-    this._comments.createComment(this._auth.token, review.title, review.description, this._auth.user.email, this.movieId)
+    this._comments.createComment(this._auth.token, review.title, review.description, this._auth.user.id, this.movieId)
         .subscribe((res: any) => {
           this.comments = [...this.comments, res];
         })

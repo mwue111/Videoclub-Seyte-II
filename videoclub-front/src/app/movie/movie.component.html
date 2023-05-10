@@ -35,14 +35,13 @@
   <div class="movie-poster">
     <img [src]="url + movie.poster" alt="Poster de la película {{movie.poster}}">
     <div class="movie-buttons">
-      <!-- Si el usuario está registrado:  -->
-      <!-- Si es tipo premium: -->
-      <button class="view-button" [routerLink]="['#']">Ver</button>
-      <!-- Si es tipo free: -->
-      <!-- <button class="view-button">Alquilar</button> -->
-
-      <!-- Si el usuario no está registrado:  -->
-      <!-- bloqueo del botón ver película -->
+      <div *ngIf="logged">
+        <button *ngIf="user.role === 'premium'" class="view-button" [routerLink]="['#']">Ver película</button>
+        <button *ngIf="user.role === 'free'" class="view-button" [routerLink]="['#']">Alquilar</button>
+      </div>
+      <div *ngIf="!logged">
+        <button class="view-button-unlogged" (click)="unloggedHandle()">Ver película</button>
+      </div>
     </div>
   </div>
 

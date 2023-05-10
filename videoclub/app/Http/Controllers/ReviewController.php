@@ -41,7 +41,8 @@ class ReviewController extends Controller
       'description' => 'required',
     ]);
 
-    $user = User::where('email', '=', $request->user_id)->first();
+    // $user = User::where('email', '=', $request->user_id)->first();
+    $user = User::findOrFail($request->user_id);
     if(!$user){
         return response()->json(['error' => 'Usuario no encontrado'], 404);
     }
