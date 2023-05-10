@@ -16,6 +16,7 @@ export class MovieComponent {
   logged: boolean;
   user: any;
   genreNames: any = [];
+  source: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -31,6 +32,7 @@ export class MovieComponent {
       this._movie.getOneMovie(movieId, this._auth.token)
           .subscribe((res: any) => {
             this.movie = res;
+            this.source = this.url + this.movie.trailer;
           });
 
       this._movie.getMovieGenre(movieId)

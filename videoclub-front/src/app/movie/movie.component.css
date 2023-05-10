@@ -17,7 +17,7 @@
 }
 
 .movie-data{
-  margin-top: -5px;
+  margin-top: -10px;
 }
 
 .movie-data span{
@@ -51,8 +51,9 @@
 
 .movie-plot{
   text-align: justify;
+  font-size: 18px;
   width: 70%;
-  padding: 10px;
+  padding: 35px 10px 5px 10px;
   margin-left: 300px;
 }
 
@@ -107,6 +108,25 @@
 
 .view-button:active{
   background-color: #1c7fca;
+}
+
+.movie-trailer{
+  margin: 0 auto;
+  padding: 20px 260px;
+  padding-bottom: 50px;
+  padding-top: 35px;
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  background: #f5f3f4;
+  border-radius: 20px;
+}
+
+h3{
+  color: #1874BA;
+  font-size: 25px;
+  font-weight: bolder;
+  align-self: start;
 }
 
 .comment-block-panel{
