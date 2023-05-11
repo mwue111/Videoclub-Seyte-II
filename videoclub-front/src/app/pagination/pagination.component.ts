@@ -9,6 +9,7 @@ export class PaginationComponent implements OnInit {
   @Input() currentPage!: number;
   @Input() totalPages!: number;
 
+  // Aquí: https://levelup.gitconnected.com/implementing-pagination-with-apis-in-angular-a-step-by-step-guide-2a7bc40499d5
   constructor() {}
 
   ngOnInit(): void {
