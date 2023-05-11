@@ -106,11 +106,15 @@ class ReviewController extends Controller
 
   public function findMovieReviews($id){
     $movie = Movie::findOrFail($id);
+    foreach($movie->reviews as $review){
+        $review->user_id = User::where('id', '=', $review->user_id)->get();
+    }
     return $movie->reviews;
   }
 
   public function getReviews($id){
     $reviews = $this->findMovieReviews($id);
+    // dd($reviews);
     return response()->json($reviews);
   }
 
