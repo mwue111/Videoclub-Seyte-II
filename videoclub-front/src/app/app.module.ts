@@ -28,6 +28,7 @@ import {VgControlsModule} from '@videogular/ngx-videogular/controls';
 import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
 import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 import { VideogularComponent } from './videogular/videogular.component';
+
 // import {SingleMediaPlayer} from './single-media-player';
 
 

@@ -17,6 +17,8 @@ export class CommentsComponent implements OnInit {
   comments: CommentInterface[] = [];
   activeComment: ActiveCommentInterface | null = null;
   movieId: any;
+  currentPage: any;
+  totalPages: any;
 
   constructor(
     private _comments: CommentsService,
@@ -35,8 +37,17 @@ export class CommentsComponent implements OnInit {
         this._comments.getMovieComments(this._auth.token, Number(this.movieId))
             .subscribe((res: any) => {
               if(res !== 'none'){
-                console.log('res: ', res)
+                console.log('res: ', res.links)
                 this.comments = res.data;
+                this.totalPages = res.links.slice(1, res.links.length - 1).length;
+
+                for(let i = 1; i < res.links.length - 1; i++){
+
+                  if(res.links[i].active === true){
+                    this.currentPage = res.links[i].label;
+                  }
+                }
+                console.log('página actual: ', this.currentPage);
               }
               else{
                 this.comments = [];
