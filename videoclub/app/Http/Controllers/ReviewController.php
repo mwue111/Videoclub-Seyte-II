@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\Movie;
 use App\Models\User;
+use Illuminate\Pagination\Paginator;
 
 class ReviewController extends Controller
 {
@@ -109,12 +110,17 @@ class ReviewController extends Controller
     foreach($movie->reviews as $review){
         $review->user_id = User::where('id', '=', $review->user_id)->get();
     }
-    return $movie->reviews;
+    // dd($movie->reviews->toQuery()->paginate(3));
+    if(($movie->reviews)->isEmpty()){
+        return $movie->reviews = 'none';
+    }
+    else{
+        return $movie->reviews->toQuery()->latest()->paginate(3);
+    }
   }
 
   public function getReviews($id){
     $reviews = $this->findMovieReviews($id);
-    // dd($reviews);
     return response()->json($reviews);
   }
 

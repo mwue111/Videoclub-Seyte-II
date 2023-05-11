@@ -41,6 +41,8 @@ export class CommentComponent implements OnInit {
   userData(user: any){
     if(!isNaN(user)){
       this.usernames.push('Anónimo');
+      this.canEdit = this.commentOptions(null, user);
+      this.canDelete = this.commentOptions('delete', user);
     }
     else{
       user.map((username: any) => {
@@ -56,7 +58,7 @@ export class CommentComponent implements OnInit {
     }
   }
 
-  commentOptions(state:any = null, user: any){
+  commentOptions(state:any, user: any){
     const fiveMinutes = 300000;
     let timePassed = new Date().getTime() - Date.parse(this.comment.created_at) > fiveMinutes;
     if(state === 'delete'){

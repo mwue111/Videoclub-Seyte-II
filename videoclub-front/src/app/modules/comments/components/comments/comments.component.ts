@@ -17,7 +17,6 @@ export class CommentsComponent implements OnInit {
   comments: CommentInterface[] = [];
   activeComment: ActiveCommentInterface | null = null;
   movieId: any;
-  // username: any = [];
 
   constructor(
     private _comments: CommentsService,
@@ -35,12 +34,11 @@ export class CommentsComponent implements OnInit {
       if(this.movieId){
         this._comments.getMovieComments(this._auth.token, Number(this.movieId))
             .subscribe((res: any) => {
-              this.comments = res;
-              // this.comments.map((item) => {
-              //   this.username.push(item.user_id);
-              // })
-              // console.log(this.username);
-              if(res.length === 0){
+              if(res !== 'none'){
+                console.log('res: ', res)
+                this.comments = res.data;
+              }
+              else{
                 this.comments = [];
               }
             })
