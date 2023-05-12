@@ -34,7 +34,7 @@ Route::group(['middleware' => ['guest']], function () {
     Route::post('resenas', 'ReviewController@store');
     Route::put('resenas/{id}', 'ReviewController@update');
     Route::delete('resenas/{id}', 'ReviewController@destroy');
-    Route::get('resenas/pelicula/{id}', 'ReviewController@getReviews');
+    Route::get('resenas/pelicula/{id}/{page}', 'ReviewController@getReviews');
     Route::get('peliculas', 'MovieController@index')->name('peliculas.index');
     Route::get('peliculas/{id}', 'MovieController@show')->name('peliculas.index');
     Route::get('generos', 'GenreController@index')->name('generos.index');

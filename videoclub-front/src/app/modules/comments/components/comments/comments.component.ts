@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommentsService } from '../../_services/comments.service';
 import { AuthService } from 'src/app/modules/auth/_services/auth.service';
 import { CommentInterface } from '../../types/comment.interface';
@@ -17,8 +17,10 @@ export class CommentsComponent implements OnInit {
   comments: CommentInterface[] = [];
   activeComment: ActiveCommentInterface | null = null;
   movieId: any;
-  currentPage: any;
-  totalPages: any;
+  data: any;
+  //paginación
+  currentPage: number;
+  pageChange: any = null;
 
   constructor(
     private _comments: CommentsService,
@@ -27,35 +29,33 @@ export class CommentsComponent implements OnInit {
   ) {
     this.logged = this._auth.isLogged();
     this.user = this._auth.user;
-    this.ngOnInit();
+    this.currentPage = 1;
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.movieId = params.get('id');
       if(this.movieId){
-        this._comments.getMovieComments(this._auth.token, Number(this.movieId))
-            .subscribe((res: any) => {
-              if(res !== 'none'){
-                console.log('res: ', res.links)
-                this.comments = res.data;
-                this.totalPages = res.links.slice(1, res.links.length - 1).length;
-
-                for(let i = 1; i < res.links.length - 1; i++){
-
-                  if(res.links[i].active === true){
-                    this.currentPage = res.links[i].label;
-                  }
-                }
-                console.log('página actual: ', this.currentPage);
-              }
-              else{
-                this.comments = [];
-              }
-            })
+        this.fetchComments(this.currentPage);
       }
     })
+  }
 
+  fetchComments(page: number) {
+    console.log('página: ', page)
+    // console.log('qué manda: ', Number(this.movieId), page);
+    this._comments.getMovieComments(this._auth.token, Number(this.movieId), page)
+        .subscribe((res: any) => {
+          console.log('res: ', res);
+          if(res !== 'none'){
+            this.comments = res.data;
+            this.data = res;
+            this.currentPage = res.current_page;
+          }
+          else{
+            this.comments = [];
+          }
+    })
   }
 
   addComment(review: any): void {
@@ -121,5 +121,12 @@ export class CommentsComponent implements OnInit {
       }
     })
 
+  }
+
+  changePage(page:number | null){
+    if(page !== null){
+      this.currentPage = page;
+      this.fetchComments(this.currentPage);
+    }
   }
 }

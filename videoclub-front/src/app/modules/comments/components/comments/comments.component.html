@@ -40,6 +40,6 @@
 </div>
 
 <div *ngIf="comments.length > 0" class="pagination">
-  <app-pagination [currentPage]="currentPage" [totalPages]="totalPages"></app-pagination>
+  <app-pagination [data]="data" (changePage)="changePage($event)"></app-pagination>
 </div>
 

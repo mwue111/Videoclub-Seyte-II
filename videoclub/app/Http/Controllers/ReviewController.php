@@ -105,7 +105,7 @@ class ReviewController extends Controller
     // return redirect()->route('resenas.index');
   }
 
-  public function findMovieReviews($id){
+  public function findMovieReviews($id, $page){
     $movie = Movie::findOrFail($id);
     foreach($movie->reviews as $review){
         $review->user_id = User::where('id', '=', $review->user_id)->get();
@@ -115,12 +115,12 @@ class ReviewController extends Controller
         return $movie->reviews = 'none';
     }
     else{
-        return $movie->reviews->toQuery()->latest()->paginate(3);
+        return $movie->reviews->toQuery()->latest()->paginate(4, ['*'], 'page', $page);
     }
   }
 
-  public function getReviews($id){
-    $reviews = $this->findMovieReviews($id);
+  public function getReviews($id, $page){
+    $reviews = $this->findMovieReviews($id, $page);
     return response()->json($reviews);
   }
 
