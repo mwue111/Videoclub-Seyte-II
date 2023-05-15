@@ -1,26 +1,35 @@
 <div class="container">
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
+  <nav>
+    <ul class="pagination">
       <li class="page-item">
-        <a class="page-link"
-            (click)="onPageChange(currentPage - 1)"
+        <a class="page-link button-prev"
+            (click)="prevPage(currentPage)"
             *ngIf="currentPage > 1"
         >
           Anterior
         </a>
       </li>
-      <li class="page-item">
-        <a class="page-link" (click)="goToPage(currentPage)">
+
+      <div *ngFor="let page of allPages">
+        <li class="page-item">
+          <!-- añadir una clase concreta si page === currentPage -->
+          <a class="page-link" (click)="goToPage(page)">
+            {{page}}
+          </a>
+        </li>
+      </div>
+
+        <!-- <a class="page-link" (click)="goToPage(currentPage)">
           {{ currentPage }}
-        </a>
-      </li>
+        </a> -->
+      <!-- </li> -->
       <li class="page-item">
-        <button class="page-link"
-                (click)="onPageChange(currentPage + 1)"
+        <a class="page-link button-next"
+                (click)="nextPage(currentPage)"
                 *ngIf="currentPage < totalPages"
         >
           Siguiente
-      </button>
+      </a>
       </li>
     </ul>
   </nav>

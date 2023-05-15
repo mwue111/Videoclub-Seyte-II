@@ -11,7 +11,7 @@ export class PaginationComponent implements OnInit {
 
   currentPage!: number;
   totalPages!: number;
-  //array con las páginas para mostrar el número en los <li>
+  allPages: any = [];
 
   constructor() {}
 
@@ -19,15 +19,27 @@ export class PaginationComponent implements OnInit {
     // console.log('data: ', this.data);
     this.currentPage = this.data.current_page;
     this.totalPages = this.data.last_page;
-    console.log('página actual en paginador: ', this.currentPage);
+    for(let i = 1; i <= this.data.last_page; i++){
+      this.allPages.push(i);
+    }
+  }
+
+  prevPage(page: any) {
+    this.currentPage = page - 1;
+    this.onPageChange(this.currentPage);
+  }
+
+  nextPage(page:any) {
+    this.currentPage = page + 1;
+    this.onPageChange(this.currentPage);
+  }
+
+  goToPage(page: number){
+    this.currentPage = page;
+    this.onPageChange(page);
   }
 
   onPageChange(page: any): void {
     this.changePage.emit(page);
-  }
-
-  goToPage(page: number){
-    //sumar la página actual con el número de página que ponga en el link
-    console.log(`Ir a la página ${page}`)
   }
 }

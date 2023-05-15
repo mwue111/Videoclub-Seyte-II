@@ -42,11 +42,11 @@ export class CommentsComponent implements OnInit {
   }
 
   fetchComments(page: number) {
-    console.log('página: ', page)
+    // console.log('página: ', page)
     // console.log('qué manda: ', Number(this.movieId), page);
     this._comments.getMovieComments(this._auth.token, Number(this.movieId), page)
         .subscribe((res: any) => {
-          console.log('res: ', res);
+          // console.log('res: ', res);
           if(res !== 'none'){
             this.comments = res.data;
             this.data = res;
