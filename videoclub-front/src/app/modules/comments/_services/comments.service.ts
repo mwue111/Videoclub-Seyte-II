@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CommentInterface } from '../types/comment.interface';
-import { Observable } from 'rxjs';
+import { Observable, finalize, of, share, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { URL_SERVICES } from 'src/app/config/config';
 
@@ -8,6 +8,8 @@ import { URL_SERVICES } from 'src/app/config/config';
   providedIn: 'root'
 })
 export class CommentsService {
+  private cache: any;
+  private cachedObservable!: Observable<any> | null;
 
   constructor(
     private _httpClient: HttpClient,
@@ -21,11 +23,26 @@ export class CommentsService {
     return this._httpClient.get<CommentInterface[]>(url, { headers:headers });
   }
 
-  getMovieComments(token: any, id: number): Observable<CommentInterface[]> {
-    let url = URL_SERVICES + `/resenas/pelicula/${id}`
+  getMovieComments(token: any, id: number, page: number, changedComment: boolean | null = null): Observable<CommentInterface[]> {
+    let observable: Observable<any>;
+    let url = URL_SERVICES + `/resenas/pelicula/${id}/${page}`
     let headers = new HttpHeaders().set('Authorization', 'Bearer' + token);
 
-    return this._httpClient.get<CommentInterface[]>(url, { headers:headers })
+    if(this.cache && this.cache.current_page === page && changedComment === null){
+      observable = of(this.cache)
+    }
+    else if(this.cachedObservable && changedComment === null) {
+      observable = this.cachedObservable;
+    }
+    else{
+      this.cachedObservable = this._httpClient.get<CommentInterface[]>(url, { headers:headers }).pipe(
+          tap(res => this.cache = res),
+          share(),
+          finalize(() => this.cachedObservable = null)
+      );
+      observable = this.cachedObservable;
+    }
+    return observable;
   }
 
   getAuthors(id: any) {

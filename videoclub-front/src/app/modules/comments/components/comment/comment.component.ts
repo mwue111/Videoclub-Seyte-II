@@ -22,6 +22,7 @@ export class CommentComponent implements OnInit {
   @Output() deleteComment = new EventEmitter<string|number>();
 
   username: string = '';
+  usernames: any = [];
   displayComment: boolean = true;
   canEdit: boolean = true;
   canDelete: boolean = true;
@@ -31,32 +32,40 @@ export class CommentComponent implements OnInit {
     private _comments: CommentsService,
     private route: ActivatedRoute,
     private _auth: AuthService,
-  ) {
-    this.route.paramMap.subscribe(params => {
-      const movieId = params.get('id');
-      if(movieId){
-        this._comments.getAuthors(movieId)
-            .subscribe((res: any) => {
-              // if(res !== 'none' && Number(movieId) === this.comment.movie_id) {
-                const user = res.find((user: any) => user.id === this.comment.user_id);
-                if(user){
-                  this.username = user.username;
-                }
-              // }
-              // else{
-              //   this.displayComment = false;
-              // }
-        });
-      }
-    });
-  }
+  ) {}
 
   ngOnInit() {
-      const fiveMinutes = 300000;
-      const timePassed = new Date().getTime() - Date.parse(this.comment.created_at) > fiveMinutes;
+      this.userData(this.comment.user_id);
+  }
 
-      this.canEdit = Boolean(this._auth.isLogged()) && this._auth.user.id === this.comment.user_id && !timePassed;
-      this.canDelete = Boolean(this._auth.isLogged()) && this._auth.user.id === this.comment.user_id; //&& !timePassed;
+  userData(user: any){
+    if(!isNaN(user)){
+      this.usernames.push('Anónimo');
+      this.canEdit = this.commentOptions(null, user);
+      this.canDelete = this.commentOptions('delete', user);
+    }
+    else{
+      user.map((username: any) => {
+        if(username.username){
+          this.usernames.push(username.username);
+        }
+        else{
+          this.usernames.push('Anónimo');
+        }
+        this.canEdit = this.commentOptions(null, username.id);
+        this.canDelete = this.commentOptions('delete', username.id);
+      })
+    }
+  }
+
+  commentOptions(state:any, user: any){
+    const fiveMinutes = 300000;
+    let timePassed = new Date().getTime() - Date.parse(this.comment.created_at) > fiveMinutes;
+    if(state === 'delete'){
+      timePassed = false;
+    }
+
+    return Boolean(this._auth.isLogged()) && this._auth.user.id === user && !timePassed;
   }
 
   isEditing(): boolean {

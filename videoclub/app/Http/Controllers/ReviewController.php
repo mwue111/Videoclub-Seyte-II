@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\Movie;
 use App\Models\User;
+use Illuminate\Pagination\Paginator;
 
 class ReviewController extends Controller
 {
@@ -104,13 +105,21 @@ class ReviewController extends Controller
     // return redirect()->route('resenas.index');
   }
 
-  public function findMovieReviews($id){
+  public function findMovieReviews($id, $page){
     $movie = Movie::findOrFail($id);
-    return $movie->reviews;
+    foreach($movie->reviews as $review){
+        $review->user_id = User::where('id', '=', $review->user_id)->get();
+    }
+    if(($movie->reviews)->isEmpty()){
+        return $movie->reviews = 'none';
+    }
+    else{
+        return $movie->reviews->toQuery()->latest()->paginate(4, ['*'], 'page', $page);
+    }
   }
 
-  public function getReviews($id){
-    $reviews = $this->findMovieReviews($id);
+  public function getReviews($id, $page){
+    $reviews = $this->findMovieReviews($id, $page);
     return response()->json($reviews);
   }
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommentsService } from '../../_services/comments.service';
 import { AuthService } from 'src/app/modules/auth/_services/auth.service';
 import { CommentInterface } from '../../types/comment.interface';
@@ -17,6 +17,10 @@ export class CommentsComponent implements OnInit {
   comments: CommentInterface[] = [];
   activeComment: ActiveCommentInterface | null = null;
   movieId: any;
+  data: any;
+  //paginación
+  currentPage: number;
+  pageChange: any = null;
 
   constructor(
     private _comments: CommentsService,
@@ -25,21 +29,29 @@ export class CommentsComponent implements OnInit {
   ) {
     this.logged = this._auth.isLogged();
     this.user = this._auth.user;
-    this.ngOnInit();
+    this.currentPage = 1;
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.movieId = params.get('id');
       if(this.movieId){
-        this._comments.getMovieComments(this._auth.token, Number(this.movieId))
-            .subscribe((res: any) => {
-              this.comments = res;
-              if(res.length === 0){
-                this.comments = [];
-              }
-            })
+        this.fetchComments(this.currentPage);
       }
+    })
+  }
+
+  fetchComments(page: number, newComment: boolean | null = null) {
+    this._comments.getMovieComments(this._auth.token, Number(this.movieId), page, newComment)
+        .subscribe((res: any) => {
+          if(res !== 'none'){
+            this.comments = res.data;
+            this.data = res;
+            this.currentPage = res.current_page;
+          }
+          else{
+            this.comments = [];
+          }
     })
   }
 
@@ -54,6 +66,7 @@ export class CommentsComponent implements OnInit {
     this._comments.createComment(this._auth.token, review.title, review.description, this._auth.user.id, this.movieId)
         .subscribe((res: any) => {
           this.comments = [...this.comments, res];
+          this.fetchComments(this.currentPage, true);
         })
   }
 
@@ -101,10 +114,19 @@ export class CommentsComponent implements OnInit {
         this._comments.deleteComment(this._auth.token, commentId)
         .subscribe(() => {
           this.comments = this.comments.filter((comment: any) => comment.id !== commentId);
+          this.fetchComments(this.currentPage, true);
+          // this.changePage(this.currentPage);
         })
 
       }
     })
 
+  }
+
+  changePage(page:number | null){
+    if(page !== null){
+      this.currentPage = page;
+      this.fetchComments(this.currentPage);
+    }
   }
 }

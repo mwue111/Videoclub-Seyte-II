@@ -7,6 +7,7 @@ import { CommentFormComponent } from './components/comment-form/comment-form.com
 import { ReactiveFormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { DateAgoPipe } from "src/app/pipes/date-ago.pipe";
+import { PaginationComponent } from "src/app/pagination/pagination.component";
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { DateAgoPipe } from "src/app/pipes/date-ago.pipe";
     CommentsComponent,
     CommentComponent,
     CommentFormComponent,
-    DateAgoPipe
+    DateAgoPipe,
+    PaginationComponent
   ],
   exports: [
     CommentsComponent,
