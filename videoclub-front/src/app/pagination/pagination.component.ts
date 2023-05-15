@@ -19,7 +19,6 @@ export class PaginationComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
 
     if(changes['data'] && !changes['data']['firstChange']){
-      console.log('entra');
       const newLastPage = changes['data']['currentValue']['last_page'];
       const oldLastPage = changes['data']['previousValue']['last_page'];
 
@@ -43,7 +42,6 @@ export class PaginationComponent implements OnInit {
     for(let i = 1; i <= total; i++){
       this.allPages.push(i);
     }
-    console.log(this.allPages);
   }
 
   prevPage(page: any) {
