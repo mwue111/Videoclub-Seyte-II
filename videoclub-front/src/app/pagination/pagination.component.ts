@@ -16,11 +16,13 @@ export class PaginationComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    // console.log('data: ', this.data);
-    this.currentPage = this.data.current_page;
-    this.totalPages = this.data.last_page;
-    for(let i = 1; i <= this.data.last_page; i++){
-      this.allPages.push(i);
+    console.log('data: ', this.data);
+    if(this.data){
+      this.currentPage = this.data.current_page;
+      this.totalPages = this.data.last_page;
+      for(let i = 1; i <= this.data.last_page; i++){
+        this.allPages.push(i);
+      }
     }
   }
 

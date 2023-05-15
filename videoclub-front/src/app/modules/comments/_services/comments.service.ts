@@ -23,16 +23,17 @@ export class CommentsService {
     return this._httpClient.get<CommentInterface[]>(url, { headers:headers });
   }
 
-  getMovieComments(token: any, id: number, page: number): Observable<CommentInterface[]> {
+  getMovieComments(token: any, id: number, page: number, newComment: boolean | null = null): Observable<CommentInterface[]> {
     let observable: Observable<any>;
     let url = URL_SERVICES + `/resenas/pelicula/${id}/${page}`
     let headers = new HttpHeaders().set('Authorization', 'Bearer' + token);
 
-    if(this.cache && this.cache.current_page === page){
-      console.log('CACHEADA:  - página actual cacheado: ', this.cache.current_page, ' y página recibida: ', page);
+    if(this.cache && this.cache.current_page === page && newComment === null){
+      // console.log('CACHEADA:  - página actual cacheado: ', this.cache.current_page, ' y página recibida: ', page);
+      console.log('CACHEADA:  - página actual cacheado: ', this.cache.data);
       observable = of(this.cache)
     }
-    else if(this.cachedObservable) {
+    else if(this.cachedObservable && newComment === null) {
       observable = this.cachedObservable;
     }
     else{

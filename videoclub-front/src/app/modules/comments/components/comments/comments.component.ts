@@ -41,13 +41,13 @@ export class CommentsComponent implements OnInit {
     })
   }
 
-  fetchComments(page: number) {
+  fetchComments(page: number, newComment: boolean | null = null) {
     // console.log('página: ', page)
-    // console.log('qué manda: ', Number(this.movieId), page);
-    this._comments.getMovieComments(this._auth.token, Number(this.movieId), page)
+    console.log('qué manda: ', Number(this.movieId), page);
+    this._comments.getMovieComments(this._auth.token, Number(this.movieId), page, newComment)
         .subscribe((res: any) => {
-          // console.log('res: ', res);
           if(res !== 'none'){
+            console.log('res en fetchComments: ', res);
             this.comments = res.data;
             this.data = res;
             this.currentPage = res.current_page;
@@ -68,7 +68,10 @@ export class CommentsComponent implements OnInit {
 
     this._comments.createComment(this._auth.token, review.title, review.description, this._auth.user.id, this.movieId)
         .subscribe((res: any) => {
+          console.log('res: ', res);
           this.comments = [...this.comments, res];
+          console.log('array de comentarios: ', this.comments);
+          this.fetchComments(this.currentPage, true);
         })
   }
 
