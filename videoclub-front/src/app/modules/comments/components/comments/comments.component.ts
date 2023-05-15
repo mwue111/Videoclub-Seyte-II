@@ -119,6 +119,7 @@ export class CommentsComponent implements OnInit {
         this._comments.deleteComment(this._auth.token, commentId)
         .subscribe(() => {
           this.comments = this.comments.filter((comment: any) => comment.id !== commentId);
+          this.fetchComments(this.currentPage, true);
         })
 
       }
