@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -13,17 +13,37 @@ export class PaginationComponent implements OnInit {
   totalPages!: number;
   allPages: any = [];
 
-  constructor() {}
+  constructor() {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+
+    if(changes['data'] && !changes['data']['firstChange']){
+      console.log('entra');
+      const newLastPage = changes['data']['currentValue']['last_page'];
+      const oldLastPage = changes['data']['previousValue']['last_page'];
+
+      if(newLastPage !== oldLastPage){
+        this.totalPages = newLastPage;
+        this.updateTotalPages(this.totalPages);
+      }
+    }
+  }
 
   ngOnInit(): void {
-    console.log('data: ', this.data);
     if(this.data){
       this.currentPage = this.data.current_page;
       this.totalPages = this.data.last_page;
-      for(let i = 1; i <= this.data.last_page; i++){
-        this.allPages.push(i);
-      }
+      this.updateTotalPages(this.totalPages);
     }
+  }
+
+  updateTotalPages(total: number) {
+    this.allPages = [];
+    for(let i = 1; i <= total; i++){
+      this.allPages.push(i);
+    }
+    console.log(this.allPages);
   }
 
   prevPage(page: any) {
