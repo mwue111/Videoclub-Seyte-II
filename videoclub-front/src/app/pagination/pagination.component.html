@@ -1,8 +1,8 @@
 <div class="container">
   <nav>
     <ul class="pagination">
-      <li class="page-item">
-        <a class="page-link button-prev"
+      <li class="page-item button-prev">
+        <a class="page-link"
             (click)="prevPage(currentPage)"
             *ngIf="currentPage > 1"
         >
@@ -11,8 +11,7 @@
       </li>
 
       <div *ngFor="let page of allPages">
-        <li class="page-item">
-          <!-- añadir una clase concreta si page === currentPage -->
+        <li [ngClass]="page === currentPage ? 'current-page':'page-item'">
           <a class="page-link" (click)="goToPage(page)">
             {{page}}
           </a>
@@ -23,8 +22,8 @@
           {{ currentPage }}
         </a> -->
       <!-- </li> -->
-      <li class="page-item">
-        <a class="page-link button-next"
+      <li class="page-item button-next">
+        <a class="page-link"
                 (click)="nextPage(currentPage)"
                 *ngIf="currentPage < totalPages"
         >

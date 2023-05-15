@@ -30,17 +30,24 @@ ul{
   background-color: #D3D3D3;
 }
 
-.current{
-  background: #B1A7A6;
+.current-page a{
+  background: #F5F3F4;
+  padding: 1em 1.5em;
 }
 
-.button-next{
+.button-next a{
   border-radius: 0 15px 15px 0;
 }
 
-.button-prev{
+.button-prev a{
   border-radius: 15px 0 0 15px;
 }
+
+.button-next a,
+.button-prev a {
+  color: #159CA3;
+}
+
 /* .pagination {
   margin: 0;
 }
