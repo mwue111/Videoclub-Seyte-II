@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../modules/auth/_services/auth.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-user-page',
