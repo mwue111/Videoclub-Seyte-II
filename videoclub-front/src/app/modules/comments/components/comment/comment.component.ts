@@ -43,7 +43,6 @@ export class CommentComponent implements OnInit {
 
   ngOnInit() {
       this.userData(this.comment.user_id);
-      console.log('usernames: ', this.usernames);
   }
 
   userData(user: any){
