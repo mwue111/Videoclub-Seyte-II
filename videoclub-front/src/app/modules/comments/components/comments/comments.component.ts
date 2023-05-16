@@ -30,6 +30,7 @@ export class CommentsComponent implements OnInit {
     this.logged = this._auth.isLogged();
     this.user = this._auth.user;
     this.currentPage = 1;
+    console.log('user: ', this.user);
   }
 
   ngOnInit() {

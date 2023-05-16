@@ -14,9 +14,9 @@
           <img src="../../../../../assets/user.png" alt="Imagen de usuario">
         </div>
         <div *ngIf="user.image">
-          <img src="{{ user.image }}" alt="Imagen de perfil de {{ user.email }}">
+          <img src="{{ user.image }}" alt="Imagen de perfil de {{ user.username }}">
         </div>
-        <h3>{{ user.email }}</h3>
+        <h2>{{ user.username }}</h2>
       </div>
     </div>
     <div class="movie-review-form">

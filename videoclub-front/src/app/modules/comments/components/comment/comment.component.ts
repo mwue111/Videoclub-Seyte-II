@@ -21,6 +21,8 @@ export class CommentComponent implements OnInit {
   }>();
   @Output() deleteComment = new EventEmitter<string|number>();
 
+  user:any;
+  logged!:boolean;
   username: string = '';
   usernames: any = [];
   displayComment: boolean = true;
@@ -32,10 +34,16 @@ export class CommentComponent implements OnInit {
     private _comments: CommentsService,
     private route: ActivatedRoute,
     private _auth: AuthService,
-  ) {}
+  ) {
+    if(this._auth.isLogged()){
+      this.logged = true;
+      this.user = this._auth.user;
+    }
+  }
 
   ngOnInit() {
       this.userData(this.comment.user_id);
+      console.log('usernames: ', this.usernames);
   }
 
   userData(user: any){
