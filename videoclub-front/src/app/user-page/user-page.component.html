@@ -1,21 +1,39 @@
 <div class="container">
   <div class="user-page-header">
     <div class="user-image">
-      <!-- <div *ngIf="!user.image"> -->
+      <div *ngIf="!user.image">
         <img src="../../assets/user.png" alt="Imagen de usuario">
-      <!-- </div> -->
-      <!-- <div *ngIf="user.image"> -->
-        <!-- <img src="user.image" alt="Imagen de {{ user.username }}"> -->
-      <!-- </div> -->
+      </div>
+      <div *ngIf="user.image">
+        <img src="user.image" alt="Imagen de {{ user.username }}">
+      </div>
     </div>
+
     <div class="user-data">
-      <p>Nombre de usuario</p>
-      <p>Email del usuario</p>
-      <p>Nombre y apellido/s real/es del usuario</p>
-      <p>Fecha de nacimiento del usuario</p>
+      <div *ngIf="!isEditing">
+        <p *ngIf="user.username" id="user-name">{{ user.username }}</p>
+        <p *ngIf="!user.name" class="unknown-data">Anónimo</p>
+      </div>
+
+      <div *ngIf="isEditing">
+        <input type="text" [(ngModel)]="user.username">
+      </div>
+
+      <p>{{ user.email }}</p>
+
+      <p *ngIf="user.name && user.surname">{{ user.name }} {{ user.surname }}</p>
+      <p *ngIf="!(user.name && user.surname)" class="unknown-data">¡Aún no nos has dicho cómo te llamas!</p>
+
+      <p *ngIf="user.birth_date">{{ user.birth_date }}</p>
     </div>
-    <div class="edit-button-container">
-      <button>Editar</button>
+
+    <div class="edit-button-container" *ngIf="!isEditing">
+      <button (click)="updateUser(user)">Editar</button>
+    </div>
+
+    <div *ngIf="isEditing">
+      <button (click)="close()">Guardar</button>
+      <button (click)="close()">Cancelar</button>
     </div>
   </div>
   <div class="user-page-content">

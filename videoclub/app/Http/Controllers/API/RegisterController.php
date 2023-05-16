@@ -86,11 +86,7 @@ class RegisterController extends BaseController
     //   $strToken = $success['token']->accessToken;
     //   $expiration = $success['token']->token->expires_at->diffInSeconds(Carbon::now());
       $success['user'] = [
-        'id' => Auth::user()->id,
-        'username' => Auth::user()->username,
-        'name' => Auth::user()->name,
-        'email' => Auth::user()->email,
-        'role' => Auth::user()->role
+        'user' => Auth::user()
       ];
 
       return $this->sendResponse($success, 'Has iniciado sesión.');

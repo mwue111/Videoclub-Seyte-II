@@ -25,7 +25,7 @@ export class MovieComponent {
     private router: Router
   ) {
     this.logged = this._auth.isLogged();
-    this.user = this._auth.user;
+    this.user = this._auth.user.user;
 
     this.route.params.subscribe((res: any) => {
       let movieId = res.id;

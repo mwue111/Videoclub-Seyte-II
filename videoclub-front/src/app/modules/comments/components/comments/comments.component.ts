@@ -28,7 +28,7 @@ export class CommentsComponent implements OnInit {
     private route: ActivatedRoute,
   ) {
     this.logged = this._auth.isLogged();
-    this.user = this._auth.user;
+    this.user = this._auth.user.user;
     this.currentPage = 1;
   }
 
@@ -63,7 +63,7 @@ export class CommentsComponent implements OnInit {
       confirmButtonColor: '#1874BA'
     })
 
-    this._comments.createComment(this._auth.token, review.title, review.description, this._auth.user.id, this.movieId)
+    this._comments.createComment(this._auth.token, review.title, review.description, this._auth.user.user.id, this.movieId)
         .subscribe((res: any) => {
           this.comments = [...this.comments, res];
           this.fetchComments(this.currentPage, true);
@@ -80,7 +80,7 @@ export class CommentsComponent implements OnInit {
       title: '¡Comentario editado!',
       confirmButtonColor: '#1874BA'
     })
-    this._comments.updateComment(this._auth.token, body.title, body.description, commentId, this._auth.user.id, this.movieId)
+    this._comments.updateComment(this._auth.token, body.title, body.description, commentId, this._auth.user.user.id, this.movieId)
         .subscribe((updatedComment: any) => {
           this.comments = this.comments.map((comment) => {
             if(comment.id === commentId) {

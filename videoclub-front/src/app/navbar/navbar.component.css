@@ -102,6 +102,7 @@
 .logged-div img {
   width: 2em;
   height: 2em;
+  margin-top: 5px;
 }
 
 .logged-div p {

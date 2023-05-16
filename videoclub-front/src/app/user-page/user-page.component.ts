@@ -9,18 +9,26 @@ import { Router } from '@angular/router';
 })
 export class UserPageComponent {
   user: any;
+  isEditing!: boolean;
 
   constructor(
     private _auth: AuthService,
     private router: Router,
   ) {
     if(this._auth.isLogged()){
-      this.user = this._auth.user;
+      this.user = this._auth.user.user;
     }
     else{
       this.router.navigate(['auth/login']);
     }
+  }
 
-    // console.log('usuario: ', this.user);
+  updateUser(user: any){
+    this.isEditing = true;
+    console.log('editando usuario ', user);
+  }
+
+  close(){
+    this.isEditing = false;
   }
 }

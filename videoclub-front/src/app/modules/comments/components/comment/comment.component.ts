@@ -37,7 +37,7 @@ export class CommentComponent implements OnInit {
   ) {
     if(this._auth.isLogged()){
       this.logged = true;
-      this.user = this._auth.user;
+      this.user = this._auth.user.user;
     }
   }
 
@@ -72,7 +72,7 @@ export class CommentComponent implements OnInit {
       timePassed = false;
     }
 
-    return Boolean(this._auth.isLogged()) && this._auth.user.id === user && !timePassed;
+    return Boolean(this._auth.isLogged()) && this._auth.user.user.id === user && !timePassed;
   }
 
   isEditing(): boolean {
