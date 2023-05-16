@@ -107,14 +107,18 @@ class ReviewController extends Controller
 
   public function findMovieReviews($id, $page){
     $movie = Movie::findOrFail($id);
-    foreach($movie->reviews as $review){
-        $review->user_id = User::where('id', '=', $review->user_id)->get();
-    }
+
     if(($movie->reviews)->isEmpty()){
-        return $movie->reviews = 'none';
+        return 'none';
     }
     else{
-        return $movie->reviews->toQuery()->latest()->paginate(4, ['*'], 'page', $page);
+        $pagination = $movie->reviews->toQuery()->latest()->paginate(4, ['*'], 'page', $page);
+
+        foreach($pagination as $p){
+            $p->user_id = User::where('id', '=', $p->user_id)->get();
+        }
+
+        return $pagination;
     }
   }
 

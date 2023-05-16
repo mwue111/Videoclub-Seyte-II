@@ -36,7 +36,9 @@ export class CommentsService {
     }
     else{
       this.cachedObservable = this._httpClient.get<CommentInterface[]>(url, { headers:headers }).pipe(
-          tap(res => this.cache = res),
+          tap(res => {
+            this.cache = res
+          }),
           share(),
           finalize(() => this.cachedObservable = null)
       );
