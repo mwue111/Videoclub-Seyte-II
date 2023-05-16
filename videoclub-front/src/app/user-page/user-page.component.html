@@ -11,12 +11,54 @@
 
     <div class="user-data">
       <div *ngIf="!isEditing">
-        <p *ngIf="user.username" id="user-name">{{ user.username }}</p>
-        <p *ngIf="!user.name" class="unknown-data">Anónimo</p>
+        <p id="user-name">{{ user.username }}</p>
       </div>
 
-      <div *ngIf="isEditing">
-        <input type="text" [(ngModel)]="user.username">
+      <div *ngIf="isEditing" class="user-edit-form">
+        <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
+          <div class="form-group">
+            <input type="text" formControlName="username">
+          </div>
+
+          <div class="form-group">
+            <input type="text" formControlName="email">
+          </div>
+
+          <div class="form-group">
+            <input type="text" formControlName="name" placeholder="Nombre">
+          </div>
+
+          <div class="form-group">
+            <input type="text" formControlName="surname" placeholder="Apellido">
+          </div>
+
+          <div class="form-group">
+            <input type="date" formControlName="birth_date">
+          </div>
+
+          <!-- Formulario para cambiar la contraseña: -->
+          <!-- <div class="form-group">
+            <label for="old-pass">Contraseña antigua:</label>
+            <input type="text" name="old-pass">
+            <label for="new-pass">Contraseña nueva:</label>
+            <input type="text" name="new-pass">
+          </div> -->
+
+          <!-- Para que el formControl coja la contraseña: -->
+          <!-- <div class="form-group">
+            <input type="text" formControlName="password">
+          </div> -->
+
+          <!-- Requerir contraseña para guardar -->
+          <!-- <div class="form-group">
+            <label for="password">Introduce tu contraseña para guardar los cambios: </label>
+            <input type="text" name="password">
+          </div> -->
+
+          <input type="submit" value="Guardar">
+          <button (click)="close()">Cancelar</button>
+
+        </form>
       </div>
 
       <p>{{ user.email }}</p>
@@ -31,10 +73,6 @@
       <button (click)="updateUser(user)">Editar</button>
     </div>
 
-    <div *ngIf="isEditing">
-      <button (click)="close()">Guardar</button>
-      <button (click)="close()">Cancelar</button>
-    </div>
   </div>
   <div class="user-page-content">
       <div class="user-seen-movies">

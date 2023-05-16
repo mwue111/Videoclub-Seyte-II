@@ -7,11 +7,15 @@ import { AuthService } from '../modules/auth/_services/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  logged: boolean;
+  logged!: boolean;
   user: any;
-  constructor(private _auth: AuthService) {
-    this.logged = _auth.isLogged();
-    this.user = _auth.user.user;
+  constructor(
+    private _auth: AuthService
+  ) {
+    if(this._auth.isLogged()){
+      this.logged = _auth.isLogged();
+      this.user = _auth.user.user;
+    }
   }
 
   logout() {

@@ -22,6 +22,7 @@ import { MovieComponent } from './movie/movie.component';
 import { CommentsModule } from './modules/comments/comments.module';
 import { ViewMovieComponent } from './view-movie/view-movie.component';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 //videogular:
 import {VgCoreModule} from '@videogular/ngx-videogular/core';
@@ -63,6 +64,7 @@ const material = [MatToolbarModule];
     VgOverlayPlayModule,
     VgBufferingModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     material,

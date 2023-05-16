@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Models\Free;
 use App\Models\Premium;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -29,6 +30,20 @@ class UserController extends Controller
     return json_encode($users);
   }
 
+  public function store(Request $request) {
+    $attributes = $request->validate([
+        'user_id' => 'required|numeric',
+        'image' => 'image|mimes:jpg,jpeg,png,bmp'
+    ]);
+
+    $user = User::findOrFail($request->user_id);
+
+    $attributes['image'] = request()->file('image')->store('user_profile_img', 'public');
+
+    $user->image = $attributes['image'];
+    $user->save();
+  }
+
   public function show($id)
   {
     $user = User::findOrFail($id);
@@ -37,17 +52,28 @@ class UserController extends Controller
 
   public function update(Request $request, $id)
   {
-
     $user = User::findOrFail($id);
+    // dd($user);
 
-    $request->validate([
-      'username' => 'unique:users,username',
-      'email' => 'required|email',
-      'password' => 'required',
-      'role' => 'required',
+    $attributes = $request->validate([
+      'username' => 'required|unique:users,username,' . $user->id, //unique:users,username,' . $user->id,
+      'name' => 'string',
+      'surname' => 'string',
+      'email' => 'string|email|unique:users,email,' . $user->id, //unique:users,email,' . $user->id,
+      'image' => 'image'
     ]);
 
-    $user->update($request->all());
+    if($request->hasFile('image')){
+
+        if(isset($user->image)){
+            $old_image = $user->image;
+            Storage::disk('public')->delete($old_image);
+        }
+
+        $attributes['image'] = request()->file('image')->store('user_profile_img', 'public');
+    }
+
+    $user->update($attributes);
 
     return json_encode($user);
   }

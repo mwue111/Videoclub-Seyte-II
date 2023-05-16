@@ -16,7 +16,12 @@
         <div *ngIf="user.image">
           <img src="{{ user.image }}" alt="Imagen de perfil de {{ user.username }}">
         </div>
-        <h2>{{ user.username }}</h2>
+        <div *ngIf="user.username">
+          <h2>{{ user.username }}</h2>
+        </div>
+        <div *ngIf="!user.username">
+          <h2>¡Aún no sabemos tu nombre!</h2>
+        </div>
       </div>
     </div>
     <div class="movie-review-form">

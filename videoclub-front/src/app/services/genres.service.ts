@@ -9,7 +9,9 @@ import { Global } from './global';
 export class GenresService {
   public url: string;
 
-  constructor(private _http: HttpClient) {
+  constructor(
+    private _http: HttpClient
+  ) {
     this.url = Global.url;
   }
 
