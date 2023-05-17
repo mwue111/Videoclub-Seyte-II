@@ -89,6 +89,7 @@ export class AuthService {
   }
 
   resetPassword(data: any) {
+    console.log('recibido: ', data)
     return this.http.post(URL_SERVICES + '/change-password', data);
   }
 

@@ -52,6 +52,7 @@ class UserController extends Controller
 
   public function update(Request $request, $id)
   {
+    // dd($request->all());
     $user = User::findOrFail($id);
     // dd($user);
 
@@ -60,6 +61,7 @@ class UserController extends Controller
       'name' => 'string',
       'surname' => 'string',
       'email' => 'string|email|unique:users,email,' . $user->id, //unique:users,email,' . $user->id,
+      'birth_date' => 'date',
       'image' => 'image'
     ]);
 

@@ -10,11 +10,11 @@
     </div>
 
     <div class="user-data">
-      <div *ngIf="!isEditing">
+      <div *ngIf="isEditing">
         <p id="user-name">{{ user.username }}</p>
       </div>
 
-      <div *ngIf="isEditing" class="user-edit-form">
+      <div *ngIf="!isEditing" class="user-edit-form">
         <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
           <div class="form-group">
             <input type="text" formControlName="username">
@@ -36,26 +36,25 @@
             <input type="date" formControlName="birth_date">
           </div>
 
-          <!-- Formulario para cambiar la contraseña: -->
-          <!-- <div class="form-group">
-            <label for="old-pass">Contraseña antigua:</label>
-            <input type="text" name="old-pass">
-            <label for="new-pass">Contraseña nueva:</label>
-            <input type="text" name="new-pass">
-          </div> -->
-
-          <!-- Para que el formControl coja la contraseña: -->
-          <!-- <div class="form-group">
-            <input type="text" formControlName="password">
-          </div> -->
-
-          <!-- Requerir contraseña para guardar -->
           <div class="form-group">
-            <label for="password">Introduce tu contraseña para guardar los cambios: </label>
+            <label for="new-pass">Contraseña nueva:</label>
+            <input type="text" formControlName="new_pass">
+          </div>
+
+          <div class="form-group">
+            <label for="password">Introduce tu contraseña antigua para guardar los cambios: </label>
             <input type="text" formControlName="password">
           </div>
 
-          <input type="submit" value="Guardar">
+          <ng-container *ngIf="hasError" class="message-container">
+            <p class="error-message">{{ hasErrorText }}</p>
+          </ng-container>
+
+          <ng-container *ngIf="hasSuccess" class="message-container">
+            <p class="success-message">{{ hasSuccessText }}</p>
+          </ng-container>
+
+          <input type="submit" value="Guardar" [disabled]="editForm.invalid">
           <button (click)="close()">Cancelar</button>
 
         </form>

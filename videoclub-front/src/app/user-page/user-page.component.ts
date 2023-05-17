@@ -16,7 +16,7 @@ export class UserPageComponent implements OnInit{
   editForm!: FormGroup;
   hasError: boolean = false;
   hasErrorText: string = '';
-  hasSuccess: boolean = true;
+  hasSuccess!: boolean;
   hasSuccessText: string = '';
 
   constructor(
@@ -98,42 +98,23 @@ export class UserPageComponent implements OnInit{
           Validators.minLength(8),
           Validators.maxLength(100)
         ])
-      ]
+      ],
+      new_pass: [
+        null,
+        Validators.compose([
+          Validators.minLength(8),
+          Validators.maxLength(100)
+        ])
+      ],
     })
   }
-
-  /*
-  verifyNewPassword(email: string, password: string): Observable<boolean> {
-    return this._auth.verifyOldPass(email, password).pipe(
-      map((res:any) => {
-        return res === 1;
-      })
-    )
-  }
-  */
 
   verifyPassword(email:string, password: string): Observable<boolean>{
     return this._auth.verifyOldPass(email, password).pipe(
       map((res: any) => {
-        console.log('res en el mapeo: ', res);
         return res === 1;
       })
     )
-    // let correctPass: boolean;
-
-    // this._auth.verifyOldPass(email, password)
-    //           .subscribe((res: any) => {
-    //             if(res){
-    //               correctPass = true;
-    //             }
-    //             else{
-    //               correctPass = false;
-    //             }
-    //             console.log(correctPass);
-    //             return correctPass;
-    //           });
-
-    //comprobar que la contraseña proporcionada es la del usuario
   }
 
   updateUser(user: any){
@@ -142,9 +123,20 @@ export class UserPageComponent implements OnInit{
   }
 
   saveChanges(){
-    this.verifyPassword(this.editForm.value.email, this.editForm.value.password).pipe(
+    if(this.editForm.value.new_pass){
+      const data = {
+        'email': this.user.email,
+        'password': this.editForm.value.new_pass
+      };
+
+      this._users.resetPassword(this._auth.token, data)
+                  .subscribe((res: any) => {
+                    console.log('respuesta recibida en contraseña: ', res);
+                  })
+    }
+
+    this.verifyPassword(this.user.email, this.editForm.value.password).pipe(
       switchMap((passMatches: boolean) => {
-        console.log('passMatches: ', passMatches)
         if(!passMatches) {
           return of(null);
         }
@@ -158,18 +150,14 @@ export class UserPageComponent implements OnInit{
       if(res){
         this.user = res;
         this.close();
+        this.hasSuccess = true;
+        this.hasSuccessText = 'Los datos se han actualizado correctamente.';
       }
-      //else: hasErrorText
+      else{
+        this.hasError = true;
+        this.hasErrorText = 'La contraseña no es correcta.';
+      }
     })
-
-    /*
-    this._users.editUser(this._auth.token, this.user.id, this.editForm.value)
-              .subscribe((res:any) => {
-                console.log('res: ', res);
-                this.user = res;
-                this.close();
-              })
-    */
   }
 
   close(){

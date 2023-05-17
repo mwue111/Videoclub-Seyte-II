@@ -25,6 +25,14 @@ export class UsersService {
     return this._http.put(this.url + `/usuarios/${id}`, value, { headers: headers });
   }
 
+  resetPassword(token: any, data: any): Observable<Object> {
+  // resetPassword(token: any, data: any) {
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+
+    console.log('valores recibidos al cambiar la contraseña: ', data);
+    return this._http.post(this.url + '/update-password', data, { headers:headers })
+  }
+
   deleteUser(id: number){
 
   }
