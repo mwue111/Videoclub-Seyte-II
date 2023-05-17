@@ -12,7 +12,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent implements OnInit{
-  user: any;
+  user: any = {
+    username: 'Cargando...',
+    name: '',
+    surname: '',
+    email: '',
+    birth_date: ''
+  };
+
   isEditing!: boolean;
   editForm!: FormGroup;
   hasError: boolean = false;
@@ -33,22 +40,50 @@ export class UserPageComponent implements OnInit{
       this.router.navigate(['auth/login']);
     }
 
-    if(!this.user.username){
-      this.user.username = 'Anónimo';
-    }
+    //objeto plantilla en lugar de esto:
+    // if(!this.user.username){
+    //   this.user.username = 'Anónimo';
+    // }
 
-    if(!this.user.name){
-      this.user.name = '';
-    }
+    // if(!this.user.name){
+    //   this.user.name = '';
+    // }
 
-    if(!this.user.surname){
-      this.user.surname = '';
-    }
+    // if(!this.user.surname){
+    //   this.user.surname = '';
+    // }
   }
 
-  ngOnInit() {
-    console.log('usuario: ', this.user);
+  fetchUser(): Promise<any> {
 
+    return new Promise<void>((resolve, reject) => {
+      this._users.getUser(this._auth.token, this.user.id)
+              .subscribe((res: any) => {
+                console.log('res en fetchUser: ', res);
+                this.user = res;
+                resolve();
+              },
+              (error: any) => {
+                reject(error);
+              }
+              );
+    });
+    //   this._users.getUser(this._auth.token, this.user.id)
+    //           .subscribe((res: any) => {
+    //             console.log('res en fetchUser: ', res);
+    //             this.user = res;
+    //           })
+
+    // console.log('usuario en fetchUser: ', this.user);
+  }
+
+  async ngOnInit() {
+    await this.fetchUser();
+    console.log('usuario: ', this.user);
+    this.initializeForm();
+  }
+
+  initializeForm() {
     this.editForm = this.fb.group({
       username: [
         this.user.username,
@@ -116,39 +151,39 @@ export class UserPageComponent implements OnInit{
     )
   }
 
-  updateUser(user: any){
+  updateUser(){
     this.isEditing = true;
-    console.log('editando usuario ', user.id);
   }
 
   saveChanges(){
-    if(this.editForm.value.new_pass){
-      const data = {
-        'email': this.user.email,
-        'password': this.editForm.value.new_pass
-      };
-
-      this._users.resetPassword(this._auth.token, data)
-                  .subscribe((res: any) => {
-                    console.log('respuesta recibida en contraseña: ', res);
-                  })
-    }
-
     this.verifyPassword(this.user.email, this.editForm.value.password).pipe(
       switchMap((passMatches: boolean) => {
         if(!passMatches) {
           return of(null);
         }
         else{
+          if(this.editForm.value.new_pass){
+            const data = {
+              'email': this.user.email,
+              'password': this.editForm.value.new_pass
+            };
+
+            this._users.resetPassword(this._auth.token, data)
+                        .subscribe((res: any) => {
+                          console.log('respuesta recibida en contraseña: ', res);
+                        })
+          }
+
           return this._users.editUser(this._auth.token, this.user.id, this.editForm.value);
         }
       })
     )
     .subscribe((res: any) => {
-      console.log(res);
+      // console.log(res);
       if(res){
-        this.user = res;
+        // this.user = res;
         this.close();
+        this.fetchUser();
 
         Swal.fire({
           icon: 'success',
@@ -162,6 +197,8 @@ export class UserPageComponent implements OnInit{
         this.hasErrorText = 'La contraseña no es correcta.';
       }
     })
+
+    console.log('usuario tras el cambio: ', this.user);
   }
 
   close(){

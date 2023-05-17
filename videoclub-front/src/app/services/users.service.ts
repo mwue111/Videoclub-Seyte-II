@@ -15,7 +15,10 @@ export class UsersService {
     this.url = URL_SERVICES; //en lugar de Global
   }
 
-  getUser(id: number){
+  getUser(token: any, id: number){
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+
+    return this._http.get(this.url + `/usuarios/${id}`, { headers:headers });
 
   }
 

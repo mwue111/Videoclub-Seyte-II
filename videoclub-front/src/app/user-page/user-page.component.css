@@ -87,7 +87,6 @@
   width: 90%;
   display: flex;
   padding: 0 0 10px 0;
-  z-index: 99;
   overflow-y: scroll;
 }
 

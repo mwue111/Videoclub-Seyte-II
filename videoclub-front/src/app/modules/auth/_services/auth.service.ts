@@ -21,7 +21,6 @@ export class AuthService {
 
   loadLocalStorage() {
     if (localStorage['token'] && localStorage['user']) {
-      //getItem vale también
       this.token = localStorage.getItem('token');
       this.user = JSON.parse(localStorage.getItem('user') ?? '');
     } else {
@@ -74,7 +73,6 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.router.navigate(['auth/login'], {
-      //quizás hay que añadir una /
       queryParams: {},
     });
   }
