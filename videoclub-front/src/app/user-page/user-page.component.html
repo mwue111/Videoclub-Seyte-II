@@ -16,7 +16,7 @@
         <p *ngIf="user.name && user.surname">{{ user.name }} {{ user.surname }}</p>
         <p *ngIf="!(user.name && user.surname)" class="unknown-data">¡Aún no nos has dicho cómo te llamas!</p>
 
-        <p *ngIf="user.birth_date">{{ user.birth_date }}</p>
+        <p *ngIf="user.birth_date">Fecha de nacimiento: {{ user.birth_date|date: 'dd/MM/yy' }}</p>
       </div>
 
       <div *ngIf="isEditing" class="user-edit-form">

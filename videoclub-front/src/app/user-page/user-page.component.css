@@ -7,15 +7,13 @@
 }
 
 .user-page-header{
-  /* background: green; */
   display: flex;
-  justify-content:start;
+  justify-content:flex-start;
   padding: 15px;
   height: 200px;
 }
 
 .user-image{
-  /* background-color: yellow; */
   width: 13%;
   text-align: center;
 }
@@ -32,13 +30,11 @@
 }
 
 .user-data p{
-  /* background-color: white; */
   font-size: 20px;
   margin: 30px 0;
 }
 
 .user-data p:first-child{
-  /* background-color: aqua; */
   font-weight: bold;
   font-size: 30px;
   margin-top: 10px;
@@ -76,6 +72,14 @@
 
 .edit-button-container button:active{
   background: #1c7fca;
+}
+
+.cancel-button-container button:hover{
+  background: #e3790f;
+}
+
+.cancel-button-container button:active{
+  background: #ff9a35;
 }
 
 .user-edit-form{
