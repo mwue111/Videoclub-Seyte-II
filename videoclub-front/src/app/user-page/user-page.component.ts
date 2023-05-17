@@ -3,6 +3,7 @@ import { AuthService } from '../modules/auth/_services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
+import { Observable, map, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-user-page',
@@ -13,6 +14,10 @@ export class UserPageComponent implements OnInit{
   user: any;
   isEditing!: boolean;
   editForm!: FormGroup;
+  hasError: boolean = false;
+  hasErrorText: string = '';
+  hasSuccess: boolean = true;
+  hasSuccessText: string = '';
 
   constructor(
     private _auth: AuthService,
@@ -97,7 +102,37 @@ export class UserPageComponent implements OnInit{
     })
   }
 
-  verifyPassword(password: string){
+  /*
+  verifyNewPassword(email: string, password: string): Observable<boolean> {
+    return this._auth.verifyOldPass(email, password).pipe(
+      map((res:any) => {
+        return res === 1;
+      })
+    )
+  }
+  */
+
+  verifyPassword(email:string, password: string): Observable<boolean>{
+    return this._auth.verifyOldPass(email, password).pipe(
+      map((res: any) => {
+        console.log('res en el mapeo: ', res);
+        return res === 1;
+      })
+    )
+    // let correctPass: boolean;
+
+    // this._auth.verifyOldPass(email, password)
+    //           .subscribe((res: any) => {
+    //             if(res){
+    //               correctPass = true;
+    //             }
+    //             else{
+    //               correctPass = false;
+    //             }
+    //             console.log(correctPass);
+    //             return correctPass;
+    //           });
+
     //comprobar que la contraseña proporcionada es la del usuario
   }
 
@@ -107,12 +142,34 @@ export class UserPageComponent implements OnInit{
   }
 
   saveChanges(){
+    this.verifyPassword(this.editForm.value.email, this.editForm.value.password).pipe(
+      switchMap((passMatches: boolean) => {
+        console.log('passMatches: ', passMatches)
+        if(!passMatches) {
+          return of(null);
+        }
+        else{
+          return this._users.editUser(this._auth.token, this.user.id, this.editForm.value);
+        }
+      })
+    )
+    .subscribe((res: any) => {
+      console.log(res);
+      if(res){
+        this.user = res;
+        this.close();
+      }
+      //else: hasErrorText
+    })
+
+    /*
     this._users.editUser(this._auth.token, this.user.id, this.editForm.value)
               .subscribe((res:any) => {
                 console.log('res: ', res);
                 this.user = res;
                 this.close();
               })
+    */
   }
 
   close(){
