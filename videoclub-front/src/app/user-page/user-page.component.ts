@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 import { Observable, map, of, switchMap } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-page',
@@ -16,8 +17,6 @@ export class UserPageComponent implements OnInit{
   editForm!: FormGroup;
   hasError: boolean = false;
   hasErrorText: string = '';
-  hasSuccess!: boolean;
-  hasSuccessText: string = '';
 
   constructor(
     private _auth: AuthService,
@@ -150,8 +149,13 @@ export class UserPageComponent implements OnInit{
       if(res){
         this.user = res;
         this.close();
-        this.hasSuccess = true;
-        this.hasSuccessText = 'Los datos se han actualizado correctamente.';
+
+        Swal.fire({
+          icon: 'success',
+          title: '¡Tus datos se han actualizado!',
+          confirmButtonColor: '#1874BA'
+        })
+
       }
       else{
         this.hasError = true;
