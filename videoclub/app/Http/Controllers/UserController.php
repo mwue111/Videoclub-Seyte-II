@@ -57,12 +57,12 @@ class UserController extends Controller
     // dd($user);
 
     $attributes = $request->validate([
-      'username' => 'required|unique:users,username,' . $user->id, //unique:users,username,' . $user->id,
-      'name' => 'string',
-      'surname' => 'string',
-      'email' => 'string|email|unique:users,email,' . $user->id, //unique:users,email,' . $user->id,
+      'username' => 'nullable|unique:users,username,' . $user->id,  //nullable todo salbo email y birth date
+      'name' => 'string|nullable',
+      'surname' => 'string|nullable',
+      'email' => 'string|email|unique:users,email,' . $user->id,
       'birth_date' => 'date',
-      'image' => 'image'
+      'image' => 'image|nullable'
     ]);
 
     if($request->hasFile('image')){

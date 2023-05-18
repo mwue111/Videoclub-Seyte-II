@@ -15,6 +15,7 @@ export class NavbarComponent {
     if(this._auth.isLogged()){
       this.logged = _auth.isLogged();
       this.user = _auth.user.user;
+      console.log('user en navbar: ', this.user);
     }
   }
 

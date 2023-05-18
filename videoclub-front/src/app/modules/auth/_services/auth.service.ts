@@ -30,6 +30,7 @@ export class AuthService {
   }
 
   storeLocalStorageToken(auth: any) {
+    // console.log('recibido desde users.service: ', auth);
     if (auth.data.token) {
       localStorage.setItem('token', auth.data.token);
       localStorage.setItem('user', JSON.stringify(auth.data.user));

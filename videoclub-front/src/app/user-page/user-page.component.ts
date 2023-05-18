@@ -12,14 +12,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent implements OnInit{
-  user: any = {
-    username: 'Cargando...',
-    name: '',
-    surname: '',
-    email: '',
-    birth_date: ''
-  };
 
+  user: any;
+  updatedUser: any;
   isEditing!: boolean;
   editForm!: FormGroup;
   hasError: boolean = false;
@@ -39,27 +34,12 @@ export class UserPageComponent implements OnInit{
     else{
       this.router.navigate(['auth/login']);
     }
-
-    //objeto plantilla en lugar de esto:
-    // if(!this.user.username){
-    //   this.user.username = 'Anónimo';
-    // }
-
-    // if(!this.user.name){
-    //   this.user.name = '';
-    // }
-
-    // if(!this.user.surname){
-    //   this.user.surname = '';
-    // }
   }
 
   fetchUser(): Promise<any> {
-
     return new Promise<void>((resolve, reject) => {
       this._users.getUser(this._auth.token, this.user.id)
               .subscribe((res: any) => {
-                console.log('res en fetchUser: ', res);
                 this.user = res;
                 resolve();
               },
@@ -68,18 +48,10 @@ export class UserPageComponent implements OnInit{
               }
               );
     });
-    //   this._users.getUser(this._auth.token, this.user.id)
-    //           .subscribe((res: any) => {
-    //             console.log('res en fetchUser: ', res);
-    //             this.user = res;
-    //           })
-
-    // console.log('usuario en fetchUser: ', this.user);
   }
 
   async ngOnInit() {
     await this.fetchUser();
-    console.log('usuario: ', this.user);
     this.initializeForm();
   }
 
@@ -88,7 +60,7 @@ export class UserPageComponent implements OnInit{
       username: [
         this.user.username,
         Validators.compose([
-          Validators.required,
+          // Validators.required,
           Validators.minLength(2),
           Validators.maxLength(20)
         ])
@@ -96,7 +68,7 @@ export class UserPageComponent implements OnInit{
       name: [
         this.user.name,
         Validators.compose([
-          Validators.required,
+          // Validators.required,
           Validators.minLength(2),
           Validators.maxLength(20)
         ])
@@ -104,7 +76,7 @@ export class UserPageComponent implements OnInit{
       surname: [
         this.user.surname,
         Validators.compose([
-          Validators.required,
+          // Validators.required,
           Validators.minLength(2),
           Validators.maxLength(20)
         ])
@@ -179,7 +151,6 @@ export class UserPageComponent implements OnInit{
       })
     )
     .subscribe((res: any) => {
-      // console.log(res);
       if(res){
         // this.user = res;
         this.close();
@@ -190,15 +161,12 @@ export class UserPageComponent implements OnInit{
           title: '¡Tus datos se han actualizado!',
           confirmButtonColor: '#1874BA'
         })
-
       }
       else{
         this.hasError = true;
         this.hasErrorText = 'La contraseña no es correcta.';
       }
     })
-
-    console.log('usuario tras el cambio: ', this.user);
   }
 
   close(){

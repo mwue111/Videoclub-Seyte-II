@@ -11,7 +11,8 @@
 
     <div class="user-data">
       <div *ngIf="!isEditing">
-        <p id="user-name">{{ user.username }}</p>
+        <p *ngIf="user.username" id="user-name">{{ user.username }}</p>
+        <p *ngIf="!user.username" id="user-name">Anónimo</p>
         <p>{{ user.email }}</p>
         <p *ngIf="user.name && user.surname">{{ user.name }} {{ user.surname }}</p>
         <p *ngIf="!(user.name && user.surname)" class="unknown-data">¡Aún no nos has dicho cómo te llamas!</p>
