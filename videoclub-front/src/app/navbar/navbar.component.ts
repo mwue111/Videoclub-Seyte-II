@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../modules/auth/_services/auth.service';
+import { UserSharedServiceService } from '../services/user-shared-service.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,14 +10,22 @@ import { AuthService } from '../modules/auth/_services/auth.service';
 export class NavbarComponent {
   logged!: boolean;
   user: any;
+  username: string = '';
+
   constructor(
-    private _auth: AuthService
+    private _auth: AuthService,
+    private _shared: UserSharedServiceService,
   ) {
     if(this._auth.isLogged()){
       this.logged = _auth.isLogged();
       this.user = _auth.user.user;
-      console.log('user en navbar: ', this.user);
     }
+  }
+
+  ngOnInit(){
+    this._shared.username$.subscribe(username => {
+      this.user.username = username;
+    })
   }
 
   logout() {

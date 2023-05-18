@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 import { Observable, map, of, switchMap } from 'rxjs';
 import Swal from 'sweetalert2';
+import { UserSharedServiceService } from '../services/user-shared-service.service';
 
 @Component({
   selector: 'app-user-page',
@@ -26,7 +27,7 @@ export class UserPageComponent implements OnInit{
     private _users: UsersService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-
+    private _shared: UserSharedServiceService,
   ) {
     if(this._auth.isLogged()){
       this.user = this._auth.user.user;
@@ -155,6 +156,7 @@ export class UserPageComponent implements OnInit{
         // this.user = res;
         this.close();
         this.fetchUser();
+        this._shared.updateUsername(this.editForm.value.username);
 
         Swal.fire({
           icon: 'success',
