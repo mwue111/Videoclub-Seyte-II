@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { URL_SERVICES } from '../config/config';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
 import { AuthService } from '../modules/auth/_services/auth.service';
 
 @Injectable({
@@ -9,7 +9,6 @@ import { AuthService } from '../modules/auth/_services/auth.service';
 })
 export class UsersService {
   public url: string;
-  // user: any = null;
 
   constructor(
     private _http: HttpClient,
@@ -36,7 +35,6 @@ export class UsersService {
       }
     }
     this._auth.storeLocalStorageToken(data);
-    // this.user = auth;
     return true;
   }
 
@@ -45,19 +43,14 @@ export class UsersService {
 
     return this._http.put(this.url + `/usuarios/${id}`, value, { headers: headers }).pipe(
       map((auth: any) => {
-        // let data = {
-        //   data: {
-        //     token: token,
-        //     user: auth
-        //   }
-        // }
-        // console.log('auth: ', auth);
         this.storeLocalStorageUpdated(token, auth);
-        // this._auth.storeLocalStorageToken(data);
         return auth;
+      }),
+      catchError(err => {
+        return of(err)
       })
-    )
 
+    )
   }
 
   // editUser(token: any, id: number, value: any): Observable<Object>{
@@ -67,7 +60,6 @@ export class UsersService {
   // }
 
   resetPassword(token: any, data: any): Observable<Object> {
-  // resetPassword(token: any, data: any) {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
     console.log('valores recibidos al cambiar la contraseña: ', data);

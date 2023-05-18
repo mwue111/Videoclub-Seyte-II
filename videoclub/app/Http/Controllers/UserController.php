@@ -8,6 +8,7 @@ use App\Models\Admin;
 use App\Models\Free;
 use App\Models\Premium;
 use Illuminate\Support\Facades\Storage;
+// use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -57,7 +58,7 @@ class UserController extends Controller
     // dd($user);
 
     $attributes = $request->validate([
-      'username' => 'nullable|unique:users,username,' . $user->id,  //nullable todo salbo email y birth date
+      'username' => 'string|nullable|unique:users,username,' . $user->id,  //nullable todo salbo email y birth date
       'name' => 'string|nullable',
       'surname' => 'string|nullable',
       'email' => 'string|email|unique:users,email,' . $user->id,

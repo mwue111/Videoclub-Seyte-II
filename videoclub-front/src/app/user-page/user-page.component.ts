@@ -52,6 +52,10 @@ export class UserPageComponent implements OnInit{
   }
 
   async ngOnInit() {
+    this._shared.username$.subscribe(username => {
+      this.user.username = username
+    })
+
     await this.fetchUser();
     this.initializeForm();
   }
@@ -126,9 +130,11 @@ export class UserPageComponent implements OnInit{
 
   updateUser(){
     this.isEditing = true;
+    this.initializeForm();
   }
 
   saveChanges(){
+
     this.verifyPassword(this.user.email, this.editForm.value.password).pipe(
       switchMap((passMatches: boolean) => {
         if(!passMatches) {
@@ -145,25 +151,34 @@ export class UserPageComponent implements OnInit{
                         .subscribe((res: any) => {
                           console.log('respuesta recibida en contraseña: ', res);
                         })
-          }
+            }
 
           return this._users.editUser(this._auth.token, this.user.id, this.editForm.value);
         }
       })
     )
     .subscribe((res: any) => {
+      console.log('res: ', res);
       if(res){
-        this.close();
-        this.fetchUser();
-        this._shared.updateUsername(res.username);
+        if(res.error){
+          this.editForm.controls['password'].reset();
+          this.hasError = true;
+          this.hasErrorText = 'Este nombre de usuario ya está en uso.';
+        }
+        else{
+          this.close();
+          this.fetchUser();
+          this._shared.updateUsername(res.username);
 
-        Swal.fire({
-          icon: 'success',
-          title: '¡Tus datos se han actualizado!',
-          confirmButtonColor: '#1874BA'
-        })
+          Swal.fire({
+            icon: 'success',
+            title: '¡Tus datos se han actualizado!',
+            confirmButtonColor: '#1874BA'
+          })
+        }
       }
       else{
+        this.editForm.controls['password'].reset();
         this.hasError = true;
         this.hasErrorText = 'La contraseña no es correcta.';
       }
