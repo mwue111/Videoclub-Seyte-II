@@ -153,10 +153,9 @@ export class UserPageComponent implements OnInit{
     )
     .subscribe((res: any) => {
       if(res){
-        // this.user = res;
         this.close();
         this.fetchUser();
-        this._shared.updateUsername(this.editForm.value.username);
+        this._shared.updateUsername(res.username);
 
         Swal.fire({
           icon: 'success',
