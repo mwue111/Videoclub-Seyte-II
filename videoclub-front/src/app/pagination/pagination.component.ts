@@ -18,14 +18,18 @@ export class PaginationComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
 
+    console.log(changes);
     if(changes['data'] && !changes['data']['firstChange']){
-      const newLastPage = changes['data']['currentValue']['last_page'];
-      const oldLastPage = changes['data']['previousValue']['last_page'];
+      if(changes['data']['previousValue']){
+        const newLastPage = changes['data']['currentValue']['last_page'];
+        const oldLastPage = changes['data']['previousValue']['last_page'];
 
-      if(newLastPage !== oldLastPage){
-        this.totalPages = newLastPage;
-        this.updateTotalPages(this.totalPages);
+        if(newLastPage !== oldLastPage){
+          this.totalPages = newLastPage;
+          this.updateTotalPages(this.totalPages);
+        }
       }
+
     }
   }
 

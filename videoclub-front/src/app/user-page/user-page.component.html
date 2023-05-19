@@ -11,12 +11,18 @@
 
     <div class="user-data">
       <div *ngIf="!isEditing">
-        <p id="user-name">{{ user.username }}</p>
+        <p *ngIf="user.username" id="user-name">{{ user.username }}</p>
+        <p *ngIf="!user.username" id="user-name">Anónimo</p>
+        <p>{{ user.email }}</p>
+        <p *ngIf="user.name && user.surname">{{ user.name }} {{ user.surname }}</p>
+        <p *ngIf="!(user.name && user.surname)" class="unknown-data">¡Aún no nos has dicho cómo te llamas!</p>
+
+        <p *ngIf="user.birth_date">Fecha de nacimiento: {{ user.birth_date|date: 'dd/MM/yy' }}</p>
       </div>
 
       <div *ngIf="isEditing" class="user-edit-form">
         <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
-          <div class="form-group">
+          <div class="form-group username">
             <input type="text" formControlName="username">
           </div>
 
@@ -36,44 +42,40 @@
             <input type="date" formControlName="birth_date">
           </div>
 
-          <!-- Formulario para cambiar la contraseña: -->
-          <!-- <div class="form-group">
-            <label for="old-pass">Contraseña antigua:</label>
-            <input type="text" name="old-pass">
+          <div class="form-group pass-container">
             <label for="new-pass">Contraseña nueva:</label>
-            <input type="text" name="new-pass">
-          </div> -->
+            <input type="password" formControlName="new_pass">
+          </div>
 
-          <!-- Para que el formControl coja la contraseña: -->
-          <!-- <div class="form-group">
-            <input type="text" formControlName="password">
-          </div> -->
+          <div class="form-group pass-container">
+            <label for="password">Introduce tu antigua contraseña para guardar los cambios: </label>
+            <input type="password" formControlName="password">
+          </div>
 
-          <!-- Requerir contraseña para guardar -->
-          <!-- <div class="form-group">
-            <label for="password">Introduce tu contraseña para guardar los cambios: </label>
-            <input type="text" name="password">
-          </div> -->
+          <div *ngIf="hasError" class="message-container">
+            <p class="error-message">{{ hasErrorText }}</p>
+          </div>
 
-          <input type="submit" value="Guardar">
-          <button (click)="close()">Cancelar</button>
+          <div class="button-container">
+            <input type="submit" value="Guardar" [disabled]="editForm.invalid">
+          </div>
+
 
         </form>
       </div>
-
-      <p>{{ user.email }}</p>
-
-      <p *ngIf="user.name && user.surname">{{ user.name }} {{ user.surname }}</p>
-      <p *ngIf="!(user.name && user.surname)" class="unknown-data">¡Aún no nos has dicho cómo te llamas!</p>
-
-      <p *ngIf="user.birth_date">{{ user.birth_date }}</p>
     </div>
 
     <div class="edit-button-container" *ngIf="!isEditing">
-      <button (click)="updateUser(user)">Editar</button>
+      <button (click)="updateUser()">Editar</button>
+    </div>
+    <div class="cancel-button-container" *ngIf="isEditing">
+      <button (click)="close()">Cancelar</button>
     </div>
 
+
+
   </div>
+
   <div class="user-page-content">
       <div class="user-seen-movies">
         <img src="#" alt="Imagen de películas">
@@ -91,4 +93,5 @@
         </div>
       </div>
   </div>
+
 </div>

@@ -8,6 +8,7 @@ use App\Models\Admin;
 use App\Models\Free;
 use App\Models\Premium;
 use Illuminate\Support\Facades\Storage;
+// use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -52,15 +53,17 @@ class UserController extends Controller
 
   public function update(Request $request, $id)
   {
+    // dd($request->all());
     $user = User::findOrFail($id);
     // dd($user);
 
     $attributes = $request->validate([
-      'username' => 'required|unique:users,username,' . $user->id, //unique:users,username,' . $user->id,
-      'name' => 'string',
-      'surname' => 'string',
-      'email' => 'string|email|unique:users,email,' . $user->id, //unique:users,email,' . $user->id,
-      'image' => 'image'
+      'username' => 'string|nullable|unique:users,username,' . $user->id,  //nullable todo salbo email y birth date
+      'name' => 'string|nullable',
+      'surname' => 'string|nullable',
+      'email' => 'string|email|unique:users,email,' . $user->id,
+      'birth_date' => 'date',
+      'image' => 'image|nullable'
     ]);
 
     if($request->hasFile('image')){

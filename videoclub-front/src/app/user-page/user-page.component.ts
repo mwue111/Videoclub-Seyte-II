@@ -3,6 +3,9 @@ import { AuthService } from '../modules/auth/_services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
+import { Observable, map, of, switchMap } from 'rxjs';
+import Swal from 'sweetalert2';
+import { UserSharedServiceService } from '../services/user-shared-service.service';
 
 @Component({
   selector: 'app-user-page',
@@ -10,9 +13,13 @@ import { UsersService } from '../services/users.service';
   styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent implements OnInit{
+
   user: any;
+  updatedUser: any;
   isEditing!: boolean;
   editForm!: FormGroup;
+  hasError: boolean = false;
+  hasErrorText: string = '';
 
   constructor(
     private _auth: AuthService,
@@ -20,7 +27,7 @@ export class UserPageComponent implements OnInit{
     private _users: UsersService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-
+    private _shared: UserSharedServiceService,
   ) {
     if(this._auth.isLogged()){
       this.user = this._auth.user.user;
@@ -28,28 +35,37 @@ export class UserPageComponent implements OnInit{
     else{
       this.router.navigate(['auth/login']);
     }
-
-    if(!this.user.username){
-      this.user.username = 'Anónimo';
-    }
-
-    if(!this.user.name){
-      this.user.name = '';
-    }
-
-    if(!this.user.surname){
-      this.user.surname = '';
-    }
   }
 
-  ngOnInit() {
-    console.log('usuario: ', this.user);
+  fetchUser(): Promise<any> {
+    return new Promise<void>((resolve, reject) => {
+      this._users.getUser(this._auth.token, this.user.id)
+              .subscribe((res: any) => {
+                this.user = res;
+                resolve();
+              },
+              (error: any) => {
+                reject(error);
+              }
+              );
+    });
+  }
 
+  async ngOnInit() {
+    this._shared.username$.subscribe(username => {
+      this.user.username = username
+    })
+
+    await this.fetchUser();
+    this.initializeForm();
+  }
+
+  initializeForm() {
     this.editForm = this.fb.group({
       username: [
         this.user.username,
         Validators.compose([
-          Validators.required,
+          // Validators.required,
           Validators.minLength(2),
           Validators.maxLength(20)
         ])
@@ -57,7 +73,7 @@ export class UserPageComponent implements OnInit{
       name: [
         this.user.name,
         Validators.compose([
-          Validators.required,
+          // Validators.required,
           Validators.minLength(2),
           Validators.maxLength(20)
         ])
@@ -65,7 +81,7 @@ export class UserPageComponent implements OnInit{
       surname: [
         this.user.surname,
         Validators.compose([
-          Validators.required,
+          // Validators.required,
           Validators.minLength(2),
           Validators.maxLength(20)
         ])
@@ -93,26 +109,80 @@ export class UserPageComponent implements OnInit{
           Validators.minLength(8),
           Validators.maxLength(100)
         ])
-      ]
+      ],
+      new_pass: [
+        null,
+        Validators.compose([
+          Validators.minLength(8),
+          Validators.maxLength(100)
+        ])
+      ],
     })
   }
 
-  verifyPassword(password: string){
-    //comprobar que la contraseña proporcionada es la del usuario
+  verifyPassword(email:string, password: string): Observable<boolean>{
+    return this._auth.verifyOldPass(email, password).pipe(
+      map((res: any) => {
+        return res === 1;
+      })
+    )
   }
 
-  updateUser(user: any){
+  updateUser(){
     this.isEditing = true;
-    console.log('editando usuario ', user.id);
+    this.initializeForm();
   }
 
   saveChanges(){
-    this._users.editUser(this._auth.token, this.user.id, this.editForm.value)
-              .subscribe((res:any) => {
-                console.log('res: ', res);
-                this.user = res;
-                this.close();
-              })
+
+    this.verifyPassword(this.user.email, this.editForm.value.password).pipe(
+      switchMap((passMatches: boolean) => {
+        if(!passMatches) {
+          return of(null);
+        }
+        else{
+          if(this.editForm.value.new_pass){
+            const data = {
+              'email': this.user.email,
+              'password': this.editForm.value.new_pass
+            };
+
+            this._users.resetPassword(this._auth.token, data)
+                        .subscribe((res: any) => {
+                          console.log('respuesta recibida en contraseña: ', res);
+                        })
+            }
+
+          return this._users.editUser(this._auth.token, this.user.id, this.editForm.value);
+        }
+      })
+    )
+    .subscribe((res: any) => {
+      console.log('res: ', res);
+      if(res){
+        if(res.error){
+          this.editForm.controls['password'].reset();
+          this.hasError = true;
+          this.hasErrorText = 'Este nombre de usuario ya está en uso.';
+        }
+        else{
+          this.close();
+          this.fetchUser();
+          this._shared.updateUsername(res.username);
+
+          Swal.fire({
+            icon: 'success',
+            title: '¡Tus datos se han actualizado!',
+            confirmButtonColor: '#1874BA'
+          })
+        }
+      }
+      else{
+        this.editForm.controls['password'].reset();
+        this.hasError = true;
+        this.hasErrorText = 'La contraseña no es correcta.';
+      }
+    })
   }
 
   close(){

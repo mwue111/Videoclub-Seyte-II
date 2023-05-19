@@ -21,7 +21,6 @@ export class AuthService {
 
   loadLocalStorage() {
     if (localStorage['token'] && localStorage['user']) {
-      //getItem vale también
       this.token = localStorage.getItem('token');
       this.user = JSON.parse(localStorage.getItem('user') ?? '');
     } else {
@@ -31,6 +30,7 @@ export class AuthService {
   }
 
   storeLocalStorageToken(auth: any) {
+    // console.log('recibido desde users.service: ', auth);
     if (auth.data.token) {
       localStorage.setItem('token', auth.data.token);
       localStorage.setItem('user', JSON.stringify(auth.data.user));
@@ -74,7 +74,6 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.router.navigate(['auth/login'], {
-      //quizás hay que añadir una /
       queryParams: {},
     });
   }
@@ -89,6 +88,7 @@ export class AuthService {
   }
 
   resetPassword(data: any) {
+    console.log('recibido: ', data)
     return this.http.post(URL_SERVICES + '/change-password', data);
   }
 
