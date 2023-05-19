@@ -130,6 +130,7 @@ export class UserPageComponent implements OnInit{
 
   updateUser(){
     this.isEditing = true;
+    this.hasError = false;
     this.initializeForm();
   }
 

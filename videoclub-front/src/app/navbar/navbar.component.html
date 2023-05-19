@@ -24,7 +24,7 @@
         <img *ngIf="user.image" src="user.image" alt="" />
         <img *ngIf="!user.image" src="../../assets/user.png" alt="" />
         <p *ngIf="user.username">{{ user.username }}</p>
-        <p *ngIf="!user.name">User</p>
+        <p *ngIf="!user.username">User</p>
       </div>
       <button (click)="logout()">Cerrar sesión</button>
     </div>
