@@ -5,6 +5,7 @@ import { CommentInterface } from '../../types/comment.interface';
 import { ActivatedRoute } from '@angular/router';
 import { ActiveCommentInterface } from '../../types/activeComment.interface';
 import Swal from 'sweetalert2';
+import { URL_BACKEND } from 'src/app/config/config';
 
 @Component({
   selector: 'comments',
@@ -14,6 +15,7 @@ import Swal from 'sweetalert2';
 export class CommentsComponent implements OnInit {
   logged: boolean;
   user: any;
+  url: string = URL_BACKEND + '/storage/';
   comments: CommentInterface[] = [];
   activeComment: ActiveCommentInterface | null = null;
   movieId: any;
@@ -39,6 +41,7 @@ export class CommentsComponent implements OnInit {
         this.fetchComments(this.currentPage);
       }
     })
+    console.log('user: ', this.user);
   }
 
   fetchComments(page: number, newComment: boolean | null = null) {

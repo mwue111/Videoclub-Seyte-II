@@ -1,6 +1,7 @@
 <div class="comment" *ngIf="displayComment">
   <div class="comment-image-container">
-    <img src="https://i.pravatar.cc/100" alt="imagen de usuario">
+    <img *ngIf="!user.image" src="https://i.pravatar.cc/100" alt="imagen de usuario">
+    <img *ngIf="user.image" [src]="url + user.image" alt="imagen de usuario">
   </div>
 
   <div class="comment-right-part">

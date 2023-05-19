@@ -31,19 +31,19 @@ class UserController extends Controller
     return json_encode($users);
   }
 
-  public function store(Request $request) {
-    $attributes = $request->validate([
-        'user_id' => 'required|numeric',
-        'image' => 'image|mimes:jpg,jpeg,png,bmp'
-    ]);
+//   public function store(Request $request) {
+//     $attributes = $request->validate([
+//         'user_id' => 'required|numeric',
+//         'image' => 'image|mimes:jpg,jpeg,png,bmp'
+//     ]);
 
-    $user = User::findOrFail($request->user_id);
+//     $user = User::findOrFail($request->user_id);
 
-    $attributes['image'] = request()->file('image')->store('user_profile_img', 'public');
+//     $attributes['image'] = request()->file('image')->store('user_profile_img', 'public');
 
-    $user->image = $attributes['image'];
-    $user->save();
-  }
+//     $user->image = $attributes['image'];
+//     $user->save();
+//   }
 
   public function show($id)
   {

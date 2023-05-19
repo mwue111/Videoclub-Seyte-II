@@ -6,6 +6,7 @@ import { UsersService } from '../services/users.service';
 import { Observable, map, of, switchMap } from 'rxjs';
 import Swal from 'sweetalert2';
 import { UserSharedServiceService } from '../services/user-shared-service.service';
+import { URL_BACKEND } from '../config/config';
 
 @Component({
   selector: 'app-user-page',
@@ -13,8 +14,8 @@ import { UserSharedServiceService } from '../services/user-shared-service.servic
   styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent implements OnInit{
-
   user: any;
+  url: string = URL_BACKEND + '/storage/';
   updatedUser: any;
   isEditing!: boolean;
   editForm!: FormGroup;

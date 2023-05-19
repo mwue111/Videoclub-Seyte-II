@@ -21,7 +21,7 @@
     </div>
     <div class="logged-div" *ngIf="logged">
       <div [routerLink]="['/usuario/', user.id]" class="user-page">
-        <img *ngIf="user.image" src="user.image" alt="" />
+        <img *ngIf="user.image" [src]="url + user.image" id="circle" alt="" />
         <img *ngIf="!user.image" src="../../assets/user.png" alt="" />
         <p *ngIf="user.username">{{ user.username }}</p>
         <p *ngIf="!user.username">User</p>

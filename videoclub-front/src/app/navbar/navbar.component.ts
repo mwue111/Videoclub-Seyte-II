@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../modules/auth/_services/auth.service';
 import { UserSharedServiceService } from '../services/user-shared-service.service';
+import { URL_BACKEND } from '../config/config';
 
 @Component({
   selector: 'app-navbar',
@@ -8,6 +9,8 @@ import { UserSharedServiceService } from '../services/user-shared-service.servic
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
+
+  url: string = URL_BACKEND + '/storage/';
   logged!: boolean;
   user: any;
   username: string = '';

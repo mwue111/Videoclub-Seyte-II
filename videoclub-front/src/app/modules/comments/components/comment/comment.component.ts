@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/modules/auth/_services/auth.service';
 import { ActiveCommentInterface } from '../../types/activeComment.interface';
 import { ActiveCommentTypeEnum } from '../../types/activeCommentType.enum';
+import { URL_BACKEND } from 'src/app/config/config';
 
 @Component({
   selector: 'comment',
@@ -22,6 +23,7 @@ export class CommentComponent implements OnInit {
   @Output() deleteComment = new EventEmitter<string|number>();
 
   user:any;
+  url: string = URL_BACKEND + '/storage/';
   logged!:boolean;
   username: string = '';
   usernames: any = [];

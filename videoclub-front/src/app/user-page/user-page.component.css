@@ -13,13 +13,19 @@
   height: 200px;
 }
 
-.user-image{
+.user-image {
   width: 13%;
-  text-align: center;
+  display: flex;
+  align-content: center;
+  justify-content: flex-start;
+  align-items: center;
 }
 
-.user-image img{
-  width: 80%;
+#circle {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
 }
 
 .user-data{
