@@ -12,29 +12,33 @@ export class PaginationComponent implements OnInit {
   currentPage!: number;
   totalPages!: number;
   allPages: any = [];
+  displayNext!: boolean;
 
   constructor() {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-
+    console.log('data en ngOnChanges: ', this.data);
     console.log(changes);
-    if(changes['data'] && !changes['data']['firstChange']){
-      if(changes['data']['previousValue']){
+    if(changes['data'] && !changes['data']['firstChange'] && changes['data']['previousValue']){
         const newLastPage = changes['data']['currentValue']['last_page'];
         const oldLastPage = changes['data']['previousValue']['last_page'];
 
         if(newLastPage !== oldLastPage){
+          this.currentPage = changes['data']['currentValue']['current_page'];
           this.totalPages = newLastPage;
           this.updateTotalPages(this.totalPages);
+
+          if(newLastPage > oldLastPage){
+            this.displayNext = true;
+          }
         }
       }
-
-    }
   }
 
   ngOnInit(): void {
     if(this.data){
+      console.log('data: ', this.data);
       this.currentPage = this.data.current_page;
       this.totalPages = this.data.last_page;
       this.updateTotalPages(this.totalPages);
@@ -45,6 +49,13 @@ export class PaginationComponent implements OnInit {
     this.allPages = [];
     for(let i = 1; i <= total; i++){
       this.allPages.push(i);
+    }
+
+    if(this.allPages.length > 1){
+      this.displayNext = true;
+    }
+    else{
+      this.displayNext = false;
     }
   }
 
