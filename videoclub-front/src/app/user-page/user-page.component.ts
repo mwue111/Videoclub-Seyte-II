@@ -22,6 +22,8 @@ export class UserPageComponent implements OnInit{
   hasError: boolean = false;
   hasErrorText: string = '';
 
+  //Aquí: https://www.youtube.com/watch?v=VQaYDSPSTtU
+
   constructor(
     private _auth: AuthService,
     private router: Router,
