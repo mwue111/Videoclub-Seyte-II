@@ -33,7 +33,6 @@ import { VideogularComponent } from './videogular/videogular.component';
 import { UserPageComponent } from './user-page/user-page.component';
 // import {SingleMediaPlayer} from './single-media-player';
 
-
 const material = [MatToolbarModule];
 
 @NgModule({

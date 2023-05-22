@@ -32,8 +32,10 @@ class UserController extends Controller
   }
 
 //   public function store(Request $request) {
+
+//     $user = User::findOrFail($id);
+
 //     $attributes = $request->validate([
-//         'user_id' => 'required|numeric',
 //         'image' => 'image|mimes:jpg,jpeg,png,bmp'
 //     ]);
 
@@ -58,12 +60,12 @@ class UserController extends Controller
     // dd($user);
 
     $attributes = $request->validate([
-      'username' => 'string|nullable|unique:users,username,' . $user->id,  //nullable todo salbo email y birth date
+      'username' => 'string|nullable|unique:users,username,' . $user->id,  //nullable todo salvo email y birth date
       'name' => 'string|nullable',
       'surname' => 'string|nullable',
       'email' => 'string|email|unique:users,email,' . $user->id,
       'birth_date' => 'date',
-      'image' => 'image|nullable'
+      'image' => 'file|nullable'
     ]);
 
     if($request->hasFile('image')){
@@ -73,10 +75,12 @@ class UserController extends Controller
             Storage::disk('public')->delete($old_image);
         }
 
-        $attributes['image'] = request()->file('image')->store('user_profile_img', 'public');
+        $filename = $request->file('image')->getClientOriginalName();
+        $attributes['image'] = request()->file('image')->storeAs('user_profile_img', $filename, 'public',);
     }
 
     $user->update($attributes);
+    // dd($user);
 
     return json_encode($user);
   }

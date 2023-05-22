@@ -17,10 +17,10 @@ export class UsersService {
     this.url = URL_SERVICES; //en lugar de Global
   }
 
-  getUser(token: any, id: number): Observable<any>{
+  getUser(token: any, id: number): Observable<any> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
-    return this._http.get(this.url + `/usuarios/${id}`, { headers:headers });
+    return this._http.get(this.url + `/usuarios/${id}`, { headers: headers });
 
   }
 
@@ -38,11 +38,15 @@ export class UsersService {
     return true;
   }
 
-  editUser(token: any, id: number, value: any): Observable<any>{
+  editUser(token: any, id: number, value: FormData): Observable<any> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+    // .set('Content-Type', 'multipart/form-data');
+
+    console.log('value en el servicio: ', value);
 
     return this._http.put(this.url + `/usuarios/${id}`, value, { headers: headers }).pipe(
       map((auth: any) => {
+        console.log('auth: ', auth)
         this.storeLocalStorageUpdated(token, auth);
         return auth;
       }),
@@ -63,10 +67,10 @@ export class UsersService {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
     console.log('valores recibidos al cambiar la contraseña: ', data);
-    return this._http.post(this.url + '/update-password', data, { headers:headers })
+    return this._http.post(this.url + '/update-password', data, { headers: headers })
   }
 
-  deleteUser(id: number){
+  deleteUser(id: number) {
 
   }
 }

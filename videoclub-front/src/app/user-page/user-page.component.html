@@ -2,14 +2,23 @@
   <div class="user-page-header">
     <div class="user-image" *ngIf="!isEditing">
       <div *ngIf="!user.image">
-        <img src="../../assets/user.png" alt="Imagen de usuario">
+        <img src="../../assets/user.png" class="circle" alt="Imagen de usuario">
       </div>
       <div *ngIf="user.image">
-        <img [src]="url + user.image" id="circle" alt="Imagen de {{ user.username }}">
+        <img [src]="url + user.image" class="circle" alt="Imagen de {{ user.username }}">
       </div>
     </div>
     <div class="user-image" *ngIf="isEditing">
-      <input type="file">
+      <!-- <a (click)="selectFile.click()">Haz click</a> -->
+      <form [formGroup]="editForm" (ngSubmit)="saveChanges()">
+        <input type="hidden" name="_method" value="put" />
+        <input id="file-selector"
+                type="file"
+                formControlName="image"
+                #selectFile
+                value="select"
+                (change)="onFileSelected($event)">
+      </form>
     </div>
 
     <div class="user-data">
