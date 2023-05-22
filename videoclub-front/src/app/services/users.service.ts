@@ -38,11 +38,31 @@ export class UsersService {
     return true;
   }
 
-  editUser(token: any, id: number, value: FormData): Observable<any> {
+
+  prepareFormData(image: any): FormData {
+    const formData = new FormData();
+
+    formData.append(
+      'image',
+      image.file,
+      image.file.name
+    );
+
+    // formData.append('_method', 'PUT');
+
+    return formData;
+  }
+
+  editUser(token: any, id: number, value: any): Observable<any> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-    // .set('Content-Type', 'multipart/form-data');
+
+    if(value.image){
+      headers = headers.append('Content-Type', 'multipart/form-data');
+      value.image = this.prepareFormData(value.image);
+    }
 
     console.log('value en el servicio: ', value);
+    // console.log('headers: ', headers);
 
     return this._http.put(this.url + `/usuarios/${id}`, value, { headers: headers }).pipe(
       map((auth: any) => {
@@ -53,7 +73,6 @@ export class UsersService {
       catchError(err => {
         return of(err)
       })
-
     )
   }
 

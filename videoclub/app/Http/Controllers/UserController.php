@@ -55,17 +55,15 @@ class UserController extends Controller
 
   public function update(Request $request, $id)
   {
-    // dd($request->all());
     $user = User::findOrFail($id);
-    // dd($user);
 
     $attributes = $request->validate([
-      'username' => 'string|nullable|unique:users,username,' . $user->id,  //nullable todo salvo email y birth date
+      'username' => 'string|nullable|unique:users,username,' . $user->id,
       'name' => 'string|nullable',
       'surname' => 'string|nullable',
       'email' => 'string|email|unique:users,email,' . $user->id,
       'birth_date' => 'date',
-      'image' => 'file|nullable'
+      'image' => 'image|nullable'
     ]);
 
     if($request->hasFile('image')){

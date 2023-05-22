@@ -150,8 +150,9 @@ export class UserPageComponent implements OnInit{
         }
         else{
           if(this.editForm.value.image){
-            console.log('hay imagen');
-            this.editForm.value.image = this.prepareFormData(this.user.image);
+            // console.log('hay imagen');
+            this.editForm.value.image = this.user.image;
+            // this.editForm.value.image = this.prepareFormData(this.user.image);
           }
           if(this.editForm.value.new_pass){
             const data = {
@@ -225,21 +226,21 @@ export class UserPageComponent implements OnInit{
     }
   }
 
-  prepareFormData(image: any): FormData {
-    console.log('image: ', image.file.name)
-    const formData = new FormData();
+  // prepareFormData(image: any): FormData {
+  //   console.log('image: ', image.file.name)
+  //   const formData = new FormData();
 
-    formData.append(
-      'image',
-      image.file,
-      image.file.name
-    );
+  //   formData.append(
+  //     'image',
+  //     image.file,
+  //     image.file.name
+  //   );
 
-    console.log('FormData que se enviaría a back: ', formData);
-    for(var key of formData.entries()){
-      console.log(key[0], ' - ', key[1]);
-    }
-    return formData;
+  //   console.log('FormData que se enviaría a back: ', formData);
+  //   for(var key of formData.entries()){
+  //     console.log(key[0], ' - ', key[1]);
+  //   }
+  //   return formData;
 
-  }
+  // }
 }
