@@ -38,17 +38,11 @@ export class UsersService {
     return true;
   }
 
-    // formData.append('_method', 'PUT');
   prepareFormData(image: any): FormData {
-    console.log('image en prepareFormData: ', image.file.name);
-    const formData = new FormData();
+    const formData: FormData = new FormData();
 
-    formData.append('image', image.file, image.file.name);
+    formData.append('image', image.file);
 
-    // console.log('FormData que se enviaría a back: ', formData);
-    // for(var key of formData.entries()){
-    //   console.log(key[0], ' - ', key[1]);
-    // }
     return formData;
   }
 
@@ -56,7 +50,7 @@ export class UsersService {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token)
                                   .append('Content-Type', 'multipart/form-data');
 
-    // console.log('valor recibido: ', value);
+    console.log('valor recibido: ', value);
     // console.log('headers: ', headers);
 
     const image = this.prepareFormData(value);
@@ -72,21 +66,6 @@ export class UsersService {
   editUser(token: any, id: number, value: any): Observable<any> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
-    // if(value.image){
-    //   this.prepareFormData(token, id, value.image);
-
-    //   // headers = headers.append('Content-Type', 'multipart/form-data');
-    //   // value.image = this.prepareFormData(token, id, value.image);
-
-    //   // console.log('value.image en editUser: ', value.image)
-    //   // for(var key of value.image.entries()){
-    //   //   console.log(key[0], ' - ', key[1])
-    //   // }
-    // }
-
-    console.log('value en el servicio: ', value);
-    // console.log('headers: ', headers);
-
     return this._http.put(this.url + `/usuarios/${id}`, value, { headers: headers }).pipe(
       map((auth: any) => {
         console.log('auth: ', auth)
@@ -98,12 +77,6 @@ export class UsersService {
       })
     )
   }
-
-  // editUser(token: any, id: number, value: any): Observable<Object>{
-  //   let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-
-  //   return this._http.put(this.url + `/usuarios/${id}`, value, { headers: headers });
-  // }
 
   resetPassword(token: any, data: any): Observable<Object> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);

@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { UserSharedServiceService } from '../services/user-shared-service.service';
 import { URL_BACKEND } from '../config/config';
 import { FileHandle } from '../_model/file-handle.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-page',
@@ -31,7 +32,8 @@ export class UserPageComponent implements OnInit{
     private _users: UsersService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private _shared: UserSharedServiceService
+    private _shared: UserSharedServiceService,
+    private _http: HttpClient,  //borrar
   ) {
     if(this._auth.isLogged()){
       this.user = this._auth.user.user;
@@ -159,7 +161,10 @@ export class UserPageComponent implements OnInit{
         })
       ).subscribe((res: any) => {
         console.log('res con imagen: ', res);
-        if(res){
+        if(res === 'error'){
+          console.log('No hay imagen.');
+        }
+        else{
           if(res.error){
             this.editForm.controls['password'].reset();
             this.hasError = true;
@@ -180,10 +185,6 @@ export class UserPageComponent implements OnInit{
             })
           }
         }
-        else{
-          console.log('¿La contraseña no es correcta?');
-        }
-
       })
     }
     else{
@@ -248,14 +249,11 @@ export class UserPageComponent implements OnInit{
     this.isEditing = false;
   }
 
-  // onFileSelected(event: any) {
-  //   if (event.target.files) {
-  //     const file = event.target.files[0];
-
-  //     this.editForm.patchValue({
-  //       image: file
-  //     });
-  //   }
+  // onFileSelected(event: Event) {
+  //   const file = (event.target as HTMLInputElement)?.files?.[0];
+  //   this.editForm.patchValue({
+  //     image: file
+  //   });
   // }
 
   onFileSelected(event: any) {
