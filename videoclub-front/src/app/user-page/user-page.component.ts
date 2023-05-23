@@ -142,7 +142,6 @@ export class UserPageComponent implements OnInit{
   }
 
   saveChanges(){
-    console.log('Valores del formulario: ', this.editForm.value);
     this.verifyPassword(this.user.email, this.editForm.value.password).pipe(
       switchMap((passMatches: boolean) => {
         if(!passMatches) {
@@ -151,7 +150,8 @@ export class UserPageComponent implements OnInit{
         else{
           if(this.editForm.value.image){
             // console.log('hay imagen');
-            this.editForm.value.image = this.user.image;
+            this.editForm.value.image = this.user.image.file;
+            console.log('imagen en editForm: ', this.editForm.value.image);
             // this.editForm.value.image = this.prepareFormData(this.user.image);
           }
           if(this.editForm.value.new_pass){
@@ -165,7 +165,7 @@ export class UserPageComponent implements OnInit{
                           console.log('respuesta recibida en contraseña: ', res);
                         })
             }
-
+            console.log('Valores enviados desde saveChanges(): ', this.editForm.value);
             return this._users.editUser(this._auth.token, this.user.id, this.editForm.value);
         }
       })

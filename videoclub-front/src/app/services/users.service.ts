@@ -40,14 +40,19 @@ export class UsersService {
 
 
   prepareFormData(image: any): FormData {
+    // console.log('image en prepareFormData: ', image);
     const formData = new FormData();
 
     formData.append(
       'image',
-      image.file,
-      image.file.name
+      image,
+      image.name
     );
 
+    // console.log('FormData que se enviaría a back: ', formData);
+    // for(var key of formData.entries()){
+    //   console.log(key[0], ' - ', key[1]);
+    // }
     // formData.append('_method', 'PUT');
 
     return formData;
@@ -59,6 +64,11 @@ export class UsersService {
     if(value.image){
       headers = headers.append('Content-Type', 'multipart/form-data');
       value.image = this.prepareFormData(value.image);
+
+      console.log('value.image en editUser: ', value.image)
+      for(var key of value.image.entries()){
+        console.log(key[0], ' - ', key[1])
+      }
     }
 
     console.log('value en el servicio: ', value);
