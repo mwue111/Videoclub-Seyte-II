@@ -41,7 +41,7 @@ export class UsersService {
   prepareFormData(image: any): FormData {
     const formData: FormData = new FormData();
 
-    formData.append('image', image.file);
+    formData.append('image', image.image, image.image.name);
 
     return formData;
   }

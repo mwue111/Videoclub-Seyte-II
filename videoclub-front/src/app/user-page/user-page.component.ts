@@ -19,6 +19,7 @@ export class UserPageComponent implements OnInit{
   user: any;
   url: string = URL_BACKEND + '/storage/';
   updatedUser: any;
+  userImage: any;
   isEditing!: boolean;
   editForm!: FormGroup;
   hasError: boolean = false;
@@ -146,7 +147,7 @@ export class UserPageComponent implements OnInit{
   saveChanges(){
     if(this.editForm.value.image){
       console.log('hay imagen');
-      this.editForm.value.image = this.user.image;
+      this.editForm.value.image = this.userImage;
       // console.log('imagen en editForm: ', this.editForm.value.image);
       // this.editForm.value.image = this.prepareFormData(this.user.image);
 
@@ -256,33 +257,36 @@ export class UserPageComponent implements OnInit{
   //   });
   // }
 
+  //Aquí: https://www.youtube.com/watch?v=FJ2Q_9zVzLA
   onFileSelected(event: any) {
     if(event.target.files) {
+      // this.userImage = event.target.files[0];
+
       console.log('evento: ', event);
       const file = event.target.files[0];
       console.log('file: ', file);
 
       const fileHandle: FileHandle = {
-        file: file,
+        image: file,
         //seguramente haya que cambiar esto para que la url sea user_profile_img/nombre del archivo
         // url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file))
       }
       // console.log('user.image: ', this.user.image);
 
-      this.user.image = fileHandle;
-      // console.log('fileHandle: ', fileHandle);
+      this.userImage = fileHandle;
+      console.log('userImage: ', this.userImage);
       // this.prepareFormData(fileHandle);
     }
   }
 
   // prepareFormData(image: any): FormData {
-  //   console.log('image: ', image.file.name)
+  //   console.log('image: ', image)
   //   const formData = new FormData();
 
   //   formData.append(
   //     'image',
-  //     image.file,
-  //     image.file.name
+  //     image.image,
+  //     image.image.name
   //   );
 
   //   console.log('FormData que se enviaría a back: ', formData);
