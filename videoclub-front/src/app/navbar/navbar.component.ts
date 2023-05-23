@@ -29,6 +29,10 @@ export class NavbarComponent {
     this._shared.username$.subscribe(username => {
       this.user.username = username;
     })
+
+    this._shared.image$.subscribe(image => {
+      this.user.image = image;
+    })
   }
 
   logout() {

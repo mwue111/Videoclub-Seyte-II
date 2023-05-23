@@ -66,7 +66,7 @@ export class UsersService {
       console.log(key[0], ' - ', key[1])
     }
 
-    return this._http.put(this.url + `/usuarios/${id}`, image, { headers:headers });
+    return this._http.put(this.url + `/usuario-avatar/${id}`, image, { headers:headers });
   }
 
   editUser(token: any, id: number, value: any): Observable<any> {
