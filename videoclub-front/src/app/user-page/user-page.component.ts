@@ -142,70 +142,121 @@ export class UserPageComponent implements OnInit{
   }
 
   saveChanges(){
-    this.verifyPassword(this.user.email, this.editForm.value.password).pipe(
-      switchMap((passMatches: boolean) => {
-        if(!passMatches) {
-          return of(null);
+    if(this.editForm.value.image){
+      console.log('hay imagen');
+      this.editForm.value.image = this.user.image;
+      // console.log('imagen en editForm: ', this.editForm.value.image);
+      // this.editForm.value.image = this.prepareFormData(this.user.image);
+
+      this.verifyPassword(this.user.email, this.editForm.value.password).pipe(
+        switchMap((passMatches: boolean) => {
+          if(!passMatches){
+            return of(null);
+          }
+          else{
+            return this._users.editUserImage(this._auth.token, this.user.id, this.editForm.value.image);
+          }
+        })
+      ).subscribe((res: any) => {
+        console.log('res con imagen: ', res);
+        if(res){
+          if(res.error){
+            this.editForm.controls['password'].reset();
+            this.hasError = true;
+            // if(res.error.errors.image){
+              this.hasErrorText = 'Ha habido un problema subiendo la imagen.'
+            // }
+          }
+          else{
+            this.user = res;
+            this.close();
+            this.fetchUser();
+            //this._shared.updateImage(res.image);
+
+            Swal.fire({
+              icon: 'success',
+              title: '¡Imagen actualizada!',
+              confirmButtonColor: '#1874BA'
+            })
+          }
         }
         else{
-          if(this.editForm.value.image){
-            // console.log('hay imagen');
-            this.editForm.value.image = this.user.image.file;
-            console.log('imagen en editForm: ', this.editForm.value.image);
-            // this.editForm.value.image = this.prepareFormData(this.user.image);
-          }
-          if(this.editForm.value.new_pass){
-            const data = {
-              'email': this.user.email,
-              'password': this.editForm.value.new_pass
-            };
-
-            this._users.resetPassword(this._auth.token, data)
-                        .subscribe((res: any) => {
-                          console.log('respuesta recibida en contraseña: ', res);
-                        })
-            }
-            console.log('Valores enviados desde saveChanges(): ', this.editForm.value);
-            return this._users.editUser(this._auth.token, this.user.id, this.editForm.value);
+          console.log('¿La contraseña no es correcta?');
         }
+
       })
-    )
-    .subscribe((res: any) => {
-      console.log('res: ', res);
-      if(res){
-        if(res.error){
+    }
+    else{
+      console.log('no hay imagen');
+      this.verifyPassword(this.user.email, this.editForm.value.password).pipe(
+        switchMap((passMatches: boolean) => {
+          if(!passMatches) {
+            return of(null);
+          }
+          else{
+            if(this.editForm.value.new_pass){
+              const data = {
+                'email': this.user.email,
+                'password': this.editForm.value.new_pass
+              };
+
+              this._users.resetPassword(this._auth.token, data)
+                          .subscribe((res: any) => {
+                            console.log('respuesta recibida en contraseña: ', res);
+                          })
+              }
+              console.log('Valores enviados desde saveChanges(): ', this.editForm.value);
+              return this._users.editUser(this._auth.token, this.user.id, this.editForm.value);
+          }
+        })
+      )
+      .subscribe((res: any) => {
+        console.log('res: ', res);
+        if(res){
+          if(res.error){
+            this.editForm.controls['password'].reset();
+            this.hasError = true;
+            if(res.error.errors.username){
+              this.hasErrorText = 'Este nombre de usuario ya está en uso.';
+            }
+            if(res.error.errors.image){
+              this.hasErrorText = 'Ha habido problemas subiendo la imagen.';
+            }
+          }
+          else{
+            this.close();
+            this.fetchUser();
+            this._shared.updateUsername(res.username);
+
+            Swal.fire({
+              icon: 'success',
+              title: '¡Tus datos se han actualizado!',
+              confirmButtonColor: '#1874BA'
+            })
+          }
+        }
+        else{
           this.editForm.controls['password'].reset();
           this.hasError = true;
-          if(res.error.errors.username){
-            this.hasErrorText = 'Este nombre de usuario ya está en uso.';
-          }
-          if(res.error.errors.image){
-            this.hasErrorText = 'Ha habido problemas subiendo la imagen.';
-          }
+          this.hasErrorText = 'La contraseña no es correcta.';
         }
-        else{
-          this.close();
-          this.fetchUser();
-          this._shared.updateUsername(res.username);
-
-          Swal.fire({
-            icon: 'success',
-            title: '¡Tus datos se han actualizado!',
-            confirmButtonColor: '#1874BA'
-          })
-        }
-      }
-      else{
-        this.editForm.controls['password'].reset();
-        this.hasError = true;
-        this.hasErrorText = 'La contraseña no es correcta.';
-      }
-    })
+      })
+    }
   }
 
   close(){
     this.isEditing = false;
   }
+
+  // onFileSelected(event: any) {
+  //   if (event.target.files) {
+  //     const file = event.target.files[0];
+
+  //     this.editForm.patchValue({
+  //       image: file
+  //     });
+  //   }
+  // }
 
   onFileSelected(event: any) {
     if(event.target.files) {
