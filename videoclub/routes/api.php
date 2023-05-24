@@ -54,5 +54,5 @@ Route::group(['middleware' => ['auth:api', 'cors']], function () {
     Route::resource('alquiler', RentController::class);
     Route::get('profile', [RegisterController::class, 'profile']);
 });
-
+// Route::put('usuario-avatar/{usuario}', 'UserImageController@update');
 Route::middleware('auth:api')->post('logout', [RegisterController::class, 'logout']);

@@ -177,7 +177,7 @@ export class UserPageComponent implements OnInit{
             this.user = res;
             this.close();
             this.fetchUser();
-            //this._shared.updateImage(res.image);
+            this._shared.updateImage(res);
 
             Swal.fire({
               icon: 'success',
