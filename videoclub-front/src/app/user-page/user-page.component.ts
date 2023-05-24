@@ -8,7 +8,6 @@ import Swal from 'sweetalert2';
 import { UserSharedServiceService } from '../services/user-shared-service.service';
 import { URL_BACKEND } from '../config/config';
 import { FileHandle } from '../_model/file-handle.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-page',
@@ -25,7 +24,7 @@ export class UserPageComponent implements OnInit{
   hasError: boolean = false;
   hasErrorText: string = '';
 
-  //Aquí: https://www.youtube.com/watch?v=VQaYDSPSTtU
+  //Aquí: https://www.youtube.com/watch?v=oXeg_q2lKGg&list=PLZTETldyguF2bRz-ypCa3a8gumxeXB4pu&index=13
 
   constructor(
     private _auth: AuthService,
@@ -34,7 +33,6 @@ export class UserPageComponent implements OnInit{
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private _shared: UserSharedServiceService,
-    private _http: HttpClient,  //borrar
   ) {
     if(this._auth.isLogged()){
       this.user = this._auth.user.user;
