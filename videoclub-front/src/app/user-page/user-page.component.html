@@ -9,11 +9,13 @@
       </div>
     </div>
     <div class="user-image" *ngIf="isEditing">
-      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+      <form (ngSubmit)="onSubmit()" [formGroup]="editForm" >
         <input  type="file"
                 name="image"
+                id="image"
                 #selectFile
                 formControlName="image"
+                (change)="uploadImage($event)"
                 >
         <button type="submit">Subir</button>
       </form>

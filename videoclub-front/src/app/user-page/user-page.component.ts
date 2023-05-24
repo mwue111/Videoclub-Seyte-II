@@ -148,6 +148,10 @@ export class UserPageComponent implements OnInit{
 
   }
 
+  uploadImage(event: Event){
+
+  }
+
   saveChanges(){
       this.verifyPassword(this.user.email, this.editForm.value.password).pipe(
         switchMap((passMatches: boolean) => {
