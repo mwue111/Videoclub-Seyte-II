@@ -10,7 +10,7 @@ import { URL_BACKEND } from '../config/config';
 })
 export class NavbarComponent {
 
-  url: string = URL_BACKEND + '/storage/';
+  url: string = URL_BACKEND + '/storage';
   logged!: boolean;
   user: any;
   username: string = '';

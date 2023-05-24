@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 class UserImageController extends Controller
 {
 
+    //https://protone.media/en/blog/convert-and-store-base64-encoded-files-in-laravel-use-validation-rules-and-access-the-decoded-files-from-the-request-instance
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -25,14 +26,16 @@ class UserImageController extends Controller
 
         $imageData = $request->input('image');
         $decodedImage = base64_decode($imageData);
-
-       // Generate a unique filename
         $filename = uniqid() . '.jpg';
 
-        // Save the decoded image to the storage folder
+        if(isset($user->image)){
+            $old_image = $user->image;
+            Storage::disk('public')->delete($old_image);
+        }
+
+        // el guardado se hace con put():
         Storage::disk('public')->put('user_profile_img/' . $filename, $decodedImage);
 
-        // Update the user's image attribute
         $user->image = "/user_profile_img/$filename";
         $user->save();
 
