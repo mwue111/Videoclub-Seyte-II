@@ -38,69 +38,67 @@ export class UsersService {
     return true;
   }
 
-  convertFileToBase64(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        const encodedString = base64String.split(',')[1];
-        resolve(encodedString);
-      };
-      reader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  }
+  //###################### Planteamiento con httpHeaders ######################
+  // convertFileToBase64(file: File): Promise<string> {
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     reader.onloadend = () => {
+  //       const base64String = reader.result as string;
+  //       const encodedString = base64String.split(',')[1];
+  //       resolve(encodedString);
+  //     };
+  //     reader.onerror = (error) => {
+  //       reject(error);
+  //     };
+  //   });
+  // }
 
-  editUserImage(token: any, id: number, value: any): Observable<any> {
-    return new Observable((observer) => {
-      this.convertFileToBase64(value.image).then((base64String) => {
-        const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
-        const params = new HttpParams().set('image', base64String);
-        this._http.put(this.url + `/usuario-avatar/${id}`, null, { headers, params }).subscribe(
-          (response) => {
-            observer.next(response);
-            this.storeLocalStorageUpdated(token, response);
-            observer.complete();
-          },
-          (error) => {
-            observer.error(error);
-          }
-        );
-      });
-    });
-  }
+  // editUserImage(token: any, id: number, value: any): Observable<any> {
+  //   return new Observable((observer) => {
+  //     this.convertFileToBase64(value.image).then((base64String) => {
+  //       const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+  //       const params = new HttpParams().set('image', base64String);
+  //       this._http.put(this.url + `/usuario-avatar/${id}`, null, { headers, params }).subscribe(
+  //         (response) => {
+  //           observer.next(response);
+  //           this.storeLocalStorageUpdated(token, response);
+  //           observer.complete();
+  //         },
+  //         (error) => {
+  //           observer.error(error);
+  //         }
+  //       );
+  //     });
+  //   });
+  // }
+  //###################### Fin planteamiento con httpHeaders ######################
+
 
   //###################### Planteamientos con formData ######################
 
-  //Planteamiento 1:
-  // editUserImage(token: any, id: number, value: any): Observable<any> {
-  //   let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token)
-  //
-  //   const formData: FormData = new FormData();
-  //   formData.append('image', value.image);
+  editUserImage(token: any, id: number, value: any): Observable<any> {
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token)
 
-    // console.log('Qué se envía al back: ', formData);
-    // for(var key of formData.entries()){
-    //   console.log(key[0], ' - ', key[1])
-    // }
+    const formData: FormData = new FormData();
+    formData.append('image', value.image);
 
-  //   return this._http.put(this.url + `/usuario-avatar/${id}`, formData, { headers });
-  // }
+    console.log('Qué se envía al back: ', formData);
+    for(var key of formData.entries()){
+      console.log(key[0], ' - ', key[1])
+    }
 
-  //Planteamiento 2:
-  // editUserImage(token: any, id: number, value: any) : Observable<any>{
-  //   let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token)
-  //                                 .append('Content-Type', 'multipart/form-data');
+    return this._http.post(this.url + `/usuario-avatar/${id}`, formData, { headers }).pipe(
+      map((auth: any) => {
+        this.storeLocalStorageUpdated(token, auth);
+        return auth;
+      }),
+      catchError(err => {
+        return of(err);
+      })
+    );
+  }
 
-  //   console.log('valor recibido: ', value);
-  //   console.log('headers: ', headers);
-
-  //   const params = new HttpParams().set('image', value.image);  //habría que codificar a base64 y decodificarlo en el back
-
-  //   return this._http.put(this.url + `/usuario-avatar/${id}`, null, { params, headers });
-  // }
   //###################### Fin planteamientos con formData ######################
 
   editUser(token: any, id: number, value: any): Observable<any> {

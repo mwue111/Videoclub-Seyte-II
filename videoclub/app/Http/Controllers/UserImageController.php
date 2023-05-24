@@ -48,7 +48,7 @@ class UserImageController extends Controller
         $user = User::findOrFail($id);
 
         $attributes = $request->validate([
-           'image' => 'nullable'
+           'image' => 'image|nullable'
         ]);
 
 
