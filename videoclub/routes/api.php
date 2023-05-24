@@ -46,13 +46,14 @@ Route::group(['middleware' => ['guest']], function () {
 });
 
 Route::group(['middleware' => ['auth:api', 'cors']], function () {
-//   Route::resource('resenas', ReviewController::class);
     Route::resource('usuarios', 'UserController');  //dividir en rutas
-    Route::put('usuario-avatar/{usuario}', 'UserImageController@update');
+    // Route::post('file', 'UserImageController@file');
     Route::post('/update-password', 'ChangePasswordController@updatePassword');
     Route::get('resenas', 'ReviewController@index');
     Route::resource('alquiler', RentController::class);
     Route::get('profile', [RegisterController::class, 'profile']);
 });
+
+Route::post('file/{user}', 'UserImageController@file');
 
 Route::middleware('auth:api')->post('logout', [RegisterController::class, 'logout']);

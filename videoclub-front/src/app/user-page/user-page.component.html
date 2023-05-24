@@ -9,14 +9,13 @@
       </div>
     </div>
     <div class="user-image" *ngIf="isEditing">
-      <!-- <a (click)="selectFile.click()">Haz click</a> + #selectFile en el input-->
-      <!-- quitado del input para hacer el patchValue: (change)="onFileSelected($event)" -->
-      <form [formGroup]="editForm" (ngSubmit)="saveChanges()" enctype="multipart/form-data" >
-        <!-- <input type="hidden" name="_method" value="put" /> -->
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
         <input  type="file"
+                name="image"
                 #selectFile
                 formControlName="image"
-                (change)="onFileSelected($event)">
+                >
+        <button type="submit">Subir</button>
       </form>
     </div>
 

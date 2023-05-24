@@ -13,31 +13,22 @@ use Illuminate\Support\Facades\Validator;
 
 class UserImageController extends Controller
 {
+    public function file(Request $request, $id) {
+         $user = User::findOrFail($id);
 
-    public function update(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
-
-        $attributes = $request->validate([
-           'image' => 'image|nullable'
-        ]);
-
-        if(!$request->hasFile('image')){
-            return response()->json('error'); //422
+         if($request->hasFile('image')) {
+            $completeFileName = $request->file('image')->getClientOriginalName();                               //nombre del archivo
+            $fileNameOnly = pathinfo($completeFileName, PATHINFO_FILENAME);                                     //nombre del archivo SIN extensiones
+            $extension = $request->file('image')->getClientOriginalExtension();                                 //extensión del archivo
+            $compPic = str_replace(' ', '_', $fileNameOnly) . '-' . rand() . '_' . time() . '.' . $extension;   //nombre codificado e irrepetible
+            $path = $request->file('image')->storeAs('public/posts', $compPic);
+            $user->image = $compPic;
+         }
+         if($user->save()){
+            return ['status' => true, 'message' => 'Imagen guardada.'];
         }
-
-        if($request->hasFile('image')){
-            if(isset($user->image)){
-                $old_image = $user->image;
-                Storage::disk('public')->delete($old_image);
-            }
-
-            $filename = $request->file('image')->getClientOriginalName();
-            $attributes['image'] = request()->file('image')->storeAs('user_profile_img', $filename, 'public');
-        }
-
-        $user->update($attributes);
-
-        return response()->json($user);
+        else{
+            return ['status' => false, 'message' => 'Ha ocurrido un error.'];
+         }
     }
 }

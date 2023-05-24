@@ -17,7 +17,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class UserPageComponent implements OnInit{
   user: any;
-  url: string = URL_BACKEND + '/storage/';
+  url: string = URL_BACKEND + '/storage/posts/';
   updatedUser: any;
   userImage: any;
   isEditing!: boolean;
@@ -144,52 +144,11 @@ export class UserPageComponent implements OnInit{
     this.initializeForm();
   }
 
+  onSubmit(){
+
+  }
+
   saveChanges(){
-    if(this.editForm.value.image){
-      console.log('hay imagen');
-      this.editForm.value.image = this.userImage;
-      // console.log('imagen en editForm: ', this.editForm.value.image);
-      // this.editForm.value.image = this.prepareFormData(this.user.image);
-
-      this.verifyPassword(this.user.email, this.editForm.value.password).pipe(
-        switchMap((passMatches: boolean) => {
-          if(!passMatches){
-            return of(null);
-          }
-          else{
-            return this._users.editUserImage(this._auth.token, this.user.id, this.editForm.value.image);
-          }
-        })
-      ).subscribe((res: any) => {
-        console.log('res con imagen: ', res);
-        if(res === 'error'){
-          console.log('No hay imagen.');
-        }
-        else{
-          if(res.error){
-            this.editForm.controls['password'].reset();
-            this.hasError = true;
-            // if(res.error.errors.image){
-              this.hasErrorText = 'Ha habido un problema subiendo la imagen.'
-            // }
-          }
-          else{
-            this.user = res;
-            this.close();
-            this.fetchUser();
-            //this._shared.updateImage(res.image);
-
-            Swal.fire({
-              icon: 'success',
-              title: '¡Imagen actualizada!',
-              confirmButtonColor: '#1874BA'
-            })
-          }
-        }
-      })
-    }
-    else{
-      console.log('no hay imagen');
       this.verifyPassword(this.user.email, this.editForm.value.password).pipe(
         switchMap((passMatches: boolean) => {
           if(!passMatches) {
@@ -243,57 +202,9 @@ export class UserPageComponent implements OnInit{
           this.hasErrorText = 'La contraseña no es correcta.';
         }
       })
-    }
   }
 
   close(){
     this.isEditing = false;
   }
-
-  // onFileSelected(event: Event) {
-  //   const file = (event.target as HTMLInputElement)?.files?.[0];
-  //   this.editForm.patchValue({
-  //     image: file
-  //   });
-  // }
-
-  //Aquí: https://www.youtube.com/watch?v=FJ2Q_9zVzLA
-  onFileSelected(event: any) {
-    if(event.target.files) {
-      // this.userImage = event.target.files[0];
-
-      console.log('evento: ', event);
-      const file = event.target.files[0];
-      console.log('file: ', file);
-
-      const fileHandle: FileHandle = {
-        image: file,
-        //seguramente haya que cambiar esto para que la url sea user_profile_img/nombre del archivo
-        // url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file))
-      }
-      // console.log('user.image: ', this.user.image);
-
-      this.userImage = fileHandle;
-      console.log('userImage: ', this.userImage);
-      // this.prepareFormData(fileHandle);
-    }
-  }
-
-  // prepareFormData(image: any): FormData {
-  //   console.log('image: ', image)
-  //   const formData = new FormData();
-
-  //   formData.append(
-  //     'image',
-  //     image.image,
-  //     image.image.name
-  //   );
-
-  //   console.log('FormData que se enviaría a back: ', formData);
-  //   for(var key of formData.entries()){
-  //     console.log(key[0], ' - ', key[1]);
-  //   }
-  //   return formData;
-
-  // }
 }
