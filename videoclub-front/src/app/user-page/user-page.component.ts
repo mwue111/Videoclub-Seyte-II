@@ -18,6 +18,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class UserPageComponent implements OnInit{
   user: any;
   url: string = URL_BACKEND + '/storage/posts/';
+  files: any;
+  data: any;
   updatedUser: any;
   userImage: any;
   isEditing!: boolean;
@@ -145,11 +147,18 @@ export class UserPageComponent implements OnInit{
   }
 
   onSubmit(){
+    const formData = new FormData();
+    formData.append('image', this.files, this.files.name);
 
+    this._users.uploadData(this._auth.token, formData, this.user.id).subscribe((res: any) => {
+      console.log('res: ', res);
+      this.data = res;
+    })
   }
 
-  uploadImage(event: Event){
-
+  uploadImage(event: any){
+    this.files = event.target.files[0];
+    console.log(this.files);
   }
 
   saveChanges(){

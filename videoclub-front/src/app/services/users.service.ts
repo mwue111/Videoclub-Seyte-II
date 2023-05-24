@@ -38,30 +38,10 @@ export class UsersService {
     return true;
   }
 
-  // prepareFormData(image: any): FormData {
-  //   const formData: FormData = new FormData();
-
-  //   formData.append('image', image.image, image.image.name);
-
-  //   return formData;
-  // }
-
-  // editUserImage(token: any, id: number, value: any) : Observable<any>{
-  //   let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token)
-  //                                 .append('Content-Type', 'multipart/form-data');
-
-  //   console.log('valor recibido: ', value);
-  //   // console.log('headers: ', headers);
-
-  //   const image = this.prepareFormData(value);
-
-  //   console.log('Qué se envía al back: ', image);
-  //   for(var key of image.entries()){
-  //     console.log(key[0], ' - ', key[1])
-  //   }
-
-  //   return this._http.put(this.url + `/usuario-avatar/${id}`, image, { headers:headers });
-  // }
+   uploadData(token: any, data: any, id: number){
+    const headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+    return this._http.post(this.url + `/file/${id}`, data, { headers: headers });
+   }
 
   editUser(token: any, id: number, value: any): Observable<any> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
