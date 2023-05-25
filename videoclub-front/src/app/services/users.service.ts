@@ -75,7 +75,7 @@ export class UsersService {
   //###################### Fin planteamiento con httpHeaders ######################
 
 
-  //###################### Planteamientos con formData ######################
+  //###################### Planteamiento con formData ######################
 
   editUserImage(token: any, id: number, value: any): Observable<any> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token)
@@ -99,7 +99,7 @@ export class UsersService {
     );
   }
 
-  //###################### Fin planteamientos con formData ######################
+  //###################### Fin planteamiento con formData ######################
 
   editUser(token: any, id: number, value: any): Observable<any> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
