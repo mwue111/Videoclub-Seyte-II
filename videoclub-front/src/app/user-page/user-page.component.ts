@@ -17,7 +17,7 @@ import { FileHandle } from '../_model/file-handle.model';
 export class UserPageComponent implements OnInit{
   user: any;
   url: string = URL_BACKEND + '/storage/';
-  updatedUser: any;
+  updatingImage!: boolean;
   userImage: any;
   isEditing!: boolean;
   editForm!: FormGroup;
@@ -143,7 +143,7 @@ export class UserPageComponent implements OnInit{
   }
 
   saveChanges(){
-    if(this.editForm.value.image){
+    if(this.editForm.value.image || this.userImage !== null){
       console.log('hay imagen');
       this.editForm.value.image = this.userImage;
 
@@ -172,6 +172,7 @@ export class UserPageComponent implements OnInit{
             this._shared.updateImage(res.image);
             this.close();
             this.fetchUser();
+            this.updatingImage = false;
 
             Swal.fire({
               icon: 'success',
@@ -238,6 +239,7 @@ export class UserPageComponent implements OnInit{
         }
       })
     }
+    // this.updatingImage = false;
   }
 
   close(){
@@ -246,6 +248,8 @@ export class UserPageComponent implements OnInit{
 
   onFileSelected(event: any) {
     if(event.target.files) {
+      this.updatingImage  = true;
+      console.log('evento: ', event);
       const file = event.target.files[0];
 
       const fileHandle: FileHandle = {
@@ -254,5 +258,10 @@ export class UserPageComponent implements OnInit{
 
       this.userImage = fileHandle;
     }
+  }
+
+  fileDropped(fileHandle: FileHandle) {
+    this.updatingImage  = true;
+    this.userImage = fileHandle;
   }
 }
