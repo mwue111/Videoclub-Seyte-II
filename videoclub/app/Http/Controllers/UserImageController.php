@@ -12,6 +12,8 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 
+use Illuminate\Support\Facades\Auth;
+
 class UserImageController extends Controller
 {
 
@@ -46,7 +48,6 @@ class UserImageController extends Controller
     public function updateWithFormData(Request $request, $id)
     {
         $user = User::findOrFail($id);
-
         $attributes = $request->validate([
            'image' => 'image|nullable'
         ]);
@@ -58,13 +59,15 @@ class UserImageController extends Controller
         }
         else{
             Log::debug("Qué recibe el controlador cuando sí hay image: ", $request->all());
-            if(isset($user->image)){
-                $old_image = $user->image;
+            if(isset(Auth::user()->image)){
+                $old_image = Auth::user()->image;
                 Storage::disk('public')->delete($old_image);
             }
 
+            $folderName = Auth::user()->email;
+
             $filename = $request->file('image')->getClientOriginalName();
-            $attributes['image'] = request()->file('image')->storeAs('user_profile_img', $filename, 'public');
+            $attributes['image'] = request()->file('image')->storeAs('user_profile_img/' . $folderName, $filename, 'public');
         }
 
         $user->update($attributes);
