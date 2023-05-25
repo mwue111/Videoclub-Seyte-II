@@ -9,12 +9,14 @@
       </div>
     </div>
     <div class="user-image" *ngIf="isEditing">
-      <a (click)="selectFile.click()">Haz click</a>
+      <!-- <a (click)="selectFile.click()">Haz click</a> -->
       <form [formGroup]="editForm" (ngSubmit)="saveChanges()" enctype="multipart/form-data">
-      <input  type="file"
-              #selectFile
-              formControlName="image"
-              (change)="onFileSelected($event)">
+        <div>
+          <input  type="file"
+                  #selectFile
+                  formControlName="image"
+                  (change)="onFileSelected($event)">
+        </div>
       </form>
     </div>
 

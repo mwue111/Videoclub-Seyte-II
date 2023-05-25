@@ -244,20 +244,15 @@ export class UserPageComponent implements OnInit{
     this.isEditing = false;
   }
 
-  //Aquí: https://www.youtube.com/watch?v=FJ2Q_9zVzLA
   onFileSelected(event: any) {
     if(event.target.files) {
-
-      console.log('evento: ', event);
       const file = event.target.files[0];
-      console.log('file: ', file);
 
       const fileHandle: FileHandle = {
         image: file,
       }
 
       this.userImage = fileHandle;
-      console.log('userImage: ', this.userImage);
     }
   }
 }
