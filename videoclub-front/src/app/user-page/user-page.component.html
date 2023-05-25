@@ -114,7 +114,9 @@
     </div>
     <div class="user-seen-movies-posters" *ngIf="movies.length !== 0">
       <div *ngFor="let movie of movies">
-        <img [src]="url + movie.poster" class="movie" id="poster">
+        <a [routerLink]="['/pelicula', movie.id]">
+          <img [src]="url + movie.poster" class="movie" id="poster">
+        </a>
       </div>
       <!-- <img src="#" alt="Imagen de películas"> -->
     </div>
@@ -125,16 +127,29 @@
 
   <!-- Reseñas hechas -->
   <div class="user-reviews">
-    <div class="user-review">
-      <div class="review-poster">
-        <img src="#" alt="Imagen de película reseñada">
-      </div>
-      <div class="review-body">
-        <p>Título</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque amet modi quaerat voluptates nostrum. Earum praesentium ut possimus placeat nemo repellendus ullam beatae. Neque repellat ad aspernatur, nihil ratione velit.
-        Fugit deleniti libero totam atque qui accusantium aliquid ex esse optio earum voluptatem numquam possimus eum consectetur illo quaerat sequi iusto, explicabo nostrum porro laborum enim laudantium reiciendis. Facilis, ut.</p>
+    <div class="user-reviews-header">
+      <p>Reseñas hechas por ti</p>
+    </div>
+
+    <div class="user-reviews-body" *ngIf="reviews.length !== 0">
+      <div class="reviews-container" *ngFor="let review of reviews">
+        <div class="left">
+          <p>Póster de la película</p>
+          <!-- <div class="movie-reviewed-poster">
+            <img [src]="url + movie.poster" alt="Póster de la película {{ movie.title }}">
+          </div> -->
+        </div>
+        <div class="right">
+          <div class="review-title">
+            <p>{{review.title}}</p>
+          </div>
+          <div class="review-body">
+            {{review.description}}
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
 
 </div>

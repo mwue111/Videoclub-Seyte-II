@@ -3,7 +3,7 @@
 .container{
   margin: 50px;
   padding: 50px;
-  height: 1000px;  /* para que el footer quede abajo */
+  height: 10000px;  /* para que el footer quede abajo */
 }
 
 .user-page-header{
@@ -249,7 +249,8 @@
   text-align: center;
 }
 
-.user-seen-movies {
+.user-seen-movies,
+.user-reviews-header p {
   margin-top: 50px;
   display: flex;
   flex-direction: column;
@@ -270,6 +271,7 @@
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 .user-seen-movies-posters::-webkit-scrollbar-track{
@@ -293,7 +295,53 @@
   object-fit: cover;
 }
 
+
+.movie {
+  transition: 0.5s, color 0.1s;
+  -webkit-transition: 0.5s, color 0.1s;
+  -moz-transition: 0.5s, color 0.1s;
+  margin-right: 25px;
+}
+
+.movie:hover {
+  transform: scale3d(1.1, 1.1, 0.3);
+  -webkit-transform: scale3d(1.1, 1.1, 0.3);
+  -moz-transform: scale3d(1.1, 1.1, 0.3);
+}
+
 .movie{
   padding: 20px;
+}
+
+.user-reviews{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.reviews-container {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+}
+
+.reviews-container .left{
+  margin: 50px;
+  padding: 50px;
+}
+
+.reviews-container .right{
+  margin-left: 20px;
+}
+
+.review-title{
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.review-body{
+  font-size: 15px;
+  text-align: justify;
 }
 

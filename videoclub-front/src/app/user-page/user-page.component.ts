@@ -25,6 +25,7 @@ export class UserPageComponent implements OnInit{
   hasErrorText: string = '';
   movies: any = [];
   watchedMovies!: boolean;
+  reviews: any = [];
 
   constructor(
     private _auth: AuthService,
@@ -38,7 +39,8 @@ export class UserPageComponent implements OnInit{
       this.user = this._auth.user.user;
       this.watchedMovies = true;
       this.getViews();
-      // console.log(this.movies);
+      this.getReviews();
+      console.log(this.reviews);
     }
     else{
       this.router.navigate(['auth/login']);
@@ -72,9 +74,7 @@ export class UserPageComponent implements OnInit{
     this._users.getViews(this._auth.token)
               .subscribe((res: any) => {
                 if(res.length){
-                  console.log('películas vistas: ', res);
                   for(let i = 0; i < res.length; i++){
-                    console.log(res[i].title);
                     this.movies.push(res[i]);
                   }
                 }
@@ -82,6 +82,18 @@ export class UserPageComponent implements OnInit{
                   this.watchedMovies = false;
                 }
                 // this.movies.push(res);
+              })
+  }
+
+  getReviews(){
+    this._users.getReviews(this._auth.token, this.user.id)
+              .subscribe((res: any) => {
+                console.log('res: ', res);
+                if(res.length){
+                  for(let i = 0; i < res.length; i++){
+                    this.reviews.push(res[i]);
+                  }
+                }
               })
   }
 
