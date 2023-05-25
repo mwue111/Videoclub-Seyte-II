@@ -230,6 +230,21 @@
   width: 100px;
   text-align: center;
 }
-/* #file-selector {
-  display: none;
-} */
+
+.updating{
+  display: flex;
+}
+
+.updating img{
+  filter: grayscale(100%);
+}
+
+.editing-text{
+  position: absolute;
+  margin: 30px 50px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #484848;
+  width: 100px;
+  text-align: center;
+}

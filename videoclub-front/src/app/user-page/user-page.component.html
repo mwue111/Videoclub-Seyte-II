@@ -15,15 +15,20 @@
             appDrag
             (files)="fileDropped($event)"
         >
-          <div *ngIf="user.image">
+          <div *ngIf="user.image && !updatingImage">
             <a (click)="selectFile.click()" class="browser-link edit">
               <p class="edit-image-text">Arrastra o haz click para subir un nuevo avatar</p>
-              <img [src]="url + user.image" class="circle" id="previous-image" alt="Imagen de {{ user.username }}">
+              <img [src]="url + user.image" class="circle" id="previous-image">
             </a>
           </div>
 
-          <div *ngIf="!user.image" class="dropzone-text">
+          <div *ngIf="!user.image && !updatingImage" class="dropzone-text">
             Arrastra tu nuevo avatar aquí o <a (click)="selectFile.click()" class="browser-link new">súbelo</a> desde tu equipo
+          </div>
+
+          <div *ngIf="updatingImage" class="updating">
+            <img [src]="url + user.image" class="circle" id="previous-image">
+            <p class="editing-text">¡Introduce tu contraseña para guardar los cambios!</p>
           </div>
         </div>
 

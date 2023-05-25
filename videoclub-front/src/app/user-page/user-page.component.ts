@@ -18,7 +18,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class UserPageComponent implements OnInit{
   user: any;
   url: string = URL_BACKEND + '/storage/';
-  updatedUser: any;
+  updatingImage!: boolean;
   userImage: any;
   isEditing!: boolean;
   editForm!: FormGroup;
@@ -174,6 +174,7 @@ export class UserPageComponent implements OnInit{
             this._shared.updateImage(res.image);
             this.close();
             this.fetchUser();
+            this.updatingImage = false;
 
             Swal.fire({
               icon: 'success',
@@ -240,16 +241,16 @@ export class UserPageComponent implements OnInit{
         }
       })
     }
+    // this.updatingImage = false;
   }
 
   close(){
     this.isEditing = false;
   }
 
-  //Aquí: https://www.youtube.com/watch?v=FJ2Q_9zVzLA
   onFileSelected(event: any) {
     if(event.target.files) {
-      // this.user.image = null;
+      this.updatingImage  = true;
       console.log('evento: ', event);
       const file = event.target.files[0];
       console.log('file: ', file);
@@ -263,11 +264,8 @@ export class UserPageComponent implements OnInit{
     }
   }
 
-  fileDropped(fileHandle: FileHandle) {//fileHandle: FileHandle
-    console.log('evento: ', fileHandle);
+  fileDropped(fileHandle: FileHandle) {
+    this.updatingImage  = true;
     this.userImage = fileHandle;
-    console.log('userImage: ', this.userImage);
-    this.editForm.value.image = this.userImage;
-    console.log('editForm.value.image: ', this.editForm.value.image);
   }
 }
