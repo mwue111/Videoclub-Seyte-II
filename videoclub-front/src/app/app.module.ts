@@ -31,6 +31,7 @@ import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
 import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 import { VideogularComponent } from './videogular/videogular.component';
 import { UserPageComponent } from './user-page/user-page.component';
+import { DragDirective } from './directives/drag.directive';
 // import {SingleMediaPlayer} from './single-media-player';
 
 const material = [MatToolbarModule];
@@ -49,6 +50,7 @@ const material = [MatToolbarModule];
     ViewMovieComponent,
     VideogularComponent,
     UserPageComponent,
+    DragDirective,
   ],
   imports: [
     BrowserModule,
