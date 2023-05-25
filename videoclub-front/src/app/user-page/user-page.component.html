@@ -9,12 +9,31 @@
       </div>
     </div>
     <div class="user-image" *ngIf="isEditing">
-      <a (click)="selectFile.click()">Haz click</a>
       <form [formGroup]="editForm" (ngSubmit)="saveChanges()" enctype="multipart/form-data">
+
+        <div class="dropzone circle"
+            appDrag
+            (files)="fileDropped($event)"
+        >
+          <div *ngIf="user.image">
+            <a (click)="selectFile.click()" class="browser-link edit">
+              <p class="edit-image-text">Arrastra o haz click para subir un nuevo avatar</p>
+              <img [src]="url + user.image" class="circle" id="previous-image" alt="Imagen de {{ user.username }}">
+            </a>
+          </div>
+
+          <div *ngIf="!user.image" class="dropzone-text">
+            Arrastra tu nuevo avatar aquí o <a (click)="selectFile.click()" class="browser-link new">súbelo</a> desde tu equipo
+          </div>
+        </div>
+
       <input  type="file"
               #selectFile
+              id="selectFile"
               formControlName="image"
-              (change)="onFileSelected($event)">
+              (change)="onFileSelected($event)"
+      >
+
       </form>
     </div>
 

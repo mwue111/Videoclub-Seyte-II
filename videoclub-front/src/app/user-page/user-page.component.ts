@@ -145,7 +145,7 @@ export class UserPageComponent implements OnInit{
   }
 
   saveChanges(){
-    if(this.editForm.value.image){
+    if(this.editForm.value.image || this.userImage !== null){
       console.log('hay imagen');
       this.editForm.value.image = this.userImage;
 
@@ -249,7 +249,7 @@ export class UserPageComponent implements OnInit{
   //Aquí: https://www.youtube.com/watch?v=FJ2Q_9zVzLA
   onFileSelected(event: any) {
     if(event.target.files) {
-
+      // this.user.image = null;
       console.log('evento: ', event);
       const file = event.target.files[0];
       console.log('file: ', file);
@@ -261,5 +261,13 @@ export class UserPageComponent implements OnInit{
       this.userImage = fileHandle;
       console.log('userImage: ', this.userImage);
     }
+  }
+
+  fileDropped(fileHandle: FileHandle) {//fileHandle: FileHandle
+    console.log('evento: ', fileHandle);
+    this.userImage = fileHandle;
+    console.log('userImage: ', this.userImage);
+    this.editForm.value.image = this.userImage;
+    console.log('editForm.value.image: ', this.editForm.value.image);
   }
 }
