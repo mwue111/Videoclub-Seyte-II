@@ -105,26 +105,36 @@
       <button (click)="close()">Cancelar</button>
     </div>
 
-
-
   </div>
 
-  <div class="user-page-content">
-      <div class="user-seen-movies">
-        <img src="#" alt="Imagen de películas">
+  <!-- Películas vistas -->
+  <div class="user-seen-movies">
+    <div class="user-seen-movies-header">
+      <p>Registro de películas</p>
+    </div>
+    <div class="user-seen-movies-posters" *ngIf="movies.length !== 0">
+      <div *ngFor="let movie of movies">
+        <img [src]="url + movie.poster" class="movie" id="poster">
       </div>
-      <div class="user-reviews">
-        <div class="user-review">
-          <div class="review-poster">
-            <img src="#" alt="Imagen de película reseñada">
-          </div>
-          <div class="review-body">
-            <p>Título</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque amet modi quaerat voluptates nostrum. Earum praesentium ut possimus placeat nemo repellendus ullam beatae. Neque repellat ad aspernatur, nihil ratione velit.
-            Fugit deleniti libero totam atque qui accusantium aliquid ex esse optio earum voluptatem numquam possimus eum consectetur illo quaerat sequi iusto, explicabo nostrum porro laborum enim laudantium reiciendis. Facilis, ut.</p>
-          </div>
-        </div>
+      <!-- <img src="#" alt="Imagen de películas"> -->
+    </div>
+    <div *ngIf="!watchedMovies">
+      <p id="no-movies">¡No has visto ninguna película todavía!</p>
+    </div>
+  </div>
+
+  <!-- Reseñas hechas -->
+  <div class="user-reviews">
+    <div class="user-review">
+      <div class="review-poster">
+        <img src="#" alt="Imagen de película reseñada">
       </div>
+      <div class="review-body">
+        <p>Título</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque amet modi quaerat voluptates nostrum. Earum praesentium ut possimus placeat nemo repellendus ullam beatae. Neque repellat ad aspernatur, nihil ratione velit.
+        Fugit deleniti libero totam atque qui accusantium aliquid ex esse optio earum voluptatem numquam possimus eum consectetur illo quaerat sequi iusto, explicabo nostrum porro laborum enim laudantium reiciendis. Facilis, ut.</p>
+      </div>
+    </div>
   </div>
 
 </div>

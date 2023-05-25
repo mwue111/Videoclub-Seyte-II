@@ -3,7 +3,7 @@
 .container{
   margin: 50px;
   padding: 50px;
-  height: 500px;  /* para que el footer quede abajo */
+  height: 1000px;  /* para que el footer quede abajo */
 }
 
 .user-page-header{
@@ -248,3 +248,52 @@
   width: 100px;
   text-align: center;
 }
+
+.user-seen-movies {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 22px;
+}
+
+#no-movies{
+  padding: 50px;
+  border-radius: 15px;
+  font-size: 20px;
+  text-transform: none;
+  background: #F5F3F4;
+}
+
+.user-seen-movies-posters{
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+}
+
+.user-seen-movies-posters::-webkit-scrollbar-track{
+  padding: 2px 0;
+}
+
+.user-seen-movies-posters::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+
+.user-seen-movies-posters::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #159CA3;
+  border: none;
+}
+
+#poster{
+  width: 200px;
+  height: 250px;
+  object-fit: cover;
+}
+
+.movie{
+  padding: 20px;
+}
+

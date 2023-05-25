@@ -23,6 +23,8 @@ export class UserPageComponent implements OnInit{
   editForm!: FormGroup;
   hasError: boolean = false;
   hasErrorText: string = '';
+  movies: any = [];
+  watchedMovies!: boolean;
 
   constructor(
     private _auth: AuthService,
@@ -34,6 +36,9 @@ export class UserPageComponent implements OnInit{
   ) {
     if(this._auth.isLogged()){
       this.user = this._auth.user.user;
+      this.watchedMovies = true;
+      this.getViews();
+      // console.log(this.movies);
     }
     else{
       this.router.navigate(['auth/login']);
@@ -62,6 +67,24 @@ export class UserPageComponent implements OnInit{
     await this.fetchUser();
     this.initializeForm();
   }
+
+  getViews(){
+    this._users.getViews(this._auth.token)
+              .subscribe((res: any) => {
+                if(res.length){
+                  console.log('películas vistas: ', res);
+                  for(let i = 0; i < res.length; i++){
+                    console.log(res[i].title);
+                    this.movies.push(res[i]);
+                  }
+                }
+                else{
+                  this.watchedMovies = false;
+                }
+                // this.movies.push(res);
+              })
+  }
+
 
   initializeForm() {
     this.editForm = this.fb.group({

@@ -17,34 +17,6 @@ use Illuminate\Support\Facades\Auth;
 class UserImageController extends Controller
 {
 
-    //https://protone.media/en/blog/convert-and-store-base64-encoded-files-in-laravel-use-validation-rules-and-access-the-decoded-files-from-the-request-instance
-    public function update(Request $request, $id)
-    {
-        $user = User::findOrFail($id);
-
-        $attributes = $request->validate([
-        'image' => 'required'
-        ]);
-
-        $imageData = $request->input('image');
-        $decodedImage = base64_decode($imageData);
-        $filename = uniqid() . '.jpg';
-
-        if(isset($user->image)){
-            $old_image = $user->image;
-            Storage::disk('public')->delete($old_image);
-        }
-
-        // el guardado se hace con put():
-        Storage::disk('public')->put('user_profile_img/' . $filename, $decodedImage);
-
-        $user->image = "/user_profile_img/$filename";
-        $user->save();
-
-        return response()->json($user);
-    }
-
-    //No recibe formData desde el servicio
     public function updateWithFormData(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -71,6 +43,34 @@ class UserImageController extends Controller
         }
 
         $user->update($attributes);
+
+        return response()->json($user);
+    }
+
+    //Para HttpParams:
+    //https://protone.media/en/blog/convert-and-store-base64-encoded-files-in-laravel-use-validation-rules-and-access-the-decoded-files-from-the-request-instance
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+
+        $attributes = $request->validate([
+        'image' => 'required'
+        ]);
+
+        $imageData = $request->input('image');
+        $decodedImage = base64_decode($imageData);
+        $filename = uniqid() . '.jpg';
+
+        if(isset($user->image)){
+            $old_image = $user->image;
+            Storage::disk('public')->delete($old_image);
+        }
+
+        // el guardado se hace con put():
+        Storage::disk('public')->put('user_profile_img/' . $filename, $decodedImage);
+
+        $user->image = "/user_profile_img/$filename";
+        $user->save();
 
         return response()->json($user);
     }

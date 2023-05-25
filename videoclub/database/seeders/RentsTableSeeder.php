@@ -25,5 +25,47 @@ class RentsTableSeeder extends Seeder
             'movie_id' => 3,
             'expiration_date' => '2023-01-01',
         ]);
+
+        DB::table('rents')->insert([
+            'user_id' => 4,
+            'movie_id' => 1,
+            'expiration_date' => '2023-01-01',
+        ]);
+
+        DB::table('rents')->insert([
+            'user_id' => 4,
+            'movie_id' => 2,
+            'expiration_date' => '2023-01-01',
+        ]);
+
+        DB::table('rents')->insert([
+            'user_id' => 4,
+            'movie_id' => 3,
+            'expiration_date' => '2023-02-02',
+        ]);
+
+        DB::table('rents')->insert([
+            'user_id' => 4,
+            'movie_id' => 4,
+            'expiration_date' => '2023-03-03',
+        ]);
+
+        DB::table('rents')->insert([
+            'user_id' => 4,
+            'movie_id' => 5,
+            'expiration_date' => '2023-04-04',
+        ]);
+
+        DB::table('rents')->insert([
+            'user_id' => 4,
+            'movie_id' => 6,
+            'expiration_date' => '2023-05-05',
+        ]);
+
+        DB::table('rents')->insert([
+            'user_id' => 4,
+            'movie_id' => 7,
+            'expiration_date' => '2023-06-06',
+        ]);
     }
 }

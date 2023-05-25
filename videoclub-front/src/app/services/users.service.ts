@@ -123,7 +123,9 @@ export class UsersService {
     return this._http.post(this.url + '/update-password', data, { headers: headers })
   }
 
-  deleteUser(id: number) {
+  getViews(token:any): Observable<any>{
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
+    return this._http.get(this.url + '/peliculas-vistas', { headers:headers });
   }
 }
