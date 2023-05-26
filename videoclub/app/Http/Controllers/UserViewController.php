@@ -23,15 +23,13 @@ class UserViewController extends Controller
             // $reviews = $user->reviews->sortByDesc('updated_at');
             // $reviews = Review::orderBy('id', 'DESC')->where('user_id', '=', $user->id)->get();
             $reviews = Review::orderBy('id', 'DESC')->where('user_id', '=', $user->id)->paginate(4);
-            // $data['reviews'] = Review::orderBy('id', 'DESC')->where('user_id', '=', $user->id)->get();
-            // $movies = [];
-            // foreach($data['reviews'] as $review){
-            //     $movies[] = Movie::where('id', '=', $review->movie_id)->get('poster');
-            // }
-            // $data['posters'] = $movies;
+            $movies = [];
+
+            foreach($reviews as $review) {
+                $review->movie_id = Movie::where('id', '=', $review->movie_id)->first();;
+            }
         }
         return response()->json($reviews);
-        // return response()->json($data);
     }
 
     /*Paginación:

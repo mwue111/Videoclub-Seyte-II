@@ -134,10 +134,9 @@
     <div class="user-reviews-body" *ngIf="reviews.length !== 0">
       <div class="reviews-container" *ngFor="let review of reviews">
         <div class="left">
-          <p>Póster de la película</p>
-          <!-- <div class="movie-reviewed-poster">
-            <img [src]="url + movie.poster" alt="Póster de la película {{ movie.title }}">
-          </div> -->
+          <div class="movie-reviewed-poster">
+            <img [src]="url + review.movie_id.poster" alt="Póster de la película {{ review.movie_id.title }}" id="review-poster">
+          </div>
         </div>
         <div class="right">
           <div class="review-title">
