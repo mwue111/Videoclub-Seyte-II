@@ -176,7 +176,8 @@ export class UserPageComponent implements OnInit{
   }
 
   saveChanges(){
-    if(this.editForm.value.image || this.userImage !== null){
+    if(this.editForm.value.image || this.userImage !== undefined){
+      console.log('userImage: ', this.userImage);
       console.log('hay imagen');
       this.editForm.value.image = this.userImage;
 
@@ -191,28 +192,30 @@ export class UserPageComponent implements OnInit{
         })
       ).subscribe((res: any) => {
         console.log('res con imagen: ', res);
-        if(res === 'error'){
-          console.log('No hay imagen.');
+        if(res.error){
+          this.editForm.controls['password'].reset();
+          this.hasError = true;
+          this.hasErrorText = 'Formato de imagen no permitido.';
+        }
+        else if(res){
+          this.user = res;
+          this._shared.updateImage(res.image);
+          this.close();
+          this.fetchUser();
+          this.userImage = undefined;
+          this.updatingImage = false;
+
+          Swal.fire({
+            icon: 'success',
+            title: '¡Imagen actualizada!',
+            confirmButtonColor: '#1874BA'
+          })
         }
         else{
-          if(res.error){
-            this.editForm.controls['password'].reset();
-            this.hasError = true;
-            this.hasErrorText = 'Ha habido un problema subiendo la imagen.';
-          }
-          else{
-            this.user = res;
-            this._shared.updateImage(res.image);
-            this.close();
-            this.fetchUser();
-            this.updatingImage = false;
-
-            Swal.fire({
-              icon: 'success',
-              title: '¡Imagen actualizada!',
-              confirmButtonColor: '#1874BA'
-            })
-          }
+          this.editForm.controls['password'].reset();
+          this.hasError = true;
+          this.hasErrorText = 'Contraseña incorrecta.';
+          // this.hasErrorText = 'Ha habido un problema subiendo la imagen.';
         }
       })
     }
@@ -277,6 +280,7 @@ export class UserPageComponent implements OnInit{
 
   close(){
     this.isEditing = false;
+    this.updatingImage = false;
   }
 
   onFileSelected(event: any) {
