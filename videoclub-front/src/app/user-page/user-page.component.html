@@ -153,3 +153,8 @@
   </div>
 
 </div>
+
+<div *ngIf="reviews.length > 0" class="pagination">
+  <!-- Para declarar un componente en más de un módulo: https://stackoverflow.com/questions/64643390/the-component-is-declared-by-more-than-one-ngmodule -->
+  <!-- <app-pagination [data]="data" (changePage)="changePage($event)"></app-pagination> -->
+</div>

@@ -27,6 +27,11 @@ export class UserPageComponent implements OnInit{
   watchedMovies!: boolean;
   reviews: any = [];
 
+  //paginación
+  data: any;
+  currentPage!: number;
+  pageChange: any = null;
+
   constructor(
     private _auth: AuthService,
     private router: Router,
@@ -88,11 +93,17 @@ export class UserPageComponent implements OnInit{
   getReviews(){
     this._users.getReviews(this._auth.token, this.user.id)
               .subscribe((res: any) => {
-                console.log('res: ', res);
-                if(res.length){
-                  for(let i = 0; i < res.length; i++){
-                    this.reviews.push(res[i]);
+                console.log('res: ', res.data);
+                if(res.data){
+                  this.data = res;
+                  this.currentPage = res.current_page;
+                  console.log('current page: ', this.currentPage);
+                  for(let i = 0; i < res.data.length; i++){
+                    this.reviews.push(res.data[i]);
                   }
+                }
+                else{
+                  this.reviews = [];
                 }
               })
   }
@@ -301,4 +312,12 @@ export class UserPageComponent implements OnInit{
     this.updatingImage  = true;
     this.userImage = fileHandle;
   }
+
+  //Para la paginación: en el back tiene que recibir la página
+  // changePage(page: number | null){
+  //   if(page !== null){
+  //     this.currentPage = page;
+  //     this.getReviews(this.currentPage);
+  //   }
+  // }
 }
