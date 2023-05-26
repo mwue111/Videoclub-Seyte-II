@@ -337,12 +337,15 @@
 }
 
 .review-title{
+  font-size: 22px;
+}
+
+.review-title:first-letter {
   text-transform: uppercase;
-  font-size: 20px;
 }
 
 .review-body{
-  font-size: 15px;
+  font-size: 17px;
   text-align: justify;
 }
 
