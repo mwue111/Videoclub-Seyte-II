@@ -49,7 +49,9 @@ h3, h4{
 
 .comment-text{
   text-align: justify;
+  white-space: pre-line;
 }
+
 
 .edit-comment{
   width: 100%;
