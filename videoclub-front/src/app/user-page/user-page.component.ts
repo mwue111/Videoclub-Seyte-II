@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { UserSharedServiceService } from '../services/user-shared-service.service';
 import { URL_BACKEND } from '../config/config';
 import { FileHandle } from '../_model/file-handle.model';
+import { CommentsService } from '../modules/comments/_services/comments.service';
 
 @Component({
   selector: 'app-user-page',
@@ -26,7 +27,6 @@ export class UserPageComponent implements OnInit{
   movies: any = [];
   watchedMovies!: boolean;
   reviews: any = [];
-
   //paginación
   data: any;
   currentPage: number;
@@ -39,6 +39,7 @@ export class UserPageComponent implements OnInit{
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private _shared: UserSharedServiceService,
+    private _comments: CommentsService,
   ) {
     this.currentPage = 1;
 
@@ -89,20 +90,16 @@ export class UserPageComponent implements OnInit{
                 else{
                   this.watchedMovies = false;
                 }
-                // this.movies.push(res);
               })
   }
 
   getReviews(page: number){
     this._users.getReviews(this._auth.token, this.user.id, page)
               .subscribe((res: any) => {
-                console.log('res en user-page.ts: ', res);
                 if(res.data){
                   this.data = res;
                   this.currentPage = res.current_page;
-                  console.log('current page en user-page.ts: ', this.currentPage);
                   this.reviews = res.data;
-                  console.log('reviews: ', this.reviews);
                 }
                 else{
                   this.reviews = [];
@@ -190,8 +187,6 @@ export class UserPageComponent implements OnInit{
 
   saveChanges(){
     if(this.editForm.value.image || this.userImage !== undefined){
-      console.log('userImage: ', this.userImage);
-      console.log('hay imagen');
       this.editForm.value.image = this.userImage;
 
       this.verifyPassword(this.user.email, this.editForm.value.password).pipe(
@@ -204,7 +199,6 @@ export class UserPageComponent implements OnInit{
           }
         })
       ).subscribe((res: any) => {
-        console.log('res con imagen: ', res);
         if(res.error){
           this.editForm.controls['password'].reset();
           this.hasError = true;
@@ -233,7 +227,6 @@ export class UserPageComponent implements OnInit{
       })
     }
     else{
-      console.log('no hay imagen');
       this.verifyPassword(this.user.email, this.editForm.value.password).pipe(
         switchMap((passMatches: boolean) => {
           if(!passMatches) {
@@ -251,13 +244,11 @@ export class UserPageComponent implements OnInit{
                             console.log('respuesta recibida en contraseña: ', res);
                           })
               }
-              console.log('Valores enviados desde saveChanges(): ', this.editForm.value);
               return this._users.editUser(this._auth.token, this.user.id, this.editForm.value);
           }
         })
       )
       .subscribe((res: any) => {
-        console.log('res: ', res);
         if(res){
           if(res.error){
             this.editForm.controls['password'].reset();
@@ -299,7 +290,6 @@ export class UserPageComponent implements OnInit{
   onFileSelected(event: any) {
     if(event.target.files) {
       this.updatingImage  = true;
-      console.log('evento: ', event);
       const file = event.target.files[0];
 
       const fileHandle: FileHandle = {
@@ -320,5 +310,40 @@ export class UserPageComponent implements OnInit{
       this.currentPage = page;
       this.getReviews(this.currentPage);
     }
+  }
+
+  deleteComment(id: number){
+    Swal.fire({
+      icon: 'warning',
+      title: '¡Cuidado!',
+      text: '¿Seguro/a que quieres borrar este comentario? No podrás recuperarlo.',
+      showCloseButton: true,
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonColor: '#FF8811',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then(res => {
+      if(res.isConfirmed){
+        Swal.fire({
+          icon: 'success',
+          title: '¡Comentario eliminado!',
+          confirmButtonColor: '#1874BA'
+        })
+
+        this._comments.deleteComment(this._auth.token, id)
+        .subscribe(() => {
+          this.reviews = this.reviews.filter((comment: any) => comment.id !== id);
+          if(this.data.data.length <= 1){
+            this.getReviews(this.currentPage - 1);
+          }
+          else{
+            this.getReviews(this.currentPage);
+          }
+        })
+
+      }
+    })
+
   }
 }

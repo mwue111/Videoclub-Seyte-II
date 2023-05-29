@@ -141,7 +141,19 @@
         </div>
         <div class="right">
           <div class="review-title">
-            <p>{{review.title}}</p>
+            <a [routerLink]="['/pelicula', review.movie_id.id]">
+              <p>{{review.title}}</p>
+            </a>
+            <div *ngIf="review.updated_at !== null" class="comment-date">
+              <p>Publicado <time>{{ review.created_at | dateAgo }}</time> </p>
+            </div>
+            <div *ngIf="review.updated_at === null" class="comment-date">
+              <p>Publicado desde el principio de los tiempos</p>
+            </div>
+
+            <div class="buttons-container">
+              <button class="comment-action-button delete" (click)="deleteComment(review.id)">Eliminar</button>
+            </div>
           </div>
           <div class="review-body">
             {{review.description}}

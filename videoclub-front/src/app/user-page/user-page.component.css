@@ -1,4 +1,8 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+a{
+  text-decoration: none;
+  color: #1874BA;
+}
 
 .container{
   margin: 50px;
@@ -167,7 +171,7 @@
   background-color: #125385;
 }
 
-.button-container input:active {
+.button-container input:active{
   background-color: #1c7fca;
 }
 
@@ -343,8 +347,19 @@
   font-size: 22px;
 }
 
+.review-title p{
+  margin: 0;
+}
+
 .review-title:first-letter {
   text-transform: uppercase;
+}
+
+.comment-date p{
+  color: #000000;
+  font-size: small;
+  margin-bottom: 5px;
+  padding: 0;
 }
 
 .review-body{
@@ -366,3 +381,28 @@
   -moz-transform: translate(0px, 5px);
 }
 
+.button-container {
+  display: flex;
+}
+
+.comment-action-button {
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  padding: 5px 10px;
+  color: #FFFFFF;
+}
+
+.delete {
+  background: #FF8811;
+}
+
+.delete:hover{
+  background: #c96b0e;
+}
+
+.delete:active{
+  background: #ff9730;
+}

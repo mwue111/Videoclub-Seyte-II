@@ -25,6 +25,7 @@ import { PaginationComponent } from "src/app/pagination/pagination.component";
   exports: [
     CommentsComponent,
     PaginationComponent,
+    DateAgoPipe,
   ],
   providers: [
     CommentsService,
