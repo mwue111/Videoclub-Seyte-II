@@ -17,16 +17,23 @@ class UserViewController extends Controller
         return response()->json($rents);
     }
 
-    public function show($id){
+    public function show($id, $page){
         $user = User::findOrFail($id);
         if($user->id === Auth::user()->id){ //puede quitarse
             // $reviews = $user->reviews->sortByDesc('updated_at');
             // $reviews = Review::orderBy('id', 'DESC')->where('user_id', '=', $user->id)->get();
-            $reviews = Review::orderBy('id', 'DESC')->where('user_id', '=', $user->id)->paginate(4);
-            $movies = [];
 
-            foreach($reviews as $review) {
-                $review->movie_id = Movie::where('id', '=', $review->movie_id)->first();;
+            if(($user->reviews)->isEmpty()){
+                $reviews = 'none';
+            }
+            else{
+                $reviews = Review::orderBy('id', 'DESC')->where('user_id', '=', $user->id)->paginate(4, ['*'], 'page', $page);
+                $movies = [];
+
+                foreach($reviews as $review) {
+                    $review->movie_id = Movie::where('id', '=', $review->movie_id)->first();;
+                }
+                return $reviews;
             }
         }
         return response()->json($reviews);

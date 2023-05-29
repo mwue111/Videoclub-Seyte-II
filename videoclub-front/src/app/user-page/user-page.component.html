@@ -134,7 +134,9 @@
       <div class="reviews-container" *ngFor="let review of reviews">
         <div class="left">
           <div class="movie-reviewed-poster">
-            <img [src]="url + review.movie_id.poster" alt="Póster de la película {{ review.movie_id.title }}" id="review-poster">
+            <a [routerLink]="['/pelicula', review.movie_id.id]">
+              <img [src]="url + review.movie_id.poster" alt="Póster de la película {{ review.movie_id.title }}" id="review-poster">
+            </a>
           </div>
         </div>
         <div class="right">
@@ -153,6 +155,5 @@
 </div>
 
 <div *ngIf="reviews.length > 0" class="pagination">
-  <!-- Para declarar un componente en más de un módulo: https://stackoverflow.com/questions/64643390/the-component-is-declared-by-more-than-one-ngmodule -->
-  <!-- <app-pagination [data]="data" (changePage)="changePage($event)"></app-pagination> -->
+  <app-pagination [data]="data" (changePage)="changePage($event)"></app-pagination>
 </div>

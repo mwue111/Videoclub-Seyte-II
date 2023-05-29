@@ -20,10 +20,11 @@ import { PaginationComponent } from "src/app/pagination/pagination.component";
     CommentComponent,
     CommentFormComponent,
     DateAgoPipe,
-    PaginationComponent
+    PaginationComponent,
   ],
   exports: [
     CommentsComponent,
+    PaginationComponent,
   ],
   providers: [
     CommentsService,

@@ -29,7 +29,7 @@ export class UserPageComponent implements OnInit{
 
   //paginación
   data: any;
-  currentPage!: number;
+  currentPage: number;
   pageChange: any = null;
 
   constructor(
@@ -40,16 +40,19 @@ export class UserPageComponent implements OnInit{
     private route: ActivatedRoute,
     private _shared: UserSharedServiceService,
   ) {
+    this.currentPage = 1;
+
     if(this._auth.isLogged()){
       this.user = this._auth.user.user;
       this.watchedMovies = true;
       this.getViews();
-      this.getReviews();
+      this.getReviews(this.currentPage);
       console.log(this.reviews);
     }
     else{
       this.router.navigate(['auth/login']);
     }
+
   }
 
   fetchUser(): Promise<any> {
@@ -90,17 +93,16 @@ export class UserPageComponent implements OnInit{
               })
   }
 
-  getReviews(){
-    this._users.getReviews(this._auth.token, this.user.id)
+  getReviews(page: number){
+    this._users.getReviews(this._auth.token, this.user.id, page)
               .subscribe((res: any) => {
-                console.log('res: ', res.data);
+                console.log('res en user-page.ts: ', res);
                 if(res.data){
                   this.data = res;
                   this.currentPage = res.current_page;
-                  console.log('current page: ', this.currentPage);
-                  for(let i = 0; i < res.data.length; i++){
-                    this.reviews.push(res.data[i]);
-                  }
+                  console.log('current page en user-page.ts: ', this.currentPage);
+                  this.reviews = res.data;
+                  console.log('reviews: ', this.reviews);
                 }
                 else{
                   this.reviews = [];
@@ -313,11 +315,10 @@ export class UserPageComponent implements OnInit{
     this.userImage = fileHandle;
   }
 
-  //Para la paginación: en el back tiene que recibir la página
-  // changePage(page: number | null){
-  //   if(page !== null){
-  //     this.currentPage = page;
-  //     this.getReviews(this.currentPage);
-  //   }
-  // }
+  changePage(page: number | null){
+    if(page !== null){
+      this.currentPage = page;
+      this.getReviews(this.currentPage);
+    }
+  }
 }

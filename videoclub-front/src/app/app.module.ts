@@ -23,6 +23,7 @@ import { CommentsModule } from './modules/comments/comments.module';
 import { ViewMovieComponent } from './view-movie/view-movie.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+// import { PaginationComponent } from './pagination/pagination.component';
 
 //videogular:
 import {VgCoreModule} from '@videogular/ngx-videogular/core';
@@ -51,6 +52,7 @@ const material = [MatToolbarModule];
     VideogularComponent,
     UserPageComponent,
     DragDirective,
+    // PaginationComponent,
   ],
   imports: [
     BrowserModule,

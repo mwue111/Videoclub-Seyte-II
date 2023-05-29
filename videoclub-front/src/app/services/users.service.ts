@@ -129,9 +129,9 @@ export class UsersService {
     return this._http.get(this.url + '/peliculas-vistas', { headers:headers });
   }
 
-  getReviews(token: any, id: number): Observable<any>{
+  getReviews(token: any, id: number, page: number): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
-    return this._http.get(this.url + `/resenas-hechas/${id}`, { headers:headers });
+    return this._http.get(this.url + `/resenas-hechas/${id}/${page}`, { headers:headers });
   }
 }

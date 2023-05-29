@@ -339,6 +339,7 @@
 }
 
 .review-title{
+  color: #1874BA;
   font-size: 22px;
 }
 
@@ -350,5 +351,18 @@
   font-size: 17px;
   text-align: justify;
   white-space: pre-line;
+}
+
+#review-poster{
+  transition: translate(0px, 5px);
+  transition-duration: 500ms;
+}
+
+#review-poster:hover{
+  box-shadow: 0 2px 2px 0 #000000, 0 2px 2px 0 #000000;
+  transform: translate(0px, 5px);
+  transition-duration: 500ms;
+  -webkit-transform: translate(0px, 5px);
+  -moz-transform: translate(0px, 5px);
 }
 

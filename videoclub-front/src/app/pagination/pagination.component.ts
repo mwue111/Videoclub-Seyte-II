@@ -25,6 +25,7 @@ export class PaginationComponent implements OnInit {
         const oldLastPage = changes['data']['previousValue']['last_page'];
 
         if(newLastPage !== oldLastPage){
+          console.log('entra');
           this.currentPage = changes['data']['currentValue']['current_page'];
           this.totalPages = newLastPage;
           this.updateTotalPages(this.totalPages);
@@ -33,14 +34,19 @@ export class PaginationComponent implements OnInit {
             this.displayNext = true;
           }
         }
+        else{
+          this.currentPage = this.data.current_page;
+          console.log('this.currentPage: ', this.currentPage)
+        }
       }
   }
 
   ngOnInit(): void {
     if(this.data){
-      console.log('data: ', this.data);
+      console.log('data en pagination.ts: ', this.data);
       this.currentPage = this.data.current_page;
       this.totalPages = this.data.last_page;
+      // console.log('página actual en pagination: ', this.currentPage, ' - última página: ', this.totalPages);
       this.updateTotalPages(this.totalPages);
     }
   }
