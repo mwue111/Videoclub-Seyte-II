@@ -23,6 +23,13 @@ export class CommentsService {
     return this._httpClient.get<CommentInterface[]>(url, { headers:headers });
   }
 
+  getSingleComment(token: any, commentId: number): Observable<CommentInterface> {
+    let url = URL_SERVICES + `/resena/${commentId}/pelicula`;
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+
+    return this._httpClient.get<CommentInterface>(url, { headers:headers });
+  }
+
   getMovieComments(token: any, id: number, page: number, changedComment: boolean | null = null): Observable<CommentInterface[]> {
     let observable: Observable<any>;
     let url = URL_SERVICES + `/resenas/pelicula/${id}/${page}`

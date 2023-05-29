@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth:api', 'cors']], function () {
     Route::get('peliculas-vistas', 'UserViewController@index');
     Route::get('resenas-hechas/{id}/{page}', 'UserViewController@show');
     Route::post('usuario-avatar/{usuario}', 'UserImageController@updateWithFormData');
+    Route::get('resena/{resena}/pelicula', 'ReviewController@show');
     Route::post('/update-password', 'ChangePasswordController@updatePassword');
     Route::get('resenas', 'ReviewController@index');
     Route::resource('alquiler', RentController::class);

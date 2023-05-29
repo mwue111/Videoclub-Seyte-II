@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'pelicula/:id', component: MovieComponent },
   { path: 'ver-pelicula/:id', component: ViewMovieComponent },
   { path: 'usuario/:id', component: UserPageComponent },
+  { path: 'review/:id/:review_id', component: MovieComponent },
   {
     path: 'auth',
     loadChildren: () =>
@@ -33,7 +34,9 @@ export const routing: ModuleWithProviders<RouterModule> =
   RouterModule.forRoot(routes);
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled',
+  anchorScrolling: 'enabled',
+  scrollOffset: [0, 64]})],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

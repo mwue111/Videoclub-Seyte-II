@@ -58,11 +58,12 @@ class ReviewController extends Controller
   /**
    * Display the specified resource.
    */
-  public function show(string $id)
+  public function show($review)
   {
-    //
-    $review = Review::findOrFail($id);
-    return view('reviews.show', ['review' => $review]);
+      $review = Review::where('id', '=', $review)->first();
+      return response()->json($review);
+    //   dd($review);
+    // return view('reviews.show', ['review' => $review]);
   }
 
   /**

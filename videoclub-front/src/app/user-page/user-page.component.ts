@@ -344,6 +344,10 @@ export class UserPageComponent implements OnInit{
 
       }
     })
+  }
 
+  goToComment(commentId: number, movieId: number){
+    // this.router.navigate([`/pelicula/${movieId}`], {fragment: commentId.toString()});
+    this.router.navigate([`/usuario/4`], {fragment: 'top'});
   }
 }

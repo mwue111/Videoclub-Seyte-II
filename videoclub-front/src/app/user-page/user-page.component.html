@@ -1,4 +1,4 @@
-<div class="container">
+ <div class="container">
   <div class="user-page-header">
     <div class="user-image" *ngIf="!isEditing">
       <div *ngIf="!user.image">
@@ -141,9 +141,8 @@
         </div>
         <div class="right">
           <div class="review-title">
-            <a [routerLink]="['/pelicula', review.movie_id.id]">
-              <p>{{review.title}}</p>
-            </a>
+            <a [routerLink]="['/review',review.movie_id.id,review.id]" id="go-to">{{review.title}}</a>
+
             <div *ngIf="review.updated_at !== null" class="comment-date">
               <p>Publicado <time>{{ review.created_at | dateAgo }}</time> </p>
             </div>
