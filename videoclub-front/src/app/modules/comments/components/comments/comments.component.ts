@@ -90,6 +90,12 @@ export class CommentsComponent implements OnInit {
         .subscribe((res: any) => {
           this.comments = [...this.comments, res];
           this.fetchComments(this.currentPage, true);
+
+          if(this.highlightedReview){
+            this.comments = this.comments.filter((comment: any) => comment.id !== this.highlightedReview.id);
+            this.fetchSingleComment(this.highlightedReview.id);
+          }
+
         })
   }
 
@@ -142,11 +148,19 @@ export class CommentsComponent implements OnInit {
         this._comments.deleteComment(this._auth.token, commentId)
         .subscribe(() => {
           if(this.highlightedReview){
-            console.log('entra');
             this.router.navigate([`/pelicula/${this.movieId}`]);
+            this.fetchComments(this.currentPage, true);
+
+            if(commentId !== this.highlightedReview.id){
+                // console.log('el comentario borrado no es el destacado');
+                this.router.navigate([`/review/${this.movieId}/${this.highlightedReview.id}`]);
+                this.fetchSingleComment(this.highlightedReview.id);
+            }
           }
-          this.comments = this.comments.filter((comment: any) => comment.id !== commentId);
-          this.fetchComments(this.currentPage, true);
+          else{
+            this.router.navigate([`/pelicula/${this.movieId}`]);
+            this.fetchComments(this.currentPage, true);
+          }
           // this.changePage(this.currentPage);
         })
 

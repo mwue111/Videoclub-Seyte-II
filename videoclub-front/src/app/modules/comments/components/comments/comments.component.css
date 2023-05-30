@@ -107,3 +107,10 @@ h3{
 .no-comments p{
   margin: 0;
 }
+
+.highlighted-comment{
+  width: 80%;
+  margin: 0 auto;
+  background-color: blanchedalmond;
+  border-radius: 15px;
+}
