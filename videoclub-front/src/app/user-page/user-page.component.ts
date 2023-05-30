@@ -111,7 +111,6 @@ export class UserPageComponent implements OnInit{
       username: [
         this.user.username,
         Validators.compose([
-          // Validators.required,
           Validators.minLength(2),
           Validators.maxLength(20)
         ])
@@ -119,7 +118,6 @@ export class UserPageComponent implements OnInit{
       name: [
         this.user.name,
         Validators.compose([
-          // Validators.required,
           Validators.minLength(2),
           Validators.maxLength(20)
         ])
@@ -127,7 +125,6 @@ export class UserPageComponent implements OnInit{
       surname: [
         this.user.surname,
         Validators.compose([
-          // Validators.required,
           Validators.minLength(2),
           Validators.maxLength(20)
         ])
@@ -197,24 +194,27 @@ export class UserPageComponent implements OnInit{
           }
         })
       ).subscribe((res: any) => {
-        if(res.error){
-          this.editForm.controls['password'].reset();
-          this.hasError = true;
-          this.hasErrorText = 'Formato de imagen no permitido.';
-        }
-        else if(res){
-          this.user = res;
-          this._shared.updateImage(res.image);
-          this.close();
-          this.fetchUser();
-          this.userImage = undefined;
-          this.updatingImage = false;
+        console.log('res: ', res);
+        if(res){
+          if(res.error){
+            this.editForm.controls['password'].reset();
+            this.hasError = true;
+            this.hasErrorText = 'Formato de imagen no permitido.';
+          }
+          else if(res){
+            this.user = res;
+            this._shared.updateImage(res.image);
+            this.close();
+            this.fetchUser();
+            this.userImage = undefined;
+            this.updatingImage = false;
 
-          Swal.fire({
-            icon: 'success',
-            title: '¡Imagen actualizada!',
-            confirmButtonColor: '#1874BA'
-          })
+            Swal.fire({
+              icon: 'success',
+              title: '¡Imagen actualizada!',
+              confirmButtonColor: '#1874BA'
+            })
+          }
         }
         else{
           this.editForm.controls['password'].reset();
