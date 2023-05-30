@@ -153,7 +153,8 @@ export class CommentsComponent implements OnInit {
 
             if(commentId !== this.highlightedReview.id){
                 // console.log('el comentario borrado no es el destacado');
-                this.router.navigate([`/review/${this.movieId}/${this.highlightedReview.id}`]);
+                // this.router.navigate([`/review/${this.movieId}/${this.highlightedReview.id}`]);
+                window.location.reload();
                 this.fetchSingleComment(this.highlightedReview.id);
             }
           }
