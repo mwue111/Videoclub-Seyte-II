@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommentsService } from '../../_services/comments.service';
 import { AuthService } from 'src/app/modules/auth/_services/auth.service';
 import { CommentInterface } from '../../types/comment.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ActiveCommentInterface } from '../../types/activeComment.interface';
 import Swal from 'sweetalert2';
 import { URL_BACKEND } from 'src/app/config/config';
@@ -32,6 +32,7 @@ export class CommentsComponent implements OnInit {
     private _comments: CommentsService,
     private _auth: AuthService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {
     this.logged = this._auth.isLogged();
     this.user = this._auth.user.user;
@@ -106,10 +107,7 @@ export class CommentsComponent implements OnInit {
     this._comments.updateComment(this._auth.token, body.title, body.description, commentId, this._auth.user.user.id, this.movieId)
         .subscribe((updatedComment: any) => {
           this.comments = this.comments.map((comment) => {
-            console.log('comentarios: ', comment);
-
             if(this.highlightedReview){
-              console.log('entra');
               this.fetchSingleComment(this.highlightedReview.id);
             }
 
@@ -143,6 +141,10 @@ export class CommentsComponent implements OnInit {
 
         this._comments.deleteComment(this._auth.token, commentId)
         .subscribe(() => {
+          if(this.highlightedReview){
+            console.log('entra');
+            this.router.navigate([`/pelicula/${this.movieId}`]);
+          }
           this.comments = this.comments.filter((comment: any) => comment.id !== commentId);
           this.fetchComments(this.currentPage, true);
           // this.changePage(this.currentPage);
