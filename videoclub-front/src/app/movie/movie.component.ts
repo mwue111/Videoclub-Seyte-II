@@ -19,8 +19,6 @@ export class MovieComponent {
   user: any;
   genreNames: any = [];
   source: string = '';
-  reviewId: any;
-  paramReview!: CommentInterface;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +33,6 @@ export class MovieComponent {
     this.route.params.subscribe((params: any) => {
       console.log('params: ', params)
       let movieId = params.id;
-      this.reviewId = params.review_id
       // let movieId = res.id;
       this._movie.getOneMovie(movieId, this._auth.token)
           .subscribe((res: any) => {
@@ -49,20 +46,8 @@ export class MovieComponent {
               this.genreNames.push(res[i].name)
             }
           })
-
-      this._comments.getSingleComment(this._auth.token, this.reviewId)
-          .subscribe((res: any) => {
-            console.log('res: ', res);
-            this.paramReview = res;
-          })
     })
   }
-
-  // ngOnInit() {
-  //   this.route.paramMap.subscribe(params => {
-  //     this.reviewId = params.get('review_id');
-  //   })
-  // }
 
   unloggedHandle() {
     Swal.fire({

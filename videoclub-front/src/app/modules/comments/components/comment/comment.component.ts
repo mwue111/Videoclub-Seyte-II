@@ -44,6 +44,7 @@ export class CommentComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('comentario recibido: ', this.comment);
       this.userData(this.comment.user_id);
   }
 

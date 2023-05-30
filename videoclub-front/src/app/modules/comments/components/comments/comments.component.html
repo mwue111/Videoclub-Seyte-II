@@ -28,7 +28,19 @@
       <comment-form submitLabel="Publicar" (handleSubmit)="addComment($event)"></comment-form>
     </div>
   </div>
+
+  <div *ngIf="highlightedReview" class="highlighted-comment">
+    <comment
+      [comment]="highlightedReview"
+      (setActiveComment)="setActiveComment($event)"
+      [activeComment]="activeComment"
+      (updateComment)="updateComment($event)"
+      (deleteComment)="deleteComment($event)"
+    />
+  </div>
+
   <div class="comments-container">
+
     <comment *ngFor="let comment of comments"
               [comment]="comment"
               (setActiveComment)="setActiveComment($event)"

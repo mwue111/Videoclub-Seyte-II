@@ -75,7 +75,7 @@ export class CommentsService {
   updateComment(token: any, title: string, body: string, id: string|number, user: number, movie: number): Observable<CommentInterface> {
     let url = URL_SERVICES + `/resenas/${id}`;
     let headers = new HttpHeaders().set('Authorization','Bearer' + token);
-
+    console.log('datos recibidos en servicio: id del comentario - ',id, ' - título: ', title, ' - cuerpo: ', body)
     return this._httpClient.put<CommentInterface>(url, {
       title: title,
       description: body,

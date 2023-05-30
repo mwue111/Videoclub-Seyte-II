@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ActiveCommentInterface } from '../../types/activeComment.interface';
 import Swal from 'sweetalert2';
 import { URL_BACKEND } from 'src/app/config/config';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'comments',
@@ -20,6 +21,9 @@ export class CommentsComponent implements OnInit {
   activeComment: ActiveCommentInterface | null = null;
   movieId: any;
   data: any;
+  reviewId: any;
+  highlightedReview!: CommentInterface;
+
   //paginación
   currentPage: number;
   pageChange: any = null;
@@ -37,17 +41,32 @@ export class CommentsComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.movieId = params.get('id');
+      this.reviewId = params.get('review_id');
       if(this.movieId){
         this.fetchComments(this.currentPage);
       }
+      if(this.reviewId){
+        console.log('review id: ', this.reviewId);
+        this.fetchSingleComment(this.reviewId);
+      }
     })
     console.log('user: ', this.user);
+  }
+
+  fetchSingleComment(reviewId: number) {
+    this._comments.getSingleComment(this._auth.token, reviewId)
+        .subscribe((res: any) => {
+          console.log('Comentario destacado: ', res);
+          this.highlightedReview = res;
+          this.comments = this.comments.filter((comment: any) => comment.id !== this.highlightedReview.id);
+        })
   }
 
   fetchComments(page: number, newComment: boolean | null = null) {
     this._comments.getMovieComments(this._auth.token, Number(this.movieId), page, newComment)
         .subscribe((res: any) => {
           if(res !== 'none'){
+            console.log('comentarios: ', res.data);
             this.comments = res.data;
             this.data = res;
             this.currentPage = res.current_page;
@@ -78,6 +97,7 @@ export class CommentsComponent implements OnInit {
   }
 
   updateComment({body, commentId}: {body: any, commentId: string|number}){
+    console.log('comentario recibido en updateComment, en comments.ts: ', body, ' - ', commentId);
     Swal.fire({
       icon: 'success',
       title: '¡Comentario editado!',
@@ -86,6 +106,13 @@ export class CommentsComponent implements OnInit {
     this._comments.updateComment(this._auth.token, body.title, body.description, commentId, this._auth.user.user.id, this.movieId)
         .subscribe((updatedComment: any) => {
           this.comments = this.comments.map((comment) => {
+            console.log('comentarios: ', comment);
+
+            if(this.highlightedReview){
+              console.log('entra');
+              this.fetchSingleComment(this.highlightedReview.id);
+            }
+
             if(comment.id === commentId) {
               return updatedComment;
             }
