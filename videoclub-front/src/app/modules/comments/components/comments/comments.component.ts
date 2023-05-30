@@ -162,7 +162,6 @@ export class CommentsComponent implements OnInit {
             this.router.navigate([`/pelicula/${this.movieId}`]);
             this.fetchComments(this.currentPage, true);
           }
-          // this.changePage(this.currentPage);
         })
 
       }
