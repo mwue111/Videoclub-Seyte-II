@@ -37,9 +37,7 @@ export class UserPageComponent implements OnInit{
     private router: Router,
     private _users: UsersService,
     private fb: FormBuilder,
-    private route: ActivatedRoute,
     private _shared: UserSharedServiceService,
-    private _comments: CommentsService,
   ) {
     this.currentPage = 1;
 
@@ -310,44 +308,5 @@ export class UserPageComponent implements OnInit{
       this.currentPage = page;
       this.getReviews(this.currentPage);
     }
-  }
-
-  deleteComment(id: number){
-    Swal.fire({
-      icon: 'warning',
-      title: '¡Cuidado!',
-      text: '¿Seguro/a que quieres borrar este comentario? No podrás recuperarlo.',
-      showCloseButton: true,
-      showCancelButton: true,
-      focusConfirm: false,
-      confirmButtonColor: '#FF8811',
-      confirmButtonText: 'Eliminar',
-      cancelButtonText: 'Cancelar'
-    }).then(res => {
-      if(res.isConfirmed){
-        Swal.fire({
-          icon: 'success',
-          title: '¡Comentario eliminado!',
-          confirmButtonColor: '#1874BA'
-        })
-
-        this._comments.deleteComment(this._auth.token, id)
-        .subscribe(() => {
-          this.reviews = this.reviews.filter((comment: any) => comment.id !== id);
-          if(this.data.data.length <= 1){
-            this.getReviews(this.currentPage - 1);
-          }
-          else{
-            this.getReviews(this.currentPage);
-          }
-        })
-
-      }
-    })
-  }
-
-  goToComment(commentId: number, movieId: number){
-    // this.router.navigate([`/pelicula/${movieId}`], {fragment: commentId.toString()});
-    this.router.navigate([`/usuario/4`], {fragment: 'top'});
   }
 }
