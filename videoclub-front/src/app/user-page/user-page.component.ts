@@ -31,6 +31,7 @@ export class UserPageComponent implements OnInit{
   data: any;
   currentPage: number;
   pageChange: any = null;
+  imagePreview: any;
 
   constructor(
     private _auth: AuthService,
@@ -290,17 +291,33 @@ export class UserPageComponent implements OnInit{
       this.updatingImage  = true;
       const file = event.target.files[0];
 
+      this.previewImage(file);
+
       const fileHandle: FileHandle = {
         image: file,
       }
 
       this.userImage = fileHandle;
     }
+
   }
 
   fileDropped(fileHandle: FileHandle) {
     this.updatingImage  = true;
+    const file = fileHandle;
+
+    this.previewImage(file.image);
+
     this.userImage = fileHandle;
+  }
+
+  //Para previsualizar la imagen antes de subirla:
+  previewImage(file: any) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imagePreview = reader.result as string;
+    }
+    return reader.readAsDataURL(file)
   }
 
   changePage(page: number | null){

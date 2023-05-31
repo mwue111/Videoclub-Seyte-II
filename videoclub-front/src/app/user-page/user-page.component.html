@@ -27,7 +27,8 @@
           </div>
 
           <div *ngIf="updatingImage" class="updating">
-            <img [src]="url + user.image" class="circle" id="previous-image">
+            <img *ngIf="imagePreview" [src]="imagePreview" alt="Image preview" class="circle" id="previous-image" />
+            <!-- <img [src]="url + user.image" class="circle" id="previous-image"> -->
             <p class="editing-text">¡Introduce tu contraseña para guardar los cambios!</p>
           </div>
         </div>
