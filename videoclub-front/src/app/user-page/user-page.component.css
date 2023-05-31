@@ -257,6 +257,14 @@ a{
   text-align: center;
 }
 
+.error-image-text {
+  margin: 30px 50px;
+}
+
+.error-image-text a {
+  color: #871717;
+}
+
 .user-seen-movies,
 .user-reviews-header p {
   margin-top: 50px;

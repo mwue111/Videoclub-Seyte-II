@@ -27,9 +27,13 @@
           </div>
 
           <div *ngIf="updatingImage" class="updating">
-            <img *ngIf="imagePreview" [src]="imagePreview" alt="Image preview" class="circle" id="previous-image" />
-            <!-- <img [src]="url + user.image" class="circle" id="previous-image"> -->
-            <p class="editing-text">¡Introduce tu contraseña para guardar los cambios!</p>
+            <img *ngIf="imagePreview" [src]="imagePreview" class="circle" id="previous-image" />
+            <p *ngIf="!hasImageError" class="editing-text">¡Introduce tu contraseña para guardar los cambios!</p>
+            <p *ngIf="hasImageError" class="editing-text error-image-text">
+              <a (click)="selectFile.click()" class="browser-link edit">
+                {{ hasImageErrorText }}
+              </a>
+            </p>
           </div>
         </div>
 
@@ -91,7 +95,7 @@
           </div>
 
           <div class="button-container">
-            <input type="submit" value="Guardar" [disabled]="editForm.invalid">
+            <input type="submit" value="Guardar" [disabled]="editForm.invalid || hasImageError">
           </div>
 
 
