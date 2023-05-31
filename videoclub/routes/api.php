@@ -43,6 +43,7 @@ Route::group(['middleware' => ['guest']], function () {
     Route::post('/reset-password', 'PasswordResetRequestController@sendPasswordResetEmail');
     Route::post('/change-password', 'ChangePasswordController@passwordResetProcess');
     Route::get('/check-password', [RegisterController::class, 'oldPassword']);
+    Route::get('/resultado', 'SearchController@frontSearch');
 });
 
 Route::group(['middleware' => ['auth:api', 'cors']], function () {

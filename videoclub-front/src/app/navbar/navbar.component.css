@@ -17,28 +17,6 @@
   text-decoration: none;
 }
 
-.tracker-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.tracker-navbar {
-  width: 25em;
-  height: 2em;
-  border: none;
-  box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 0.5);
-  border-radius: 20px;
-  padding-left: 10px;
-  margin-right: 20px;
-}
-
-.tracker-glass {
-  width: 2em;
-  height: 2em;
-  cursor: pointer;
-}
-
 .auth-div {
   display: flex;
   justify-content: center;
@@ -116,7 +94,6 @@
   display: flex;
   cursor: pointer;
 }
-
 
 #circle {
   border-radius: 50%;

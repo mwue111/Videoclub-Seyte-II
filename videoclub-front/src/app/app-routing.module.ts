@@ -7,6 +7,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { MovieComponent } from './movie/movie.component';
 import { ViewMovieComponent } from './view-movie/view-movie.component';
 import { UserPageComponent } from './user-page/user-page.component';
+import { ResultsComponent } from './modules/search/components/results/results.component';
 
 const routes: Routes = [
   { path: '', component: LandingComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'ver-pelicula/:id', component: ViewMovieComponent },
   { path: 'usuario/:id', component: UserPageComponent },
   { path: 'review/:id/:review_id', component: MovieComponent },
+  { path: 'results', component: ResultsComponent },
   {
     path: 'auth',
     loadChildren: () =>

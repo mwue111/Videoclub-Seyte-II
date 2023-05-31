@@ -23,7 +23,6 @@ import { CommentsModule } from './modules/comments/comments.module';
 import { ViewMovieComponent } from './view-movie/view-movie.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-// import { PaginationComponent } from './pagination/pagination.component';
 
 //videogular:
 import {VgCoreModule} from '@videogular/ngx-videogular/core';
@@ -33,7 +32,7 @@ import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 import { VideogularComponent } from './videogular/videogular.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { DragDirective } from './directives/drag.directive';
-// import {SingleMediaPlayer} from './single-media-player';
+import { SearchModule } from './modules/search/search.module';
 
 const material = [MatToolbarModule];
 
@@ -52,7 +51,6 @@ const material = [MatToolbarModule];
     VideogularComponent,
     UserPageComponent,
     DragDirective,
-    // PaginationComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +66,7 @@ const material = [MatToolbarModule];
     VgBufferingModule,
     FormsModule,
     ReactiveFormsModule,
+    SearchModule,
   ],
   exports: [
     material,
@@ -77,7 +76,6 @@ const material = [MatToolbarModule];
   providers: [appRoutingProviders, { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }],
   bootstrap: [
     AppComponent,
-    // SingleMediaPlayer
  ],
 })
 export class AppModule {}
