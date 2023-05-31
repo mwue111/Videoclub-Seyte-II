@@ -6,9 +6,11 @@
             placeholder="Nombre de película"
             class="tracker-navbar"
             name="search"
+            [formControl]="inputSearch"
       />
 
     <button type="submit" [routerLink]="['/results/']" class="search-button">
+    <!-- <button *ngIf="submitted" type="submit" [routerLink]="['/results/', submitted]" class="search-button"></button> -->
       <img
         src="../../assets/magnifying-glass-backup-svgrepo-com (1).png"
         alt="lupa"

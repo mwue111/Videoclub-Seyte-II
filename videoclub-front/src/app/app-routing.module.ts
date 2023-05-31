@@ -18,16 +18,12 @@ const routes: Routes = [
   { path: 'ver-pelicula/:id', component: ViewMovieComponent },
   { path: 'usuario/:id', component: UserPageComponent },
   { path: 'review/:id/:review_id', component: MovieComponent },
-  { path: 'results', component: ResultsComponent },
+  { path: 'results/:id', component: ResultsComponent },
   {
     path: 'auth',
     loadChildren: () =>
       import('./modules/auth/auth.module').then((res) => res.AuthModule),
   },
-  // Si se añade un componente al que sólo se pueda acceder con autenticación, debe ser como este:
-  // { path: 'welcome', canActivate: [AuthGuard], loadChildren: () =>
-  //     import('./modules/user-landing/user-landing.module')
-  //           .then(res => res.UserLandingModule)  },
   { path: '**', redirectTo: 'error/404' },
 ];
 
