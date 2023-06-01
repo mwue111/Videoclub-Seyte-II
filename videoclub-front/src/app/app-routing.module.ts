@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'ver-pelicula/:id', component: ViewMovieComponent },
   { path: 'usuario/:id', component: UserPageComponent },
   { path: 'review/:id/:review_id', component: MovieComponent },
-  { path: 'results/:id', component: ResultsComponent },
+  { path: 'results', component: ResultsComponent },
   {
     path: 'auth',
     loadChildren: () =>

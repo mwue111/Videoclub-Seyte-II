@@ -30,8 +30,8 @@ class Movie extends Model
         $query
                 ->where('title', 'LIKE', '%'. $filters['search'] . '%')
                 ->orWhere('director', 'LIKE', '%' . $filters['search'] . '%')
-                ->orWhere('year', '=', $filters['search'])
-                ->paginate(5);
+                ->orWhere('year', '=', $filters['search']);
+                // ->paginate(5);
     }
     else{
         $query = Movie::latest()->paginate(5);

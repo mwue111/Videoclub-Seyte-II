@@ -5,13 +5,15 @@ import { ResultsComponent } from './components/results/results.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CardMovieComponent } from './components/card-movie/card-movie.component';
 
 
 
 @NgModule({
   declarations: [
     SearchComponent,
-    ResultsComponent
+    ResultsComponent,
+    CardMovieComponent
   ],
   imports: [
     CommonModule,

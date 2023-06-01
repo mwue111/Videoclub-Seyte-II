@@ -1,5 +1,11 @@
 <div class="container">
 
+  <!-- <input type="text" #searchField placeholder="Buscar película" class="tracker-navbar" name="search">
+  <button (click)="onSearch(searchField.value)" class="search-button">
+    <img src="../../assets/magnifying-glass-backup-svgrepo-com (1).png" alt="Buscar" >
+
+  </button> -->
+
   <form class="search-container">
       <input
             type="text"
@@ -9,8 +15,7 @@
             [formControl]="inputSearch"
       />
 
-    <button type="submit" [routerLink]="['/results/']" class="search-button">
-    <!-- <button *ngIf="submitted" type="submit" [routerLink]="['/results/', submitted]" class="search-button"></button> -->
+    <button (click)="onSearch()" type="submit" class="search-button">
       <img
         src="../../assets/magnifying-glass-backup-svgrepo-com (1).png"
         alt="lupa"
