@@ -1,11 +1,18 @@
 <div class="container">
-  <h1>Películas</h1>
+  <h2>Has buscado: <span>"{{ query }}"</span>. ¡Esto es lo que hemos encontrado!</h2>
+
+  <h1>Películas con {{ query }}</h1>
 
   <div class="movie-results">
-    <app-card-movie *ngFor="let result of results" [movie]="result"/>
+    <app-card-movie *ngFor="let movie of movies" [movie]="movie"/>
   </div>
 
-  <div *ngIf="results.length === 0" class="no-results">
+  <h1>Géneros con {{ query }}</h1>
+  <div class="movie-results">
+    <app-card-movie *ngFor="let genre of genres" [movie]="genre"/>
+  </div>
+
+  <div *ngIf="movies.length === 0" class="no-results">
     <p>Lo sentimos, no tenemos ninguna película que coincida con tu búsqueda.</p>
   </div>
 </div>

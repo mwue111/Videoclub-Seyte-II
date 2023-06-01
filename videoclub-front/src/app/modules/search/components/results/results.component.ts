@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { SearchService } from '../../_services/search.service';
-import { GenresService } from 'src/app/services/genres.service';
 
 @Component({
   selector: 'app-results',
@@ -10,44 +9,33 @@ import { GenresService } from 'src/app/services/genres.service';
 })
 export class ResultsComponent {
   query: any;
-  results: any = [];
+  movies: any = [];
   genres: any = [];
 
   constructor(
     private route: ActivatedRoute,
     private _search : SearchService,
-    private _genres: GenresService,
   ) {
     this.query = this.route.snapshot.queryParamMap.get('search');
     console.log('query: ', this.query);
-
-    //Para comprobar si el término es un género (se queda corto y es costoso)
-    this.getGenres();
   }
   ngOnInit(): void {
 
+    //Aquí: identificar si el objeto tiene el término de búsqueda. Si no lo tiene, se asume que es el género.
     this._search.search(this.query)
         .subscribe((res: any) => {
-          for(let i = 0; i < res.length; i++){
-            this.results.push(res[i]);
-          }
+          console.log('res: ', res);
+          // if(res.includes(this.query)){
+            for(let i = 0; i < res.length; i++){
+              this.movies.push(res[i]);
+            }
+          // }
+          // else{
+            for(let i = 0; i < res.length; i++) {
+              this.genres.push(res[i]);
+            }
+          // }
         })
         // console.log('resultado de la búsqueda fuera de la suscripción: ', this.results)
-  }
-
-  getGenres() {
-    this._genres.getAllGenres()
-    .subscribe((res: any) => {
-      for(let i = 0; i < res.length; i++){
-        this.genres.push((res[i].name).toLowerCase());
-      }
-      if(this.genres.includes((this.query).toLowerCase())){
-        this.searchGenres();
-      }
-    })
-  }
-
-  searchGenres() {
-    console.log('Buscando películas de ese género... ');
   }
 }
