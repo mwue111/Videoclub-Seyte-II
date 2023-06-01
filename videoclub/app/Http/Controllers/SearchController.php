@@ -8,7 +8,9 @@ use App\Models\Movie;
 class SearchController extends Controller
 {
     public function frontSearch(Request $request){
+
         $querys = Movie::latest()->filter(request(['search']))->get();
+
         if(!$querys->count()){
             $querys = null;
         }
