@@ -32,6 +32,7 @@ class Movie extends Model
                 ->orWhere('director', 'LIKE', '%' . $filters['search'] . '%')
                 ->orWhere('year', '=', $filters['search']);
                 // ->paginate(5);
+                //orWhere $filters['search'] esté en la tabla genres->name, que devuelva el id de ese genre y todas las películas asociadas
     }
     else{
         $query = Movie::latest()->paginate(5);

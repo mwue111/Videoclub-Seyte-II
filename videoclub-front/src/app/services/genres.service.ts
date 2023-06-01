@@ -15,6 +15,10 @@ export class GenresService {
     this.url = Global.url;
   }
 
+  getAllGenres(): Observable<any> {
+    return this._http.get(this.url + '/api/generos');
+  }
+
   getGenres(amount: number, token: any): Observable<any> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     let params = new HttpParams().set('cantidad', amount.toString());

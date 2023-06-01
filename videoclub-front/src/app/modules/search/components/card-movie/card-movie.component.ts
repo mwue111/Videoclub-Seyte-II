@@ -11,7 +11,7 @@ export class CardMovieComponent {
   url: string = URL_BACKEND + '/storage/';
 
   ngOnInit(): void {
-    console.log('película en card-movie: ', this.movie);
+    // console.log('película en card-movie: ', this.movie);
   }
 
 }
