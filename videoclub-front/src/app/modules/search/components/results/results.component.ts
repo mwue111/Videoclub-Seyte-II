@@ -16,26 +16,25 @@ export class ResultsComponent {
     private route: ActivatedRoute,
     private _search : SearchService,
   ) {
-    this.query = this.route.snapshot.queryParamMap.get('search');
-    console.log('query: ', this.query);
+    this.query = (this.route.snapshot.queryParamMap.get('search'))?.toLocaleLowerCase();
   }
   ngOnInit(): void {
-
-    //Aquí: identificar si el objeto tiene el término de búsqueda. Si no lo tiene, se asume que es el género.
     this._search.search(this.query)
-        .subscribe((res: any) => {
-          console.log('res: ', res);
-          // if(res.includes(this.query)){
-            for(let i = 0; i < res.length; i++){
-              this.movies.push(res[i]);
+    .subscribe((res: any) => {
+          Object.values(res).map((item: any) => {
+            if(this.checkString(item)){
+              this.movies.push(item);
             }
-          // }
-          // else{
-            for(let i = 0; i < res.length; i++) {
-              this.genres.push(res[i]);
+            else{
+              this.genres.push(item);
             }
-          // }
+          })
         })
-        // console.log('resultado de la búsqueda fuera de la suscripción: ', this.results)
+  }
+
+  checkString(item: any){
+    return item.title.toString().toLowerCase().includes(this.query) ||
+          item.director.toString().toLocaleLowerCase().includes(this.query) ||
+          item.year.toString().toLocaleLowerCase().includes(this.query);
   }
 }
