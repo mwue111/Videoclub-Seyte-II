@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, tap, filter } from 'rxjs';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -9,17 +9,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
-  inputSearch = new FormControl('');
-  submitted: any;
+  submitted: any = '';
   results: any;
+  inputSearch = new FormControl('');
 
   constructor(
     private router: Router,
   ) {}
-
-  ngOnInit(): void {
-    // this.onChange();
-  }
 
   onChange(): void {
     this.inputSearch.valueChanges.pipe(
@@ -32,12 +28,15 @@ export class SearchComponent {
     ).subscribe();
   }
 
+  //Aquí: https://medium.com/@iborn2code/angular-using-query-parameters-with-routing-59494396703e
   onSearch(): void {
-    this.router.navigate(['/results'], {queryParams: {search: this.submitted}});
-  }
+    const queryParams: NavigationExtras = {
+      queryParams: { search: this.submitted },
+      queryParamsHandling: 'preserve'
+    };
 
-  // onSearch(term: string): void {
-  //   console.log('term: ', term);
-  //   this.router.navigate(['/results'], {queryParams: {search: term}});
-  // }
+    this.router.navigate(['/results'], queryParams);
+    // this.router.navigate(['/results'], {queryParams: {search: this.submitted}});
+
+  }
 }

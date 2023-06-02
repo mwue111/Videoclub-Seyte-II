@@ -16,9 +16,13 @@ export class ResultsComponent {
     private route: ActivatedRoute,
     private _search : SearchService,
   ) {
-    this.query = (this.route.snapshot.queryParamMap.get('search'))?.toLocaleLowerCase();
+    // this.query = (this.route.snapshot.queryParamMap.get('search'))?.toLocaleLowerCase();
+    this.route.queryParamMap.subscribe(params => {
+      this.query = params.get('search')?.toLowerCase();
+    });
   }
   ngOnInit(): void {
+
     this._search.search(this.query)
     .subscribe((res: any) => {
           Object.values(res).map((item: any) => {

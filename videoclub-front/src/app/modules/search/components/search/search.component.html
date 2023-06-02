@@ -13,6 +13,7 @@
             class="tracker-navbar"
             name="search"
             [formControl]="inputSearch"
+            [value]="inputSearch.value"
       />
 
     <button (click)="onSearch()" type="submit" class="search-button">
