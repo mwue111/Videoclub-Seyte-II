@@ -1,5 +1,10 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+a{
+  text-decoration: none;
+  color: #1874BA;
+}
+
 .container,
 .search-container {
   display: flex;
@@ -29,4 +34,8 @@
 
 .search-button img{
   width: 100%;
+}
+
+.custom-autocomplete-panel {
+  border-radius: 18px;
 }

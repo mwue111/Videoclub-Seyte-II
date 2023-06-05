@@ -7,7 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CardMovieComponent } from './components/card-movie/card-movie.component';
 
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { CardMovieComponent } from './components/card-movie/card-movie.component
     CommonModule,
     RouterModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule,
   ],
   exports: [
     SearchComponent,

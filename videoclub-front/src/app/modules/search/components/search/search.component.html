@@ -1,20 +1,26 @@
 <div class="container">
-
-  <!-- <input type="text" #searchField placeholder="Buscar película" class="tracker-navbar" name="search">
-  <button (click)="onSearch(searchField.value)" class="search-button">
-    <img src="../../assets/magnifying-glass-backup-svgrepo-com (1).png" alt="Buscar" >
-
-  </button> -->
-
   <form class="search-container">
-      <input
+    <div class="input-suggestions-container">
+
+      <input class="input-container"
             type="text"
             placeholder="¿Qué te apetece ver hoy?"
             class="tracker-navbar"
             name="search"
             [formControl]="inputSearch"
             [value]="value"
+            (input)="getSuggestions($event)"
+            [matAutocomplete]="auto"
       />
+
+      <mat-autocomplete #auto="matAutocomplete" appearance="fill" panelClass="custom-autocomplete-panel">
+        <mat-option *ngFor="let suggestion of data" [value]="suggestion.title | lowercase" >
+          <a [routerLink]="['pelicula/', suggestion.id]">
+            {{suggestion.title}}
+          </a>
+        </mat-option>
+      </mat-autocomplete>
+    </div>
 
     <button (click)="onSearch()" type="submit" class="search-button">
       <img
