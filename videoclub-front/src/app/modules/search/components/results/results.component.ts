@@ -22,7 +22,7 @@ export class ResultsComponent {
     console.log('valor a buscar: ', this.query);
   }
   ngOnInit(): void {
-    //Dar a sharedQuery un valor
+    //Dar a query$ un valor
     this._shared.searchValue(this.query);
 
     this._search.search(this.query)

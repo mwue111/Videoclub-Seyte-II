@@ -1,28 +1,31 @@
-.movie {
-  margin: 25px;
+a {
+  text-decoration: none;
 }
 
-/* .movie img{
-  transition: 0.5s, color 0.1s;
-  -webkit-transition: 0.5s, color 0.1s;
-  -moz-transition: 0.5s, color 0.1s;
-  margin-right: 25px;
-} */
+.movie {
+  margin: 25px;
+  width: 200px;
+}
 
 #poster{
   width: 200px;
   height: 300px;
   object-fit: cover;
-  transition: 0.5s, color 0.1s;
-  -webkit-transition: 0.5s, color 0.1s;
-  -moz-transition: 0.5s, color 0.1s;
   margin-right: 25px;
 }
 
-.movie img:hover{
+.movie:hover{
   box-shadow: 0px 20px 18px -8px rgba(0, 0, 0, 0.1);
   transform: scale3d(1.1, 1.1, 1.1);
-  /* -webkit-transform: scale3d(1.1, 1.1, 0.3);
-  -moz-transform: scale3d(1.1, 1.1, 0.3); */
+  transition: 0.5s, color 0.1s;
+  -webkit-transition: 0.5s, color 0.1s;
+  -moz-transition: 0.5s, color 0.1s;
+}
 
+h1{
+  color: #159CA3;
+  height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
