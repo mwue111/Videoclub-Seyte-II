@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, tap, filter } from 'rxjs';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { SearchSharedServiceService } from 'src/app/services/search-shared-service.service';
 
 @Component({
   selector: 'app-search',
@@ -12,10 +13,18 @@ export class SearchComponent {
   submitted: any = '';
   results: any;
   inputSearch = new FormControl('');
+  value: string = '';
 
   constructor(
     private router: Router,
+    private _shared: SearchSharedServiceService,
   ) {}
+
+  ngOnInit() {
+    this._shared.query$.subscribe(receivedQuery =>
+      this.value = receivedQuery
+    )
+  }
 
   onChange(): void {
     this.inputSearch.valueChanges.pipe(
@@ -28,15 +37,7 @@ export class SearchComponent {
     ).subscribe();
   }
 
-  //Aquí: https://medium.com/@iborn2code/angular-using-query-parameters-with-routing-59494396703e
   onSearch(): void {
-    const queryParams: NavigationExtras = {
-      queryParams: { search: this.submitted },
-      queryParamsHandling: 'preserve'
-    };
-
-    this.router.navigate(['/results'], queryParams);
-    // this.router.navigate(['/results'], {queryParams: {search: this.submitted}});
-
+    this.router.navigate(['/results'], {queryParams: {search: this.submitted}});
   }
 }

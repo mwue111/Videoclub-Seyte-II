@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { SearchService } from '../../_services/search.service';
+import { SearchSharedServiceService } from 'src/app/services/search-shared-service.service';
 
 @Component({
   selector: 'app-results',
@@ -15,13 +16,14 @@ export class ResultsComponent {
   constructor(
     private route: ActivatedRoute,
     private _search : SearchService,
+    private _shared: SearchSharedServiceService,
   ) {
-    // this.query = (this.route.snapshot.queryParamMap.get('search'))?.toLocaleLowerCase();
-    this.route.queryParamMap.subscribe(params => {
-      this.query = params.get('search')?.toLowerCase();
-    });
+    this.query = (this.route.snapshot.queryParamMap.get('search'))?.toLocaleLowerCase();
+    console.log('valor a buscar: ', this.query);
   }
   ngOnInit(): void {
+    //Dar a sharedQuery un valor
+    this._shared.searchValue(this.query);
 
     this._search.search(this.query)
     .subscribe((res: any) => {
