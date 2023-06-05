@@ -18,6 +18,9 @@ export class SearchComponent {
   data: any;
   suggestions: any = [];
   fields: any;
+  suggestedMovies: any = [];
+  suggestedGenres: any = [];
+  input: string = '';
 
   constructor(
     private router: Router,
@@ -48,10 +51,24 @@ export class SearchComponent {
   }
 
   getSuggestions(event: any) {
-    const input = event.target.value;
-    this._search.suggestions(input).then((res:any) => {
+    this.input = event.target.value;
+    this._search.suggestions(this.input).then((res:any) => {
       this.data = res;
       console.log('data: ', this.data);
+      Object.values(res).map((sug: any) => {
+        if(this.checkString(sug)){
+          this.suggestedMovies.push(sug);
+        }
+        else{
+          this.suggestedGenres.push(sug);
+        }
+      })
     })
+  }
+
+  checkString(item: any) {
+    return item.title.toString().toLowerCase().includes(this.input) ||
+          item.director.toString().toLowerCase().includes(this.input) ||
+          item.year.toString().toLowerCase().includes(this.input);
   }
 }
