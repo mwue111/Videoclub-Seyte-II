@@ -10,6 +10,7 @@ import { CardMovieComponent } from './components/card-movie/card-movie.component
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 
+
 @NgModule({
   declarations: [
     SearchComponent,
@@ -22,7 +23,7 @@ import {MatInputModule} from '@angular/material/input';
     HttpClientModule,
     ReactiveFormsModule,
     MatAutocompleteModule,
-    MatInputModule,
+    MatInputModule
   ],
   exports: [
     SearchComponent,

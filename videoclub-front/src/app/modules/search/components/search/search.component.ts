@@ -17,6 +17,7 @@ export class SearchComponent {
   value: string = '';
   data: any;
   suggestions: any = [];
+  fields: any;
 
   constructor(
     private router: Router,

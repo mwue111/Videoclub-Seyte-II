@@ -2,6 +2,17 @@
   <form class="search-container">
     <div class="input-suggestions-container">
 
+      <!-- <input class="input-container"
+            type="text"
+            placeholder="¿Qué te apetece ver hoy?"
+            class="tracker-navbar"
+            name="search"
+            [formControl]="inputSearch"
+            [value]="value"
+            (input)="getSuggestions($event)"
+            [matAutocomplete]="auto"
+      /> -->
+
       <input class="input-container"
             type="text"
             placeholder="¿Qué te apetece ver hoy?"
@@ -14,11 +25,20 @@
       />
 
       <mat-autocomplete #auto="matAutocomplete" appearance="fill" panelClass="custom-autocomplete-panel">
-        <mat-option *ngFor="let suggestion of data" [value]="suggestion.title | lowercase" >
-          <a [routerLink]="['pelicula/', suggestion.id]">
-            {{suggestion.title}}
-          </a>
-        </mat-option>
+        <mat-optgroup label="Películas">
+          <mat-option *ngFor="let suggestion of data" [value]="suggestion.title | lowercase">
+            <a [routerLink]="['pelicula/', suggestion.id]">
+              {{suggestion.title}}
+            </a>
+          </mat-option>
+        </mat-optgroup>
+        <mat-optgroup label="Géneros">
+          <mat-option *ngFor="let suggestion of data" [value]="suggestion.title | lowercase">
+            <a [routerLink]="['pelicula/', suggestion.id]">
+              {{suggestion.title}}
+            </a>
+          </mat-option>
+        </mat-optgroup>
       </mat-autocomplete>
     </div>
 
