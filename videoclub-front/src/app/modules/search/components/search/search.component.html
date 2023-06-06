@@ -32,13 +32,24 @@
             </a>
           </mat-option>
         </mat-optgroup>
+
         <mat-optgroup *ngIf="suggestedGenres.length > 0" label="Géneros">
           <mat-option *ngFor="let genre of suggestedGenres" [value]="genre | lowercase" (click)="onSuggestedClick(genre)">
             <span class="suggested-gender-button">
               {{genre}}
             </span>
           </mat-option>
+
         </mat-optgroup>
+
+        <mat-optgroup *ngIf="suggestedDireccion.length > 0" label="directores/as">
+          <mat-option *ngFor="let director of suggestedDireccion" [value]="director | lowercase" (click)="onSuggestedClick(director)">
+            <span class="suggested-gender-button">
+              {{ director }}
+            </span>
+          </mat-option>
+        </mat-optgroup>
+
       </mat-autocomplete>
     </div>
 
