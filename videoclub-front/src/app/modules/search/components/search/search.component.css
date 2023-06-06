@@ -39,3 +39,8 @@ a{
 .custom-autocomplete-panel {
   border-radius: 18px;
 }
+
+.suggested-gender-button{
+  all: unset;
+  color: #1874BA;
+}

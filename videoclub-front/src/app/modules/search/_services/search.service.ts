@@ -30,7 +30,7 @@ export class SearchService {
           reject(err);
           console.log('error: ', err);
         })
-      }, 350)
+      }, 500)
     })
   }
 }
