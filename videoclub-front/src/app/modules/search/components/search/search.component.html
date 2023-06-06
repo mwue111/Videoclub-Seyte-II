@@ -25,14 +25,14 @@
       />
 
       <mat-autocomplete #auto="matAutocomplete" appearance="fill" panelClass="custom-autocomplete-panel">
-        <mat-optgroup label="Películas">
+        <mat-optgroup *ngIf="suggestedMovies.length > 0" label="Películas">
           <mat-option *ngFor="let suggestion of suggestedMovies" [value]="suggestion.title | lowercase">
             <a [routerLink]="['pelicula/', suggestion.id]">
               {{suggestion.title}}
             </a>
           </mat-option>
         </mat-optgroup>
-        <mat-optgroup label="Géneros">
+        <mat-optgroup *ngIf="suggestedGenres.length > 0" label="Géneros">
           <mat-option *ngFor="let suggestion of suggestedGenres" [value]="suggestion.title | lowercase">
             <a [routerLink]="['pelicula/', suggestion.id]">
               {{suggestion.title}}

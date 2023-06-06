@@ -12,12 +12,8 @@ import { SearchService } from '../../_services/search.service';
 })
 export class SearchComponent {
   submitted: any = '';
-  results: any;
   inputSearch = new FormControl('');
   value: string = '';
-  data: any;
-  suggestions: any = [];
-  fields: any;
   suggestedMovies: any = [];
   suggestedGenres: any = [];
   input: string = '';
@@ -51,10 +47,12 @@ export class SearchComponent {
   }
 
   getSuggestions(event: any) {
+
     this.input = event.target.value;
     this._search.suggestions(this.input).then((res:any) => {
-      this.data = res;
-      console.log('data: ', this.data);
+      this.suggestedMovies = [];
+      this.suggestedGenres = [];
+
       Object.values(res).map((sug: any) => {
         if(this.checkString(sug)){
           this.suggestedMovies.push(sug);
