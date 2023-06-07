@@ -9,7 +9,8 @@
 
   <div *ngIf="genres.length > 0">
     <!-- <div *ngFor="let suggested of suggestedGenres"> -->
-      <h1>Género</h1>
+      <h1 *ngIf="genresNames.length <= 1">Género: {{ genresNames.toString() | titlecase}}</h1>
+      <h1 *ngIf="genresNames.length > 1">Géneros: {{ genresNames.join(', ').toString() | titlecase }}</h1>
       <div class="movie-results">
         <app-card-movie *ngFor="let genre of genres" [movie]="genre"/>
       </div>
