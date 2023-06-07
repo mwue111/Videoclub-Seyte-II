@@ -26,7 +26,7 @@ export class GenresService {
     return this._http.get(this.url + '/api/generos', { params: params, headers: headers });
   }
 
-  getMoviesGenre(amount: number, id: number) {
+  getMoviesGenre(amount: number, id: number): Observable<any> {
     let params = new HttpParams()
       .set('cantidad', amount.toString())
       .append('id', id);

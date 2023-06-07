@@ -45,34 +45,22 @@ export class ResultsComponent {
   }
 
   ngOnInit(): void {
-    // this._genres.getAllGenres().subscribe((res: any) => {
-    //   for(let i = 0; i < res.length; i++){
-    //     this.allGenres.push(res[i].name)
-    //   }
-
-    //   this.genreSuggestion();
-    // })
-
     this._genres.getAllGenres().pipe(
-      switchMap((res: any) => {
-        for(let i = 0; i < res.length; i++) {
+      switchMap((res: any) => {                 //switchMap para secuenciar observables
+        for(let i = 0; i < res.length; i++) {   //Primero almacenar los nombres de los géneros en allGenres
           this.allGenres.push(res[i].name)
         }
 
-        this.genreSuggestion();
+        this.genreSuggestion();                 //Segundo comprobar si el input puede ser algún género
 
-        const requests = [];
-        for(let i = 0; i < res.length; i++){
-          // requests.push(this._genres.getMoviesGenre(100, res[i].id))
+        for(let i = 0; i < res.length; i++){    //Tercero almacenar en requests las películas de cada género que hay en BD
           this.requests.push(this._genres.getMoviesGenre(100, res[i].id))
         }
 
-        return forkJoin(this.requests);
+        return forkJoin(this.requests);         //Cuarto devolver requests sólo cuando se hayan completado todos los observables
       })
     ).subscribe((moviesGenres: any) => {
       if(this.query === ''){
-        console.log('query vacío');
-        console.log('género de las películas: ', moviesGenres);
         this.emptyQuery = true;
         this.accion = moviesGenres[0];
         this.adventure = moviesGenres[1];
@@ -81,8 +69,7 @@ export class ResultsComponent {
       }
     })
 
-    //Dar a query$ un valor
-    this._shared.searchValue(this.query);
+    this._shared.searchValue(this.query);       //Dar a query$ un valor
 
     this._search.search(this.query)
     .subscribe((res: any) => {

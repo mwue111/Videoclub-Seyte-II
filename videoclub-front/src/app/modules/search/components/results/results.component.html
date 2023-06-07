@@ -9,7 +9,7 @@
 
   <div *ngIf="genres.length > 0">
     <div *ngFor="let suggested of suggestedGenres">
-      <h1>Películas del mismo género</h1>
+      <h1>Películas del género</h1>
       <div class="movie-results">
         <app-card-movie *ngFor="let genre of genres" [movie]="genre"/>
       </div>
