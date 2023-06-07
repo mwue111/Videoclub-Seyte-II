@@ -8,6 +8,7 @@ import { URL_BACKEND } from 'src/app/config/config';
 })
 export class CardMovieComponent {
   @Input() movie: any;
+  @Input() displayDirection: any;
   url: string = URL_BACKEND + '/storage/';
 
   ngOnInit(): void {

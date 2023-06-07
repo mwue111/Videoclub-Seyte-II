@@ -58,10 +58,12 @@ export class SearchComponent {
     this.suggestedMovies = [];
     this.suggestedGenres = [];
     this.suggestedMovieGenres = [];
+    this.suggestedDireccion = [];
 
     this.input = event.target.value;
 
     this._search.suggestions(this.input).then((res:any) => {
+
     console.log('res: ', res)
       Object.values(res).map((sug: any) => {
         console.log('sug: ', sug)

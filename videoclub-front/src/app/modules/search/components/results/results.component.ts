@@ -14,6 +14,7 @@ export class ResultsComponent {
   query: any;
   movies: any = [];
   genres: any = [];
+  directions: any = [];
 
   allGenres: any = [];
   suggestedGenres: any = [];
@@ -35,7 +36,6 @@ export class ResultsComponent {
     private _genres: GenresService,
   ) {
     this.query = (this.route.snapshot.queryParamMap.get('search'))?.toLocaleLowerCase();
-    console.log('valor buscado: ', this.query);
   }
 
   genreSuggestion(){
@@ -44,7 +44,6 @@ export class ResultsComponent {
         this.suggestedGenres.push(this.allGenres[i]);
       }
     }
-    console.log('géneros sugeridos: ', this.suggestedGenres);
   }
 
   ngOnInit(): void {
@@ -80,13 +79,15 @@ export class ResultsComponent {
 
     this._search.search(this.query)
     .subscribe((res: any) => {
-      // console.log('res: ', res);
       this.genres = [];
       this.movies = [];
 
       Object.values(res).map((item: any) => {
         if(this.checkString(item)){
           this.movies.push(item);
+        }
+        else if(this.checkDirection(item)){
+          this.directions.push(item);
         }
       })
     })
@@ -96,6 +97,10 @@ export class ResultsComponent {
     return item.title.toString().toLowerCase().includes(this.query) ||
           // item.director.toString().toLocaleLowerCase().includes(this.query) ||
           item.year.toString().toLocaleLowerCase().includes(this.query);
+  }
+
+  checkDirection(item: any) {
+    return item.director.toString().toLocaleLowerCase().includes(this.query);
   }
 
   addSuggestedMovies() {
@@ -129,6 +134,5 @@ export class ResultsComponent {
         this.genres.push(this.drama[i]);
       }
     }
-    console.log('nombres de los géneros: ', this.genresNames.join(', ').toString());
   }
 }
