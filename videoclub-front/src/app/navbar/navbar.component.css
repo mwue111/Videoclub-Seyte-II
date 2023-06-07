@@ -106,6 +106,10 @@
   background-color: #12598f;
 }
 
+.title-div:active,
+.user-page:active {
+  background-color: #1a80ce;
+}
 #circle {
   border-radius: 50%;
   width: 45px;
