@@ -13,7 +13,7 @@
             [matAutocomplete]="auto"
       /> -->
 
-      <input class="input-container"
+      <input
             type="text"
             placeholder="¿Qué te apetece ver hoy?"
             class="tracker-navbar"
@@ -51,14 +51,15 @@
         </mat-optgroup>
 
       </mat-autocomplete>
-    </div>
 
+    </div>
     <button (click)="onSearch()" type="submit" class="search-button">
       <img
         src="../../assets/magnifying-glass-backup-svgrepo-com (1).png"
         alt="buscar"
       />
     </button>
+
   </form>
 
 </div>

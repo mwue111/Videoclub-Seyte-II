@@ -1,6 +1,6 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-a{
+a {
   text-decoration: none;
   color: #1874BA;
 }
@@ -19,28 +19,39 @@ a{
   box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 0.5);
   border-radius: 20px;
   padding-left: 10px;
-  margin-right: 20px;
+  text-align: center;
+  color: #1874BA;
+  font-size: 15px;
+  /* margin-right: 20px; */
 }
 
-.search-button{
+.search-button {
   all: unset;
-  width: 35px;
-  height: 35px;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: -46px;
+  border-radius: 0 41% 41% 0%;
+  padding: 4.5px 13.5px 3px 7px;
+  margin-top: 2px;
 }
 
-.search-button img{
+.search-button img {
   width: 100%;
+}
+
+.search-button:hover {
+  background: #D3D3D3;
 }
 
 .custom-autocomplete-panel {
   border-radius: 18px;
 }
 
-.suggested-gender-button{
+.suggested-gender-button {
   all: unset;
   color: #1874BA;
 }

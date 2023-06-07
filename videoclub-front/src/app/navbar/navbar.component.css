@@ -57,7 +57,7 @@
 }
 
 .logged-div button {
-  background: #159ca3;
+  background: #ffffff;
   width: 10em;
   height: 2.5em;
   border-radius: 20px;
@@ -65,7 +65,8 @@
   box-shadow: none;
   cursor: pointer;
   margin-right: 10px;
-  color: #ffffff;
+  /* color: #159ca3; */
+  color: #FF8811;
   font-size: 14px;
   margin-left: 3em;
   transition: 0.3s;
@@ -73,8 +74,9 @@
 
 .logged-div button:hover {
   transition: 0.3s;
-  background: #fff;
-  color: #1874ba;
+  background: #FF8811;
+  /* color: #1874ba; */
+  color: #ffffff;
 }
 
 .logged-div img {

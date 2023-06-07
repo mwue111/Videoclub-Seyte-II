@@ -1,9 +1,9 @@
 import { Component, SimpleChange, SimpleChanges } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Route, Router } from '@angular/router';
 import { SearchService } from '../../_services/search.service';
 import { SearchSharedServiceService } from 'src/app/services/search-shared-service.service';
 import { GenresService } from 'src/app/services/genres.service';
-import { Subscription, forkJoin, switchMap } from 'rxjs';
+import { Subscription, filter, forkJoin, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-results',
@@ -27,6 +27,8 @@ export class ResultsComponent {
   comedy: any = [];
   drama: any = [];
 
+  public currentUrl: any = '';
+
 
   constructor(
     private route: ActivatedRoute,
@@ -35,7 +37,7 @@ export class ResultsComponent {
     private _shared: SearchSharedServiceService,
     private _genres: GenresService,
   ) {
-    this.query = (this.route.snapshot.queryParamMap.get('search'))?.toLocaleLowerCase();
+    this.currentUrl = this.router.url;
   }
 
   genreSuggestion(){
@@ -47,6 +49,16 @@ export class ResultsComponent {
   }
 
   ngOnInit(): void {
+
+    this.query = (this.route.snapshot.queryParamMap.get('search'))?.toLocaleLowerCase();
+
+    this.router.events.pipe(
+      filter((event: any) => event instanceof NavigationEnd)
+    ).subscribe((res: any) => {
+        this.currentUrl = res['url'];
+        window.location.reload();
+    });
+
     this._genres.getAllGenres().pipe(
       switchMap((res: any) => {                 //switchMap para secuenciar observables
         for(let i = 0; i < res.length; i++) {   //Primero almacenar los nombres de los géneros en allGenres
