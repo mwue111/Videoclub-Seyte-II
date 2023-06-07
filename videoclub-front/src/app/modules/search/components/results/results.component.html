@@ -8,36 +8,36 @@
   </div>
 
   <div *ngIf="genres.length > 0">
-    <div *ngFor="let suggested of suggestedGenres">
-      <h1>Películas del género</h1>
+    <!-- <div *ngFor="let suggested of suggestedGenres"> -->
+      <h1>Género</h1>
       <div class="movie-results">
         <app-card-movie *ngFor="let genre of genres" [movie]="genre"/>
       </div>
-    </div>
+    <!-- </div> -->
   </div>
 
-  <div *ngIf="accion.length > 0">
+  <div *ngIf="emptyQuery">
     <h1>Acción</h1>
     <div class="no-filter-movie-results">
       <app-card-movie *ngFor="let movie of accion" [movie]="movie"/>
     </div>
   </div>
 
-  <div *ngIf="adventure.length > 0">
+  <div *ngIf="emptyQuery">
     <h1>Aventura</h1>
     <div class="no-filter-movie-results">
       <app-card-movie *ngFor="let movie of adventure" [movie]="movie"/>
     </div>
   </div>
 
-  <div *ngIf="comedy.length > 0">
+  <div *ngIf="emptyQuery">
     <h1>Comedia</h1>
     <div class="no-filter-movie-results">
       <app-card-movie *ngFor="let movie of comedy" [movie]="movie"/>
     </div>
   </div>
 
-  <div *ngIf="drama.length > 0">
+  <div *ngIf="emptyQuery">
     <h1>Drama</h1>
     <div class="no-filter-movie-results">
       <app-card-movie *ngFor="let movie of drama" [movie]="movie"/>

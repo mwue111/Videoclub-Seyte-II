@@ -34,6 +34,7 @@ export class ResultsComponent {
     private _genres: GenresService,
   ) {
     this.query = (this.route.snapshot.queryParamMap.get('search'))?.toLocaleLowerCase();
+    console.log('valor buscado: ', this.query);
   }
 
   genreSuggestion(){
@@ -42,6 +43,7 @@ export class ResultsComponent {
         this.suggestedGenres.push(this.allGenres[i]);
       }
     }
+    console.log('géneros sugeridos: ', this.suggestedGenres);
   }
 
   ngOnInit(): void {
@@ -60,12 +62,16 @@ export class ResultsComponent {
         return forkJoin(this.requests);         //Cuarto devolver requests sólo cuando se hayan completado todos los observables
       })
     ).subscribe((moviesGenres: any) => {
+      this.accion = moviesGenres[0];
+      this.adventure = moviesGenres[1];
+      this.comedy = moviesGenres[2];
+      this.drama = moviesGenres[3];
+
       if(this.query === ''){
         this.emptyQuery = true;
-        this.accion = moviesGenres[0];
-        this.adventure = moviesGenres[1];
-        this.comedy = moviesGenres[2];
-        this.drama = moviesGenres[3];
+      }
+      else{
+        this.addSuggestedMovies();
       }
     })
 
@@ -73,15 +79,13 @@ export class ResultsComponent {
 
     this._search.search(this.query)
     .subscribe((res: any) => {
+      // console.log('res: ', res);
       this.genres = [];
       this.movies = [];
 
       Object.values(res).map((item: any) => {
         if(this.checkString(item)){
           this.movies.push(item);
-        }
-        else{
-          this.genres.push(item);
         }
       })
     })
@@ -91,5 +95,33 @@ export class ResultsComponent {
     return item.title.toString().toLowerCase().includes(this.query) ||
           item.director.toString().toLocaleLowerCase().includes(this.query) ||
           item.year.toString().toLocaleLowerCase().includes(this.query);
+  }
+
+  addSuggestedMovies() {
+    const accion = this.accion;
+    const aventura = this.adventure;
+    const comedia = this.comedy;
+    const drama = this.drama;
+
+    if(Object.keys({accion})[0].includes(this.query)){
+      for(let i = 0; i < this.accion.length; i++){
+        this.genres.push(this.accion[i]);
+      }
+    }
+    if(Object.keys({aventura})[0].includes(this.query)){
+      for(let i = 0; i < this.adventure.length; i++){
+        this.genres.push(this.adventure[i]);
+      }
+    }
+    if(Object.keys({comedia})[0].includes(this.query)){
+      for(let i = 0; i < this.comedy.length; i++){
+        this.genres.push(this.comedy[i]);
+      }
+    }
+    if(Object.keys({drama})[0].includes(this.query)){
+      for(let i = 0; i < this.drama.length; i++) {
+        this.genres.push(this.drama[i]);
+      }
+    }
   }
 }
