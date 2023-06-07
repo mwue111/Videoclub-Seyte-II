@@ -86,7 +86,7 @@ export class ResultsComponent {
         if(this.checkString(item)){
           this.movies.push(item);
         }
-        else if(this.checkDirection(item)){
+        if(this.checkDirection(item)){
           this.directions.push(item);
         }
       })
