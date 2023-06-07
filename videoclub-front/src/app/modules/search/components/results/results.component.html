@@ -17,7 +17,7 @@
     <!-- </div> -->
   </div>
 
-  <div *ngIf="directions.length > 0">
+  <div *ngIf="directions.length > 0 && !emptyQuery">
     <h1>Directores/as</h1>
     <div class="movie-results">
       <app-card-movie *ngFor="let direction of directions"

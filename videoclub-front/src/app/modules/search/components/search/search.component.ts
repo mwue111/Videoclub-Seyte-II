@@ -86,7 +86,7 @@ export class SearchComponent {
 
   checkString(item: any) {
     return item.title.toString().toLowerCase().includes(this.input) ||
-          item.director.toString().toLowerCase().includes(this.input) ||
+          // item.director.toString().toLowerCase().includes(this.input) ||
           item.year.toString().toLowerCase().includes(this.input);
   }
 
