@@ -25,6 +25,10 @@ a {
   /* margin-right: 20px; */
 }
 
+.tracker-navbar:focus {
+  outline: none;
+}
+
 .search-button {
   all: unset;
   width: 25px;
@@ -51,7 +55,7 @@ a {
   border-radius: 18px;
 }
 
-.suggested-gender-button {
+.suggested-item {
   all: unset;
   color: #1874BA;
 }
