@@ -20,6 +20,16 @@ h2 span{
 }
 
 .movie-results{
+  overflow-x: hidden;
+  width: 100%
+}
+
+app-card-movie{
+  float: left;
+}
+
+
+.no-filter-movie-results{
   overflow-x: auto;
   display: flex;
   align-items: center;
@@ -28,16 +38,16 @@ h2 span{
   margin-bottom: 50px;
 }
 
-.movie-results::-webkit-scrollbar-track{
+.no-filter-movie-results::-webkit-scrollbar-track{
   padding: 2px 0;
 }
 
-.movie-results::-webkit-scrollbar {
+.no-filter-movie-results::-webkit-scrollbar {
   width: 10px;
   height: 5px;
 }
 
-.movie-results::-webkit-scrollbar-thumb {
+.no-filter-movie-results::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #159CA3;
   border: none;

@@ -47,23 +47,43 @@ export class LandingComponent implements OnInit {
 
   getGenresMovies() {
     // console.log(this.genres.length);
+    // this._genres
+    //   .getMoviesGenre(10, 1, this._authServices.token)
+    //   .subscribe((res) => {
+    //     this.actionMovies = res;
+    //   });
+    // this._genres
+    //   .getMoviesGenre(10, 2, this._authServices.token)
+    //   .subscribe((res) => {
+    //     this.adventureMovies = res;
+    //   });
+    // this._genres
+    //   .getMoviesGenre(10, 3, this._authServices.token)
+    //   .subscribe((res) => {
+    //     this.animationMovies = res;
+    //   });
+    // this._genres
+    //   .getMoviesGenre(10, 4, this._authServices.token)
+    //   .subscribe((res) => {
+    //     this.comedyMovies = res;
+    //   });
     this._genres
-      .getMoviesGenre(10, 1, this._authServices.token)
+      .getMoviesGenre(100, 1)
       .subscribe((res) => {
         this.actionMovies = res;
       });
     this._genres
-      .getMoviesGenre(10, 2, this._authServices.token)
+      .getMoviesGenre(100, 2)
       .subscribe((res) => {
         this.adventureMovies = res;
       });
     this._genres
-      .getMoviesGenre(10, 3, this._authServices.token)
+      .getMoviesGenre(100, 3)
       .subscribe((res) => {
         this.animationMovies = res;
       });
     this._genres
-      .getMoviesGenre(10, 4, this._authServices.token)
+      .getMoviesGenre(100, 4)
       .subscribe((res) => {
         this.comedyMovies = res;
       });

@@ -1,25 +1,47 @@
 <div class="container">
-  <!-- <h2>Has buscado: <span>"{{ query }}"</span>. ¡Esto es lo que hemos encontrado!</h2> -->
 
   <div *ngIf="movies.length > 0">
     <h1>Películas</h1>
-    <div class="movie-results">
+    <div [ngClass]="{'movie-results' : !emptyQuery, 'no-filter-movie-results': emptyQuery}">
       <app-card-movie *ngFor="let movie of movies" [movie]="movie"/>
     </div>
   </div>
 
   <div *ngIf="genres.length > 0">
     <div *ngFor="let suggested of suggestedGenres">
-      <h1>Películas del género {{suggested}}</h1>
+      <h1>Películas del mismo género</h1>
       <div class="movie-results">
         <app-card-movie *ngFor="let genre of genres" [movie]="genre"/>
       </div>
     </div>
+  </div>
 
-    <!-- <h1>Películas del género: {{ query }}</h1>
-    <div class="movie-results">
-      <app-card-movie *ngFor="let genre of genres" [movie]="genre"/>
-    </div> -->
+  <div *ngIf="accion.length > 0">
+    <h1>Acción</h1>
+    <div class="no-filter-movie-results">
+      <app-card-movie *ngFor="let movie of accion" [movie]="movie"/>
+    </div>
+  </div>
+
+  <div *ngIf="adventure.length > 0">
+    <h1>Aventura</h1>
+    <div class="no-filter-movie-results">
+      <app-card-movie *ngFor="let movie of adventure" [movie]="movie"/>
+    </div>
+  </div>
+
+  <div *ngIf="comedy.length > 0">
+    <h1>Comedia</h1>
+    <div class="no-filter-movie-results">
+      <app-card-movie *ngFor="let movie of comedy" [movie]="movie"/>
+    </div>
+  </div>
+
+  <div *ngIf="drama.length > 0">
+    <h1>Drama</h1>
+    <div class="no-filter-movie-results">
+      <app-card-movie *ngFor="let movie of drama" [movie]="movie"/>
+    </div>
   </div>
 
   <div *ngIf="movies.length === 0 && genres.length === 0" class="no-results">

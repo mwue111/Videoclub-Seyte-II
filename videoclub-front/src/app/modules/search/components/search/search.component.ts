@@ -62,8 +62,9 @@ export class SearchComponent {
     this.input = event.target.value;
 
     this._search.suggestions(this.input).then((res:any) => {
-
+    console.log('res: ', res)
       Object.values(res).map((sug: any) => {
+        console.log('sug: ', sug)
         if(this.checkString(sug)){
           this.suggestedMovies.push(sug);
 
@@ -74,6 +75,7 @@ export class SearchComponent {
         else{
           this.suggestedMovieGenres.push(sug);
         }
+        console.log('suggestedMovies: ', this.suggestedMovies);
       })
 
       this.genreSuggestion();

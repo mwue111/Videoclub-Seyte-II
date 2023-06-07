@@ -26,14 +26,25 @@ export class GenresService {
     return this._http.get(this.url + '/api/generos', { params: params, headers: headers });
   }
 
-  getMoviesGenre(amount: number, id: number, token: any) {
-    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+  getMoviesGenre(amount: number, id: number) {
     let params = new HttpParams()
       .set('cantidad', amount.toString())
       .append('id', id);
 
     return this._http.get(this.url + '/api/generos/' + id + '/peliculas', {
-      params: params, headers: headers
+      params: params
     });
   }
+
+  //con token (correspondencia con landing.ts):
+  // getMoviesGenre(amount: number, id: number, token: any) {
+  //   let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+  //   let params = new HttpParams()
+  //     .set('cantidad', amount.toString())
+  //     .append('id', id);
+
+  //   return this._http.get(this.url + '/api/generos/' + id + '/peliculas', {
+  //     params: params, headers: headers
+  //   });
+  // }
 }
