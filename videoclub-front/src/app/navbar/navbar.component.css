@@ -11,6 +11,9 @@
   align-items: center;
   background: #1874ba;
 }
+.title-div{
+  padding: 15px 20px;
+}
 
 .title-div a {
   color: #ffffff;
@@ -95,6 +98,12 @@
 .user-page{
   display: flex;
   cursor: pointer;
+  padding: 5px 15px;
+}
+
+.title-div:hover,
+.user-page:hover{
+  background-color: #12598f;
 }
 
 #circle {
