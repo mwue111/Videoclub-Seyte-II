@@ -30,9 +30,14 @@ import {VgControlsModule} from '@videogular/ngx-videogular/controls';
 import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
 import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 import { VideogularComponent } from './videogular/videogular.component';
+
 import { UserPageComponent } from './user-page/user-page.component';
 import { DragDirective } from './directives/drag.directive';
 import { SearchModule } from './modules/search/search.module';
+import { PopupComponent } from './modals/popup/popup.component';
+
+//tests modal
+import { MatDialogModule } from '@angular/material/dialog';
 
 const material = [MatToolbarModule];
 
@@ -51,6 +56,7 @@ const material = [MatToolbarModule];
     VideogularComponent,
     UserPageComponent,
     DragDirective,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +73,7 @@ const material = [MatToolbarModule];
     FormsModule,
     ReactiveFormsModule,
     SearchModule,
+    MatDialogModule,
   ],
   exports: [
     material,

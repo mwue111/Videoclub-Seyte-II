@@ -4,9 +4,9 @@ import { MoviesService } from '../services/movies.service';
 import { AuthService } from '../modules/auth/_services/auth.service';
 import { URL_BACKEND } from '../config/config';
 import Swal from 'sweetalert2';
-import { CommentsService } from '../modules/comments/_services/comments.service';
-import { CommentInterface } from '../modules/comments/types/comment.interface';
 import { UsersService } from '../services/users.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupComponent } from '../modals/popup/popup.component';
 
 @Component({
   selector: 'app-movie',
@@ -25,9 +25,9 @@ export class MovieComponent {
     private route: ActivatedRoute,
     private _movie: MoviesService,
     private _auth: AuthService,
-    // private _comments: CommentsService,
     private router: Router,
     private _user: UsersService,
+    public dialog: MatDialog,
   ) {
     this.logged = this._auth.isLogged();
     this.user = this._auth.user.user;
@@ -72,6 +72,22 @@ export class MovieComponent {
   addToViews(id: number) {
     console.log('Añadir película con id ', id);
     this._user.createView(this._auth.token, this.user.id, id).subscribe((res: any) => {
+      console.log('res: ', res);
+    })
+  }
+
+  openDialog() {
+    this.dialog.open(PopupComponent, {
+      width: '20%',
+      data: {
+        movie: this.movie.title,
+        user: this.user.username
+      }
+    })
+  }
+
+  addToRents(id: number) {
+    this._user.createRent(this._auth.token, this.user.id, id).subscribe((res: any) => {
       console.log('res: ', res);
     })
   }

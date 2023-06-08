@@ -1,0 +1,13 @@
+<div class="container">
+  <mat-dialog-content class="dialog-content">
+    <p id="username">{{ data.user | titlecase }},<p>
+
+    <p id="message">¡disfruta de la película <span>{{ data.movie }}</span> durante 15 días!</p>
+    <!-- o hazte premium para poder verla indefinidamente + link-->
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="dialog-footer">
+    <button>Pagar</button>
+    <button id="cancel-button" (click)="closeDialog()">Cancelar</button>
+  </mat-dialog-actions>
+</div>

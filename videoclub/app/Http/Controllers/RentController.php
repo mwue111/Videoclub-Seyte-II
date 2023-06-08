@@ -65,7 +65,7 @@ class RentController extends BaseController
         if($user->role === 'free' || $user->role === 'admin'){
             $validator = Validator::make($request->all(), [
                 'movie_id' => 'required',
-                'date' => 'required|date|date_format:Y-m-d'
+                'date' => 'required|date'
             ]);
 
             if($validator->fails()){

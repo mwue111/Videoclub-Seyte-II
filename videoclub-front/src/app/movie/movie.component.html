@@ -37,7 +37,7 @@
     <div class="movie-buttons">
       <div *ngIf="logged">
         <button *ngIf="user.role === 'premium'" class="view-button" (click)="addToViews(movie.id)" [routerLink]="['/ver-pelicula', movie.id]">Ver película</button>
-        <button *ngIf="user.role === 'free'" class="view-button" [routerLink]="['#']">Alquilar</button>
+        <button mat-button *ngIf="user.role === 'free'" class="view-button" (click)="openDialog()">Alquilar</button>
       </div>
       <div *ngIf="!logged">
         <button class="view-button-unlogged" (click)="unloggedHandle()">Ver película</button>
