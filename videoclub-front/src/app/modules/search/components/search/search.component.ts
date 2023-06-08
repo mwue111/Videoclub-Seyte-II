@@ -66,7 +66,6 @@ export class SearchComponent {
       Object.values(res).map((sug: any) => {
         if(this.checkString(sug)){
           this.suggestedMovies.push(sug);
-
         }
         if(this.checkDireccionString(sug.director)){
           this.suggestedDireccion.push(sug.director)
@@ -91,7 +90,6 @@ export class SearchComponent {
   }
 
   onSuggestedClick(input: any) {
-    this._shared.searchValue(input);
     this.router.navigate(['/results'], {queryParams: {search: input}})
   }
 
