@@ -16,4 +16,8 @@ export class PopupComponent {
   closeDialog(): void {
     this.dialogRef.close();
   }
+
+  //Aquí: https://www.youtube.com/watch?v=9BrcahgymVw
+
+
 }

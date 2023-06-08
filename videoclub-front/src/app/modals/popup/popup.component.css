@@ -10,7 +10,7 @@
   flex-grow: 2;
   text-align: center;
   margin: 50px 15px;
-  font-size: 27px;
+  font-size: 25px;
   color: #1874BA;
   background-color: white;
   border-radius: 15px;
@@ -23,7 +23,8 @@
   font-weight: bolder;
 }
 
-#message{
+#message,
+#go-premium{
   letter-spacing: 0px;
   line-height: 40px;
 }
@@ -43,13 +44,40 @@
   box-shadow: none;
   cursor: pointer;
   width: 100%;
-  background-color: #1874BA;
   border-radius: 40px;
   color: white;
   padding: 10px 20px;
 }
 
+#go-premium a{
+  cursor: pointer;
+  color: #FF8811;
+}
+
+#go-premium a:hover{
+  color: #d4710e;
+}
+
+#rent-button{
+  background-color: #1874BA;
+}
+
 #cancel-button{
   background: #FF8811;
-  color: white
+}
+
+.dialog-footer #rent-button:hover{
+  background-color: #135d96;
+}
+
+.dialog-footer #rent-button:active{
+  background-color: #1c84d3;
+}
+
+.dialog-footer #cancel-button:hover{
+  background: #d4710e;
+}
+
+.dialog-footer #cancel-button:active{
+  background: #ff962c;
 }
