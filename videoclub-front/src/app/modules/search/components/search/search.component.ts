@@ -67,9 +67,9 @@ export class SearchComponent {
         if(this.checkString(sug)){
           this.suggestedMovies.push(sug);
 
-          if(this.checkDireccionString(sug.director)){
-            this.suggestedDireccion.push(sug.director)
-          }
+        }
+        if(this.checkDireccionString(sug.director)){
+          this.suggestedDireccion.push(sug.director)
         }
         else{
           this.suggestedMovieGenres.push(sug);
