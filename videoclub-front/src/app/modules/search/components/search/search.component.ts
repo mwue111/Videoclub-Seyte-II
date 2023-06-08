@@ -55,14 +55,14 @@ export class SearchComponent {
   }
 
   getSuggestions(event: any) {
-    this.suggestedMovies = [];
-    this.suggestedGenres = [];
-    this.suggestedMovieGenres = [];
-    this.suggestedDireccion = [];
-
     this.input = event.target.value;
 
     this._search.suggestions(this.input).then((res:any) => {
+      this.suggestedMovies = [];
+      this.suggestedGenres = [];
+      this.suggestedMovieGenres = [];
+      this.suggestedDireccion = [];
+
       Object.values(res).map((sug: any) => {
         if(this.checkString(sug)){
           this.suggestedMovies.push(sug);
