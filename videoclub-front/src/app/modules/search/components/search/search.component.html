@@ -44,7 +44,7 @@
 
         <mat-optgroup *ngIf="suggestedDireccion.length > 0" label="directores/as">
           <mat-option *ngFor="let director of suggestedDireccion" [value]="director | lowercase" (click)="onSuggestedClick(director)">
-            <span class="suggested-gender-button">
+            <span class="suggested-item">
               {{ director }}
             </span>
           </mat-option>
