@@ -123,6 +123,31 @@ export class UsersService {
     return this._http.post(this.url + '/update-password', data, { headers: headers })
   }
 
+  createView(token: any, id: number, movie: any): Observable<any> {
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token)
+                                  .set('Content-Type', 'application/json');
+
+    let body = { movie_id: movie };
+
+    return this._http.post(this.url + `/nueva-vista/${id}`, body, { headers }).pipe(
+      map((res: any) => {
+        return res;
+      }),
+      catchError((err: any) => {
+        console.log('error: ', err)
+        return of(err);
+      })
+    )
+
+    // let headers = new HttpHeaders()
+    // .set('Authorization', 'Bearer ' + token)
+    // .set('Content-Type', 'application/json');
+
+    // let params = new HttpParams().set('movie_id', movie.toString());
+
+    // return this._http.post(this.url + `/nueva-vista/${user}`, { params: params, headers: headers })
+  }
+
   getViews(token:any): Observable<any>{
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 

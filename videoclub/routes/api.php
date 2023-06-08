@@ -49,9 +49,9 @@ Route::group(['middleware' => ['guest']], function () {
 Route::group(['middleware' => ['auth:api', 'cors']], function () {
 //   Route::resource('resenas', ReviewController::class);
     Route::resource('usuarios', 'UserController');  //dividir en rutas
-    // Route::put('usuario-avatar/{usuario}', 'UserImageController@update');
     Route::get('peliculas-vistas', 'UserViewController@index');
     Route::get('resenas-hechas/{id}/{page}', 'UserViewController@show');
+    Route::post('nueva-vista/{id}', 'UserViewController@store');
     Route::post('usuario-avatar/{usuario}', 'UserImageController@updateWithFormData');
     Route::get('resena/{resena}/pelicula', 'ReviewController@show');
     Route::post('/update-password', 'ChangePasswordController@updatePassword');

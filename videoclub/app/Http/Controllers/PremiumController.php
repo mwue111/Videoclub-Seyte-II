@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 
 class PremiumController extends Controller
 {
-  //
-
   public function index()
   {
     return Premium::all();

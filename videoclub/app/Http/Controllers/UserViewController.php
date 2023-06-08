@@ -9,14 +9,26 @@ use App\Models\Premium; //views
 use App\Models\Review;
 use App\Models\Movie;
 use Illuminate\Support\Facades\Auth;
+use Validator;
 
-class UserViewController extends Controller
+use App\Http\Controllers\API\BaseController as BaseController;
+
+class UserViewController extends BaseController
 {
+    //vistas/alquiladas
     public function index(){
-        $rents = Auth::user()->rents;
-        return response()->json($rents);
+        $user = User::findOrFail(Auth::user()->id);
+        if($user->role === 'premium'){
+            $response = $user->premium->movies;
+        }
+        else if($user->role === 'free'){
+            $response = Auth::user()->rents;
+        }
+
+        return response()->json($response);
     }
 
+    //reseñas
     public function show($id, $page){
         $user = User::findOrFail($id);
         if($user->id === Auth::user()->id){ //puede quitarse
@@ -39,27 +51,28 @@ class UserViewController extends Controller
         return response()->json($reviews);
     }
 
-    /*Paginación:
-     public function findMovieReviews($id, $page){
-    $movie = Movie::findOrFail($id);
+    //crear un registro en la tabla views
+    public function store(Request $request, $id) {
 
-    if(($movie->reviews)->isEmpty()){
-        return 'none';
-    }
-    else{
-        $pagination = $movie->reviews->toQuery()->latest()->paginate(4, ['*'], 'page', $page);
+        $intId = (int)$id;
 
-        foreach($pagination as $p){
-            $p->user_id = User::where('id', '=', $p->user_id)->get();
+        if(Auth::user()->id === $intId) {
+            $user = Auth::user();
+            if($user->role === 'premium') {
+                $validator = Validator::make($request->all(), [
+                    'movie_id' => 'required',
+                ]);
+
+                if($validator->fails()) {
+                    return $this->sendError('Falta el id de la película.', $validator->errors());
+                }
+
+                $view = $user->premium->movies()->attach([
+                    $request->input('movie_id')
+                ]);
+
+                return $this->sendResponse($view, 'Registro de vista creado');
+            }
         }
-
-        return $pagination;
     }
-    }
-
-    public function getReviews($id, $page){
-        $reviews = $this->findMovieReviews($id, $page);
-        return response()->json($reviews);
-    }
-  */
 }
