@@ -81,6 +81,7 @@ export class MovieComponent {
       width: '20%',
       data: {
         movie: this.movie.title,
+        price: this.movie.price,
         user: this.user.username
       }
     })

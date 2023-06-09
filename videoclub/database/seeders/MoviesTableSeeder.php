@@ -23,7 +23,8 @@ class MoviesTableSeeder extends Seeder
       'director' => 'James Cameron',
       'file' => 'media/PmrQlXdn6NlSbeLqAYyQi12wg40MTjQ70m4AfbFn.mp4',
       'trailer' => 'trailer/Z6pDLp9Maz0SIboBDxpczSiAQ9assTDS24gTDZxM.mp4',
-      'created_at' => '2023/01/30'
+      'created_at' => '2023/01/30',
+      'price' => 4.99
     ]);
 
     DB::table('movies')->insert([
@@ -36,7 +37,8 @@ class MoviesTableSeeder extends Seeder
       'director' => 'Francis Lawrence',
       'file' => 'media/hCkrTQ0D98foZSoh0daWZQoOoAONDQZlWFb6amT6.mp4',
       'trailer' => 'trailer/R8yyxGfMNkyXtse1X48zKHyliiM7sLKG62SKHGJh.mp4',
-      'created_at' => '2023/02/28'
+      'created_at' => '2023/02/28',
+      'price' => 4.99
     ]);
 
     DB::table('movies')->insert([
@@ -49,7 +51,8 @@ class MoviesTableSeeder extends Seeder
       'director' => 'Zack Snyder',
       'file' => 'media/Tol2MOGMJmyAJjJNjsPqjZIHqb8uohVcTn2abVNF.mp4',
       'trailer' => 'trailer/zDvIh33yREbwoI7VhSD0RTWcIJbdXuYT8parTF6r.mp4',
-      'created_at' => '2023/03/30'
+      'created_at' => '2023/03/30',
+      'price' => 4.99
     ]);
 
     DB::table('movies')->insert([
@@ -62,7 +65,8 @@ class MoviesTableSeeder extends Seeder
       'director' => 'David Leitch',
       'file' => 'media/lqRGBo8HkYS4lymCbAQ3CQjGwO6Oavo6JyzYvIHs.mp4',
       'trailer' => 'trailer/jfUy9WYuVccWYyrR1nuddErOtflrvemXa71z5XdA.mp4',
-      'created_at' => '2023-04-11 08:50:32'
+      'created_at' => '2023-04-11 08:50:32',
+      'price' => 14.99
     ]);
 
     DB::table('movies')->insert([
@@ -75,7 +79,8 @@ class MoviesTableSeeder extends Seeder
       'director' => 'Ruben Fleischer',
       'file' => 'media/fC5Xzm7vsO22t72ncv2uhgPVT3Cbbh6hVPaXQomK.mp4',
       'trailer' => 'trailer/12Z2fJ2JBpPgZU0JmRtP1T4vMMdBWRvadkKNehSb.mp4',
-      'created_at' => '2023-04-11 09:12:53'
+      'created_at' => '2023-04-11 09:12:53',
+      'price' => 14.99
     ]);
 
     DB::table('movies')->insert([
@@ -88,7 +93,8 @@ class MoviesTableSeeder extends Seeder
       'director' => 'Jaume Collet-Serra',
       'file' => 'media/aH7rkF7rDUAvWWBop0I235Ke47WuKpkgSVZePMQ9.mp4',
       'trailer' => 'trailer/gLxHu00BjBIvc5aQEtXoGiI9lvoi30zVjB6Dbkd0.mp4',
-      'created_at' => '2023-04-11 09:14:56'
+      'created_at' => '2023-04-11 09:14:56',
+      'price' => 14.99
     ]);
 
     DB::table('movies')->insert([
@@ -101,7 +107,8 @@ class MoviesTableSeeder extends Seeder
       'director' => 'Joe Russo y Anthony Russo',
       'file' => 'media/3MlLWWdV0QUWanvvwhadiC8bCxJiRX044fcQABAC.mp4',
       'trailer' => 'trailer/aUQN7Pn6bFe9BqbSzTzvobb1KbUdxHSFtMD1BSn8.mp4',
-      'created_at' => '2023-04-11 09:19:49'
+      'created_at' => '2023-04-11 09:19:49',
+      'price' => 14.99
     ]);
 
     DB::table('movies')->insert([
@@ -114,7 +121,8 @@ class MoviesTableSeeder extends Seeder
       'director' => 'Colin Trevorrow',
       'file' => 'media/2qflyUoCLi2hXu3o42zyK9AVbU43JJaTV5VFn3YA.mp4',
       'trailer' => 'trailer/i17ec1yJQFJHPU7zU3WWUEUz7lXiHa7UcDhAGAnC.mp4',
-      'created_at' => '2023-04-11 09:27:59'
+      'created_at' => '2023-04-11 09:27:59',
+      'price' => 14.99
     ]);
 
     DB::table('movies')->insert([
@@ -127,7 +135,8 @@ class MoviesTableSeeder extends Seeder
       'director' => 'Robert Eggers',
       'file' => 'media/yMlE19UqGAvBD8iUgFe5eqUmVzPy0BWsMpqa1FHu.mp4',
       'trailer' => 'trailer/nMK9u25UI4TcMykpaODxabz94a2J7h8CkwioJ8cB.mp4',
-      'created_at' => '2023-04-11 09:31:01'
+      'created_at' => '2023-04-11 09:31:01',
+      'price' => 14.99
     ]);
 
     DB::table('movies')->insert([
@@ -140,7 +149,8 @@ class MoviesTableSeeder extends Seeder
         'director' => 'Jon Watts',
         'file' => 'media/yNW2TFNNkKIOFDaaaPiR5EehuxSuVaBB8FIG1DUn.mp4',
         'trailer' => 'trailer/gTqfiG7Aroc8kpTEPNdUI5qkYFTlcqLrKCtFSHbm.mp4',
-        'created_at' => '2023-04-11 09:33:54'
+        'created_at' => '2023-04-11 09:33:54',
+        'price' => 10.99
       ]);
 
     DB::table('movies')->insert([
@@ -153,7 +163,8 @@ class MoviesTableSeeder extends Seeder
         'director' => 'Joseph Kosinski',
         'file' => 'media/bLstkPI9fyVqy3Sn5bqGlzT1FEDG97xo3FgOBbV0.mp4',
         'trailer' => 'trailer/k1W4bz3e93NbbKJvdCfLP8Qx4wsYoLCebwqox2tL.mp4',
-        'created_at' => '2023-04-11 09:36:31'
+        'created_at' => '2023-04-11 09:36:31',
+        'price' => 14.99
       ]);
 
     DB::table('movies')->insert([
@@ -166,7 +177,8 @@ class MoviesTableSeeder extends Seeder
         'director' => 'Daniel Espinosa',
         'file' => 'media/ICjdraunJiJMamYEmfbt0EJDkSBL3a6aOpdh4tct.mp4',
         'trailer' => 'trailer/uZFOXg6jaPoc7d1K6itLbKiObhBwokYRqNyyp7YQ.mp4',
-        'created_at' => '2023-04-11 09:37:51'
+        'created_at' => '2023-04-11 09:37:51',
+        'price' => 4.99
       ]);
 
     DB::table('movies')->insert([
@@ -179,7 +191,8 @@ class MoviesTableSeeder extends Seeder
         'director' => 'Malgorzata Szumowska y Michal Englert',
         'file' => 'media/AXf80L5Xfz21TI7giLJyXhueCpefjHXSds8OQtjQ.mp4',
         'trailer' => 'trailer/DbBNlhnV9us3jAEaE1Av9ROrCs69VPCgu2uM3CGv.mp4',
-        'created_at' => '2023-04-11 11:16:13'
+        'created_at' => '2023-04-11 11:16:13',
+        'price' => 14.99
       ]);
 
     DB::table('movies')->insert([
@@ -192,7 +205,8 @@ class MoviesTableSeeder extends Seeder
         'director' => 'Baltasar Kormákur',
         'file' => 'media/IxWuN1vStZyxwCc9fPYBbxcTXBjf5RAMvt5Yw4Ud.mp4',
         'trailer' => 'trailer/XGkFiCrAfD0phgrijWqsHoM0u67s2AlXEr2RBwom.mp4',
-        'created_at' => '2023-04-11 11:19:58'
+        'created_at' => '2023-04-11 11:19:58',
+        'price' => 14.99
       ]);
 
     DB::table('movies')->insert([
@@ -205,7 +219,8 @@ class MoviesTableSeeder extends Seeder
         'director' => 'David Yates',
         'file' => 'media/jXjYbdQ9vdZ99j027PAiS0or1Dl7kTpLNgq9drZE.mp4',
         'trailer' => 'trailer/0DdI8HCmtlDSCikgCc8CXOvLTmqioqdIyDLkCtVp.mp4',
-        'created_at' => '2023-04-11 11:22:54'
+        'created_at' => '2023-04-11 11:22:54',
+        'price' => 14.99
       ]);
 
     DB::table('movies')->insert([
@@ -218,7 +233,8 @@ class MoviesTableSeeder extends Seeder
         'director' => 'Denis Villeneuve',
         'file' => 'media/voMmwBLyN5lSQmH3QidBOYtaBQb9nSb0eltrzHHm.mp4',
         'trailer' => 'trailer/DdGfoIvXIrONmOVKpNAJ4We5xKXS72LXwrEcq1NJ.mp4',
-        'created_at' => '2023-04-11 11:27:53'
+        'created_at' => '2023-04-11 11:27:53',
+        'price' => 10.99
       ]);
 
     DB::table('movies')->insert([
@@ -231,7 +247,8 @@ class MoviesTableSeeder extends Seeder
         'director' => 'Aaron Nee y Adam Nee',
         'file' => 'media/KSqcuXd5e4NX4MX4x1tZ7qjTWVK4ZJ4EJzdblOw0.mp4',
         'trailer' => 'trailer/B9u0QkMUfse9q8cBnQilSBCOxb9Mq2mw2OfyG6z9.mp4',
-        'created_at' => '2023-04-11 11:32:55'
+        'created_at' => '2023-04-11 11:32:55',
+        'price' => 14.99
       ]);
 
     DB::table('movies')->insert([
@@ -244,7 +261,8 @@ class MoviesTableSeeder extends Seeder
         'director' => 'Shawn Levy',
         'file' => 'media/sdZDxhxTIQXhgemaOMaTzSzE7kGiLZYwiKwCI4ei.mp4',
         'trailer' => 'trailer/EJLcOh92pmbDKwNgB5Dm3MzlBms3mtLhiLVXLQQU.mp4',
-        'created_at' => '2023-04-11 11:36:57'
+        'created_at' => '2023-04-11 11:36:57',
+        'price' => 10.99
       ]);
 
     DB::table('movies')->insert([
@@ -257,7 +275,8 @@ class MoviesTableSeeder extends Seeder
         'director' => 'Ryan Coogler',
         'file' => 'media/aBNoO5aAsVztUDrnV27uEr0acDSxTKLEWgZf7wi8.mp4',
         'trailer' => 'trailer/1zFeEdJEEo1AnJYTn2PcUjr1mepZmRCjLXfKJukJ.mp4',
-        'created_at' => '2023-04-11 11:38:43'
+        'created_at' => '2023-04-11 11:38:43',
+        'price' => 14.99
       ]);
 
     DB::table('movies')->insert([
@@ -270,7 +289,8 @@ class MoviesTableSeeder extends Seeder
         'director' => 'Matt Reeves',
         'file' => 'media/45vZ3hWpytw862loStrV2oIzugZ2DDVCLeXUmRcx.mp4',
         'trailer' => 'trailer/Q9dXTYG7CXHpEng2fI9cjB6s29R2A357oDil99ph.mp4',
-        'created_at' => '2023-04-11 11:44:00'
+        'created_at' => '2023-04-11 11:44:00',
+        'price' => 14.99
       ]);
 
     DB::table('movies')->insert([
@@ -283,7 +303,8 @@ class MoviesTableSeeder extends Seeder
         'director' => 'David S F Wilson',
         'file' => 'media/N2dM9Tf4gdKTxBEhDiEGdjbHYzA8dnZgTuVNVQZT.mp4',
         'trailer' => 'trailer/4j7kKtCospnv5k3IobF1aHshcFxJLzDQLBO9NDTQ.mp4',
-        'created_at' => '2023-04-11 11:47:24'
+        'created_at' => '2023-04-11 11:47:24',
+        'price' => 4.99
       ]);
 
     DB::table('movies')->insert([
@@ -296,9 +317,53 @@ class MoviesTableSeeder extends Seeder
         'director' => 'Steven Spielberg',
         'file' => 'media/az6JcYqKdEk0R3lvDhmSdSrNxFIaSvfp1EobSAZ6.mp4',
         'trailer' => 'trailer/6iFPAjyeOjs4EQ82n1IaXDYSKKd97B89k0sW3F1h.mp4',
-        'created_at' => '2023-04-11 11:49:28'
+        'created_at' => '2023-04-11 11:49:28',
+        'price' => 4.99
       ]);
+      //
+    DB::table('movies')->insert([
+        'title' => 'Drama',
+        'poster' => 'images/WTmUSSpY55cifJeLRD1OdXUAdC5xR4bbXK6NrmJd.jpg',
+        'banner' => 'images/Lu0e9Cw5jncbjW5H7ehMzZGMmi6RXZ7PBRGYxo84.jpg',
+        'year' => 2010,
+        'runtime' => 80,
+        'plot' => 'Tres estudiantes de teatro, influenciados por un carismático profesor y la técnica actoral creada por el francés Antonin Artaud, comienzan a experimentar con sus propias vidas en busca de emociones y situaciones reales para llevar al escenario. Su obsesión por ser mejores actores los guía a contactarse con sus lados más oscuros, sobrepasando límites que ni ellos mismos ni sus maestros imaginaron.',
+        'director' => 'Matias Lira',
+        'file' => 'media/GzVN898edUUdJ3pUEbIXo54h5SbMfHPm9igSDOM6.mp4',
+        'trailer' => 'trailer/DLCcyIyui0xkslhJ9Mye5asIkgkkNjX8SyYLQy4N.mp4',
+        'created_at' => '2023-06-01 15:02:45',
+        'updated_at' => '2023-06-01 15:02:45',
+        'price' => 4.99
+    ]);
 
+    DB::table('movies')->insert([
+        'title' => 'Dungeons & Dragons: Honor entre ladrones',
+        'poster' => 'images/rdFbkUQgUur8NkS44uUD94VtVaQv5ciHfqayEsSv.jpg',
+        'banner' => 'images/cWqg53PIwj97a4vLE0BzDvVE0w4ciBhmSm20pqK6.jpg',
+        'year' => 2023,
+        'runtime' => 134,
+        'plot' => 'Adaptación cinematográfica del primer juego de rol de la historia, publicado por primera vez en 1974. Un ladrón encantador y una banda de aventureros increíbles emprenden un atraco épico para recuperar una reliquia perdida, pero las cosas salen rematadamente mal cuando se topan con las personas equivocadas.',
+        'director' => 'Jonathan M. Goldstein',
+        'file' => 'media/JmkIN5KTW83dBeniKffmcuCNRBfH5n8pg1eJ5dtU.mp4',
+        'trailer' => 'trailer/8w5aF1VcUfkZE8o2R8W1E3sGRlaTOp286IIE2Z5F.mp4',
+        'created_at' => '2023-06-01 15:23:24',
+        'updated_at' => '2023-06-06 15:26:17',
+        'price' => 14.99
+    ]);
 
+    DB::table('movies')->insert([
+        'title' => 'Ellas',
+        'poster' => 'images/ZhWqGDpcjMEUbXRCVOPcrof6cykEQjC5K0Kh30mW.jpg',
+        'banner' => 'images/baURXLMgDwrpdmqInvebLugPrk10sxIv1PWHklRW.jpg',
+        'year' => 2011,
+        'runtime' => 99,
+        'plot' => 'Una periodista intenta equilibrar las labores del matrimonio y la maternidad mientras investiga un caso de mujeres universitarias que trabajan como prostitutas para pagar por sus estudios.',
+        'director' => 'Malgorzata Szumowska',
+        'file' => 'media/Pj2e3sZZdMjKdQepvw61A6u92P3goFkxSPJ3nTz7.mp4',
+        'trailer' => 'trailer/qbaPD2vtauvBx5MMKM8ClT1yWKch66wxZGD5H1JG.mp4',
+        'created_at' => '2023-06-06 15:26:17',
+        'updated_at' => '2023-06-06 15:26:17',
+        'price' => 4.99
+    ]);
   }
 }
