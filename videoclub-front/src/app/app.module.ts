@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import {
@@ -39,6 +39,13 @@ import { PopupComponent } from './modals/popup/popup.component';
 //tests modal
 import { MatDialogModule } from '@angular/material/dialog';
 
+//payment
+import { NgxPayPalModule } from 'ngx-paypal';
+
+//Aquí: https://www.youtube.com/watch?v=9BrcahgymVw&list=PL4bT56Uw3S4xtlptHVrl6s-lB7qCTfrc2&index=9
+//ngx spinner
+// import { NgxSpinnerModule } from 'ngx-spinner';
+
 const material = [MatToolbarModule];
 
 @NgModule({
@@ -74,6 +81,8 @@ const material = [MatToolbarModule];
     ReactiveFormsModule,
     SearchModule,
     MatDialogModule,
+    NgxPayPalModule,
+    // NgxSpinnerModule,
   ],
   exports: [
     material,
@@ -81,8 +90,7 @@ const material = [MatToolbarModule];
     VideogularComponent,
   ],
   providers: [appRoutingProviders, { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }],
-  bootstrap: [
-    AppComponent,
- ],
+  bootstrap: [AppComponent,],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
