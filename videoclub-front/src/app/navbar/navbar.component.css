@@ -13,11 +13,9 @@
 }
 .title-div{
   padding: 15px 20px;
-}
-
-.title-div a {
   color: #ffffff;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .auth-div {
