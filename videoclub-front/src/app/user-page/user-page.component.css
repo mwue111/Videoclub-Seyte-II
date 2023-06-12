@@ -284,6 +284,16 @@ a{
   text-align: center;
 }
 
+.rented-active-movies{
+  margin-bottom: 100px;
+}
+
+#subtitle{
+  text-transform:initial;
+  font-size: 17px;
+  color: #159CA3;
+}
+
 .user-seen-movies-posters{
   display: flex;
   flex-direction: row;
@@ -333,7 +343,7 @@ a{
   display: flex;
   flex-direction: column;
   width: 90%;
-  margin: 50px auto 0 auto;
+  margin: 50px auto;
 }
 
 .reviews-container {

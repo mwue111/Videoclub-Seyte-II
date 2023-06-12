@@ -133,26 +133,20 @@ class RentController extends BaseController
     public function checkExpirationDate() {
         $user = Auth::user();
         $rents = $user->rents;
-        $activeRents = [];
-        $expiredRents = [];
-        // $records = [];
 
         foreach($rents as $rent) {
-            if(!Carbon::now()->lte($rent->pivot->expiration_date))
+            if(!Carbon::now()->lte($rent->pivot->expiration_date)){
                 $this->destroy($rent->pivot->id);
-                // $expiredRents[] = $rent->pivot->id;
-            else{
-                // $activeRents[] = $rent->pivot->id;
-                $activeRents[] = $rent;
             }
         }
-
-        return $activeRents;
     }
 
     //eliminar un alquiler
     public function destroy($id) {
-        $rent = Rent::findOrFail($id);
-        $rent->delete();
+        //coger el registro de la tabla rents con el id indicado
+        // $rent = Rent::findOrFail($id);
+        $rent = Auth::user()->rents->pivot->id;
+        dd($rent);
+        //eliminar esos registros
     }
 }

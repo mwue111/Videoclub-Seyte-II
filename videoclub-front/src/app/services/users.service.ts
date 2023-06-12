@@ -166,6 +166,12 @@ export class UsersService {
     // return this._http.post(this.url + `/nueva-vista/${user}`, { params: params, headers: headers })
   }
 
+  checkRents(token: any): Observable<any> {
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+
+    return this._http.get(this.url + '/comprobar-alquiler', { headers:headers });
+  }
+
   getRents(token: any): Observable<any> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 

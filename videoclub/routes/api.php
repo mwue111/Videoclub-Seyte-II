@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth:api', 'cors']], function () {
     Route::resource('usuarios', 'UserController');  //dividir en rutas
     Route::get('peliculas-vistas', 'UserViewController@index');
     Route::get('peliculas-alquiladas', 'RentController@index');
+    Route::get('comprobar-alquiler', 'RentController@checkExpirationDate');
     Route::get('resenas-hechas/{id}/{page}', 'UserViewController@show');
     Route::post('nueva-vista/{id}', 'UserViewController@store');
     Route::post('nuevo-alquiler', 'RentController@store');

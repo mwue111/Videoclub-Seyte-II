@@ -32,7 +32,7 @@ export class UserPageComponent implements OnInit{
   activeMovies: any = [];
   //paginación
   data: any;
-  currentPage: number;
+  currentPage!: number;
   pageChange: any = null;
   imagePreview: any;
 
@@ -42,21 +42,7 @@ export class UserPageComponent implements OnInit{
     private _users: UsersService,
     private fb: FormBuilder,
     private _shared: UserSharedServiceService,
-  ) {
-    this.currentPage = 1;
-
-    if(this._auth.isLogged()){
-      this.user = this._auth.user.user;
-      this.watchedMovies = true;
-      this.getViews();
-      this.getReviews(this.currentPage);
-      console.log(this.reviews);
-    }
-    else{
-      this.router.navigate(['auth/login']);
-    }
-
-  }
+  ) {}
 
   fetchUser(): Promise<any> {
     return new Promise<void>((resolve, reject) => {
@@ -73,6 +59,22 @@ export class UserPageComponent implements OnInit{
   }
 
   async ngOnInit() {
+    this.currentPage = 1;
+
+    if(this._auth.isLogged()){
+      this.user = this._auth.user.user;
+      if(this.user.role === 'free'){
+        this.checkRentedMovies();
+      }
+      this.watchedMovies = true;
+      this.getViews();
+      this.getReviews(this.currentPage);
+      console.log(this.reviews);
+    }
+    else{
+      this.router.navigate(['auth/login']);
+    }
+
     this._shared.username$.subscribe(username => {
       this.user.username = username
     })
@@ -80,16 +82,21 @@ export class UserPageComponent implements OnInit{
     this.initializeForm();
   }
 
+  checkRentedMovies() {
+    console.log('chequeando alquileres');
+    this._users.checkRents(this._auth.token).subscribe((res: any) => {
+      console.log('res: ', res);
+    })
+  }
+
   getViews(){
     if(this.user.role === 'premium'){
       this._users.getViews(this._auth.token)
                 .subscribe((res: any) => {
                   if(res.length){
-                    console.log('res: ', res)
                     for(let i = 0; i < res.length; i++){
                       this.movies.push(res[i]);
                     }
-                    console.log('array de películas vistas: ', this.movies);
                   }
                   else{
                     this.watchedMovies = false;
@@ -98,13 +105,13 @@ export class UserPageComponent implements OnInit{
     }
     else{
       this._users.getRents(this._auth.token).subscribe((res: any) => {
-        console.log('res: ', res);
         if(res.length) {
           for(let i = 0; i < res.length; i++) {
-            this.movies.push(res[i]);
             if(res[i].pivot.deleted_at === null){
-              // console.log('res[i].pivot.deleted_at: ', res[i].pivot.deleted_at)
               this.activeMovies.push(res[i]);
+            }
+            else{
+              this.movies.push(res[i]);
             }
           }
         }
