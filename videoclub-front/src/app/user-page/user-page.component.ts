@@ -29,6 +29,7 @@ export class UserPageComponent implements OnInit{
   movies: any = [];
   watchedMovies!: boolean;
   reviews: any = [];
+  activeMovies: any = [];
   //paginación
   data: any;
   currentPage: number;
@@ -75,25 +76,43 @@ export class UserPageComponent implements OnInit{
     this._shared.username$.subscribe(username => {
       this.user.username = username
     })
-
     await this.fetchUser();
     this.initializeForm();
   }
 
   getViews(){
-    this._users.getViews(this._auth.token)
-              .subscribe((res: any) => {
-                if(res.length){
-                  console.log('res: ', res)
-                  for(let i = 0; i < res.length; i++){
-                    this.movies.push(res[i]);
+    if(this.user.role === 'premium'){
+      this._users.getViews(this._auth.token)
+                .subscribe((res: any) => {
+                  if(res.length){
+                    console.log('res: ', res)
+                    for(let i = 0; i < res.length; i++){
+                      this.movies.push(res[i]);
+                    }
+                    console.log('array de películas vistas: ', this.movies);
                   }
-                  console.log('array de películas vistas: ', this.movies);
-                }
-                else{
-                  this.watchedMovies = false;
-                }
-              })
+                  else{
+                    this.watchedMovies = false;
+                  }
+                })
+    }
+    else{
+      this._users.getRents(this._auth.token).subscribe((res: any) => {
+        console.log('res: ', res);
+        if(res.length) {
+          for(let i = 0; i < res.length; i++) {
+            this.movies.push(res[i]);
+            if(res[i].pivot.deleted_at === null){
+              // console.log('res[i].pivot.deleted_at: ', res[i].pivot.deleted_at)
+              this.activeMovies.push(res[i]);
+            }
+          }
+        }
+        else{
+          this.watchedMovies = false;
+        }
+      })
+    }
   }
 
   getReviews(page: number){

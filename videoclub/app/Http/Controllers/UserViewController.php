@@ -15,7 +15,7 @@ use App\Http\Controllers\API\BaseController as BaseController;
 
 class UserViewController extends BaseController
 {
-    //vistas/alquiladas
+    //vistas
     public function index(){
         $user = User::findOrFail(Auth::user()->id);
         if($user->role === 'premium'){
@@ -27,15 +27,15 @@ class UserViewController extends BaseController
                 $response = null;
             }
         }
-        else if($user->role === 'free'){
-            $rents = Auth::user()->rents;
-            if(count($rents)){
-                $response = Auth::user()->rents; //->toQuery()->orderByDesc('id', 'desc')->get();
-            }
-            else{
-                $response = null;
-            }
-        }
+        // else if($user->role === 'free'){
+        //     $rents = Auth::user()->rents;
+        //     if(count($rents)){
+        //         $response = Auth::user()->rents; //->toQuery()->orderByDesc('id', 'desc')->get();
+        //     }
+        //     else{
+        //         $response = null;
+        //     }
+        // }
 
         return response()->json($response);
     }

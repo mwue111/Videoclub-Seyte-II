@@ -17,14 +17,24 @@ use DB;
 
 class RentController extends BaseController
 {
-
-
     public function index(){
-        if(Auth::user()->role === 'admin'){
+        $user = Auth::user();
+
+        if($user->role === 'admin'){
             $response = Rent::all();
         }
-        else{
-            $response = 'No tienes permiso para estar aquí.';
+        else if($user->role === 'free'){
+            // $this->checkExpirationDate();
+            $rents = Auth::user()->rents;
+            // dd($rents);
+            // $rents = $this->checkExpirationDate();
+            // $rents = Auth::user()->rents;
+            if(count($rents)){
+                $response = Auth::user()->rents; //->toQuery()->orderByDesc('id', 'desc')->get();
+            }
+            else{
+                $response = null;
+            }
         }
         return response()->json($response);
     }
@@ -118,6 +128,26 @@ class RentController extends BaseController
         $rent->save();
 
         return $this->sendResponse($rent, 'Alquiler modificado');
+    }
+
+    public function checkExpirationDate() {
+        $user = Auth::user();
+        $rents = $user->rents;
+        $activeRents = [];
+        $expiredRents = [];
+        // $records = [];
+
+        foreach($rents as $rent) {
+            if(!Carbon::now()->lte($rent->pivot->expiration_date))
+                $this->destroy($rent->pivot->id);
+                // $expiredRents[] = $rent->pivot->id;
+            else{
+                // $activeRents[] = $rent->pivot->id;
+                $activeRents[] = $rent;
+            }
+        }
+
+        return $activeRents;
     }
 
     //eliminar un alquiler
