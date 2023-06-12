@@ -67,6 +67,7 @@ class User extends Authenticatable
   {
     return $this->belongsToMany(Movie::class, 'rents')
       ->withPivot('id', 'expiration_date')
+      ->orderByDesc('rents.id')
       ->withTimeStamps();
   }
 

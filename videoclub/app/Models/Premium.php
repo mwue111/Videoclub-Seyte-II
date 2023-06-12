@@ -23,6 +23,7 @@ class Premium extends Model
   public function movies()
   {
     return $this->belongsToMany(Movie::class, 'views', 'user_id', 'movie_id')
+                ->orderByDesc('views.updated_at')
                 ->withTimestamps();
   }
 }

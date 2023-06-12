@@ -84,9 +84,11 @@ export class UserPageComponent implements OnInit{
     this._users.getViews(this._auth.token)
               .subscribe((res: any) => {
                 if(res.length){
+                  console.log('res: ', res)
                   for(let i = 0; i < res.length; i++){
                     this.movies.push(res[i]);
                   }
+                  console.log('array de películas vistas: ', this.movies);
                 }
                 else{
                   this.watchedMovies = false;

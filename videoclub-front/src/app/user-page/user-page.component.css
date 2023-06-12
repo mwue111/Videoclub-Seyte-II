@@ -275,12 +275,13 @@ a{
   font-size: 22px;
 }
 
-#no-movies{
+.no-data{
   padding: 50px;
   border-radius: 15px;
   font-size: 20px;
   text-transform: none;
   background: #F5F3F4;
+  text-align: center;
 }
 
 .user-seen-movies-posters{

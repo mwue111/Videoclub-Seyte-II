@@ -19,10 +19,22 @@ class UserViewController extends BaseController
     public function index(){
         $user = User::findOrFail(Auth::user()->id);
         if($user->role === 'premium'){
-            $response = $user->premium->movies;
+            $views = $user->premium->movies;
+            if(count($views)){
+                $response = $user->premium->movies;
+            }
+            else{
+                $response = null;
+            }
         }
         else if($user->role === 'free'){
-            $response = Auth::user()->rents;
+            $rents = Auth::user()->rents;
+            if(count($rents)){
+                $response = Auth::user()->rents; //->toQuery()->orderByDesc('id', 'desc')->get();
+            }
+            else{
+                $response = null;
+            }
         }
 
         return response()->json($response);

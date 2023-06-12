@@ -125,7 +125,7 @@
       </div>
     </div>
     <div *ngIf="!watchedMovies">
-      <p id="no-movies">¡No has visto ninguna película todavía!</p>
+      <p class="no-data">¡No has visto ninguna película todavía!</p>
     </div>
   </div>
 
@@ -162,7 +162,10 @@
         </div>
       </div>
     </div>
+  </div>
 
+  <div *ngIf="!reviews.length">
+    <p class="no-data">¡No has hecho ninguna reseña todavía!</p>
   </div>
 
 </div>
