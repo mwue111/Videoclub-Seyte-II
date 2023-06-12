@@ -80,17 +80,16 @@ export class MovieComponent {
     this.dialog.open(PopupComponent, {
       width: '20%',
       data: {
-        movie: this.movie.title,
-        price: this.movie.price,
-        user: this.user.username
+        movie: {
+          id: this.movie.id,
+          title: this.movie.title,
+          price: this.movie.price,
+        },
+        user: {
+          id: this.user.id,
+          username: this.user.username
+        }
       }
     })
   }
-
-  addToRents(id: number) {
-    this._user.createRent(this._auth.token, this.user.id, id).subscribe((res: any) => {
-      console.log('res: ', res);
-    })
-  }
-
 }

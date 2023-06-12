@@ -81,3 +81,7 @@
 .dialog-footer #cancel-button:active{
   background: #ff962c;
 }
+
+ngx-paypal{
+  width: 100%;
+}
