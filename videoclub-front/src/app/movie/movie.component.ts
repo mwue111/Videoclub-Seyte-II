@@ -56,11 +56,7 @@ export class MovieComponent {
       this._user.checkRents(this._auth.token).subscribe((res: any) => {
         res.forEach((element: any) => {
             if(element.id === this.movie.id) {
-              console.log('película alquilada')
               this.activeRent = true;
-            }
-            else{
-              console.log('película no alquilada')
             }
         });
       })
