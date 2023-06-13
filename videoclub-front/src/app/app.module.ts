@@ -42,6 +42,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 //payment
 import { NgxPayPalModule } from 'ngx-paypal';
 import { DaysToPipe } from './pipes/days-to.pipe';
+import { PremiumFormComponent } from './modals/premium-form/premium-form.component';
 
 //Aquí: https://www.youtube.com/watch?v=9BrcahgymVw&list=PL4bT56Uw3S4xtlptHVrl6s-lB7qCTfrc2&index=9
 //ngx spinner
@@ -66,6 +67,7 @@ const material = [MatToolbarModule];
     DragDirective,
     PopupComponent,
     DaysToPipe,
+    PremiumFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -29,6 +29,7 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
 
 Route::group(['middleware' => ['guest']], function () {
+    Route::post('premium', 'PremiumController@store');
     Route::get('autor-resena/{id}', 'ReviewController@getAuthor');
     Route::get('resenas', 'ReviewController@index');
     Route::post('resenas', 'ReviewController@store');

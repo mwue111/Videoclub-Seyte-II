@@ -189,4 +189,13 @@ export class UsersService {
 
     return this._http.get(this.url + `/resenas-hechas/${id}/${page}`, { headers:headers });
   }
+
+  goPremium(id: number): Observable<any> {
+    const body = {
+      user_id: id
+    }
+
+    return this._http.post(this.url + '/premium', body);
+
+  }
 }

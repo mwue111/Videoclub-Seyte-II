@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../modules/auth/_services/auth.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 import { Observable, map, of, switchMap } from 'rxjs';
@@ -8,7 +8,8 @@ import Swal from 'sweetalert2';
 import { UserSharedServiceService } from '../services/user-shared-service.service';
 import { URL_BACKEND } from '../config/config';
 import { FileHandle } from '../_model/file-handle.model';
-import { CommentsService } from '../modules/comments/_services/comments.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PremiumFormComponent } from '../modals/premium-form/premium-form.component';
 
 @Component({
   selector: 'app-user-page',
@@ -42,6 +43,7 @@ export class UserPageComponent implements OnInit{
     private _users: UsersService,
     private fb: FormBuilder,
     private _shared: UserSharedServiceService,
+    public dialog: MatDialog,
   ) {}
 
   fetchUser(): Promise<any> {
@@ -90,6 +92,7 @@ export class UserPageComponent implements OnInit{
   }
 
   getViews(){
+    console.log('usuario: ', this.user);
     if(this.user.role === 'premium'){
       this._users.getViews(this._auth.token)
                 .subscribe((res: any) => {
@@ -205,6 +208,16 @@ export class UserPageComponent implements OnInit{
         return res === 1;
       })
     )
+  }
+
+  goPremium(id: number) {
+    this.dialog.open(PremiumFormComponent, {
+      width: '30%',
+      data: {
+        user: id,
+        date: Date.now()
+      }
+    })
   }
 
   updateUser(){
