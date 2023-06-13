@@ -22,10 +22,6 @@ class PremiumController extends Controller
   }
 
   public function store(Request $request) {
-    //llegará id de usuario - user_id
-    //fecha actual - current_date
-
-    //validar
     $validator = Validator::make($request->all(), [
         'user_id' => 'required | numeric',
     ]);
@@ -43,5 +39,6 @@ class PremiumController extends Controller
         $user->save();
     }
 
+    return response()->json($user);
   }
 }

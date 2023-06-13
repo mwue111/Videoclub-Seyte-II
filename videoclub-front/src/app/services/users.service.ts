@@ -190,12 +190,36 @@ export class UsersService {
     return this._http.get(this.url + `/resenas-hechas/${id}/${page}`, { headers:headers });
   }
 
-  goPremium(id: number): Observable<any> {
+  goPremium(token: any, id: number): Observable<any> {
     const body = {
       user_id: id
     }
 
-    return this._http.post(this.url + '/premium', body);
+    return this._http.post(this.url + '/premium', body).pipe(
+      map((auth: any) => {
+        console.log('auth: ', auth);
+        this.storeLocalStorageUpdated(token, auth);
+        return auth;
+      }),
+      catchError(err => {
+        console.log('Ha ocurrido un error: ', err);
+        return of(err);
+      })
+    );
+
+    /*
+    return this._http.put(this.url + `/usuarios/${id}`, value, { headers: headers }).pipe(
+      map((auth: any) => {
+        console.log('auth: ', auth)
+        this.storeLocalStorageUpdated(token, auth);
+        return auth;
+      }),
+      catchError(err => {
+        return of(err)
+      })
+    )
+
+    */
 
   }
 }

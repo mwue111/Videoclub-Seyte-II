@@ -15,6 +15,7 @@ export class PremiumFormComponent {
 
   public payPalConfig?: IPayPalConfig;
   premiumSubscription: string = '60';
+  date: any = new Date();
 
   constructor(
     public dialogRef: MatDialogRef<any>,
@@ -25,6 +26,12 @@ export class PremiumFormComponent {
 
   ngOnInit(): void {
     this.initConfig();
+    this.addOneYear();
+  }
+
+  addOneYear() {
+    this.date = this.date.setFullYear(this.date.getFullYear() + 1);
+    console.log('año: ', new Date(this.date));
   }
 
   private initConfig(): void {
@@ -87,11 +94,19 @@ export class PremiumFormComponent {
 
   addToPremiums() {
     console.log('añadido usuario ', this.data.user, ' a la tabla de premiums');
-    this._user.goPremium(this.data.user).subscribe((res: any) => {
+    this._user.goPremium(this._auth.token, this.data.user).subscribe((res: any) => {
       console.log('res: ', res);
+      Swal.fire({
+        icon: 'success',
+        title:'¡Enhorabuena! ¡Ya eres Premium!',
+        text: `Disfruta de todas las películas de manera ilimitada hasta el ${this.date}`,
+        confirmButtonColor: '#1874BA'
+      }).then(res => {
+        if(res.isConfirmed){
+          window.location.reload();
+        }
+      })
     })
-    //añadir este usuario a la tabla premiums
-    //añadir además a la tabla de premiums la fecha del último pago (fecha actual)
   }
 
   closeDialog(): void {
