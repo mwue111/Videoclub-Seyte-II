@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class PremiumsTableSeeder extends Seeder
 {
@@ -17,6 +18,11 @@ class PremiumsTableSeeder extends Seeder
     DB::table('premiums')->insert([
       'user_id' => 1,
       'fecha_ultimo_pago' => '2021-07-22',
+    ]);
+
+    DB::table('premiums')->insert([
+      'user_id' => 5,
+      'fecha_ultimo_pago' => Carbon::now(),
     ]);
   }
 }

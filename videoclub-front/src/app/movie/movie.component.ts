@@ -16,10 +16,11 @@ import { PopupComponent } from '../modals/popup/popup.component';
 export class MovieComponent {
   public movie: any;
   url: string = URL_BACKEND + '/storage/';
-  logged: boolean;
+  logged!: boolean;
   user: any;
   genreNames: any = [];
   source: string = '';
+  activeRent: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,14 +29,15 @@ export class MovieComponent {
     private router: Router,
     private _user: UsersService,
     public dialog: MatDialog,
-  ) {
+  ) {}
+
+  ngOnInit(): void {
     this.logged = this._auth.isLogged();
     this.user = this._auth.user.user;
 
     this.route.params.subscribe((params: any) => {
-      console.log('params: ', params)
       let movieId = params.id;
-      // let movieId = res.id;
+
       this._movie.getOneMovie(movieId, this._auth.token)
           .subscribe((res: any) => {
             this.movie = res;
@@ -49,6 +51,20 @@ export class MovieComponent {
             }
           })
     })
+
+    if(this.user.role === 'free'){
+      this._user.checkRents(this._auth.token).subscribe((res: any) => {
+        res.forEach((element: any) => {
+            if(element.id === this.movie.id) {
+              console.log('película alquilada')
+              this.activeRent = true;
+            }
+            else{
+              console.log('película no alquilada')
+            }
+        });
+      })
+    }
   }
 
   unloggedHandle() {

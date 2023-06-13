@@ -24,11 +24,8 @@ class RentController extends BaseController
             $response = Rent::all();
         }
         else if($user->role === 'free'){
-            // $this->checkExpirationDate();
             $rents = Auth::user()->rents;
-            // dd($rents);
-            // $rents = $this->checkExpirationDate();
-            // $rents = Auth::user()->rents;
+
             if(count($rents)){
                 $response = Auth::user()->rents; //->toQuery()->orderByDesc('id', 'desc')->get();
             }
@@ -133,12 +130,18 @@ class RentController extends BaseController
     public function checkExpirationDate() {
         $user = Auth::user();
         $rents = $user->rents;
+        $activeRents = [];
 
         foreach($rents as $rent) {
             if(!Carbon::now()->lte(Carbon::parse($rent->pivot->expiration_date))){
                 $this->destroy($rent->pivot->id);
             }
+            else{
+                $activeRents[] = $rent;
+            }
         }
+
+        return response()->json($activeRents);
     }
 
     //eliminar un alquiler

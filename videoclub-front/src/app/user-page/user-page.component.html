@@ -119,7 +119,7 @@
     <!-- Películas con alquiler activo -->
     <div *ngIf="user.role === 'free' && activeMovies.length > 0" class="rented-active-movies">
       <div class="user-seen-movies-header">
-        <p>Películas alquiladas</p>
+        <!-- <p>Películas alquiladas</p> -->
         <p id="subtitle">¡Todavía tienes tiempo de disfrutar de estas películas!</p>
       </div>
 
@@ -133,7 +133,8 @@
     </div>
 
     <div class="user-seen-movies-header">
-      <p>Películas vistas</p>
+      <p *ngIf="user.role === 'premium'">Películas vistas</p>
+      <p *ngIf="user.role === 'free'">Películas alquiladas</p>
     </div>
     <div class="user-seen-movies-posters" *ngIf="movies.length !== 0">
       <div *ngFor="let movie of movies">

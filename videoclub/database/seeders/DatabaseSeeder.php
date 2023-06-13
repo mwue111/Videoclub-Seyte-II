@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         PurchasesTableSeeder::class,
         GenresTableSeeder::class,
         AdminsTableSeeder::class,
+        PremiumsTableSeeder::class,
         FreesTableSeeder::class,
         RentsTableSeeder::class,
         MovieGenresSeeder::class,
