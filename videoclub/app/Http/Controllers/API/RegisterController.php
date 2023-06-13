@@ -56,7 +56,7 @@ class RegisterController extends BaseController
         Free::create(['user_id' => $user->id]);
         break;
       case 'premium':
-        Premium::create(['user_id' => $user->id, 'fecha_ultimo_pago' => now()]);
+        Premium::create(['user_id' => $user->id, 'payment_date' => now()]);
         break;
     }
 

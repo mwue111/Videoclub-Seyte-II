@@ -12,7 +12,7 @@ class Premium extends Model
   protected $table = 'premiums';
   protected $primaryKey = 'user_id';
   protected $fillable = [
-    'user_id', 'fecha_ultimo_pago'
+    'user_id', 'payment_date'
   ];
 
   public function user()

@@ -37,7 +37,7 @@ class PremiumController extends Controller
     $user = User::findOrFail($request->user_id);
 
     if($user){
-        $premium = Premium::create(['user_id' => $request->user_id, 'fecha_ultimo_pago' => now()]);
+        $premium = Premium::create(['user_id' => $request->user_id, 'payment_date' => now()]);
         $user->role = 'premium';
         $user->free->delete();
         $user->save();
