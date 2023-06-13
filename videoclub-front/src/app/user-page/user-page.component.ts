@@ -122,6 +122,8 @@ export class UserPageComponent implements OnInit{
     }
   }
 
+  //let days = new Date().getDay() - new Date("2013-02-20T12:01:04.753Z").getDay();
+
   getReviews(page: number){
     this._users.getReviews(this._auth.token, this.user.id, page)
               .subscribe((res: any) => {

@@ -119,14 +119,14 @@
     <!-- Películas con alquiler activo -->
     <div *ngIf="user.role === 'free' && activeMovies.length > 0" class="rented-active-movies">
       <div class="user-seen-movies-header">
-        <!-- <p>Películas alquiladas</p> -->
-        <p id="subtitle">¡Todavía tienes tiempo de disfrutar de estas películas!</p>
+        <p>Alquileres actuales</p>
       </div>
 
       <div class="user-seen-movies-posters" *ngIf="activeMovies.length !== 0">
-        <div *ngFor="let movie of activeMovies">
+        <div *ngFor="let movie of activeMovies" class="rented-movies-info">
           <a [routerLink]="['/pelicula', movie.id]">
             <img [src]="url + movie.poster" class="movie" alt="póster de la película {{ movie.title }}" id="poster">
+            <p id="expiration_time">¡Tienes <time>{{ movie.pivot.expiration_date | daysTo }}</time> días para disfrutarla!</p>
           </a>
         </div>
       </div>

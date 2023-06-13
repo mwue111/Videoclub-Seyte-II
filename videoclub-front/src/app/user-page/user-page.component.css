@@ -292,6 +292,12 @@ a{
   text-transform:initial;
 }
 
+#expiration_time{
+  font-size: 15px;
+  color: #159CA3;
+  text-transform: initial;
+}
+
 .user-seen-movies-posters{
   display: flex;
   flex-direction: row;
@@ -318,6 +324,7 @@ a{
   width: 200px;
   height: 250px;
   object-fit: cover;
+  margin: 0 auto;
 }
 
 .movie {
