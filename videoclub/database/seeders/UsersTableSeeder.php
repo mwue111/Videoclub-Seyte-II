@@ -45,5 +45,27 @@ class UsersTableSeeder extends Seeder
             'birth_date' => '2000/01/01',
             'role' => 'premium',
         ]);
+
+        DB::table('users')->insert([
+            'name' => 'usuario',
+            'username' => 'free2',
+            'email' => 'free@free.com',
+            'password' => '$2y$10$X617gDgMQgAIwctsZseuX.mP75.kWKFBlV7JsmPX1BI3aeX50nzTC',
+            'image' => 'user_profile_img/free@free.com/free2.jpg',
+            'surname' => 'free',
+            'birth_date' => '2000/01/01',
+            'role' => 'free',
+        ]);
+
+        DB::table('users')->insert([
+            'name' => 'usuario',
+            'username' => 'premium2',
+            'email' => 'premium@premium.com',
+            'password' => '$2y$10$ru7q4Tq8OKn3QpRUvNBRVOT5Qh3TeGtUs2ROH6APVjwl90OmDt442',
+            'image' => 'user_profile_img/premium@premium.com/free2.jpg',
+            'surname' => 'apellido',
+            'birth_date' => '2000/01/01',
+            'role' => 'premium',
+        ]);
     }
 }

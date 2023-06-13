@@ -135,7 +135,7 @@ class RentController extends BaseController
         $rents = $user->rents;
 
         foreach($rents as $rent) {
-            if(!Carbon::now()->lte($rent->pivot->expiration_date)){
+            if(!Carbon::now()->lte(Carbon::parse($rent->pivot->expiration_date))){
                 $this->destroy($rent->pivot->id);
             }
         }
@@ -143,10 +143,7 @@ class RentController extends BaseController
 
     //eliminar un alquiler
     public function destroy($id) {
-        //coger el registro de la tabla rents con el id indicado
-        // $rent = Rent::findOrFail($id);
-        $rent = Auth::user()->rents->pivot->id;
-        dd($rent);
-        //eliminar esos registros
+        $user = Auth::user();
+        $user->rents()->wherePivot('id', $id)->update(['rents.deleted_at' => now()]);
     }
 }
