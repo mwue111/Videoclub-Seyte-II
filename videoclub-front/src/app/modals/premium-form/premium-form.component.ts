@@ -30,8 +30,9 @@ export class PremiumFormComponent {
   }
 
   addOneYear() {
-    this.date = this.date.setFullYear(this.date.getFullYear() + 1);
-    console.log('año: ', new Date(this.date));
+    const date = this.date;
+    date.setFullYear(date.getFullYear() + 1);
+    this.date = date.toLocaleDateString('es-ES');
   }
 
   private initConfig(): void {
@@ -99,7 +100,7 @@ export class PremiumFormComponent {
       Swal.fire({
         icon: 'success',
         title:'¡Enhorabuena! ¡Ya eres Premium!',
-        text: `Disfruta de todas las películas de manera ilimitada hasta el ${this.date}`,
+        text: `¡Disfruta de todas las películas de manera ilimitada hasta el ${this.date}!`,
         confirmButtonColor: '#1874BA'
       }).then(res => {
         if(res.isConfirmed){
