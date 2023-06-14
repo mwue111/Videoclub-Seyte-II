@@ -384,16 +384,14 @@ export class UserPageComponent implements OnInit{
       confirmButtonText: 'Desuscribirme',
       cancelButtonText: '¡He cambiado de opinión!'
     }).then(res => {
-
       if(res.isConfirmed) {
         Swal.fire({
           icon: 'success',
-          title: 'Suscripción cancelada :(',
-          confirmButtonColor: '#1874BA'
+          title: 'Suscripción cancelada',
+          showConfirmButton: false
         })
 
-        this._users.cancelSub(this._auth.token).subscribe((res: any) => {
-          console.log('res al cancelar suscripción: ', res);
+        this._users.cancelSub(this._auth.token).subscribe(() => {
           window.location.reload();
         })
       }
