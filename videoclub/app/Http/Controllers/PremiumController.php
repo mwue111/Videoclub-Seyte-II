@@ -38,6 +38,7 @@ class PremiumController extends Controller
         $premium = Premium::create(['user_id' => $request->user_id, 'payment_date' => now()]);
         $user->role = 'premium';
         $user->free->delete();
+
         $user->save();
     }
 

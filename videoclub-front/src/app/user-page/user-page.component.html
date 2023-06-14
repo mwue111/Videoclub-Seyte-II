@@ -131,7 +131,7 @@
         <div *ngFor="let movie of activeMovies" class="rented-movies-info">
           <a [routerLink]="['/pelicula', movie.id]">
             <img [src]="url + movie.poster" class="movie" alt="póster de la película {{ movie.title }}" id="poster">
-            <p id="expiration_time">¡Tienes <time>{{ movie.pivot.expiration_date | daysTo }}</time> días para
+            <p id="expiration_time">¡Tienes <time>{{ movie.pivot.expiration_date | daysTo }}</time> para
               disfrutarla!</p>
           </a>
         </div>

@@ -17,7 +17,7 @@ class RentsTableSeeder extends Seeder
         DB::table('rents')->insert([
             'user_id' => 2,
             'movie_id' => 1,
-            'expiration_date' => Carbon::now()->addDays(15),
+            'expiration_date' => Carbon::now()->addDays(14),
         ]);
 
         DB::table('rents')->insert([
