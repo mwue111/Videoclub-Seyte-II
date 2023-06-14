@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             'username' => 'admin',
             'email' => 'admin@admin.com',
             'password' => '$2y$10$H6JH0Ak4RcxcnEXjml0nIe1/LmDAo2k5EC51o05x.C8SNeTVnIxAy',
-            'image' => 'url/de/imagen',
+            'image' => '',
             'surname' => 'apellido1',
             'birth_date' => '1985/01/01',
             'role' => 'admin',

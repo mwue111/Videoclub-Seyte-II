@@ -440,7 +440,8 @@ a {
   background: #ff9730;
 }
 
-.go-premium {
+.go-premium,
+.expiring-soon {
   background: #F5F3F4;
   border-radius: 15px;
   width: 40%;
@@ -475,6 +476,16 @@ a {
   font-size: 20px;
   padding: 10px 20px;
   margin-bottom: 30px;
+}
+
+.expiring-soon p{
+  font-size: 25px;
+}
+
+.expiring-soon span{
+  font-size: 26px;
+  font-weight: bolder;
+  color:#FF8811;
 }
 
 #go-to {

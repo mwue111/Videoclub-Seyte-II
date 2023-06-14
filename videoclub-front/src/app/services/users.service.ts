@@ -166,6 +166,41 @@ export class UsersService {
     // return this._http.post(this.url + `/nueva-vista/${user}`, { params: params, headers: headers })
   }
 
+  checkPremium(token: any): Observable<any> {
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+
+    return this._http.get(this.url + '/comprobar-premium', { headers:headers }).pipe(
+      map((auth: any) => {
+        console.log('auth: ', auth);
+        if(Array.isArray(auth)){
+          return auth;
+        }
+        else{
+          this.storeLocalStorageUpdated(token, auth);
+          return auth;
+        }
+      }),
+      catchError(err => {
+        console.log('error: ', err);
+        return of(err);
+      })
+    );
+
+    /*
+    return this._http.put(this.url + `/usuarios/${id}`, value, { headers: headers }).pipe(
+      map((auth: any) => {
+        console.log('auth: ', auth)
+        this.storeLocalStorageUpdated(token, auth);
+        return auth;
+      }),
+      catchError(err => {
+        return of(err)
+      })
+    )
+
+    */
+  }
+
   checkRents(token: any): Observable<any> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
@@ -206,20 +241,5 @@ export class UsersService {
         return of(err);
       })
     );
-
-    /*
-    return this._http.put(this.url + `/usuarios/${id}`, value, { headers: headers }).pipe(
-      map((auth: any) => {
-        console.log('auth: ', auth)
-        this.storeLocalStorageUpdated(token, auth);
-        return auth;
-      }),
-      catchError(err => {
-        return of(err)
-      })
-    )
-
-    */
-
   }
 }

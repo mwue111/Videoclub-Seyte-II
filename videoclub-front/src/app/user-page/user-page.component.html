@@ -103,6 +103,12 @@
       <button (click)="close()">Cancelar</button>
     </div>
 
+    <div class="expiring-soon" *ngIf="expiringSoon && user.role === 'premium' ">
+      <p *ngIf="!expiresTomorrow">¡Tu suscripción Premium caduca en <span>{{ daysToExpire }}</span> días!</p>
+      <p *ngIf="expiresTomorrow">¡Tu suscripción Premium caduca <span>{{ daysToExpire }}</span>!</p>
+      <!-- <button (click)="goPremium(user.id)">Renovar</button> -->
+    </div>
+
     <div class="go-premium" *ngIf="user.role === 'free'">
       <p>¿Quieres tener acceso ilimitado a nuestro catálogo?</p>
       <p>¡Hazte Premium por sólo <span>60€ al año</span> y olvídate de pasarte horas buscando esa película que quieres ver!</p>
