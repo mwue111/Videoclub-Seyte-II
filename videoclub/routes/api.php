@@ -63,6 +63,7 @@ Route::group(['middleware' => ['auth:api', 'cors']], function () {
     Route::get('resenas', 'ReviewController@index');
     Route::resource('alquiler', RentController::class);
     Route::get('profile', [RegisterController::class, 'profile']);
+    Route::post('cancelar-sub', 'PremiumController@cancelSub');
 });
 
 Route::middleware('auth:api')->post('logout', [RegisterController::class, 'logout']);

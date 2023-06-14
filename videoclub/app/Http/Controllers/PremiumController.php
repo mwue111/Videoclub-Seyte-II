@@ -78,4 +78,17 @@ class PremiumController extends Controller
 
     return response()->json($user);
   }
+
+  public function cancelSub() {
+    $user = Auth::user();
+
+    if($user){
+        $free = Free::create(['user_id' => $user->id]);
+        $user->role = 'free';
+        $user->premium->delete();
+        $user->save();
+    }
+
+    return response()->json($user);
+  }
 }

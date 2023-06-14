@@ -196,6 +196,11 @@
 
 </div>
 
+<div *ngIf="user.role === 'premium'" class="cancel-sub-container">
+  <p>¿Te has cansado de poder ver todas tus películas favoritas cuando quieras?</p>
+  <a (click)="cancelSub()">Cancelar suscripción</a>
+</div>
+
 <div *ngIf="reviews.length > 0" class="pagination">
   <app-pagination [data]="data" (changePage)="changePage($event)"></app-pagination>
 </div>

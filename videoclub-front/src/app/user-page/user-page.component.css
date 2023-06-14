@@ -491,3 +491,20 @@ a {
 #go-to {
   cursor: pointer;
 }
+
+.cancel-sub-container{
+  display: flex;
+  flex-direction: column;
+  background: #F5F3F4;
+  padding: 20px;
+  align-items: center;
+}
+
+.cancel-sub-container a{
+  color:#159CA3;
+  cursor: pointer;
+}
+
+.cancel-sub-container a:hover{
+  text-decoration: underline;
+}
