@@ -1,12 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
-// import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
-import {
-  PayPalScriptService,
-  IPayPalConfig,
-  NgxPaypalComponent,
-} from "ngx-paypal";
+import { ICreateOrderRequest, IPayPalConfig } from 'ngx-paypal';
 import { PAYPAL_CLIENT_ID } from 'src/app/config/config';
 import { AuthService } from 'src/app/modules/auth/_services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -21,25 +16,20 @@ export class PremiumFormComponent {
   public payPalConfig?: IPayPalConfig;
   premiumSubscription: string = '60';
   date: any = new Date();
-  private plans: any = []; //nuevo
-  public configs: any = {} //nuevo
 
   constructor(
     public dialogRef: MatDialogRef<any>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private _user: UsersService,
     private _auth: AuthService,
-    private payPalScriptService: PayPalScriptService  //nuevo
   ){}
 
   ngOnInit(): void {
     //nuevo:
-    this.plans.map((plan: any) => {
-      this.configs[plan.name] = this.getConfig(plan.id);
-    });
+
 
     //antiguo:
-    // this.initConfig();
+    this.initConfig();
     this.addOneYear();
   }
 
@@ -51,47 +41,7 @@ export class PremiumFormComponent {
   //############################################################
   //Aquí: https://stackoverflow.com/questions/63201776/paypal-subscription-integration-and-revise-subscription-issues
   //github: https://github.com/prettydev/ngx-paypal-subscription/blob/master/src/app/plan-list/plan-list.component.ts
-  getConfig(plan_id: any): IPayPalConfig {
-    return {
-      clientId: PAYPAL_CLIENT_ID,
-      currency: "EUR",
-      vault: "true",
-      style: {
-        label: "paypal",
-        layout: "vertical",
-        // size: "small",
-        shape: "pill",
-        color: "silver",
-        tagline: false,
-      },
-      //el error lo da por IPayPalConfig
-      createSubscription: function (data: any, actions: any) {
-        return actions.subscription.create({
-          plan_id,
-        });
-      },
 
-      onApprove: function (data, actions) {
-        console.log("subscription data:", data);
-        actions.subscription.get().then((details: any) => {
-          console.log("subscription details:", details);
-          alert("Success to subscribe!");
-        });
-      },
-
-      onCancel: (data, actions) => {
-        console.log("OnCancel", data, actions);
-      },
-
-      onError: (err) => {
-        console.log("OnError", err);
-      },
-
-      onClick: (data, actions) => {
-        console.log("Clicked:", data, actions);
-      },
-    };
-  }
   //############################################################
 
   private initConfig(): void {
