@@ -9,19 +9,21 @@ import { URL_SERVICES } from 'src/app/config/config';
 })
 export class CommentsService {
   private cache: any;
+  // private cache: { [movieId: number]: CommentInterface[] } = {};
   private cachedObservable!: Observable<any> | null;
+  // private cachedObservables: { [movieId: number]: Observable<CommentInterface[]> } = {};
 
   constructor(
     private _httpClient: HttpClient,
   ) {
   }
 
-  getComments(token: any): Observable<CommentInterface[]> {
-    let url = URL_SERVICES + '/resenas';
-    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+  // getComments(token: any): Observable<CommentInterface[]> {
+  //   let url = URL_SERVICES + '/resenas';
+  //   let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
-    return this._httpClient.get<CommentInterface[]>(url, { headers:headers });
-  }
+  //   return this._httpClient.get<CommentInterface[]>(url, { headers:headers });
+  // }
 
   getSingleComment(token: any, commentId: number): Observable<CommentInterface> {
     let url = URL_SERVICES + `/resena/${commentId}/pelicula`;
@@ -47,10 +49,14 @@ export class CommentsService {
             this.cache = res
           }),
           share(),
-          finalize(() => this.cachedObservable = null)
+          finalize(() => {
+            this.cachedObservable = null;
+            this.cache = null;  //invalida cache
+          })
       );
       observable = this.cachedObservable;
     }
+
     return observable;
   }
 

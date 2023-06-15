@@ -61,6 +61,8 @@ export class CommentComponent implements OnInit {
       this.highlight = true;
       this.username = user.username;
       this.avatar = user.image;
+      this.canEdit = this.commentOptions(null, user.id);
+      this.canDelete = this.commentOptions('delete', user.id);
     }
     else{
       user.map((username: any) => {
