@@ -23,6 +23,7 @@ class Movie extends Model
     'director',
     'file',
     'trailer',
+    'price',
   ];
 
   public function scopeFilter($query, array $filters) {

@@ -12,9 +12,11 @@ use Termwind\Components\Dd;
 
 class MovieController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   */
+  public function getAllMovies(Request $request) {
+    $movies = Movie::latest('created_at')->with('genres')->get();
+    return response()->json($movies);
+  }
+
   public function index(Request $request)
   {
     $amount = $request->input('cantidad');
@@ -58,6 +60,7 @@ class MovieController extends Controller
       'director' => 'required',
       'file' => 'required|file|mimes:mp4,mp3,wav',
       'trailer' => 'required|file|mimes:mp4,mp3,wav',
+      'price' => 'required|numeric'
     ]);
 
     $attributes['poster'] = request()->file('poster')->store('images', 'public');

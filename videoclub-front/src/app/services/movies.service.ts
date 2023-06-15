@@ -13,6 +13,11 @@ export class MoviesService {
     this.url = Global.url;
   }
 
+  getAllMovies(): Observable<any> {
+
+      return this._http.get(this.url + '/api/todas-las-peliculas');
+  }
+
   getMovies(amount: number, token: any): Observable<any> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     let params = new HttpParams().set('cantidad', amount.toString());

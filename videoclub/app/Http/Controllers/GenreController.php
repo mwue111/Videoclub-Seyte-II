@@ -122,8 +122,8 @@ class GenreController extends Controller
   public function getMovies(Request $request, $id)
   {
     $genre = Genre::findOrFail($id);
-
     $amount = $request->input('cantidad');
+
     if ($amount) {
       $movies = $genre->movies()->take($amount)->get();
     }
