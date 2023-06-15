@@ -1,4 +1,4 @@
- <div class="container">
+<div class="container">
   <div class="user-page-header">
     <div class="user-image" *ngIf="!isEditing">
       <div *ngIf="!user.image">
@@ -11,10 +11,7 @@
     <div class="user-image" *ngIf="isEditing">
       <form [formGroup]="editForm" (ngSubmit)="saveChanges()" enctype="multipart/form-data">
 
-        <div class="dropzone circle"
-            appDrag
-            (files)="fileDropped($event)"
-        >
+        <div class="dropzone circle" appDrag (files)="fileDropped($event)">
           <div *ngIf="user.image && !updatingImage">
             <a (click)="selectFile.click()" class="browser-link edit">
               <p class="edit-image-text">Arrastra o haz click para subir un nuevo avatar</p>
@@ -23,7 +20,8 @@
           </div>
 
           <div *ngIf="!user.image && !updatingImage" class="dropzone-text">
-            Arrastra tu nuevo avatar aquí o <a (click)="selectFile.click()" class="browser-link new">súbelo</a> desde tu equipo
+            Arrastra tu nuevo avatar aquí o <a (click)="selectFile.click()" class="browser-link new">súbelo</a> desde tu
+            equipo
           </div>
 
           <div *ngIf="updatingImage" class="updating">
@@ -37,12 +35,7 @@
           </div>
         </div>
 
-      <input  type="file"
-              #selectFile
-              id="selectFile"
-              formControlName="image"
-              (change)="onFileSelected($event)"
-      >
+        <input type="file" #selectFile id="selectFile" formControlName="image" (change)="onFileSelected($event)">
 
       </form>
     </div>
@@ -59,7 +52,7 @@
       </div>
 
       <div *ngIf="isEditing" class="user-edit-form">
-        <form [formGroup]="editForm" (ngSubmit)="saveChanges()" enctype="multipart/form-data" >
+        <form [formGroup]="editForm" (ngSubmit)="saveChanges()" enctype="multipart/form-data">
           <div class="form-group username">
             <input type="text" formControlName="username">
           </div>
@@ -110,6 +103,18 @@
       <button (click)="close()">Cancelar</button>
     </div>
 
+    <div class="expiring-soon" *ngIf="expiringSoon && user.role === 'premium' ">
+      <p *ngIf="!expiresTomorrow">¡Tu suscripción Premium caduca en <span>{{ daysToExpire }}</span> días!</p>
+      <p *ngIf="expiresTomorrow">¡Tu suscripción Premium caduca <span>{{ daysToExpire }}</span>!</p>
+      <!-- <button (click)="goPremium(user.id)">Renovar</button> -->
+    </div>
+
+    <div class="go-premium" *ngIf="user.role === 'free'">
+      <p>¿Quieres tener acceso ilimitado a nuestro catálogo?</p>
+      <p>¡Hazte Premium por sólo <span>60€ al año</span> y olvídate de pasarte horas buscando esa película que quieres ver!</p>
+      <button (click)="goPremium(user.id)">¡Hazte Premium!</button>
+    </div>
+
   </div>
 
 
@@ -126,7 +131,8 @@
         <div *ngFor="let movie of activeMovies" class="rented-movies-info">
           <a [routerLink]="['/pelicula', movie.id]">
             <img [src]="url + movie.poster" class="movie" alt="póster de la película {{ movie.title }}" id="poster">
-            <p id="expiration_time">¡Tienes <time>{{ movie.pivot.expiration_date | daysTo }}</time> días para disfrutarla!</p>
+            <p id="expiration_time">¡Tienes <time>{{ movie.pivot.expiration_date | daysTo }}</time> para
+              disfrutarla!</p>
           </a>
         </div>
       </div>
@@ -159,7 +165,8 @@
         <div class="left">
           <div class="movie-reviewed-poster">
             <a [routerLink]="['/pelicula', review.movie_id.id]">
-              <img [src]="url + review.movie_id.poster" alt="Póster de la película {{ review.movie_id.title }}" id="review-poster">
+              <img [src]="url + review.movie_id.poster" alt="Póster de la película {{ review.movie_id.title }}"
+                id="review-poster">
             </a>
           </div>
         </div>
@@ -187,6 +194,11 @@
     <p class="no-data">¡No has hecho ninguna reseña todavía!</p>
   </div>
 
+</div>
+
+<div *ngIf="user.role === 'premium'" class="cancel-sub-container">
+  <p>¿Te has cansado de poder ver todas tus películas favoritas cuando quieras?</p>
+  <a (click)="cancelSub()">Cancelar suscripción</a>
 </div>
 
 <div *ngIf="reviews.length > 0" class="pagination">

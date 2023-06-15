@@ -106,7 +106,7 @@ export class UsersService {
 
     return this._http.put(this.url + `/usuarios/${id}`, value, { headers: headers }).pipe(
       map((auth: any) => {
-        console.log('auth: ', auth)
+        // console.log('auth: ', auth)
         this.storeLocalStorageUpdated(token, auth);
         return auth;
       }),
@@ -119,7 +119,7 @@ export class UsersService {
   resetPassword(token: any, data: any): Observable<Object> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
-    console.log('valores recibidos al cambiar la contraseña: ', data);
+    // console.log('valores recibidos al cambiar la contraseña: ', data);
     return this._http.post(this.url + '/update-password', data, { headers: headers })
   }
 
@@ -135,7 +135,7 @@ export class UsersService {
         return res;
       }),
       catchError((err: any) => {
-        console.log('error: ', err);
+        // console.log('error: ', err);
         return of(err);
       })
     )
@@ -152,18 +152,31 @@ export class UsersService {
         return res;
       }),
       catchError((err: any) => {
-        console.log('error: ', err)
+        // console.log('error: ', err)
         return of(err);
       })
     )
+  }
 
-    // let headers = new HttpHeaders()
-    // .set('Authorization', 'Bearer ' + token)
-    // .set('Content-Type', 'application/json');
+  checkPremium(token: any): Observable<any> {
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
-    // let params = new HttpParams().set('movie_id', movie.toString());
-
-    // return this._http.post(this.url + `/nueva-vista/${user}`, { params: params, headers: headers })
+    return this._http.get(this.url + '/comprobar-premium', { headers:headers }).pipe(
+      map((auth: any) => {
+        // console.log('auth: ', auth);
+        if(Array.isArray(auth)){
+          return auth;
+        }
+        else{
+          this.storeLocalStorageUpdated(token, auth);
+          return auth;
+        }
+      }),
+      catchError(err => {
+        // console.log('error: ', err);
+        return of(err);
+      })
+    );
   }
 
   checkRents(token: any): Observable<any> {
@@ -188,5 +201,38 @@ export class UsersService {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
     return this._http.get(this.url + `/resenas-hechas/${id}/${page}`, { headers:headers });
+  }
+
+  goPremium(token: any, id: number): Observable<any> {
+    const body = {
+      user_id: id
+    }
+
+    return this._http.post(this.url + '/premium', body).pipe(
+      map((auth: any) => {
+        // console.log('auth: ', auth);
+        this.storeLocalStorageUpdated(token, auth);
+        return auth;
+      }),
+      catchError(err => {
+        console.log('Ha ocurrido un error: ', err);
+        return of(err);
+      })
+    );
+  }
+
+  cancelSub(token: any): Observable<any> {
+    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+
+    return this._http.post(this.url + '/cancelar-sub', null, { headers:headers }).pipe(
+      map((auth: any) => {
+        console.log('auth: ', auth);
+        this.storeLocalStorageUpdated(token, auth);
+        return auth;
+      }),
+      catchError(err => {
+        return of(err);
+      })
+    );
   }
 }

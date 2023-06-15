@@ -17,12 +17,13 @@ class PremiumsTableSeeder extends Seeder
     //
     DB::table('premiums')->insert([
       'user_id' => 1,
-      'fecha_ultimo_pago' => '2021-07-22',
+      'payment_date' => '2021-07-22',
     ]);
 
     DB::table('premiums')->insert([
       'user_id' => 5,
-      'fecha_ultimo_pago' => Carbon::now(),
+    //   'payment_date' => '2022-06-15',
+      'payment_date' => '2022-06-20',
     ]);
   }
 }

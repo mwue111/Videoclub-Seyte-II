@@ -29,6 +29,7 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [RegisterController::class, 'login']);
 
 Route::group(['middleware' => ['guest']], function () {
+    Route::post('premium', 'PremiumController@store');
     Route::get('autor-resena/{id}', 'ReviewController@getAuthor');
     Route::get('resenas', 'ReviewController@index');
     Route::post('resenas', 'ReviewController@store');
@@ -52,6 +53,7 @@ Route::group(['middleware' => ['auth:api', 'cors']], function () {
     Route::get('peliculas-vistas', 'UserViewController@index');
     Route::get('peliculas-alquiladas', 'RentController@index');
     Route::get('comprobar-alquiler', 'RentController@checkExpirationDate');
+    Route::get('comprobar-premium', 'PremiumController@checkPremium');
     Route::get('resenas-hechas/{id}/{page}', 'UserViewController@show');
     Route::post('nueva-vista/{id}', 'UserViewController@store');
     Route::post('nuevo-alquiler', 'RentController@store');
@@ -61,6 +63,7 @@ Route::group(['middleware' => ['auth:api', 'cors']], function () {
     Route::get('resenas', 'ReviewController@index');
     Route::resource('alquiler', RentController::class);
     Route::get('profile', [RegisterController::class, 'profile']);
+    Route::post('cancelar-sub', 'PremiumController@cancelSub');
 });
 
 Route::middleware('auth:api')->post('logout', [RegisterController::class, 'logout']);

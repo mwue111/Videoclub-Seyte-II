@@ -16,20 +16,20 @@ class UsersTableSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'nombre1',
             'username' => 'admin',
-            'email' => 'nombre1@test.com',
-            'password' => '12345678',
-            'image' => 'url/de/imagen',
+            'email' => 'admin@admin.com',
+            'password' => '$2y$10$H6JH0Ak4RcxcnEXjml0nIe1/LmDAo2k5EC51o05x.C8SNeTVnIxAy',
+            'image' => '',
             'surname' => 'apellido1',
             'birth_date' => '1985/01/01',
             'role' => 'admin',
         ]);
 
         DB::table('users')->insert([
-            'name' => 'nombre2',
-            'username' => 'free',
-            'email' => 'free@test.com',
-            'password' => '12345678',
-            'image' => 'url/de/imagen',
+            'name' => 'free-a-premium',
+            'username' => 'free-premium',
+            'email' => 'freetopremium@test.com',
+            'password' => '$2y$10$qjw7WP7HPQNvB/mPGYa5medJ4qVXmRERXP8/vJN3ORKEd7wx2kr.m',
+            'image' => 'user_profile_img/freetopremium@test.com/sally.jpg',
             'surname' => 'apellido2',
             'birth_date' => '1990/01/01',
             'role' => 'free',
@@ -37,10 +37,10 @@ class UsersTableSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => 'nombre3',
-            'username' => 'premium',
-            'email' => 'premium@test.com',
-            'password' => '12345678',
-            'image' => 'url/de/imagen',
+            'username' => 'premium-free',
+            'email' => 'premiumtofree@test.com',
+            'password' => '$2y$10$Y7OGprK8bk0guwuY5a/EDOjZEdptmopOZSXS1qnoPhHWncLsv0WTW',
+            'image' => 'user_profile_img/premiumtofree@test.com/knuckles.jpg',
             'surname' => 'apellido3',
             'birth_date' => '2000/01/01',
             'role' => 'premium',

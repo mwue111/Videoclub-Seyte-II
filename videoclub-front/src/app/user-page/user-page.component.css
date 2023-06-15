@@ -1,22 +1,23 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 html {
   scroll-behavior: smooth;
 }
 
-a{
+a {
   text-decoration: none;
   color: #1874BA;
 }
 
-.container{
+.container {
   margin: 50px;
   padding: 50px;
   /*height: 1000px;   para que el footer quede abajo */
 }
 
-.user-page-header{
+.user-page-header {
   display: flex;
-  justify-content:flex-start;
+  justify-content: flex-start;
   padding: 15px;
   height: 200px;
 }
@@ -36,31 +37,31 @@ a{
   object-fit: cover;
 }
 
-.user-data{
+.user-data {
   width: 30%;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.user-data p{
+.user-data p {
   font-size: 20px;
   margin: 30px 0;
 }
 
-.user-data p:first-child{
+.user-data p:first-child {
   font-weight: bold;
   font-size: 30px;
   margin-top: 10px;
 }
 
 .edit-button-container,
-.cancel-button-container{
+.cancel-button-container {
   width: 100px;
 }
 
 .edit-button-container button,
-.cancel-button-container button{
+.cancel-button-container button {
   font-size: 20px;
   border: none;
   box-shadow: none;
@@ -71,32 +72,32 @@ a{
   padding: 10px 20px;
 }
 
-.edit-button-container button{
+.edit-button-container button {
   background-color: #1874BA;
 }
 
-.cancel-button-container button{
+.cancel-button-container button {
   width: 120%;
   background-color: #FF8811;
 }
 
-.edit-button-container button:hover{
+.edit-button-container button:hover {
   background: #125385;
 }
 
-.edit-button-container button:active{
+.edit-button-container button:active {
   background: #1c7fca;
 }
 
-.cancel-button-container button:hover{
+.cancel-button-container button:hover {
   background: #e3790f;
 }
 
-.cancel-button-container button:active{
+.cancel-button-container button:active {
   background: #ff9a35;
 }
 
-.user-edit-form{
+.user-edit-form {
   height: 100%;
   width: 90%;
   display: flex;
@@ -104,7 +105,7 @@ a{
   overflow-y: scroll;
 }
 
-.user-edit-form::-webkit-scrollbar-track{
+.user-edit-form::-webkit-scrollbar-track {
   padding: 2px 0;
 }
 
@@ -118,7 +119,7 @@ a{
   border: none;
 }
 
-.user-edit-form .form-group input{
+.user-edit-form .form-group input {
   border: none;
   padding: 5px;
   margin: 5px 0;
@@ -128,23 +129,23 @@ a{
   font-size: 20px;
 }
 
-.user-edit-form .username input{
+.user-edit-form .username input {
   margin-top: 0;
 }
 
-.user-edit-form .username input{
+.user-edit-form .username input {
   font-weight: bold;
   font-size: 30px;
 }
 
-.pass-container{
+.pass-container {
   /* background: yellowgreen; */
   display: flex;
   flex-direction: column;
   margin-top: 20px;
 }
 
-.pass-container label{
+.pass-container label {
   color: #1874BA;
   font-size: 15px;
   width: 80%;
@@ -159,7 +160,7 @@ a{
   justify-content: center;
 }
 
-.button-container input{
+.button-container input {
   background-color: #1874BA;
   color: white;
   width: 100%;
@@ -175,7 +176,7 @@ a{
   background-color: #125385;
 }
 
-.button-container input:active{
+.button-container input:active {
   background-color: #1c7fca;
 }
 
@@ -184,17 +185,17 @@ a{
   cursor: default;
 }
 
-.user-data .message-container p{
+.user-data .message-container p {
   color: #FF8811;
   font-size: 20px;
   margin-top: 0px;
 }
 
-#previous-image{
+#previous-image {
   opacity: .4;
 }
 
-.dropzone{
+.dropzone {
   background: #eee;
   border: 2px dashed #aaa;
 }
@@ -211,25 +212,25 @@ a{
   cursor: pointer;
 }
 
-.new{
+.new {
   color: #125385;
   font-weight: light;
 }
 
-.new:hover{
+.new:hover {
   color: #0d3b5e;
   text-decoration: underline;
 }
 
-.edit:hover{
+.edit:hover {
   opacity: .8;
 }
 
-#selectFile{
+#selectFile {
   display: none;
 }
 
-.edit-image-text{
+.edit-image-text {
   position: absolute;
   margin: 50px;
   font-size: 20px;
@@ -239,15 +240,15 @@ a{
   text-align: center;
 }
 
-.updating{
+.updating {
   display: flex;
 }
 
-.updating img{
+.updating img {
   filter: grayscale(100%);
 }
 
-.editing-text{
+.editing-text {
   position: absolute;
   margin: 30px 50px;
   font-size: 20px;
@@ -275,7 +276,7 @@ a{
   font-size: 22px;
 }
 
-.no-data{
+.no-data {
   padding: 50px;
   border-radius: 15px;
   font-size: 20px;
@@ -284,28 +285,28 @@ a{
   text-align: center;
 }
 
-.rented-active-movies{
+.rented-active-movies {
   margin-bottom: 100px;
 }
 
-#subtitle{
-  text-transform:initial;
+#subtitle {
+  text-transform: initial;
 }
 
-#expiration_time{
+#expiration_time {
   font-size: 15px;
   color: #159CA3;
   text-transform: initial;
 }
 
-.user-seen-movies-posters{
+.user-seen-movies-posters {
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
   overflow-y: hidden;
 }
 
-.user-seen-movies-posters::-webkit-scrollbar-track{
+.user-seen-movies-posters::-webkit-scrollbar-track {
   padding: 2px 0;
 }
 
@@ -320,7 +321,7 @@ a{
   border: none;
 }
 
-#poster{
+#poster {
   width: 200px;
   height: 250px;
   object-fit: cover;
@@ -340,11 +341,11 @@ a{
   -moz-transform: scale3d(1.1, 1.1, 0.3);
 }
 
-.movie{
+.movie {
   padding: 20px;
 }
 
-.user-reviews{
+.user-reviews {
   display: flex;
   flex-direction: column;
   width: 90%;
@@ -365,17 +366,17 @@ a{
   object-fit: cover;
 }
 
-.right{
+.right {
   width: 70%;
   /* margin-left: 50px; */
 }
 
-.review-title{
+.review-title {
   color: #1874BA;
   font-size: 22px;
 }
 
-.review-title p{
+.review-title p {
   margin: 0;
 }
 
@@ -383,25 +384,25 @@ a{
   text-transform: uppercase;
 }
 
-.comment-date p{
+.comment-date p {
   color: #000000;
   font-size: small;
   margin-bottom: 5px;
   padding: 0;
 }
 
-.review-body{
+.review-body {
   font-size: 17px;
   text-align: justify;
   white-space: pre-line;
 }
 
-#review-poster{
+#review-poster {
   transition: translate(0px, 5px);
   transition-duration: 500ms;
 }
 
-#review-poster:hover{
+#review-poster:hover {
   box-shadow: 0 2px 2px 0 #000000, 0 2px 2px 0 #000000;
   transform: translate(0px, 5px);
   transition-duration: 500ms;
@@ -413,7 +414,8 @@ a{
   display: flex;
 }
 
-.comment-action-button {
+.comment-action-button,
+.go-premium button {
   border: none;
   box-shadow: none;
   cursor: pointer;
@@ -423,18 +425,86 @@ a{
   color: #FFFFFF;
 }
 
-.delete {
+.delete,
+.go-premium button {
   background: #FF8811;
 }
 
-.delete:hover{
+.delete:hover,
+.go-premium button:hover {
   background: #c96b0e;
 }
 
-.delete:active{
+.delete:active,
+.go-premium button:active {
   background: #ff9730;
 }
 
-#go-to{
+.go-premium,
+.expiring-soon {
+  background: #F5F3F4;
+  border-radius: 15px;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 50px;
+  margin: 0 50px;
+}
+
+.go-premium p:first-child{
+  font-size: 25px;
+  font-weight: bolder;
+  color: #159CA3;
+  margin-top: 30px;
+}
+
+.go-premium p {
+  padding: 10px;
+  font-size: 20px
+}
+
+.go-premium span{
+  color: #1874BA;
+  font-weight: bolder;
+  font-size: 21px;
+}
+
+.go-premium button {
+  font-size: 20px;
+  padding: 10px 20px;
+  margin-bottom: 30px;
+}
+
+.expiring-soon p{
+  font-size: 25px;
+}
+
+.expiring-soon span{
+  font-size: 26px;
+  font-weight: bolder;
+  color:#FF8811;
+}
+
+#go-to {
   cursor: pointer;
+}
+
+.cancel-sub-container{
+  display: flex;
+  flex-direction: column;
+  background: #F5F3F4;
+  padding: 20px;
+  align-items: center;
+}
+
+.cancel-sub-container a{
+  color:#159CA3;
+  cursor: pointer;
+}
+
+.cancel-sub-container a:hover{
+  text-decoration: underline;
 }

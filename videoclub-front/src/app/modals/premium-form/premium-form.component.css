@@ -1,0 +1,64 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.dialog-content {
+  flex-grow: 2;
+  font-size: 20px;
+  margin: 50px 30px 0;
+  line-height: 35px;
+}
+
+.dialog-content p:first-child {
+  font-size: 30px;
+  color: #1874BA;
+  font-weight: bolder;
+}
+
+.dialog-content p {
+  padding: 10px;
+  color: black;
+}
+
+.dialog-content span {
+  font-size: 21px;
+  color: #159CA3;
+  font-weight: bolder;
+}
+
+.dialog-footer {
+  flex-grow: 1;
+  margin-bottom: 50px;
+}
+
+.dialog-footer button {
+  margin: 5px;
+  font-size: 20px;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 40px;
+  color: white;
+  padding: 10px 20px;
+}
+
+#cancel-button {
+  background: #FF8811;
+}
+
+.dialog-footer #cancel-button:hover {
+  background: #d4710e;
+}
+
+.dialog-footer #cancel-button:active {
+  background: #ff962c;
+}
+
+ngx-paypal {
+  width: 100%;
+}

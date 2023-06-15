@@ -4,15 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Premium extends Model
 {
-  use HasFactory;
+  use HasFactory, SoftDeletes;
 
   protected $table = 'premiums';
   protected $primaryKey = 'user_id';
   protected $fillable = [
-    'user_id', 'fecha_ultimo_pago'
+    'user_id', 'payment_date'
   ];
 
   public function user()
