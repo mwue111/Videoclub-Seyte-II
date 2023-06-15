@@ -1,5 +1,14 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+a{
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a h3:hover{
+  color:#3193dd;
+}
+
 .comment{
   display:flex;
   margin: 20px;

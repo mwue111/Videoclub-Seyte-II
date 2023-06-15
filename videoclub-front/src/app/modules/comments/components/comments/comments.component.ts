@@ -51,7 +51,7 @@ export class CommentsComponent implements OnInit {
         this.fetchSingleComment(this.reviewId);
       }
     })
-    console.log('user: ', this.user);
+    // console.log('user: ', this.user);
   }
 
   fetchSingleComment(reviewId: number) {
@@ -59,6 +59,7 @@ export class CommentsComponent implements OnInit {
         .subscribe((res: any) => {
           console.log('Comentario destacado: ', res);
           this.highlightedReview = res;
+          this.highlightedReview.user_id = res.user;
           this.comments = this.comments.filter((comment: any) => comment.id !== this.highlightedReview.id);
         })
   }

@@ -60,7 +60,8 @@ class ReviewController extends Controller
    */
   public function show($review)
   {
-      $review = Review::where('id', '=', $review)->first();
+      $review = Review::where('id', '=', $review)->with('user')->first();
+
       return response()->json($review);
     //   dd($review);
     // return view('reviews.show', ['review' => $review]);

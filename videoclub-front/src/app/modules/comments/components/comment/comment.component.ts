@@ -32,6 +32,7 @@ export class CommentComponent implements OnInit {
   displayComment: boolean = true;
   canEdit: boolean = true;
   canDelete: boolean = true;
+  highlight: boolean = false;
   activeCommentType = ActiveCommentTypeEnum;
 
   constructor(
@@ -47,6 +48,7 @@ export class CommentComponent implements OnInit {
 
   ngOnInit() {
     this.userData(this.comment.user_id);
+    // console.log('this.comment.user_id: ', this.comment.user_id);
   }
 
   userData(user: any){
@@ -54,6 +56,11 @@ export class CommentComponent implements OnInit {
       this.usernames.push('Anónimo');
       this.canEdit = this.commentOptions(null, user);
       this.canDelete = this.commentOptions('delete', user);
+    }
+    else if (!Array.isArray(user)) {
+      this.highlight = true;
+      this.username = user.username;
+      this.avatar = user.image;
     }
     else{
       user.map((username: any) => {
