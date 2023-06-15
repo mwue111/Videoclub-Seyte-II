@@ -31,6 +31,9 @@ export class UserPageComponent implements OnInit{
   watchedMovies!: boolean;
   reviews: any = [];
   activeMovies: any = [];
+  expiringSoon: boolean = false;
+  daysToExpire: number = 0;
+  expiresTomorrow: boolean = false;
   //paginación
   data: any;
   currentPage!: number;
@@ -68,6 +71,9 @@ export class UserPageComponent implements OnInit{
       if(this.user.role === 'free'){
         this.checkRentedMovies();
       }
+      else if(this.user.role === 'premium') {
+        this.checkPremiumStatus();
+      }
       this.watchedMovies = true;
       this.getViews();
       this.getReviews(this.currentPage);
@@ -87,12 +93,28 @@ export class UserPageComponent implements OnInit{
   checkRentedMovies() {
     console.log('chequeando alquileres');
     this._users.checkRents(this._auth.token).subscribe((res: any) => {
-      console.log('res: ', res);
+      console.log('res en checkRentedMovies: ', res);
+    })
+  }
+
+  checkPremiumStatus() {
+    this._users.checkPremium(this._auth.token).subscribe((res: any) => {
+      if(res.role === 'free'){
+        window.location.reload();
+      }
+      if(Array.isArray(res)){
+        // console.log('Caduca en 7 días: ', res);
+        this.expiringSoon = true;
+        this.daysToExpire = res[0];
+        if(res[0] === 'mañana'){
+          this.expiresTomorrow = true;
+        }
+      }
     })
   }
 
   getViews(){
-    console.log('usuario: ', this.user);
+    // console.log('usuario: ', this.user);
     if(this.user.role === 'premium'){
       this._users.getViews(this._auth.token)
                 .subscribe((res: any) => {
@@ -246,7 +268,7 @@ export class UserPageComponent implements OnInit{
                 }
 
               if(this.editForm.value.image || this.userImage !== undefined){
-                console.log('hay imagen');
+                // console.log('hay imagen');
                 this.editForm.value.image = this.userImage;
 
                 this._users.editUserImage(this._auth.token, this.user.id, this.editForm.value.image)
@@ -264,7 +286,7 @@ export class UserPageComponent implements OnInit{
           })
         )
         .subscribe((res: any) => {
-          console.log('res sin imagen: ', res);
+          // console.log('res sin imagen: ', res);
           if(res){
             if(res.error){
               this.editForm.controls['password'].reset();
@@ -347,6 +369,33 @@ export class UserPageComponent implements OnInit{
       }
     }
     return reader.readAsDataURL(file)
+  }
+
+  cancelSub(){
+    Swal.fire({
+      icon: 'warning',
+      title: '¿Estás seguro/a?',
+      text: 'Si cancelas la suscripción, perderás los privilegios de ser Premium.',
+      showCloseButton: true,
+      showCancelButton: true,
+      focusCancel: true,
+      confirmButtonColor: '#FF8811',
+      cancelButtonColor: '#1874BA',
+      confirmButtonText: 'Desuscribirme',
+      cancelButtonText: '¡He cambiado de opinión!'
+    }).then(res => {
+      if(res.isConfirmed) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Suscripción cancelada',
+          showConfirmButton: false
+        })
+
+        this._users.cancelSub(this._auth.token).subscribe(() => {
+          window.location.reload();
+        })
+      }
+    })
   }
 
   changePage(page: number | null){

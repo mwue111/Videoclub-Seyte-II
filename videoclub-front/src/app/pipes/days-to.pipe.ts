@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DaysToPipe implements PipeTransform {
 
-  transform(value: any): number {
+  transform(value: any): string {
     const _MS_PER_DAY = 1000 * 60 * 60 * 24;
     let expDate = new Date(value);
     let today = new Date();
@@ -16,7 +16,13 @@ export class DaysToPipe implements PipeTransform {
 
     const diff = Math.floor((utc1 - utc2) / _MS_PER_DAY);
 
-    return diff;
+    let stringDiff = `${diff} días`;
+
+    if(diff === 1){
+      stringDiff = `${diff} día`
+    }
+
+    return stringDiff;
   }
 
 }

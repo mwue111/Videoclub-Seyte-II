@@ -22,7 +22,8 @@ class PremiumsTableSeeder extends Seeder
 
     DB::table('premiums')->insert([
       'user_id' => 5,
-      'payment_date' => Carbon::now(),
+    //   'payment_date' => '2022-06-15',
+      'payment_date' => '2022-06-20',
     ]);
   }
 }

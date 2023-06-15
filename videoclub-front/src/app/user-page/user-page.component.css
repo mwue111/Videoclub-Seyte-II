@@ -440,7 +440,8 @@ a {
   background: #ff9730;
 }
 
-.go-premium {
+.go-premium,
+.expiring-soon {
   background: #F5F3F4;
   border-radius: 15px;
   width: 40%;
@@ -477,6 +478,33 @@ a {
   margin-bottom: 30px;
 }
 
+.expiring-soon p{
+  font-size: 25px;
+}
+
+.expiring-soon span{
+  font-size: 26px;
+  font-weight: bolder;
+  color:#FF8811;
+}
+
 #go-to {
   cursor: pointer;
+}
+
+.cancel-sub-container{
+  display: flex;
+  flex-direction: column;
+  background: #F5F3F4;
+  padding: 20px;
+  align-items: center;
+}
+
+.cancel-sub-container a{
+  color:#159CA3;
+  cursor: pointer;
+}
+
+.cancel-sub-container a:hover{
+  text-decoration: underline;
 }
