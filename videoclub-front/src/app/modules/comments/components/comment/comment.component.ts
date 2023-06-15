@@ -27,6 +27,8 @@ export class CommentComponent implements OnInit {
   logged!:boolean;
   username: string = '';
   usernames: any = [];
+  avatar: string = '';
+  hasAvatar: boolean = true;
   displayComment: boolean = true;
   canEdit: boolean = true;
   canDelete: boolean = true;
@@ -44,8 +46,7 @@ export class CommentComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('comentario recibido: ', this.comment);
-      this.userData(this.comment.user_id);
+    this.userData(this.comment.user_id);
   }
 
   userData(user: any){
@@ -61,6 +62,14 @@ export class CommentComponent implements OnInit {
         }
         else{
           this.usernames.push('Anónimo');
+        }
+
+        if(username.image){
+          this.avatar = username.image;
+        }
+        else{
+          this.hasAvatar = false;
+          this.avatar = 'https://i.pravatar.cc/100';
         }
         this.canEdit = this.commentOptions(null, username.id);
         this.canDelete = this.commentOptions('delete', username.id);
