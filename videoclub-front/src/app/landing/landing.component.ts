@@ -3,6 +3,7 @@ import { MoviesService } from '../services/movies.service';
 import { GenresService } from '../services/genres.service';
 import { URL_BACKEND } from '../config/config';
 import { AuthService } from '../modules/auth/_services/auth.service';
+import axios from 'axios';
 
 @Component({
   selector: 'app-landing',

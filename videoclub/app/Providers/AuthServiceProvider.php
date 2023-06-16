@@ -14,7 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**
@@ -23,7 +23,8 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //Passport::hashClientSecrets();
-        //Passport::routes();
-        //$this->registerPolicies();
+        // Passport::routes();  //Since version 11 passport's routes have been moved to a dedicated route file. You can remove the Passport::routes() call from your application's service provider. https://stackoverflow.com/questions/74134310/call-to-undefined-method-laravel-passport-passportroutes
+
+        $this->registerPolicies();
     }
 }
