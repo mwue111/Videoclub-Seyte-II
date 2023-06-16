@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+// use App\Http\Controllers\API\RegisterController;
+// use App\Http\Controllers\API\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
   return view('welcome');
 });
+
+// Route::post('register', 'RegisterController@register');
+// Route::post('login', 'RegisterController@login');
+Route::get('admin-login', 'AdminController@loginForm');
+Route::post('admin', 'AdminController@login')->name('admin.login');
 
 // Route::get('/', 'MovieController@index');
 
