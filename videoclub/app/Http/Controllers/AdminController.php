@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\Movie;
 
 class AdminController extends Controller
 {
@@ -20,9 +21,5 @@ class AdminController extends Controller
         $admin = Admin::findOrFail($id);
         $admin->user;
         return $admin;
-    }
-
-    public function login(Request $request) {
-        return 'ok';
     }
 }

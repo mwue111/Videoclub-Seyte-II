@@ -9,9 +9,8 @@ import { URL_SERVICES } from 'src/app/config/config';
 })
 export class CommentsService {
   private cache: any;
-  // private cache: { [movieId: number]: CommentInterface[] } = {};
   private cachedObservable!: Observable<any> | null;
-  // private cachedObservables: { [movieId: number]: Observable<CommentInterface[]> } = {};
+  private diffMovie: boolean = false;
 
   constructor(
     private _httpClient: HttpClient,
@@ -37,10 +36,16 @@ export class CommentsService {
     let url = URL_SERVICES + `/resenas/pelicula/${id}/${page}`
     let headers = new HttpHeaders().set('Authorization', 'Bearer' + token);
 
-    if(this.cache && this.cache.current_page === page && changedComment === null){
+    if(this.cache && this.cache.data && this.cache.data[0]){
+      if(id !== this.cache.data[0].movie_id){
+        this.diffMovie = true;
+      }
+    }
+
+    if(this.cache && this.cache.current_page === page && changedComment === null && !this.diffMovie){
       observable = of(this.cache)
     }
-    else if(this.cachedObservable && changedComment === null) {
+    else if(this.cachedObservable && changedComment === null && !this.diffMovie) {
       observable = this.cachedObservable;
     }
     else{
@@ -51,7 +56,6 @@ export class CommentsService {
           share(),
           finalize(() => {
             this.cachedObservable = null;
-            this.cache = null;  //invalida cache
           })
       );
       observable = this.cachedObservable;

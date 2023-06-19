@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Models\Free;
 use App\Models\Premium;
+use App\Models\Movie;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use Laravel\Passport\Passport;
@@ -16,6 +17,11 @@ use Hash;
 
 class RegisterController extends BaseController
 {
+
+    public function create() {
+        return view('register.create');
+    }
+
   /**
    * Register api
    *
@@ -24,30 +30,27 @@ class RegisterController extends BaseController
   public function register(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'email' => 'required|email',
+      'email' => 'required|email|unique:users,email',
       'birth_date' => 'required',
-      'password' => 'required',
+      'password' => 'required|min:7|max:255',
       'c_password' => 'required|same:password',
     ]);
 
     if ($validator->fails()) {
       return $this->sendError('Validation Error.', $validator->errors());
     }
+
     $input = $request->all();
-    $input['password'] = bcrypt($input['password']);
+    $input['password'] = bcrypt($input['password']);    //esto se puede hacer con un mutador en el modelo de usuario
     $user = User::create($input);
 
-    if($user->email === 'premium@premium.com'){
-        $user->role = 'premium';
-    }
-    else if($user->email === 'admin@admin.com'){
-        $user->role = 'admin';
-    }
-    else{
+    if($request->path() === 'api/register'){
         $user->role = 'free';
     }
+    else{
+        $user->role = 'admin';
+    }
 
-    $user->save();
     switch ($user->role) {
       case 'admin':
         Admin::create(['user_id' => $user->id]);
@@ -63,7 +66,16 @@ class RegisterController extends BaseController
     $success['token'] =  $user->createToken('MyApp')->accessToken;
     $success['name'] =  $user->name;
     $user->save();
-    return $this->sendResponse($success, 'Registro realizado con éxito.');
+
+    if($request->path() === 'api/register') {
+        return $this->sendResponse($success, 'Registro realizado con éxito.');
+    }
+    else{
+        auth()->login($user);
+        // session()->flash('success', '¡Tu cuenta se ha creado!');
+        // return view('movies.index', ['movies' => Movie::latest()->paginate(5)]);
+        return redirect('/')->with('success', '¡Tu cuenta se ha creado!');
+    }
   }
 
   /**
@@ -89,7 +101,13 @@ class RegisterController extends BaseController
         'user' => Auth::user()
       ];
 
-      return $this->sendResponse($success, 'Has iniciado sesión.');
+      if($request->path() === 'api/login') {
+          return $this->sendResponse($success, 'Has iniciado sesión.');
+      }
+      else{
+        return view('movies.index', ['movies' => Movie::latest()->paginate(5)]);
+      }
+
     } else {
       return $this->sendError('Unauthorised.', ['error' => 'Unauthorized']);
     }
@@ -108,8 +126,14 @@ class RegisterController extends BaseController
 
   public function logout(Request $request)
   {
-    $token = $request->user()->token();
-    $token->revoke();
-    return response(['message' => 'Has cerrado sesión.'], 200);
+      if($request->path() === 'api/logout'){
+        $token = $request->user()->token();
+        $token->revoke();
+        return response(['message' => 'Has cerrado sesión.'], 200);
+    }
+    else{
+        auth()->logout();
+        return redirect('/')->with('success', 'Has cerrado sesión.');
+    }
   }
 }

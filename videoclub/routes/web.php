@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-// use App\Http\Controllers\API\RegisterController;
+use App\Http\Controllers\API\RegisterController;
 // use App\Http\Controllers\API\ProductController;
 
 /*
@@ -16,16 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-  return view('welcome');
-});
+Route::get('/', 'MovieController@index');
 
-// Route::post('register', 'RegisterController@register');
-// Route::post('login', 'RegisterController@login');
-Route::get('admin-login', 'AdminController@loginForm');
-Route::post('admin', 'AdminController@login')->name('admin.login');
+//registro de admins:
+Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
+Route::post('register', [RegisterController::class, 'register'])->middleware('guest');
 
-// Route::get('/', 'MovieController@index');
+Route::post('logout', [RegisterController::class, 'logout']);
+// Route::get('/', 'AdminController@loginForm');
+// Route::post('login', [RegisterController::class, 'login'])->name('admin.login');
+// Route::middleware('auth:api')->post('logout', [RegisterController::class, 'logout'])->name('admin.logout');
+
 
 Route::resource('peliculas', 'MovieController'); //->middleware('client');
 Route::resource('generos', 'GenreController'); //->name('generos.index');

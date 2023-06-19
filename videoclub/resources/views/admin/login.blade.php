@@ -6,10 +6,14 @@
             method="POST"
             enctype="multipart/form-data"
         >
+            <!-- {{ csrf_field() }} -->
+            @csrf
 
             <x-form.input name="email" label="Correo electrónico" required />
 
             <x-form.pass name="password" label="Contraseña"/>
+
+            <input type="hidden" name="remember_me" value="true"/>
 
             <x-form.button class="mt-4">Acceder</x-form>
 
