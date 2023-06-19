@@ -8,9 +8,12 @@ use App\Models\Movie;
 
 class AdminController extends Controller
 {
+    public function welcome() {
+        return view('welcome.welcome');
+    }
 
     public function loginForm() {
-        return view('admin.login');
+        return view('sessions.login');
     }
 
     public function index() {

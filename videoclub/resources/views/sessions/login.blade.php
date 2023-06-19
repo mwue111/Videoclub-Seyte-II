@@ -1,15 +1,15 @@
 <x-layout>
 
-    <x-panel class="mt-2 mb-4 w-1/2 m-auto">
+    <x-panel class="mt-4 mb-4 w-1/2 m-auto">
         <h1 class="text-xl font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white">Iniciar sesión</h1>
-        <form action="{{ route('admin.login') }}"
+
+        <form action="/login"
             method="POST"
             enctype="multipart/form-data"
         >
-            <!-- {{ csrf_field() }} -->
             @csrf
 
-            <x-form.input name="email" label="Correo electrónico" required />
+            <x-form.email name="email" label="Correo electrónico" required/>
 
             <x-form.pass name="password" label="Contraseña"/>
 

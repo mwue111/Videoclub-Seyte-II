@@ -71,10 +71,8 @@ class RegisterController extends BaseController
         return $this->sendResponse($success, 'Registro realizado con éxito.');
     }
     else{
-        auth()->login($user);
-        // session()->flash('success', '¡Tu cuenta se ha creado!');
-        // return view('movies.index', ['movies' => Movie::latest()->paginate(5)]);
-        return redirect('/')->with('success', '¡Tu cuenta se ha creado!');
+        Auth::login($user);
+        return redirect('welcome')->with('success', '¡Tu cuenta se ha creado!');
     }
   }
 
@@ -105,11 +103,19 @@ class RegisterController extends BaseController
           return $this->sendResponse($success, 'Has iniciado sesión.');
       }
       else{
-        return view('movies.index', ['movies' => Movie::latest()->paginate(5)]);
+        session()->regenerate();
+        session()->flash('success', '¡Bienvenido/a de vuelta!');
+        return view('welcome.welcome', ['user' => Auth::user()]);
       }
 
     } else {
-      return $this->sendError('Unauthorised.', ['error' => 'Unauthorized']);
+        if($request->path() === 'api/login'){
+            return $this->sendError('Unauthorised.', ['error' => 'Unauthorized']);
+        }
+        else{
+            return redirect('/')->with('error', 'Ha habido un error en el usuario o en la contraseña.');
+            // return back()->with('error', 'Ha habido un error en el usuario o en la contraseña.');
+        }
     }
   }
 
@@ -133,7 +139,7 @@ class RegisterController extends BaseController
     }
     else{
         auth()->logout();
-        return redirect('/')->with('success', 'Has cerrado sesión.');
+        return redirect('/')->with('success', 'Has cerrado sesión. ¡Hasta pronto!');
     }
   }
 }
