@@ -6,6 +6,7 @@
             name="{{ $name }}"
             id="{{ $name }}"
             type="date"
+            {{ $attributes(['value' => $data ? $data : old($name)])}}
     >
 </x-form.panel>
 <x-form.error name="{{ $name }}" />

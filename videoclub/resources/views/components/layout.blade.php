@@ -46,6 +46,10 @@
                 </li>
 
                 <li class="nav-item">
+                <a class="nav-link" href="{{ route('usuarios.index') }}">Usuarios</a>
+                </li>
+
+                <li class="nav-item">
                     <div>
                         <form action="/logout" method="POST" class="font-semibold text-red-500 ml-3 mt-2">
                         @csrf

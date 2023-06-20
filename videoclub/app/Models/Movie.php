@@ -63,13 +63,6 @@ class Movie extends Model
       ->withTimeStamps();
   }
 
-  //Lo que había:
-//   public function reviews()
-//   {
-//     return $this->belongsToMany(User::class, 'reviews')
-//       ->withPivot('title', 'description');
-//   }
-
     public function reviews() {
         return $this->hasMany(Review::class);
     }

@@ -104,8 +104,9 @@ class RegisterController extends BaseController
       }
       else{
         session()->regenerate();
+        session(['user' => $success['user']]);
         session()->flash('success', '¡Bienvenido/a de vuelta!');
-        return view('welcome.welcome', ['user' => Auth::user()]);
+        return redirect()->route('welcome');
       }
 
     } else {
@@ -139,6 +140,7 @@ class RegisterController extends BaseController
     }
     else{
         auth()->logout();
+        $request->session()->flush();
         return redirect('/')->with('success', 'Has cerrado sesión. ¡Hasta pronto!');
     }
   }

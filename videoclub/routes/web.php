@@ -16,20 +16,23 @@ use App\Http\Controllers\API\RegisterController;
 |
 */
 
+Route::get('/welcome', 'AdminController@welcome')->name('welcome')->middleware('auth', 'admin');
+Route::get('/', 'AdminController@loginForm'); //->middleware('guest');
 
+Route::group(['middleware' => ['guest']], function () {
+    //registro de admins:
+    Route::get('register', [RegisterController::class, 'create']); //->middleware('guest');
+    Route::post('register', [RegisterController::class, 'register']); //->middleware('guest');
 
-//registro de admins:
-Route::get('register', [RegisterController::class, 'create']);
-Route::post('register', [RegisterController::class, 'register']);
+    //login:
+    Route::get('login', 'AdminController@loginForm'); //->middleware('guest');
+    Route::post('login', [RegisterController::class, 'login'])->name('admin.login'); //->middleware('guest');
+});
 
-//login:
-Route::post('login', [RegisterController::class, 'login'])->name('admin.login');
-Route::get('/', 'AdminController@loginForm');
-
-// Route::group(['middleware' => ['auth']], function () {
-    Route::get('/welcome', 'AdminController@welcome')->name('welcome');
+// Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('peliculas', 'MovieController'); //->middleware('client');
     Route::resource('generos', 'GenreController'); //->name('generos.index');
+    Route::resource('usuarios', 'UserController');
     Route::post('peliculas/{id}/add-genre', 'MovieController@addGenre')->name('peliculas.addGenre');
     Route::delete('peliculas/{id}/delete-genre', 'MovieController@deleteGenre')->name('peliculas.deleteGenre');
     Route::resource('resenas', 'ReviewController');//->middleware('client');

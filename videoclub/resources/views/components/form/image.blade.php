@@ -3,7 +3,8 @@
 <x-form.panel>
     <x-form.label name="{{ $name }}"> {{ $label }} </x-form.label>
 
-    <img src="{{ asset('storage/' . $data) }}"
+    <img
+        src="{{ asset('storage/' . $data) }}"
         alt="Imagen de {{ $movie }}"
         style="width: 30%"
         name="{{ $name }}"

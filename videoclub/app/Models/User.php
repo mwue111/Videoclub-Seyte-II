@@ -64,18 +64,19 @@ class User extends Authenticatable
   }
 
   public function rents()
-  {
-    return $this->belongsToMany(Movie::class, 'rents')
-      ->withPivot('id', 'expiration_date', 'deleted_at')
-      ->orderByDesc('rents.id')
-      ->withTimeStamps();
-  }
+{
+    return $this->belongsToMany(Movie::class, 'rents', 'user_id', 'movie_id')
+        ->withPivot('id', 'expiration_date', 'deleted_at')
+        ->orderByDesc('rents.id')
+        ->withTimestamps();
+}
 
-  //Lo que había:
-//   public function reviews()
+//   public function rents()
 //   {
-//     return $this->belongsToMany(Movie::class, 'reviews')
-//       ->withPivot('title', 'description');
+//     return $this->belongsToMany(Movie::class, 'rents')
+//       ->withPivot('id', 'expiration_date', 'deleted_at')
+//       ->orderByDesc('rents.id')
+//       ->withTimeStamps();
 //   }
 
     public function reviews() {

@@ -16,16 +16,15 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // dd(Auth::user()->role);
-        if(Auth::user()->role === 'free'){
-            abort(403, 'Unauthorized');
-            return redirect('/login');
+        if(session('user')){
+            foreach(session('user') as $user){
+                if($user->role !== 'admin'){
+                    auth()->logout();
+                    return redirect('/')->with('error', 'No tienes permiso para acceder aquí.');
+                }
 
+            }
         }
-
-        // if(!Auth::guard('admin')->check()){
-        //     return redirect('/login');
-        // }
         return $next($request);
     }
 }
