@@ -83,12 +83,55 @@ class UserController extends Controller
     }
   }
 
+  public function deleted() {
+    $users = User::withTrashed()->where('deleted_at', '!=', null)->get();
+    return view('users.deleted', ['users' => $users]);
+  }
+
+  public function restore($id) {
+    $user = User::withTrashed()->findOrFail($id);
+    $user->restore();
+
+    switch($user->role){
+        case 'free':
+            // dd($user->reviews()->withTrashed()->where('deleted_at', '!=', null)->get());
+            $user->reviews()
+                ->withTrashed()
+                ->restore();
+                //intento 2:
+                // ->where('deleted_at', '!=', null)
+                // ->where('user_id', '=', $user->id)
+                // ->update(['deleted_at' =>  null]);
+
+                //intento 1:
+                // ->findOrFail($user->id)
+                // ->pivot
+                // ->restore();
+
+            dd($user->rents()->withTrashed());
+            $user->rents
+                ->withTrashed()
+                ->findOrFail($user->id)
+                ->pivot
+                ->restore();
+            break;
+        case 'premium': break;
+        case 'admin': break;
+    }
+
+    //recuperar las tablas relacionadas
+    return redirect()->route('usuarios.index');
+  }
+
+  public function forceDelete($id) {
+    User::withTrashed()->findOrFail($id)->forceDelete();
+    return redirect()->route('usuarios.index');
+  }
+
   public function destroy($id)
   {
     $user = User::findOrFail($id);
 
-    //borrar en las tablas relacionadas que esté ese id
-    //admin/free/premium
     switch($user->role){
         case 'free':
                     if($user->reviews) {
@@ -102,7 +145,6 @@ class UserController extends Controller
                     $user->free->delete();
                     $user->delete();
                     break;
-        //views->solamente premium (relación movies)
         case 'premium':
                     if($user->reviews){
                         $user->reviews->each->delete();
@@ -118,8 +160,6 @@ class UserController extends Controller
                     break;
         case 'admin': $user->admin->delete(); break;
     }
-    //rents
-    //reviews
 
     User::destroy($id);
 

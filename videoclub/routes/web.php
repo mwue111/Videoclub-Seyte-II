@@ -52,6 +52,11 @@ Route::group(['middleware' => ['guest']], function () {
     Route::post('restaurar-generos/{id}', 'GenreController@restore')->name('genres.restore');
     Route::delete('borrar-def-generos/{id}', 'GenreController@forceDelete')->name('genres.force-delete');
 
+    //Recuperación de usuarios
+    Route::get('usuarios-eliminados', 'UserController@deleted')->name('users.deleted');
+    Route::post('restaurar-usuario/{id}', 'UserController@restore')->name('users.restore');
+    Route::delete('borrar-def-usuario/{id}', 'UserController@forceDelete')->name('users.force-delete');
+
     //logout:
     Route::post('logout', [RegisterController::class, 'logout']);
 // });

@@ -1,4 +1,12 @@
 <x-layout>
+    <div>
+        <form action="{{ route('users.deleted') }}" method="GET">
+        @csrf
+            <x-form.button class="my-3 px-8 bg-success">
+                Recuperar usuarios
+            </x-form.button>
+        </form>
+    </div>
     @if('users')
     <table class="table mt-4">
         <thead class="table-light text-center">
@@ -27,9 +35,9 @@
                     >
                     @endif
                 </td>
-                <td>{{ $user->username }}</td>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->surname }}</td>
+                <td>{{ $user->username ? $user->username : 'Sin nombre de usuario' }}</td>
+                <td>{{ $user->name ? $user->name : 'Anónimo' }}</td>
+                <td>{{ $user->surname ? $user->surname : 'Anónimo' }}</td>
                 <td>{{\Carbon\Carbon::parse($user->birth_date)->format('d-m-Y')}}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->role }}</td>
