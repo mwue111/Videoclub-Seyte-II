@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Models\Free;
 use App\Models\Premium;
+use App\Models\Movie;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use Laravel\Passport\Passport;
@@ -16,6 +17,11 @@ use Hash;
 
 class RegisterController extends BaseController
 {
+
+    public function create() {
+        return view('register.create');
+    }
+
   /**
    * Register api
    *
@@ -24,20 +30,29 @@ class RegisterController extends BaseController
   public function register(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'email' => 'required|email',
+      'email' => 'required|email|unique:users,email',
       'birth_date' => 'required',
-      'password' => 'required',
+      'password' => 'required|min:7|max:255',
       'c_password' => 'required|same:password',
     ]);
 
     if ($validator->fails()) {
       return $this->sendError('Validation Error.', $validator->errors());
     }
+
     $input = $request->all();
-    $input['password'] = bcrypt($input['password']);
-    $user = User::create($input);
-    $user->role = 'free';
+    $input['password'] = bcrypt($input['password']);    //esto se puede hacer con un mutador en el modelo de usuario
+    // $user = User::create($input);
+    $user = new User($input);
+
+    if($request->path() === 'api/register'){
+        $user->role = 'free';
+    }
+    else{
+        $user->role = 'admin';
+    }
     $user->save();
+
     switch ($user->role) {
       case 'admin':
         Admin::create(['user_id' => $user->id]);
@@ -46,14 +61,21 @@ class RegisterController extends BaseController
         Free::create(['user_id' => $user->id]);
         break;
       case 'premium':
-        Premium::create(['user_id' => $user->id, 'fecha_ultimo_pago' => now()]);
+        Premium::create(['user_id' => $user->id, 'payment_date' => now()]);
         break;
     }
 
     $success['token'] =  $user->createToken('MyApp')->accessToken;
     $success['name'] =  $user->name;
     $user->save();
-    return $this->sendResponse($success, 'Registro realizado con éxito.');
+
+    if($request->path() === 'api/register') {
+        return $this->sendResponse($success, 'Registro realizado con éxito.');
+    }
+    else{
+        Auth::login($user);
+        return redirect('welcome')->with('success', '¡Tu cuenta se ha creado!');
+    }
   }
 
   /**
@@ -71,18 +93,32 @@ class RegisterController extends BaseController
             Passport::personalAccessTokensExpireIn(Carbon::now()->addDays(1));
         }
       $user = Auth::user();
-      //$success['token'] =  $user->createToken('MyApp')->accessToken;
-      $success['token'] =  $user->createToken('MyApp');
-      $strToken = $success['token']->accessToken;
-      $expiration = $success['token']->token->expires_at->diffInSeconds(Carbon::now());
+      $success['token'] =  $user->createToken('MyApp')->accessToken;
+    //   $success['token'] =  $user->createToken('MyApp');
+    //   $strToken = $success['token']->accessToken;
+    //   $expiration = $success['token']->token->expires_at->diffInSeconds(Carbon::now());
       $success['user'] = [
-        'name' => Auth::user()->name,
-        'email' => Auth::user()->email,
+        'user' => Auth::user()
       ];
 
-      return $this->sendResponse($success, 'Has iniciado sesión.');
+      if($request->path() === 'api/login') {
+          return $this->sendResponse($success, 'Has iniciado sesión.');
+      }
+      else{
+        session()->regenerate();
+        session(['user' => $success['user']]);
+        session()->flash('success', '¡Bienvenido/a de vuelta!');
+        return redirect()->route('welcome');
+      }
+
     } else {
-      return $this->sendError('Unauthorised.', ['error' => 'Unauthorized']);
+        if($request->path() === 'api/login'){
+            return $this->sendError('Unauthorised.', ['error' => 'Unauthorized']);
+        }
+        else{
+            return redirect('/')->with('error', 'Ha habido un error en el usuario o en la contraseña.');
+            // return back()->with('error', 'Ha habido un error en el usuario o en la contraseña.');
+        }
     }
   }
 
@@ -99,8 +135,15 @@ class RegisterController extends BaseController
 
   public function logout(Request $request)
   {
-    $token = $request->user()->token();
-    $token->revoke();
-    return response(['message' => 'Has cerrado sesión.'], 200);
+      if($request->path() === 'api/logout'){
+        $token = $request->user()->token();
+        $token->revoke();
+        return response(['message' => 'Has cerrado sesión.'], 200);
+    }
+    else{
+        auth()->logout();
+        $request->session()->flush();
+        return redirect('/')->with('success', 'Has cerrado sesión. ¡Hasta pronto!');
+    }
   }
 }

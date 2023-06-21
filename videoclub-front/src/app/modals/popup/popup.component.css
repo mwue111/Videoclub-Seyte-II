@@ -1,0 +1,87 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: #F5F3F4;
+}
+
+.dialog-content{
+  flex-grow: 2;
+  text-align: center;
+  margin: 50px 15px;
+  font-size: 25px;
+  color: #1874BA;
+  background-color: white;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#username{
+  font-weight: bolder;
+}
+
+#message,
+#go-premium{
+  letter-spacing: 0px;
+  line-height: 40px;
+}
+
+.dialog-content span{
+  font-weight: bolder;
+}
+
+.dialog-footer{
+  flex-grow: 1;
+}
+
+.dialog-footer button{
+  margin: 5px;
+  font-size: 20px;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 40px;
+  color: white;
+  padding: 10px 20px;
+}
+
+#go-premium a{
+  cursor: pointer;
+  color: #FF8811;
+}
+
+#go-premium a:hover{
+  color: #d4710e;
+}
+
+#rent-button{
+  background-color: #1874BA;
+}
+
+#cancel-button{
+  background: #FF8811;
+}
+
+.dialog-footer #rent-button:hover{
+  background-color: #135d96;
+}
+
+.dialog-footer #rent-button:active{
+  background-color: #1c84d3;
+}
+
+.dialog-footer #cancel-button:hover{
+  background: #d4710e;
+}
+
+.dialog-footer #cancel-button:active{
+  background: #ff962c;
+}
+
+ngx-paypal{
+  width: 100%;
+}

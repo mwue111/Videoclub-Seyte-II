@@ -1,18 +1,9 @@
 <div id="content-navbar">
   <mat-toolbar class="navbar">
-    <div class="title-div"><a href="/">SEYTECLUB</a></div>
-    <div class="tracker-div">
-      <input
-        type="text"
-        placeholder="Nombre de película"
-        class="tracker-navbar"
-      />
-      <img
-        src="../../assets/magnifying-glass-backup-svgrepo-com (1).png"
-        alt="lupa"
-        class="tracker-glass"
-      />
-    </div>
+    <div class="title-div" [routerLink]="['/']">SEYTECLUB</div>
+
+      <app-search></app-search>
+
     <div class="auth-div" *ngIf="!logged">
       <button class="register-btn" [routerLink]="['/auth/registro']">
         Registrarse
@@ -20,10 +11,12 @@
       <button class="login-btn" [routerLink]="['/auth/login']">Entrar</button>
     </div>
     <div class="logged-div" *ngIf="logged">
-      <img *ngIf="user.image" src="user.image" alt="" />
-      <img *ngIf="!user.image" src="../../assets/user.png" alt="" />
-      <p *ngIf="user.name">{{ user.name }}</p>
-      <p *ngIf="!user.name">User</p>
+      <div [routerLink]="['/usuario/', user.id]" class="user-page">
+        <img *ngIf="user.image" [src]="url + user.image" id="circle" alt="" />
+        <img *ngIf="!user.image" src="../../assets/user.png" alt="" />
+        <p *ngIf="user.username">{{ user.username }}</p>
+        <p *ngIf="!user.username">User</p>
+      </div>
       <button (click)="logout()">Cerrar sesión</button>
     </div>
   </mat-toolbar>

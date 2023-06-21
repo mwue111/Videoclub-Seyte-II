@@ -4,17 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Review;
+use App\Models\Movie;
+use App\Models\User;
+use Illuminate\Pagination\Paginator;
 
 class ReviewController extends Controller
 {
   /**
    * Display a listing of the resource.
    */
-  public function index()
+  public function index(Request $request)
   {
-    //
     $reviews = Review::orderBy('id', 'ASC')->get();
-    return view('reviews.index', ['reviews' => $reviews]);
+
+    if ($request->path() == 'api/resenas') {
+        return response()->json($reviews);
+    }
+    else {
+        return view('reviews.index', ['reviews' => $reviews]);
+    }
   }
 
   /**
@@ -33,20 +41,30 @@ class ReviewController extends Controller
       'title' => 'required',
       'description' => 'required',
     ]);
-    //Creo el objeto a partir de los datos recibidos, lo guardo y lo devuelvo.
-    $review = Review::create($request->all());
-    $review->save();
-    return json_encode($review);
+
+    // $user = User::where('email', '=', $request->user_id)->first();
+    $user = User::findOrFail($request->user_id);
+    if(!$user){
+        return response()->json(['error' => 'Usuario no encontrado'], 404);
+    }
+
+    $data = $request->all();
+    $data['user_id'] = $user->id;
+    $review = Review::create($data);
+
+    return json_encode($review, 201);
   }
 
   /**
    * Display the specified resource.
    */
-  public function show(string $id)
+  public function show($review)
   {
-    //
-    $review = Review::findOrFail($id);
-    return view('reviews.show', ['review' => $review]);
+      $review = Review::where('id', '=', $review)->with('user')->first();
+
+      return response()->json($review);
+    //   dd($review);
+    // return view('reviews.show', ['review' => $review]);
   }
 
   /**
@@ -85,7 +103,48 @@ class ReviewController extends Controller
   {
     //
     $review = Review::findOrFail($id);
-    $review->delete();
-    return redirect()->route('resenas.index');
+    return $review->delete();
+    // return redirect()->route('resenas.index');
   }
+
+  public function findMovieReviews($id, $page){
+    $movie = Movie::findOrFail($id);
+
+    if(($movie->reviews)->isEmpty()){
+        return 'none';
+    }
+    else{
+        $pagination = $movie->reviews->toQuery()->latest()->paginate(4, ['*'], 'page', $page);
+
+        foreach($pagination as $p){
+            $p->user_id = User::where('id', '=', $p->user_id)->get();
+        }
+
+        return $pagination;
+    }
+  }
+
+  public function getReviews($id, $page){
+    $reviews = $this->findMovieReviews($id, $page);
+    return response()->json($reviews);
+  }
+
+  public function getAuthor($id){
+
+    $reviews = $this->findMovieReviews($id);
+
+    if(count($reviews) > 0){
+        $authors = [];
+
+        foreach($reviews as $review){
+            $authors[] = $review->user;
+        }
+    }
+    else{
+        $authors = 'none';
+    }
+
+    return response()->json($authors);
+  }
+
 }

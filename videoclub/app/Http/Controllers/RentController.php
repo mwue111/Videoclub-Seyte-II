@@ -17,14 +17,21 @@ use DB;
 
 class RentController extends BaseController
 {
-
-
     public function index(){
-        if(Auth::user()->role === 'admin'){
+        $user = Auth::user();
+
+        if($user->role === 'admin'){
             $response = Rent::all();
         }
-        else{
-            $response = 'No tienes permiso para estar aquí.';
+        else if($user->role === 'free'){
+            $rents = Auth::user()->rents;
+
+            if(count($rents)){
+                $response = Auth::user()->rents; //->toQuery()->orderByDesc('id', 'desc')->get();
+            }
+            else{
+                $response = null;
+            }
         }
         return response()->json($response);
     }
@@ -65,7 +72,7 @@ class RentController extends BaseController
         if($user->role === 'free' || $user->role === 'admin'){
             $validator = Validator::make($request->all(), [
                 'movie_id' => 'required',
-                'date' => 'required|date|date_format:Y-m-d'
+                'date' => 'required|date'
             ]);
 
             if($validator->fails()){
@@ -120,9 +127,26 @@ class RentController extends BaseController
         return $this->sendResponse($rent, 'Alquiler modificado');
     }
 
+    public function checkExpirationDate() {
+        $user = Auth::user();
+        $rents = $user->rents;
+        $activeRents = [];
+
+        foreach($rents as $rent) {
+            if(!Carbon::now()->lte(Carbon::parse($rent->pivot->expiration_date))){
+                $this->destroy($rent->pivot->id);
+            }
+            else{
+                $activeRents[] = $rent;
+            }
+        }
+
+        return response()->json($activeRents);
+    }
+
     //eliminar un alquiler
     public function destroy($id) {
-        $rent = Rent::findOrFail($id);
-        $rent->delete();
+        $user = Auth::user();
+        $user->rents()->wherePivot('id', $id)->update(['rents.deleted_at' => now()]);
     }
 }

@@ -1,0 +1,15 @@
+<div class="container">
+  <mat-dialog-content class="dialog-content">
+    <p id="username">{{ data.user.username | titlecase }},<p>
+
+    <p id="message">¡disfruta de la película <span>{{ data.movie.title }}</span> durante 15 días por sólo <span>{{ data.movie.price }}€</span>!</p>
+
+    <!-- Añadir ... a #message y quitar el signo de exclamación<p id="go-premium">... o <a>hazte premium</a> para poder verla siempre que quieras! </p> -->
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="dialog-footer">
+    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+    <!-- <button id="rent-button">Alquilar</button> -->
+    <button id="cancel-button" (click)="closeDialog()">Cancelar</button>
+  </mat-dialog-actions>
+</div>

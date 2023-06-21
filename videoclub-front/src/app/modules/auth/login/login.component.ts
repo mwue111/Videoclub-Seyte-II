@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit{
     private authServices: AuthService,
     private route: Router,
     private router: ActivatedRoute,
+    private _location: Location,
   ){
     if(this.authServices.isLogged()){
       this.route.navigate(['/']);
@@ -74,6 +76,10 @@ export class LoginComponent implements OnInit{
                       error => {
                         console.log('Ha ocurrido un error intentando iniciar sesión: ', error);
                       })
+  }
+
+  goBack() {
+    this._location.back();
   }
 
 }

@@ -11,8 +11,8 @@
   align-items: center;
   flex-direction: column;
   background-color: #f5f3f4;
-  width: 90%;
-  margin-bottom: 5em;
+  width: 100%;
+  /* margin-bottom: 20px; */
   padding: 2em;
   border-radius: 15px;
   text-align: center;
@@ -64,11 +64,11 @@ input{
   cursor: default;
 }
 
-.links{
+.links, a{
   font-size: 18px;
 }
 
-.links a{
+.links a, a{
   color: #159CA3;
 }
 
@@ -99,4 +99,15 @@ input{
 }
 .message{
   color: white;
+}
+
+.go-back{
+  margin-bottom: 20px;
+  padding: 20px 50px;
+  text-align: right;
+  width: 101%;
+}
+
+a{
+  cursor: pointer;
 }

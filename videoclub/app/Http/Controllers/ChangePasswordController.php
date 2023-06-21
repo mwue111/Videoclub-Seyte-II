@@ -49,4 +49,9 @@ class ChangePasswordController extends Controller
       'data' => 'La contraseña ha sido actualizada.'
     ], Response::HTTP_CREATED);
   }
+
+  //para cambiar la contraseña desde el perfil de usuario
+  public function updatePassword(Request $request) {
+    return $this->resetPassword($request);
+  }
 }

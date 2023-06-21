@@ -1,0 +1,67 @@
+<div class="comment" *ngIf="displayComment">
+  <div class="comment-image-container">
+    <img *ngIf="hasAvatar" [src]="url + avatar" alt="imagen de usuario" class="avatar">
+    <img *ngIf="!hasAvatar" [src]="avatar" alt="imagen de usuario" class="avatar">
+  </div>
+
+  <div class="comment-right-part">
+    <div class="comment-content">
+
+      <div class="comment-author" *ngIf="comment.user_id !== user.id">
+        <h3>{{ usernames }}</h3>
+      </div>
+      <div class="comment-author" *ngIf="comment.user_id === user.id || highlight">
+        <a [routerLink]="['/usuario/', user.id]">
+          <h3>{{ user.username }}</h3>
+        </a>
+      </div>
+
+      <div *ngIf="comment.updated_at !== null" class="comment-date">
+        <p>Publicado <time>{{ comment.created_at | dateAgo }}</time> </p>
+      </div>
+      <div *ngIf="comment.updated_at === null" class="comment-date">
+        <p>Publicado desde el principio de los tiempos</p>
+      </div>
+    </div>
+
+    <div class="comment-title" *ngIf="!isEditing()">
+      <h4>{{ comment.title }}</h4>
+    </div>
+
+    <div class="comment-text" *ngIf="!isEditing()">
+      {{ comment.description }}
+    </div>
+
+    <!-- edición de comentario -->
+    <div class="edit-comment">
+      <comment-form *ngIf="isEditing()"
+                    submitLabel="Guardar"
+                    [hasCancelButton]="true"
+                    [initialText]="comment.description"
+                    [initialTitle]="comment.title"
+                    (handleSubmit)="updateComment.emit({ body: $event, commentId: comment.id })"
+                    (handleCancel)="setActiveComment.emit(null)"
+      ></comment-form>
+    </div>
+    <!-- fin de edición de comentario -->
+
+    <!-- opciones de edición y borrado del comentario -->
+    <div class="comment-actions" *ngIf="!isEditing()">
+      <button *ngIf="canEdit"
+              class="comment-action-button"
+              (click)="setActiveComment.emit({ id: comment.id, type: activeCommentType.editing })"
+      >
+        Editar
+      </button>
+
+      <button *ngIf="canDelete"
+              class="comment-action-button button-delete"
+              (click)="deleteComment.emit(comment.id)"
+      >
+        Eliminar
+      </button>
+    </div>
+    <!-- fin de opciones edición y borrado del comentario -->
+  </div>
+</div>
+

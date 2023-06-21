@@ -13,11 +13,31 @@ export class MoviesService {
     this.url = Global.url;
   }
 
+  getAllMovies(): Observable<any> {
+
+      return this._http.get(this.url + '/api/todas-las-peliculas');
+  }
+
   getMovies(amount: number, token: any): Observable<any> {
     let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
     let params = new HttpParams().set('cantidad', amount.toString());
 
     return this._http.get(this.url + '/api/peliculas', { params: params, headers: headers });
+  }
+
+  getOneMovie(id: number, token: any) {
+    if(token !== 'none'){
+      let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+
+      return this._http.get(this.url + '/api/peliculas/' + id, { headers:headers });
+    }
+    else{
+      return this._http.get(this.url + '/api/peliculas/' + id);
+    }
+  }
+
+  getMovieGenre(id: number) {
+    return this._http.get(this.url + '/api/pelicula/' + id + '/generos');
   }
 
   // getGenreMovie(id: number): Observable<any> {

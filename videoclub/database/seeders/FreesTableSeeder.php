@@ -16,5 +16,9 @@ class FreesTableSeeder extends Seeder
         DB::table('frees')->insert([
             'user_id' => 2,
         ]);
+
+        DB::table('frees')->insert([
+            'user_id' => 4,
+        ]);
     }
 }

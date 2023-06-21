@@ -1,0 +1,20 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.container{
+  margin: 50px;
+}
+
+h1{
+  font-weight: light;
+}
+
+.go-back{
+  padding: 15px;
+  text-align: end;
+}
+
+.go-back a{
+  cursor: pointer;
+  color: #159ca3;
+  font-size: 18px;
+}

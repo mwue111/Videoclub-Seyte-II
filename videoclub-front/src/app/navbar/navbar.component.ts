@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AuthService } from '../modules/auth/_services/auth.service';
+import { UserSharedServiceService } from '../services/user-shared-service.service';
+import { URL_BACKEND } from '../config/config';
 
 @Component({
   selector: 'app-navbar',
@@ -7,11 +9,30 @@ import { AuthService } from '../modules/auth/_services/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  logged: boolean;
+
+  url: string = URL_BACKEND + '/storage/';
+  logged!: boolean;
   user: any;
-  constructor(private _auth: AuthService) {
-    this.logged = _auth.isLogged();
-    this.user = _auth.user;
+  username: string = '';
+
+  constructor(
+    private _auth: AuthService,
+    private _shared: UserSharedServiceService,
+  ) {
+    if(this._auth.isLogged()){
+      this.logged = _auth.isLogged();
+      this.user = _auth.user.user;
+    }
+  }
+
+  ngOnInit(){
+    this._shared.username$.subscribe(username => {
+      this.user.username = username;
+    })
+
+    this._shared.image$.subscribe(image => {
+      this.user.image = image;
+    })
   }
 
   logout() {

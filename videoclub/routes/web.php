@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\API\RegisterController;
+// use App\Http\Controllers\API\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,34 +16,49 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//   return view('welcome');
-// });
+Route::get('/welcome', 'AdminController@welcome')->name('welcome')->middleware('auth', 'admin');
+Route::get('/', 'AdminController@loginForm'); //->middleware('guest');
 
-Route::get('/', 'MovieController@index');
+Route::group(['middleware' => ['guest']], function () {
+    //registro de admins:
+    Route::get('register', [RegisterController::class, 'create']);
+    Route::post('register', [RegisterController::class, 'register']);
 
-Route::resource('peliculas', 'MovieController'); //->middleware('client');
-Route::resource('generos', 'GenreController'); //->name('generos.index');
+    //login:
+    Route::get('login', 'AdminController@loginForm');
+    Route::post('login', [RegisterController::class, 'login'])->name('admin.login');
+});
 
-Route::post('peliculas/{id}/add-genre', 'MovieController@addGenre')->name('peliculas.addGenre');
+Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::resource('peliculas', 'MovieController');
+    Route::resource('generos', 'GenreController');
+    Route::resource('usuarios', 'UserController');
+    Route::post('peliculas/{id}/add-genre', 'MovieController@addGenre')->name('peliculas.addGenre');
+    Route::delete('peliculas/{id}/delete-genre', 'MovieController@deleteGenre')->name('peliculas.deleteGenre');
+    Route::resource('resenas', 'ReviewController');
+    Route::resource('usuarios', 'UserController');
+    Route::resource('alquiler', 'RentController');
 
-Route::delete('peliculas/{id}/delete-genre', 'MovieController@deleteGenre')->name('peliculas.deleteGenre');
+    //Buscador en el back:
+    Route::get('buscar', 'SearchController@search')->name('movies.search');
 
-Route::resource('resenas', 'ReviewController')->middleware('client');
+    //Recuperación y eliminación de películas:
+    Route::get('peliculas-eliminadas', 'MovieController@deleted')->name('movies.deleted');
+    Route::post('restaurar-peliculas/{id}', 'MovieController@restore')->name('movies.restore');
+    Route::delete('borrar-def-peliculas/{id}', 'MovieController@forceDelete')->name('movies.force-delete');
 
-Route::resource('usuarios', 'UserController');
+    //Recuperación y eliminación de géneros:
+    Route::get('generos-liminados', 'GenreController@deleted')->name('genres.deleted');
+    Route::post('restaurar-generos/{id}', 'GenreController@restore')->name('genres.restore');
+    Route::delete('borrar-def-generos/{id}', 'GenreController@forceDelete')->name('genres.force-delete');
 
-Route::resource('alquiler', 'RentController'); //->middleware('client');
+    //Recuperación de usuarios
+    Route::get('usuarios-eliminados', 'UserController@deleted')->name('users.deleted');
+    Route::post('restaurar-usuario/{id}', 'UserController@restore')->name('users.restore');
+    Route::delete('borrar-def-usuario/{id}', 'UserController@forceDelete')->name('users.force-delete');
 
-//Buscador en el back:
-Route::get('buscar', 'SearchController@search')->name('movies.search');
+    //logout:
+    Route::post('logout', [RegisterController::class, 'logout']);
+});
 
-//Recuperación y eliminación de películas:
-Route::get('peliculas-eliminadas', 'MovieController@deleted')->name('movies.deleted');
-Route::post('restaurar-peliculas/{id}', 'MovieController@restore')->name('movies.restore');
-Route::delete('borrar-def-peliculas/{id}', 'MovieController@forceDelete')->name('movies.force-delete');
 
-//Recuperación y eliminación de géneros:
-Route::get('generos-liminados', 'GenreController@deleted')->name('genres.deleted');
-Route::post('restaurar-generos/{id}', 'GenreController@restore')->name('genres.restore');
-Route::delete('borrar-def-generos/{id}', 'GenreController@forceDelete')->name('genres.force-delete');

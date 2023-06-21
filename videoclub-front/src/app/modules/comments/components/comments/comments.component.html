@@ -1,0 +1,63 @@
+<div class="comment-block-panel" *ngIf="!logged">
+  <p>Para escribir una reseña</p>
+  <div class="buttons">
+    <button [routerLink]="['/auth/login']">INICIA SESIÓN</button> O <button [routerLink]="['/auth/registro']">REGÍSTRATE</button>
+  </div>
+</div>
+
+<div class="comments">
+  <h3 id="form-title">¡Participa en la conversación!</h3>
+  <div class="comment-form">
+    <div class="logged-user">
+      <div *ngIf="user">
+        <div *ngIf="!user.image">
+          <img src="../../../../../assets/user.png" alt="Imagen de usuario" class="avatar">
+        </div>
+        <div *ngIf="user.image">
+          <img [src]="url + user.image" alt="Imagen de perfil de {{ user.username }}" class="avatar">
+        </div>
+        <div *ngIf="user.username">
+          <h2>{{ user.username }}</h2>
+        </div>
+        <div *ngIf="!user.username">
+          <h2>¡Aún no sabemos tu nombre!</h2>
+        </div>
+      </div>
+    </div>
+    <div class="movie-review-form">
+      <comment-form submitLabel="Publicar" (handleSubmit)="addComment($event)"></comment-form>
+    </div>
+  </div>
+
+  <div *ngIf="highlightedReview" class="highlighted-comment">
+    <comment
+      [comment]="highlightedReview"
+      (setActiveComment)="setActiveComment($event)"
+      [activeComment]="activeComment"
+      (updateComment)="updateComment($event)"
+      (deleteComment)="deleteComment($event)"
+      id="highlighted"
+    />
+  </div>
+
+  <div class="comments-container">
+
+    <comment *ngFor="let comment of comments"
+              [comment]="comment"
+              (setActiveComment)="setActiveComment($event)"
+              [activeComment] = "activeComment"
+              (updateComment)="updateComment($event)"
+              (deleteComment)="deleteComment($event)"
+    />
+  </div>
+
+  <div class="no-comments" *ngIf="comments.length === 0 && !highlightedReview">
+    <p>Aún no hay reseñas para esta película. ¡Sé la primera persona en dar su opinión!</p>
+  </div>
+
+</div>
+
+<div *ngIf="comments.length > 0" class="pagination">
+  <app-pagination [data]="data" (changePage)="changePage($event)"></app-pagination>
+</div>
+

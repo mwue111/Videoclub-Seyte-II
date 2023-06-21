@@ -1,0 +1,206 @@
+<div class="container">
+  <div class="user-page-header">
+    <div class="user-image" *ngIf="!isEditing">
+      <div *ngIf="!user.image">
+        <img src="../../assets/user.png" class="circle" alt="Imagen de usuario">
+      </div>
+      <div *ngIf="user.image">
+        <img [src]="url + user.image" class="circle" alt="Imagen de {{ user.username }}">
+      </div>
+    </div>
+    <div class="user-image" *ngIf="isEditing">
+      <form [formGroup]="editForm" (ngSubmit)="saveChanges()" enctype="multipart/form-data">
+
+        <div class="dropzone circle" appDrag (files)="fileDropped($event)">
+          <div *ngIf="user.image && !updatingImage">
+            <a (click)="selectFile.click()" class="browser-link edit">
+              <p class="edit-image-text">Arrastra o haz click para subir un nuevo avatar</p>
+              <img [src]="url + user.image" class="circle" id="previous-image">
+            </a>
+          </div>
+
+          <div *ngIf="!user.image && !updatingImage" class="dropzone-text">
+            Arrastra tu nuevo avatar aquí o <a (click)="selectFile.click()" class="browser-link new">súbelo</a> desde tu
+            equipo
+          </div>
+
+          <div *ngIf="updatingImage" class="updating">
+            <img *ngIf="imagePreview" [src]="imagePreview" class="circle" id="previous-image" />
+            <p *ngIf="!hasImageError" class="editing-text">¡Introduce tu contraseña para guardar los cambios!</p>
+            <p *ngIf="hasImageError" class="editing-text error-image-text">
+              <a (click)="selectFile.click()" class="browser-link edit">
+                {{ hasImageErrorText }}
+              </a>
+            </p>
+          </div>
+        </div>
+
+        <input type="file" #selectFile id="selectFile" formControlName="image" (change)="onFileSelected($event)">
+
+      </form>
+    </div>
+
+    <div class="user-data">
+      <div *ngIf="!isEditing">
+        <p *ngIf="user.username" id="user-name">{{ user.username }}</p>
+        <p *ngIf="!user.username" id="user-name">Anónimo</p>
+        <p>{{ user.email }}</p>
+        <p *ngIf="user.name && user.surname">{{ user.name }} {{ user.surname }}</p>
+        <p *ngIf="!(user.name && user.surname)" class="unknown-data">¡Aún no nos has dicho cómo te llamas!</p>
+
+        <p *ngIf="user.birth_date">Fecha de nacimiento: {{ user.birth_date|date: 'dd/MM/yy' }}</p>
+      </div>
+
+      <div *ngIf="isEditing" class="user-edit-form">
+        <form [formGroup]="editForm" (ngSubmit)="saveChanges()" enctype="multipart/form-data">
+          <div class="form-group username">
+            <input type="text" formControlName="username">
+          </div>
+
+          <div class="form-group">
+            <input type="text" formControlName="email">
+          </div>
+
+          <div class="form-group">
+            <input type="text" formControlName="name" placeholder="Nombre">
+          </div>
+
+          <div class="form-group">
+            <input type="text" formControlName="surname" placeholder="Apellido">
+          </div>
+
+          <div class="form-group">
+            <input type="date" formControlName="birth_date">
+          </div>
+
+          <div class="form-group pass-container">
+            <label for="new-pass">Contraseña nueva:</label>
+            <input type="password" formControlName="new_pass">
+          </div>
+
+          <div class="form-group pass-container">
+            <label for="password">Introduce tu antigua contraseña para guardar los cambios: </label>
+            <input type="password" formControlName="password">
+          </div>
+
+          <div *ngIf="hasError" class="message-container">
+            <p class="error-message">{{ hasErrorText }}</p>
+          </div>
+
+          <div class="button-container">
+            <input type="submit" value="Guardar" [disabled]="editForm.invalid || hasImageError">
+          </div>
+
+
+        </form>
+      </div>
+    </div>
+
+    <div class="edit-button-container" *ngIf="!isEditing">
+      <button (click)="updateUser()">Editar</button>
+    </div>
+    <div class="cancel-button-container" *ngIf="isEditing">
+      <button (click)="close()">Cancelar</button>
+    </div>
+
+    <div class="expiring-soon" *ngIf="expiringSoon && user.role === 'premium' ">
+      <p *ngIf="!expiresTomorrow">¡Tu suscripción Premium caduca en <span>{{ daysToExpire }}</span> días!</p>
+      <p *ngIf="expiresTomorrow">¡Tu suscripción Premium caduca <span>{{ daysToExpire }}</span>!</p>
+      <!-- <button (click)="goPremium(user.id)">Renovar</button> -->
+    </div>
+
+    <div class="go-premium" *ngIf="user.role === 'free'">
+      <p>¿Quieres tener acceso ilimitado a nuestro catálogo?</p>
+      <p>¡Hazte Premium por sólo <span>60€ al año</span> y olvídate de pasarte horas buscando esa película que quieres ver!</p>
+      <button (click)="goPremium(user.id)">¡Hazte Premium!</button>
+    </div>
+
+  </div>
+
+
+  <!-- Películas vistas -->
+  <div class="user-seen-movies">
+
+    <!-- Películas con alquiler activo -->
+    <div *ngIf="user.role === 'free' && activeMovies.length > 0" class="rented-active-movies">
+      <div class="user-seen-movies-header">
+        <p>Alquileres actuales</p>
+      </div>
+
+      <div class="user-seen-movies-posters" *ngIf="activeMovies.length !== 0">
+        <div *ngFor="let movie of activeMovies" class="rented-movies-info">
+          <a [routerLink]="['/pelicula', movie.id]">
+            <img [src]="url + movie.poster" class="movie" alt="póster de la película {{ movie.title }}" id="poster">
+            <p id="expiration_time">¡Tienes <time>{{ movie.pivot.expiration_date | daysTo }}</time> para
+              disfrutarla!</p>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="user-seen-movies-header">
+      <p *ngIf="user.role === 'premium'">Películas vistas</p>
+      <p *ngIf="user.role === 'free'">Películas alquiladas</p>
+    </div>
+    <div class="user-seen-movies-posters" *ngIf="movies.length !== 0">
+      <div *ngFor="let movie of movies">
+        <a [routerLink]="['/pelicula', movie.id]">
+          <img [src]="url + movie.poster" class="movie" id="poster">
+        </a>
+      </div>
+    </div>
+    <div *ngIf="!watchedMovies">
+      <p class="no-data">¡No has visto ninguna película todavía!</p>
+    </div>
+  </div>
+
+  <!-- Reseñas hechas -->
+  <div class="user-reviews">
+    <div class="user-reviews-header">
+      <p>Reseñas hechas por ti</p>
+    </div>
+
+    <div class="user-reviews-body" *ngIf="reviews.length !== 0">
+      <div class="reviews-container" *ngFor="let review of reviews">
+        <div class="left">
+          <div class="movie-reviewed-poster">
+            <a [routerLink]="['/pelicula', review.movie_id.id]">
+              <img [src]="url + review.movie_id.poster" alt="Póster de la película {{ review.movie_id.title }}"
+                id="review-poster">
+            </a>
+          </div>
+        </div>
+        <div class="right">
+          <div class="review-title">
+            <a [routerLink]="['/review',review.movie_id.id,review.id]" id="go-to">{{review.title}}</a>
+
+            <div *ngIf="review.updated_at !== null" class="comment-date">
+              <p>Publicado <time>{{ review.created_at | dateAgo }}</time> </p>
+            </div>
+            <div *ngIf="review.updated_at === null" class="comment-date">
+              <p>Publicado desde el principio de los tiempos</p>
+            </div>
+
+          </div>
+          <div class="review-body">
+            {{review.description}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!reviews.length">
+    <p class="no-data">¡No has hecho ninguna reseña todavía!</p>
+  </div>
+
+</div>
+
+<div *ngIf="user.role === 'premium'" class="cancel-sub-container">
+  <p>¿Te has cansado de poder ver todas tus películas favoritas cuando quieras?</p>
+  <a (click)="cancelSub()">Cancelar suscripción</a>
+</div>
+
+<div *ngIf="reviews.length > 0" class="pagination">
+  <app-pagination [data]="data" (changePage)="changePage($event)"></app-pagination>
+</div>

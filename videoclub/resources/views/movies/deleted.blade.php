@@ -1,6 +1,6 @@
 <x-layout>
 
-    <table class="table">
+    <table class="table mt-4">
         <thead class="table-light text-center">
             <th>Título</th>
             <th>Fecha eliminación</th>

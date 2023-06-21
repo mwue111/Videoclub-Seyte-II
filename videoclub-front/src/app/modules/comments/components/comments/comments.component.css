@@ -1,0 +1,125 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.comments{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.comment-form{
+  width: 70%;
+  margin-left: 300px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: flex-start;
+  text-align: center;
+  padding: 20px;
+}
+
+#form-title {
+  color: #1874BA;
+  font-size: 20px;
+  font-weight: bolder;
+  margin: 45px 340px;
+}
+
+h2{
+  color: #1874BA;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+h3{
+  color: #1874BA;
+  font-size: 17px;
+  font-weight: bolder;
+}
+
+/* .comment-form img{
+  margin: 0 auto;
+  width: 40%;
+} */
+
+.logged-user{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 250px;
+  height: 250px;
+  margin: 0 30px 0 40px;
+  font-size: 15px;
+}
+
+.avatar{
+  margin: 0 auto;
+  /* width: 50%; */
+  height: 150px;
+  width: 150px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.movie-review-form{
+  width: 100%;
+}
+
+.comment-block-panel {
+  position: absolute;
+  z-index: 99;
+  background: #ffffffc2;
+  width: 69%;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 300px;
+  margin-bottom: 20px;
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+  border-radius: 15px;
+  justify-content: center;
+  margin: 24px 0px 20px 300px;
+}
+
+.comment-block-panel button{
+  font-size: 20px;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  background-color: #1874BA;
+  border-radius: 40px;
+  color: white;
+  padding: 10px 20px;
+  width: 20%;
+  margin: 20px;
+}
+
+
+.comments-container,
+.no-comments{
+  margin-left: 300px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  padding: 20px;
+}
+
+.no-comments{
+  background-color: #F5F3F4;
+  text-align: center;
+  border-radius: 15px;
+  padding: 50px;
+  font-size: 18px;
+}
+
+.no-comments p{
+  margin: 0;
+}
+
+.highlighted-comment{
+  width: 80%;
+  margin: 0 auto;
+  background-color: blanchedalmond;
+  border-radius: 15px;
+}

@@ -1,0 +1,72 @@
+<div class="movie-container" *ngIf="movie">
+  <div class="movie-header">
+    <img [src]="url + movie.banner" alt="Banner de la película {{movie.title}}">
+  </div>
+
+  <div class="movie-data">
+    <div class="movie-data-header">
+      <div class="movie-title">
+        <span>{{ movie.title | uppercase }}</span>
+      </div>
+
+      <div class="movie-info">
+        <span>Director/a: {{ movie.director }}</span>
+
+        <ng-container *ngIf="genreNames.length > 1">
+          <span>Géneros:
+            <span class="genre-names">{{genreNames.join(', ')}}</span>
+          </span>
+        </ng-container>
+        <ng-container *ngIf="genreNames.length === 1">
+          <span>Género: </span>
+          <span class="genre-names" *ngFor="let genre of genreNames">{{genre}}</span>
+        </ng-container>
+
+        <span>Duración: {{ movie.runtime }} minutos</span>
+      </div>
+    </div>
+
+    <div class="movie-plot">
+      <p>{{ movie.plot }}</p>
+    </div>
+  </div>
+
+
+  <div class="movie-poster">
+    <img [src]="url + movie.poster" alt="Poster de la película {{movie.poster}}">
+    <div class="movie-buttons">
+      <div *ngIf="logged">
+
+        <button *ngIf="user.role === 'premium' || activeRent"
+                class="view-button"
+                (click)="addToViews(movie.id)"
+                [routerLink]="['/ver-pelicula', movie.id]"
+        >
+          Ver película
+        </button>
+
+        <button mat-button
+                *ngIf="user.role === 'free' && !activeRent"
+                class="view-button"
+                (click)="openDialog()"
+        >
+          Alquilar
+        </button>
+
+      </div>
+      <div *ngIf="!logged">
+        <button class="view-button-unlogged" (click)="unloggedHandle()">Ver película</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="movie-trailer">
+    <h3>Ver trailer</h3>
+    <videogular [source]="source"/>
+  </div>
+
+  <div class="comments">
+    <comments></comments>
+  </div>
+
+</div>

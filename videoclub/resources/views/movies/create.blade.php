@@ -25,6 +25,8 @@
 
             <x-form.file name="trailer" label="Tráiler de la película" class="mt-4"/>
 
+            <x-form.number name="price" label="Precio de alquiler de la película" required class="mt-4"/>
+
             <x-form.button class="mt-4 w-64 h-10">Añadir</x-form.button>
 
             <x-link url="{{ route('peliculas.index') }}">Volver</x-link>

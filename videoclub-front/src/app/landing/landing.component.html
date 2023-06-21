@@ -1,33 +1,37 @@
 <div class="landing-header">
-  <img
-    *ngFor="let movie of movies"
-    [src]="url + movie.banner"
-    alt=""
-    class="banner"
-  />
+
+    <img
+      *ngFor="let movie of movies"
+      [src]="url + movie.banner"
+      alt=""
+      class="banner"
+      id="banner"
+      [routerLink]="['/pelicula', movie.id]"
+    />
+
 </div>
 
 <div class="landing-body">
-  <div *ngFor="let genre of genres">
+  <div *ngFor="let genre of genres" class="genres-container">
     <span class="genre-name">{{ genre.name }}</span>
     <div *ngIf="genre.name == 'Accion'" class="genre">
-      <span *ngFor="let movie of actionMovies">
-        <img [src]="url + movie.poster" alt="" class="poster" />
+      <span *ngFor="let movie of actionMovies" >
+        <img [src]="url + movie.poster" alt="" class="poster" [routerLink]="['/pelicula', movie.id]"/>
       </span>
     </div>
     <div *ngIf="genre.name == 'Aventura'" class="genre">
       <span *ngFor="let movie of adventureMovies">
-        <img [src]="url + movie.poster" alt="" class="poster" />
+        <img [src]="url + movie.poster" alt="" class="poster" [routerLink]="['/pelicula', movie.id]" />
       </span>
     </div>
     <div *ngIf="genre.name == 'Comedia'" class="genre">
-      <span *ngFor="let movie of actionMovies">
-        <img [src]="url + movie.poster" alt="" class="poster" />
+      <span *ngFor="let movie of comedyMovies">
+        <img [src]="url + movie.poster" alt="" class="poster" [routerLink]="['/pelicula', movie.id]" />
       </span>
     </div>
     <div *ngIf="genre.name == 'Drama'" class="genre">
-      <span *ngFor="let movie of adventureMovies">
-        <img [src]="url + movie.poster" alt="" class="poster" />
+      <span *ngFor="let movie of dramaMovies">
+        <img [src]="url + movie.poster" alt="" class="poster" [routerLink]="['/pelicula', movie.id]" />
       </span>
     </div>
   </div>

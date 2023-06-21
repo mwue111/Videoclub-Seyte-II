@@ -9,8 +9,14 @@ import { Global } from './global';
 export class GenresService {
   public url: string;
 
-  constructor(private _http: HttpClient) {
+  constructor(
+    private _http: HttpClient
+  ) {
     this.url = Global.url;
+  }
+
+  getAllGenres(): Observable<any> {
+    return this._http.get(this.url + '/api/generos');
   }
 
   getGenres(amount: number, token: any): Observable<any> {
@@ -20,14 +26,25 @@ export class GenresService {
     return this._http.get(this.url + '/api/generos', { params: params, headers: headers });
   }
 
-  getMoviesGenre(amount: number, id: number, token: any) {
-    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+  getMoviesGenre(amount: number, id: number): Observable<any> {
     let params = new HttpParams()
       .set('cantidad', amount.toString())
       .append('id', id);
 
     return this._http.get(this.url + '/api/generos/' + id + '/peliculas', {
-      params: params, headers: headers
+      params: params
     });
   }
+
+  //con token (correspondencia con landing.ts):
+  // getMoviesGenre(amount: number, id: number, token: any) {
+  //   let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+  //   let params = new HttpParams()
+  //     .set('cantidad', amount.toString())
+  //     .append('id', id);
+
+  //   return this._http.get(this.url + '/api/generos/' + id + '/peliculas', {
+  //     params: params, headers: headers
+  //   });
+  // }
 }

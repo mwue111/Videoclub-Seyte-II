@@ -3,10 +3,10 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
@@ -64,15 +64,22 @@ class User extends Authenticatable
   }
 
   public function rents()
-  {
-    return $this->belongsToMany(Movie::class, 'rents')
-      ->withPivot('id', 'expiration_date')
-      ->withTimeStamps();
-  }
+{
+    return $this->belongsToMany(Movie::class, 'rents', 'user_id', 'movie_id')
+        ->withPivot('id', 'expiration_date', 'deleted_at')
+        ->orderByDesc('rents.id')
+        ->withTimestamps();
+}
 
-  public function reviews()
-  {
-    return $this->belongsToMany(Movie::class, 'reviews')
-      ->withPivot('title', 'description');
-  }
+//   public function rents()
+//   {
+//     return $this->belongsToMany(Movie::class, 'rents')
+//       ->withPivot('id', 'expiration_date', 'deleted_at')
+//       ->orderByDesc('rents.id')
+//       ->withTimeStamps();
+//   }
+
+    public function reviews() {
+        return $this->hasMany(Review::class);
+    }
 }

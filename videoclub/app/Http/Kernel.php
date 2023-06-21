@@ -16,6 +16,8 @@ class Kernel extends HttpKernel
    */
   protected $middleware = [
     // \App\Http\Middleware\TrustHosts::class,
+
+    // \Illuminate\View\Middleware\ShareErrorsFromSession::class,   //para que muestre los errores (da fallo Session store not set on request)
     \App\Http\Middleware\TrustProxies::class,
     \Illuminate\Http\Middleware\HandleCors::class,
     \App\Http\Middleware\PreventRequestsDuringMaintenance::class,
@@ -67,5 +69,6 @@ class Kernel extends HttpKernel
     'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     'cors' => \App\Http\Middleware\Cors::class,
     'client' => CheckClientCredentials::class,
+    'admin' => \App\Http\Middleware\Admin::class,
   ];
 }

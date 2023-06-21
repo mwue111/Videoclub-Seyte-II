@@ -14,7 +14,7 @@ return new class extends Migration
     Schema::create('premiums', function (Blueprint $table) {
       $table->foreignId('user_id')->constrained()->primary();
       $table->timestamps();
-      $table->date('fecha_ultimo_pago');
+      $table->date('payment_date');
       $table->softDeletes('deleted_at');
     });
   }

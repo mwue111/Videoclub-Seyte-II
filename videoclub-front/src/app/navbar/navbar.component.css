@@ -11,31 +11,10 @@
   align-items: center;
   background: #1874ba;
 }
-
-.title-div a {
+.title-div{
+  padding: 15px 20px;
   color: #ffffff;
   text-decoration: none;
-}
-
-.tracker-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.tracker-navbar {
-  width: 25em;
-  height: 2em;
-  border: none;
-  box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 0.5);
-  border-radius: 20px;
-  padding-left: 10px;
-  margin-right: 20px;
-}
-
-.tracker-glass {
-  width: 2em;
-  height: 2em;
   cursor: pointer;
 }
 
@@ -79,7 +58,7 @@
 }
 
 .logged-div button {
-  background: #159ca3;
+  background: #ffffff;
   width: 10em;
   height: 2.5em;
   border-radius: 20px;
@@ -87,7 +66,8 @@
   box-shadow: none;
   cursor: pointer;
   margin-right: 10px;
-  color: #ffffff;
+  /* color: #159ca3; */
+  color: #FF8811;
   font-size: 14px;
   margin-left: 3em;
   transition: 0.3s;
@@ -95,17 +75,42 @@
 
 .logged-div button:hover {
   transition: 0.3s;
-  background: #fff;
-  color: #1874ba;
+  background: #FF8811;
+  /* color: #1874ba; */
+  color: #ffffff;
 }
 
 .logged-div img {
   width: 2em;
   height: 2em;
+  margin-top: 5px;
 }
 
 .logged-div p {
   margin-left: 0.5em;
+  margin-top: 10px;
   color: white;
   font-size: 0.9em;
+}
+
+.user-page{
+  display: flex;
+  cursor: pointer;
+  padding: 5px 15px;
+}
+
+.title-div:hover,
+.user-page:hover{
+  background-color: #12598f;
+}
+
+.title-div:active,
+.user-page:active {
+  background-color: #1a80ce;
+}
+#circle {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
 }

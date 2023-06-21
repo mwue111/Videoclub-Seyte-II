@@ -1,0 +1,65 @@
+<div class="container">
+  <form class="search-container">
+    <div class="input-suggestions-container">
+
+      <!-- <input class="input-container"
+            type="text"
+            placeholder="¿Qué te apetece ver hoy?"
+            class="tracker-navbar"
+            name="search"
+            [formControl]="inputSearch"
+            [value]="value"
+            (input)="getSuggestions($event)"
+            [matAutocomplete]="auto"
+      /> -->
+
+      <input
+            type="text"
+            placeholder="¿Qué te apetece ver hoy?"
+            class="tracker-navbar"
+            name="search"
+            [formControl]="inputSearch"
+            [value]="value"
+            (input)="getSuggestions($event)"
+            [matAutocomplete]="auto"
+      />
+
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-optgroup *ngIf="suggestedMovies.length > 0" label="Películas">
+          <mat-option *ngFor="let suggestion of suggestedMovies" [value]="suggestion.title | lowercase" [routerLink]="['pelicula/', suggestion.id]">
+            <span class="suggested-item">
+              {{suggestion.title}}
+            </span>
+          </mat-option>
+        </mat-optgroup>
+
+        <mat-optgroup *ngIf="suggestedGenres.length > 0" label="Géneros">
+          <mat-option *ngFor="let genre of suggestedGenres" [value]="genre | lowercase" (click)="onSuggestedClick(genre)">
+            <span class="suggested-item">
+              {{genre}}
+            </span>
+          </mat-option>
+
+        </mat-optgroup>
+
+        <mat-optgroup *ngIf="suggestedDireccion.length > 0" label="directores/as">
+          <mat-option *ngFor="let director of suggestedDireccion" [value]="director | lowercase" (click)="onSuggestedClick(director)">
+            <span class="suggested-item">
+              {{ director }}
+            </span>
+          </mat-option>
+        </mat-optgroup>
+
+      </mat-autocomplete>
+
+    </div>
+    <button (click)="onSearch()" type="submit" class="search-button">
+      <img
+        src="../../assets/magnifying-glass-backup-svgrepo-com (1).png"
+        alt="buscar"
+      />
+    </button>
+
+  </form>
+
+</div>

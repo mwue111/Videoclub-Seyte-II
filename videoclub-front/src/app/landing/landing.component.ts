@@ -3,6 +3,7 @@ import { MoviesService } from '../services/movies.service';
 import { GenresService } from '../services/genres.service';
 import { URL_BACKEND } from '../config/config';
 import { AuthService } from '../modules/auth/_services/auth.service';
+import axios from 'axios';
 
 @Component({
   selector: 'app-landing',
@@ -14,7 +15,7 @@ export class LandingComponent implements OnInit {
   genres: any = [];
   actionMovies: any = [];
   adventureMovies: any = [];
-  animationMovies: any = [];
+  dramaMovies: any = [];
   comedyMovies: any = [];
   url: string = URL_BACKEND + '/storage/';
 
@@ -27,45 +28,59 @@ export class LandingComponent implements OnInit {
   ngOnInit(): void {
     this.getLatestMovies();
     this.getGenres();
-    this.getGenresMovies();
+    this.getMovies();
+    // this.getGenresMovies();
   }
 
   getLatestMovies() {
+    // this._movies.getMovies(2, this._authServices.token).subscribe((res) => {
     this._movies.getMovies(2, this._authServices.token).subscribe((res) => {
       this.movies = res;
-      console.log('movies: ', this.movies);
+      // console.log('movies: ', this.movies);
     });
   }
 
   getGenres() {
     this._genres.getGenres(4, this._authServices.token).subscribe((res) => {
-      console.log(res);
       this.genres = res;
-      console.log('genres: ', this.genres);
     });
   }
 
-  getGenresMovies() {
-    console.log(this.genres.length);
-    this._genres
-      .getMoviesGenre(10, 1, this._authServices.token)
-      .subscribe((res) => {
-        this.actionMovies = res;
+  getMovies() {
+    this._movies.getAllMovies().subscribe((res: any) => {
+      res.forEach((element:any) => {
+        for(let i = 0; i < element.genres.length; i++){
+          switch(element.genres[i].id){
+            case 1: this.actionMovies.push(element); break;
+            case 2: this.adventureMovies.push(element); break;
+            case 3: this.comedyMovies.push(element); break;
+            case 4: this.dramaMovies.push(element); break;
+          }
+        }
       });
-    this._genres
-      .getMoviesGenre(10, 2, this._authServices.token)
-      .subscribe((res) => {
-        this.adventureMovies = res;
-      });
-    this._genres
-      .getMoviesGenre(10, 3, this._authServices.token)
-      .subscribe((res) => {
-        this.animationMovies = res;
-      });
-    this._genres
-      .getMoviesGenre(10, 4, this._authServices.token)
-      .subscribe((res) => {
-        this.comedyMovies = res;
-      });
+    })
   }
+
+  // getGenresMovies() {
+  //   this._genres
+  //     .getMoviesGenre(100, 1)
+  //     .subscribe((res) => {
+  //       this.actionMovies = res;
+  //     });
+  //   this._genres
+  //     .getMoviesGenre(100, 2)
+  //     .subscribe((res) => {
+  //       this.adventureMovies = res;
+  //     });
+  //   this._genres
+  //     .getMoviesGenre(100, 3)
+  //     .subscribe((res) => {
+  //       this.comedyMovies = res;
+  //     });
+  //   this._genres
+  //     .getMoviesGenre(100, 4)
+  //     .subscribe((res) => {
+  //       this.dramaMovies = res;
+  //     });
+  // }
 }

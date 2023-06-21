@@ -1,0 +1,71 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 50px;
+}
+
+.section-container:nth-child(1n+2) {
+  margin-top: 50px;
+}
+
+h1, h2{
+  margin: 0 20px;
+}
+
+h2{
+  color: #159CA3;
+}
+
+h2 span{
+  font-style: italic;
+}
+
+.movie-results{
+  overflow-x: hidden;
+  width: 100%
+}
+
+app-card-movie{
+  float: left;
+}
+
+
+.no-filter-movie-results{
+  overflow-x: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  margin-bottom: 50px;
+}
+
+.no-filter-movie-results::-webkit-scrollbar-track{
+  padding: 2px 0;
+}
+
+.no-filter-movie-results::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+
+.no-filter-movie-results::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #159CA3;
+  border: none;
+}
+
+.no-results{
+  margin: 20px auto;
+  padding: 50px;
+  background: #F5F3F4;
+  border-radius: 15px;
+  width: 50%;
+  text-align: center;
+}
+
+.no-results p{
+  margin: 0;
+}

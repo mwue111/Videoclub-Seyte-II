@@ -1,0 +1,61 @@
+<div class="container">
+
+  <div *ngIf="movies.length > 0" class="section-container">
+    <h1>Películas</h1>
+    <div [ngClass]="{'movie-results' : !emptyQuery, 'no-filter-movie-results': emptyQuery}">
+      <app-card-movie *ngFor="let movie of movies" [movie]="movie"/>
+    </div>
+  </div>
+
+  <div *ngIf="genres.length > 0" class="section-container">
+    <!-- <div *ngFor="let suggested of suggestedGenres"> -->
+      <h1 *ngIf="genresNames.length <= 1">Género: {{ genresNames.toString() | titlecase}}</h1>
+      <h1 *ngIf="genresNames.length > 1">Géneros: {{ genresNames.join(', ').toString() | titlecase }}</h1>
+      <div class="movie-results">
+        <app-card-movie *ngFor="let genre of genres" [movie]="genre"/>
+      </div>
+    <!-- </div> -->
+  </div>
+
+  <div *ngIf="directions.length > 0 && !emptyQuery" class="section-container">
+    <h1>Directores/as</h1>
+    <div class="movie-results">
+      <app-card-movie *ngFor="let direction of directions"
+                      [movie]="direction"
+                      [displayDirection]="true"
+      />
+    </div>
+  </div>
+
+  <div *ngIf="emptyQuery" class="section-container">
+    <h1>Acción</h1>
+    <div class="no-filter-movie-results">
+      <app-card-movie *ngFor="let movie of accion" [movie]="movie"/>
+    </div>
+  </div>
+
+  <div *ngIf="emptyQuery" class="section-container">
+    <h1>Aventura</h1>
+    <div class="no-filter-movie-results">
+      <app-card-movie *ngFor="let movie of adventure" [movie]="movie"/>
+    </div>
+  </div>
+
+  <div *ngIf="emptyQuery" class="section-container">
+    <h1>Comedia</h1>
+    <div class="no-filter-movie-results">
+      <app-card-movie *ngFor="let movie of comedy" [movie]="movie"/>
+    </div>
+  </div>
+
+  <div *ngIf="emptyQuery" class="section-container">
+    <h1>Drama</h1>
+    <div class="no-filter-movie-results">
+      <app-card-movie *ngFor="let movie of drama" [movie]="movie"/>
+    </div>
+  </div>
+
+  <div *ngIf="movies.length === 0 && genres.length === 0 && directions.length === 0" class="no-results">
+    <p>Lo sentimos, no tenemos ninguna película que coincida con tu búsqueda.</p>
+  </div>
+</div>

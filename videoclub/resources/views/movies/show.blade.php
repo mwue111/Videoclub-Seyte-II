@@ -12,7 +12,7 @@
             @endif
         @endif
 
-            <ul class="list-group mt-4 ml-4">
+        <ul class="list-group mt-4 ml-4">
             <li class="list-group-item flex flex-row justify-between">Año de salida: {{ $movie->year }}</li>
             <li class="list-group-item flex flex-row justify-between">Duración: {{ $movie->runtime }} minutos.</li>
             <li class="list-group-item flex flex-row justify-between">Género/s: {{ $movie->genres->pluck('name')->implode(', ') }}</li>

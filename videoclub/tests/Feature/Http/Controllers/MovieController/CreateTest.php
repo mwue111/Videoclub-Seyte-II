@@ -15,6 +15,7 @@ class CreateTest extends TestCase
     use RefreshDatabase, WithoutMiddleware;
     /**
      * A basic feature test example.
+     *
      */
     public function test_it_shows_the_create_form(): void
     {

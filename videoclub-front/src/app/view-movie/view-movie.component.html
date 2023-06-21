@@ -1,0 +1,11 @@
+<div class="container" *ngIf="movie">
+  <div class="view-header">
+    <h1>{{ movie.title | uppercase }}</h1>
+  </div>
+  <videogular [source]="source"></videogular>
+  <div class="go-back">
+    <a (click)="goBack()">Volver</a>
+  </div>
+
+</div>
+

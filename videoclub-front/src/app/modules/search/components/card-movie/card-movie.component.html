@@ -1,0 +1,12 @@
+<div class="movie">
+  <div *ngIf="movie">
+    <!-- <div>
+      {{ movie.year }}
+    </div> -->
+    <a [routerLink]="['/pelicula/', movie.id]">
+      <img [src]="url + movie.poster" alt="Poster de {{ movie.title }}" id="poster">
+      <h1 *ngIf="!displayDirection">{{ movie.title }}</h1>
+      <h4 *ngIf="displayDirection">{{ movie.director }}</h4>
+    </a>
+  </div>
+</div>
