@@ -4,14 +4,17 @@
             <div class="flex flex-between">
                 @foreach(session('user') as $user)
                     @if($user->image)
-                    <div class="w-1/2">
-                        <x-form.image name="avatar" label="" :data="$user->image" :movie="$user->username"></x-form>
-                    </div>
+
+                        <x-form.image name="avatar" label="" :data="$user->image" :movie="$user->username"/>
 
                     @else
-                    <div>
-                        <p>No tienes avatar aún.</p>
-                    </div>
+                        <x-panel class="h-full">
+                        <img src="{{ asset('images/user.png') }}"
+                            alt="Imagen de {{ $user->email }}"
+                            style="width: 70px; height: 70px; object-fit:cover; margin: 60px auto; border-radius: 100%;"
+                            class="mt-4"
+                        >
+                        </x-panel>
                     @endif
 
                 <ul class="list-group mt-4 ml-4 w-1/2">

@@ -29,7 +29,7 @@ class UserController extends Controller
       }
     }
     // return json_encode($users);
-    return view('users.index', ['users' => $users]);
+    return view('users.index', ['users' => $users->toQuery()->paginate(5)]);
   }
 
   public function show($id)
@@ -94,32 +94,34 @@ class UserController extends Controller
 
     switch($user->role){
         case 'free':
-            // dd($user->reviews()->withTrashed()->where('deleted_at', '!=', null)->get());
+            $user->free()->restore();
+
             $user->reviews()
                 ->withTrashed()
-                ->restore();
-                //intento 2:
-                // ->where('deleted_at', '!=', null)
-                // ->where('user_id', '=', $user->id)
-                // ->update(['deleted_at' =>  null]);
+                ->update(['deleted_at' => null]);
 
-                //intento 1:
-                // ->findOrFail($user->id)
-                // ->pivot
-                // ->restore();
-
-            dd($user->rents()->withTrashed());
-            $user->rents
+            $user->rents()
                 ->withTrashed()
-                ->findOrFail($user->id)
-                ->pivot
-                ->restore();
+                ->each(function ($rent) {
+                    $rent->pivot->update(['deleted_at' => null]);
+                });
             break;
-        case 'premium': break;
-        case 'admin': break;
-    }
+        case 'premium':
+            $user->premium()->restore();
 
-    //recuperar las tablas relacionadas
+            $user->reviews()
+                ->withTrashed()
+                ->update(['deleted_at' => null]);
+
+            $user->premium
+                ->movies()
+                ->withTrashed()
+                ->each(function ($view) {
+                    $view->pivot->update(['deleted_at' => null]);
+                });
+            break;
+        case 'admin': $user->admin()->restore(); break;
+    }
     return redirect()->route('usuarios.index');
   }
 
@@ -142,23 +144,31 @@ class UserController extends Controller
                             $rent->pivot->update(['deleted_at' => now()]);
                         });
                     }
-                    $user->free->delete();
+                    if($user->free){
+                        $user->free->delete();
+                    }
                     $user->delete();
                     break;
         case 'premium':
                     if($user->reviews){
                         $user->reviews->each->delete();
                     }
-                    if($user->premium->movies){
-                        $user->premium->movies->each(function ($view) {
-                            $view->pivot->update(['deleted_at' => now()]);
-                        });
-                    }
+                    if($user->premium) {
+                        $user->premium->delete();
 
-                    $user->premium->delete();
+                        if($user->premium->movies){
+                            $user->premium->movies->each(function ($view) {
+                                $view->pivot->update(['deleted_at' => now()]);
+                            });
+                        }
+                    }
                     $user->delete();
                     break;
-        case 'admin': $user->admin->delete(); break;
+        case 'admin':
+            if($user->admin){
+                $user->admin->delete();
+            }
+            break;
     }
 
     User::destroy($id);

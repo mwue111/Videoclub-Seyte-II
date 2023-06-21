@@ -18,6 +18,7 @@ export class MovieComponent {
   url: string = URL_BACKEND + '/storage/';
   logged!: boolean;
   user: any;
+  token: any;
   genreNames: any = [];
   source: string = '';
   activeRent: boolean = false;
@@ -33,13 +34,20 @@ export class MovieComponent {
 
   ngOnInit(): void {
     this.logged = this._auth.isLogged();
-    this.user = this._auth.user.user;
+    if(this._auth.user){
+      this.user = this._auth.user.user;
+      this.token = this._auth.token;
+    }
+    else{
+      this.token = 'none';
+    }
 
     this.route.params.subscribe((params: any) => {
       let movieId = params.id;
 
-      this._movie.getOneMovie(movieId, this._auth.token)
+      this._movie.getOneMovie(movieId, this.token)
           .subscribe((res: any) => {
+            console.log('res: ', res);
             this.movie = res;
             this.source = this.url + this.movie.trailer;
           });
@@ -52,7 +60,7 @@ export class MovieComponent {
           })
     })
 
-    if(this.user.role === 'free'){
+    if(this.user && this.user.role === 'free'){
       this._user.checkRents(this._auth.token).subscribe((res: any) => {
         res.forEach((element: any) => {
             if(element.id === this.movie.id) {

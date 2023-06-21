@@ -26,9 +26,14 @@ export class MoviesService {
   }
 
   getOneMovie(id: number, token: any) {
-    let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
+    if(token !== 'none'){
+      let headers = new HttpHeaders().set('Authorization', 'Bearer ' + token);
 
-    return this._http.get(this.url + '/api/peliculas/' + id, { headers:headers });
+      return this._http.get(this.url + '/api/peliculas/' + id, { headers:headers });
+    }
+    else{
+      return this._http.get(this.url + '/api/peliculas/' + id);
+    }
   }
 
   getMovieGenre(id: number) {

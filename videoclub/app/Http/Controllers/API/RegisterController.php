@@ -42,7 +42,8 @@ class RegisterController extends BaseController
 
     $input = $request->all();
     $input['password'] = bcrypt($input['password']);    //esto se puede hacer con un mutador en el modelo de usuario
-    $user = User::create($input);
+    // $user = User::create($input);
+    $user = new User($input);
 
     if($request->path() === 'api/register'){
         $user->role = 'free';
@@ -50,6 +51,7 @@ class RegisterController extends BaseController
     else{
         $user->role = 'admin';
     }
+    $user->save();
 
     switch ($user->role) {
       case 'admin':

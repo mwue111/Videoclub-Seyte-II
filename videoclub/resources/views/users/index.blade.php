@@ -47,20 +47,27 @@
                         <input type="submit" value="Editar" class="btn btn-warning">
                     </form>
                 </td>
-                <td>
-                    <form action="{{ route('usuarios.destroy', $user->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
 
+                <td>
+                    @if($user->id !== session('user')['user']->id)
+                    <form action="{{ route('usuarios.destroy', $user->id) }}" method="POST">
+                        @csrf
+                    @method('DELETE')
                         <button type="submit" class="btn btn-danger show-alert-delete-box" data-toggle="tooltip" title='Delete'>Borrar</button>
                     </form>
+                    @else
+                    <button type="submit" class="btn btn-danger show-alert-delete-box" data-toggle="tooltip" title='Delete' disabled>Borrar</button>
+                    @endif
                 </td>
+
+
             </tr>
         @endforeach
         </tbody>
 
     </table>
     @endif
+    {{ $users->links() }}
 </x-layout>
 
 <script type="text/javascript">
